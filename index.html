@@ -17,7 +17,7 @@
   <nav class="nav wrap" aria-label="Main navigation">
     <a class="brand" href="#top" aria-label="CUA-SWE home"><span class="cua">CUA</span><span class="bar" aria-hidden="true"></span><span class="swe">SWE</span></a>
     <ul>
-      <li><a href="results.html">Results</a></li>
+      <li><a href="#results">Results</a></li>
       <li><a href="tasks.html">Tasks</a></li>
       <li><a href="#paper">Resources</a></li>
       <li class="nav-external"><a data-link="viewer" href="#">Data viewer <span aria-hidden="true">↗</span></a></li>
@@ -65,6 +65,23 @@
     <h3>With computer use</h3>
     <p>The same coding tools, plus screenshots, mouse and keyboard.</p>
   </div>
+</section>
+
+<section class="wrap section results-section" id="results">
+    <div class="section-head">
+      <h2>What changes when<br>agents can see?</h2>
+      <p>First-attempt success on the same tasks, reported separately for each domain.</p>
+    </div>
+    <div class="result-domains" role="group" aria-label="Results domain">
+      <button type="button" data-result-domain="web" aria-pressed="true">Web <span>36</span></button>
+      <button type="button" data-result-domain="game" aria-pressed="false">Game <span>29</span></button>
+      <button type="button" data-result-domain="devops" aria-pressed="false">DevOps <span>20</span></button>
+      <button type="button" data-result-domain="mobile" aria-pressed="false">Mobile <span>20</span></button>
+    </div>
+    <div id="results-table" class="results-table"></div>
+    <p id="results-note" class="results-note" aria-live="polite"></p>
+    <p class="results-note">Codex and Claude Code have CUA results only. Each domain retains its original scoring rules.</p>
+
 </section>
 
 <section class="wrap section" id="episode">
@@ -146,7 +163,7 @@
       <h2>Explore CUA-SWE.</h2>
       <p class="paper-title">CUA-SWE: When Computer-Use Agents Meet Visual Software Engineering</p>
       <div class="resource-links">
-        <a href="results.html">Compare model results <span aria-hidden="true">↗</span></a>
+        <a href="#results">Compare model results <span aria-hidden="true">↗</span></a>
         <a href="tasks.html">Browse the tasks <span aria-hidden="true">↗</span></a>
         <a data-link="viewer" href="#">Explore recorded trajectories <span aria-hidden="true">↗</span></a>
         <a data-link="code" href="#">Code and task bundles <span aria-hidden="true">↗</span></a>

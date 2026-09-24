@@ -1,7 +1,8 @@
 # CUA-SWE project website
 
-A static research site: `index.html` presents the benchmark and recorded repairs;
-`results.html` contains the per-domain model results; `tasks.html` explores all 105 tasks. GitHub Pages serves the repository root.
+A static research site: `index.html` presents the benchmark, per-domain model results
+and recorded repairs; `tasks.html` explores all 105 tasks. `results.html` remains
+available as a standalone results view. GitHub Pages serves the repository root.
 No build step or JavaScript dependencies are required.
 
 Preview locally:
@@ -18,7 +19,7 @@ of its task data and retained media.
 | Content | Source |
 | --- | --- |
 | Task inventory, original instructions, budgets and families | `tools/build_data.py` reads the canonical registry, domain manifests, task descriptors and release summaries. Run `python3 tools/build_data.py --root <research-checkout>`. |
-| Per-domain pass@1 results | `TABLE1` in `assets/js/site.js`, transcribed from `paper/evaluation/final-evaluation-report.md` (September 24, 2026). On `results.html`, the domain buttons switch the table and comparison plot together. |
+| Per-domain pass@1 results | `TABLE1` in `assets/js/site.js`, transcribed from `paper/evaluation/final-evaluation-report.md` (September 24, 2026). On the homepage and `results.html`, the domain buttons switch the table and comparison plot together. |
 | Vector Relay repair episode | Retained screenshots, patch, shell outputs and verifier report in `paper/figure2_assets/cases/01_vector_relay`. The five steps are a selected excerpt of one recorded attempt. |
 | Other screenshots | `tools/prepare_media.py --root <research-checkout>` copies retained frames from `paper/figure1_assets`, `paper/figure2_assets` and `paper/demo_video`. `assets/media/manifest.json` records file sources and hashes. |
 | Overview video | `paper/demo_video/exports/CUA-SWE_demo_web_720p.mp4`, with the opening title card removed. This contains baseline and repair replays; it is not an original agent-run recording. See `tools/prepare_media.py` for export commands. |
@@ -39,7 +40,9 @@ they are not the final pass@1 model comparison.
 ## Presentation and interaction
 
 All pages use white backgrounds with blue and cyan interaction accents.
-Model comparisons have their own Results page. The homepage uses a manually controlled repair episode and an overview video
+Model comparisons follow the evaluation conditions on the homepage, before the
+recorded repair episode. Results navigation links jump to that section. The homepage
+uses a manually controlled repair episode and an overview video
 with pause and full-screen controls. Reduced-motion preferences disable video
 autoplay. Results and task filters work with keyboard controls; task URL hashes
 open the corresponding original instruction.
