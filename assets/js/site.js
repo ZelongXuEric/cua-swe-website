@@ -186,16 +186,16 @@
 
   // ---- Paired comparison: identical tasks per model and domain, four domains weighted equally.
   // Counts are successes out of the matched task set: [code-only, computer use, tasks].
-  // Web and Game use all 36 / 29 tasks; DevOps all 20; Mobile the tasks scorable in both conditions.
+  // Every model covers all 36 Web, 29 Game, 20 DevOps and 20 Mobile tasks (final evaluation report, 2026-09-24).
   var PAIRED = [
-    { m: "GPT-6 Astra",     web: [10, 24, 36], game: [5, 11, 29], devops: [0, 16, 20], mobile: [0, 10, 19] },
-    { m: "GPT-5.6 Sol",     web: [7, 21, 36],  game: [3, 3, 29],  devops: [0, 11, 20], mobile: [0, 9, 19] },
-    { m: "GPT-5.6 Luna",    web: [4, 2, 36],   game: [0, 2, 29],  devops: [0, 3, 20],  mobile: [0, 7, 19] },
-    { m: "GPT-5.6 Terra",   web: [4, 5, 36],   game: [1, 2, 29],  devops: [0, 5, 20],  mobile: [0, 7, 19] },
-    { m: "Claude Opus 4.8", web: [6, 10, 36],  game: [1, 6, 29],  devops: [0, 11, 20], mobile: [0, 4, 12] },
-    { m: "Claude Sonnet 5", web: [3, 0, 36],   game: [2, 1, 29],  devops: [0, 8, 20],  mobile: [0, 4, 16] },
-    { m: "Claude Fable 5",  web: [7, 17, 36],  game: [4, 5, 29],  devops: [1, 11, 20], mobile: [1, 5, 8] },
-    { m: "Grok 4.6",        web: [11, 20, 36], game: [3, 5, 29],  devops: [0, 13, 20], mobile: [0, 3, 8] }
+    { m: "GPT-6 Astra",     web: [10, 24, 36], game: [5, 11, 29], devops: [0, 16, 20], mobile: [0, 11, 20] },
+    { m: "GPT-5.6 Sol",     web: [7, 21, 36],  game: [3, 3, 29],  devops: [0, 11, 20], mobile: [0, 9, 20] },
+    { m: "GPT-5.6 Luna",    web: [4, 2, 36],   game: [0, 2, 29],  devops: [0, 3, 20],  mobile: [0, 7, 20] },
+    { m: "GPT-5.6 Terra",   web: [4, 5, 36],   game: [1, 2, 29],  devops: [0, 5, 20],  mobile: [0, 7, 20] },
+    { m: "Claude Opus 4.8", web: [6, 10, 36],  game: [1, 6, 29],  devops: [0, 11, 20], mobile: [0, 8, 20] },
+    { m: "Claude Sonnet 5", web: [3, 0, 36],   game: [2, 1, 29],  devops: [0, 8, 20],  mobile: [0, 7, 20] },
+    { m: "Claude Fable 5",  web: [7, 17, 36],  game: [4, 5, 29],  devops: [1, 11, 20], mobile: [1, 8, 20] },
+    { m: "Grok 4.6",        web: [11, 20, 36], game: [3, 5, 29],  devops: [0, 13, 20], mobile: [0, 6, 20] }
   ];
   function mean(row, idx) {
     var ds = ["web", "game", "devops", "mobile"], s = 0;
@@ -247,13 +247,13 @@
     rows: [
       { m: "GPT-6 Astra",          web: [27.8, 66.7], game: [17.2, 37.9], devops: [0.0, 80.0], mobile: [0.0, 55.0] },
       { m: "GPT-5.6 Sol",          web: [19.4, 58.3], game: [10.3, 10.3], devops: [0.0, 55.0], mobile: [0.0, 45.0] },
-      { m: "GPT-5.6 Luna",         web: [11.1, 5.6],  game: [0.0, 6.9],   devops: [0.0, 15.0], mobile: [0.0, 36.8] },
-      { m: "GPT-5.6 Terra",        web: [11.1, 13.9], game: [3.4, 6.9],   devops: [0.0, 25.0], mobile: [0.0, 36.8] },
+      { m: "GPT-5.6 Luna",         web: [11.1, 5.6],  game: [0.0, 6.9],   devops: [0.0, 15.0], mobile: [0.0, 35.0] },
+      { m: "GPT-5.6 Terra",        web: [11.1, 13.9], game: [3.4, 6.9],   devops: [0.0, 25.0], mobile: [0.0, 35.0] },
       { m: "Claude Opus 5",        web: [22.2, 55.6], game: [13.8, 20.7], devops: [0.0, 60.0], mobile: [null, null] },
-      { m: "Claude Opus 4.8",      web: [16.7, 27.8], game: [3.4, 20.7],  devops: [0.0, 55.0], mobile: [0.0, 50.0] },
+      { m: "Claude Opus 4.8",      web: [16.7, 27.8], game: [3.4, 20.7],  devops: [0.0, 55.0], mobile: [0.0, 40.0] },
       { m: "Claude Sonnet 5",      web: [8.3, 0.0],   game: [6.9, 3.4],   devops: [0.0, 40.0], mobile: [0.0, 35.0] },
-      { m: "Claude Fable 5",       web: [19.4, 47.2], game: [13.8, 17.2], devops: [5.0, 55.0], mobile: [10.0, 53.3] },
-      { m: "Grok 4.6",             web: [30.6, 55.6], game: [10.3, 17.2], devops: [0.0, 65.0], mobile: [0.0, 27.8] },
+      { m: "Claude Fable 5",       web: [19.4, 47.2], game: [13.8, 17.2], devops: [5.0, 55.0], mobile: [5.0, 40.0] },
+      { m: "Grok 4.6",             web: [30.6, 55.6], game: [10.3, 17.2], devops: [0.0, 65.0], mobile: [0.0, 30.0] },
       { m: "Codex + GPT-5.6 Sol",  sys: true, web: [null, 55.6], game: [null, 17.2], devops: [null, 55.0], mobile: [null, 40.0] },
       { m: "Claude Code + Opus 5", sys: true, web: [null, 55.6], game: [null, 20.7], devops: [null, 65.0], mobile: [null, null] }
     ]

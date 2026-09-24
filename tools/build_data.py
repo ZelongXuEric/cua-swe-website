@@ -214,8 +214,9 @@ def main():
             "verifiers": ["protected native verifier"],
             "viewport": "mobile-400x800",
             "path": f"dataset/mobile/tasks/{tid}",
-            "outcomes": {"label": "Mobile release evaluation, scorable API-model cells only",
-                          "code": {"k": o["code"][0], "n": o["code"][1]}, "cua": {"k": o["cua"][0], "n": o["cua"][1]}},
+            # Per-task Mobile outcomes are withheld: the 2026-09-24 final report re-selected attempts and
+            # publishes only per-model totals, which the September 22 release rows no longer match.
+            "outcomes": None,
         })
 
     order = {"web": 0, "game": 1, "devops": 2, "mobile": 3}

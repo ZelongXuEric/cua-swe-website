@@ -2504,17 +2504,7 @@
    ],
    "viewport": "mobile-400x800",
    "path": "dataset/mobile/tasks/mobile.synthetic.external-campus-wayfinding.001",
-   "outcomes": {
-    "label": "Mobile release evaluation, scorable API-model cells only",
-    "code": {
-     "k": 1,
-     "n": 6
-    },
-    "cua": {
-     "k": 8,
-     "n": 8
-    }
-   }
+   "outcomes": null
   },
   {
    "id": "mobile.synthetic.external-packaging-proof.001",
@@ -2535,17 +2525,7 @@
    ],
    "viewport": "mobile-400x800",
    "path": "dataset/mobile/tasks/mobile.synthetic.external-packaging-proof.001",
-   "outcomes": {
-    "label": "Mobile release evaluation, scorable API-model cells only",
-    "code": {
-     "k": 0,
-     "n": 7
-    },
-    "cua": {
-     "k": 8,
-     "n": 8
-    }
-   }
+   "outcomes": null
   },
   {
    "id": "mobile.synthetic.external-wallchart-schedule.001",
@@ -2566,17 +2546,7 @@
    ],
    "viewport": "mobile-400x800",
    "path": "dataset/mobile/tasks/mobile.synthetic.external-wallchart-schedule.001",
-   "outcomes": {
-    "label": "Mobile release evaluation, scorable API-model cells only",
-    "code": {
-     "k": 0,
-     "n": 5
-    },
-    "cua": {
-     "k": 0,
-     "n": 6
-    }
-   }
+   "outcomes": null
   },
   {
    "id": "mobile.synthetic.external-wallchart-schedule.004",
@@ -2597,17 +2567,7 @@
    ],
    "viewport": "mobile-400x800",
    "path": "dataset/mobile/tasks/mobile.synthetic.external-wallchart-schedule.004",
-   "outcomes": {
-    "label": "Mobile release evaluation, scorable API-model cells only",
-    "code": {
-     "k": 0,
-     "n": 6
-    },
-    "cua": {
-     "k": 0,
-     "n": 8
-    }
-   }
+   "outcomes": null
   },
   {
    "id": "mobile.synthetic.external-wallchart-schedule.005",
@@ -2628,17 +2588,7 @@
    ],
    "viewport": "mobile-400x800",
    "path": "dataset/mobile/tasks/mobile.synthetic.external-wallchart-schedule.005",
-   "outcomes": {
-    "label": "Mobile release evaluation, scorable API-model cells only",
-    "code": {
-     "k": 0,
-     "n": 5
-    },
-    "cua": {
-     "k": 0,
-     "n": 7
-    }
-   }
+   "outcomes": null
   },
   {
    "id": "mobile.synthetic.external-wallchart-schedule.008",
@@ -2659,17 +2609,7 @@
    ],
    "viewport": "mobile-400x800",
    "path": "dataset/mobile/tasks/mobile.synthetic.external-wallchart-schedule.008",
-   "outcomes": {
-    "label": "Mobile release evaluation, scorable API-model cells only",
-    "code": {
-     "k": 0,
-     "n": 6
-    },
-    "cua": {
-     "k": 0,
-     "n": 8
-    }
-   }
+   "outcomes": null
   },
   {
    "id": "mobile.synthetic.external-wallchart-schedule.009",
@@ -2690,17 +2630,7 @@
    ],
    "viewport": "mobile-400x800",
    "path": "dataset/mobile/tasks/mobile.synthetic.external-wallchart-schedule.009",
-   "outcomes": {
-    "label": "Mobile release evaluation, scorable API-model cells only",
-    "code": {
-     "k": 0,
-     "n": 7
-    },
-    "cua": {
-     "k": 0,
-     "n": 7
-    }
-   }
+   "outcomes": null
   },
   {
    "id": "mobile.synthetic.external-wallchart-schedule.010",
@@ -2721,17 +2651,7 @@
    ],
    "viewport": "mobile-400x800",
    "path": "dataset/mobile/tasks/mobile.synthetic.external-wallchart-schedule.010",
-   "outcomes": {
-    "label": "Mobile release evaluation, scorable API-model cells only",
-    "code": {
-     "k": 0,
-     "n": 7
-    },
-    "cua": {
-     "k": 0,
-     "n": 7
-    }
-   }
+   "outcomes": null
   },
   {
    "id": "mobile.synthetic.external-wallchart-schedule.013",
@@ -2752,17 +2672,7 @@
    ],
    "viewport": "mobile-400x800",
    "path": "dataset/mobile/tasks/mobile.synthetic.external-wallchart-schedule.013",
-   "outcomes": {
-    "label": "Mobile release evaluation, scorable API-model cells only",
-    "code": {
-     "k": 0,
-     "n": 6
-    },
-    "cua": {
-     "k": 0,
-     "n": 8
-    }
-   }
+   "outcomes": null
   },
   {
    "id": "mobile.synthetic.external-wallchart-schedule.015",
@@ -2783,17 +2693,7 @@
    ],
    "viewport": "mobile-400x800",
    "path": "dataset/mobile/tasks/mobile.synthetic.external-wallchart-schedule.015",
-   "outcomes": {
-    "label": "Mobile release evaluation, scorable API-model cells only",
-    "code": {
-     "k": 0,
-     "n": 6
-    },
-    "cua": {
-     "k": 0,
-     "n": 6
-    }
-   }
+   "outcomes": null
   },
   {
    "id": "mobile.synthetic.external-wallchart-schedule.016",
@@ -2814,17 +2714,7 @@
    ],
    "viewport": "mobile-400x800",
    "path": "dataset/mobile/tasks/mobile.synthetic.external-wallchart-schedule.016",
-   "outcomes": {
-    "label": "Mobile release evaluation, scorable API-model cells only",
-    "code": {
-     "k": 0,
-     "n": 6
-    },
-    "cua": {
-     "k": 0,
-     "n": 6
-    }
-   }
+   "outcomes": null
   },
   {
    "id": "mobile.synthetic.external-inspection-calibration.001",
@@ -2845,17 +2735,7 @@
    ],
    "viewport": "mobile-400x800",
    "path": "dataset/mobile/tasks/mobile.synthetic.external-inspection-calibration.001",
-   "outcomes": {
-    "label": "Mobile release evaluation, scorable API-model cells only",
-    "code": {
-     "k": 0,
-     "n": 7
-    },
-    "cua": {
-     "k": 8,
-     "n": 8
-    }
-   }
+   "outcomes": null
   },
   {
    "id": "mobile.synthetic.external-sprite-exposure-board.001",
@@ -2876,17 +2756,7 @@
    ],
    "viewport": "mobile-400x800",
    "path": "dataset/mobile/tasks/mobile.synthetic.external-sprite-exposure-board.001",
-   "outcomes": {
-    "label": "Mobile release evaluation, scorable API-model cells only",
-    "code": {
-     "k": 0,
-     "n": 8
-    },
-    "cua": {
-     "k": 1,
-     "n": 7
-    }
-   }
+   "outcomes": null
   },
   {
    "id": "mobile.synthetic.external-stateful-relay-board.001",
@@ -2907,17 +2777,7 @@
    ],
    "viewport": "mobile-400x800",
    "path": "dataset/mobile/tasks/mobile.synthetic.external-stateful-relay-board.001",
-   "outcomes": {
-    "label": "Mobile release evaluation, scorable API-model cells only",
-    "code": {
-     "k": 0,
-     "n": 7
-    },
-    "cua": {
-     "k": 3,
-     "n": 8
-    }
-   }
+   "outcomes": null
   },
   {
    "id": "mobile.synthetic.external-marble-run.001",
@@ -2938,17 +2798,7 @@
    ],
    "viewport": "mobile-400x800",
    "path": "dataset/mobile/tasks/mobile.synthetic.external-marble-run.001",
-   "outcomes": {
-    "label": "Mobile release evaluation, scorable API-model cells only",
-    "code": {
-     "k": 0,
-     "n": 7
-    },
-    "cua": {
-     "k": 7,
-     "n": 7
-    }
-   }
+   "outcomes": null
   },
   {
    "id": "mobile.synthetic.external-mural-warp.001",
@@ -2969,17 +2819,7 @@
    ],
    "viewport": "mobile-400x800",
    "path": "dataset/mobile/tasks/mobile.synthetic.external-mural-warp.001",
-   "outcomes": {
-    "label": "Mobile release evaluation, scorable API-model cells only",
-    "code": {
-     "k": 0,
-     "n": 7
-    },
-    "cua": {
-     "k": 7,
-     "n": 8
-    }
-   }
+   "outcomes": null
   },
   {
    "id": "mobile.synthetic.external-panorama-hotspots.001",
@@ -3000,17 +2840,7 @@
    ],
    "viewport": "mobile-400x800",
    "path": "dataset/mobile/tasks/mobile.synthetic.external-panorama-hotspots.001",
-   "outcomes": {
-    "label": "Mobile release evaluation, scorable API-model cells only",
-    "code": {
-     "k": 0,
-     "n": 7
-    },
-    "cua": {
-     "k": 8,
-     "n": 8
-    }
-   }
+   "outcomes": null
   },
   {
    "id": "mobile.synthetic.external-wallet-entitlement.001",
@@ -3031,17 +2861,7 @@
    ],
    "viewport": "mobile-400x800",
    "path": "dataset/mobile/tasks/mobile.synthetic.external-wallet-entitlement.001",
-   "outcomes": {
-    "label": "Mobile release evaluation, scorable API-model cells only",
-    "code": {
-     "k": 0,
-     "n": 6
-    },
-    "cua": {
-     "k": 6,
-     "n": 7
-    }
-   }
+   "outcomes": null
   },
   {
    "id": "mobile.synthetic.external-star-plate-registration.001",
@@ -3062,17 +2882,7 @@
    ],
    "viewport": "mobile-400x800",
    "path": "dataset/mobile/tasks/mobile.synthetic.external-star-plate-registration.001",
-   "outcomes": {
-    "label": "Mobile release evaluation, scorable API-model cells only",
-    "code": {
-     "k": 0,
-     "n": 5
-    },
-    "cua": {
-     "k": 5,
-     "n": 8
-    }
-   }
+   "outcomes": null
   },
   {
    "id": "mobile.synthetic.external-kinetic-gear-plan.001",
@@ -3093,17 +2903,7 @@
    ],
    "viewport": "mobile-400x800",
    "path": "dataset/mobile/tasks/mobile.synthetic.external-kinetic-gear-plan.001",
-   "outcomes": {
-    "label": "Mobile release evaluation, scorable API-model cells only",
-    "code": {
-     "k": 0,
-     "n": 8
-    },
-    "cua": {
-     "k": 1,
-     "n": 7
-    }
-   }
+   "outcomes": null
   }
  ]
 }
