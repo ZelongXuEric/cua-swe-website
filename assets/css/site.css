@@ -64,7 +64,7 @@ img, video { max-width: 100%; height: auto; display: block; }
 .text-link:hover span, .resource-links a:hover span, .domain:hover .domain-heading > span { transform: translate(2px, -2px); }
 .hero { display: grid; grid-template-columns: 1.08fr 1fr; gap: 42px; padding-top: 88px; padding-bottom: 88px; align-items: center; }
 .hero h1 { font-size: clamp(48px, 4.65vw, 67px); letter-spacing: -.055em; }
-.hero h1 span { font-family: "Klee One", var(--sans); font-size: .97em; font-weight: 600; letter-spacing: -.04em; white-space: nowrap; color: var(--gui); background: linear-gradient(110deg, #2649ef 18%, #067fa8 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero h1 span { font-family: "Kalam", var(--sans); font-size: 1em; font-weight: 400; letter-spacing: -.035em; white-space: nowrap; color: var(--gui); background: linear-gradient(110deg, #2649ef 18%, #067fa8 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 .hero .lead { max-width: 480px; font-size: 19px; line-height: 1.6; margin: 26px 0 32px; }
 .hero-demo { min-width: 0; position: relative; isolation: isolate; }
 .hero-demo::before { content: ""; position: absolute; z-index: -1; inset: -40px -22px 16px; background-image: linear-gradient(#dee7fb 1px, transparent 1px), linear-gradient(90deg, #dee7fb 1px, transparent 1px); background-size: 28px 28px; mask-image: radial-gradient(ellipse at center, #000 28%, transparent 72%); pointer-events: none; }
