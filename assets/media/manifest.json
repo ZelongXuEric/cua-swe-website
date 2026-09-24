@@ -1,0 +1,74 @@
+[
+ {
+  "file": "vector-relay-frame-03.png",
+  "source": "paper/figure2_assets/cases/01_vector_relay/originals/agent_0003.png",
+  "note": "byte-identical copy",
+  "sha256": "01245a857e52dcf43fc0bef683cd6be1e177cb1ea7f0a8e14afd488d816f689f"
+ },
+ {
+  "file": "vector-relay-frame-15.png",
+  "source": "paper/figure2_assets/cases/01_vector_relay/originals/agent_0015.png",
+  "note": "byte-identical copy",
+  "sha256": "c33570ffdf662e325915f29b9c6806a690a14e0ea15a14aaf89e57539017e738"
+ },
+ {
+  "file": "callisto-frame-01.jpg",
+  "source": "paper/figure2_assets/cases/05_captain_callisto/originals/agent_0001.png",
+  "note": "re-encoded as JPEG at 1280x720",
+  "sha256": "7316bb2e8130ac5bf81b206854849def9c349d08a96d61eb15d199d54dd5ba70"
+ },
+ {
+  "file": "callisto-frame-03.jpg",
+  "source": "paper/figure2_assets/cases/05_captain_callisto/originals/agent_0003.png",
+  "note": "re-encoded as JPEG at 1280x720",
+  "sha256": "607971eefc2314649ecfe05077b3c72d57a0492608f670cf31ffb38a3cc248c1"
+ },
+ {
+  "file": "letter-arc-frame-17.png",
+  "source": "paper/figure2_assets/cases/02_letter_arc/originals/agent_0017.png",
+  "note": "resized to 800x880",
+  "sha256": "5d729badd8b1508307a12001403f797d1a4751b3ff3e164c0ab239566017156b"
+ },
+ {
+  "file": "letter-arc-frame-18.png",
+  "source": "paper/figure2_assets/cases/02_letter_arc/originals/agent_0018.png",
+  "note": "resized to 800x880",
+  "sha256": "2bf08b1fc82b75f651ed499c5a3abac650d8e105ea6e79d3159a9e210b5052f0"
+ },
+ {
+  "file": "core-ball-frame-11.png",
+  "source": "paper/figure1_assets/cases/G04_core_ball/keyframes/agent_0011.png",
+  "note": "byte-identical copy",
+  "sha256": "571a0eb84a540c84308394e79dd475b4393975de2a17bebc4a7fe3c47e668b32"
+ },
+ {
+  "file": "allocation-ring-baseline.png",
+  "source": "paper/figure1_assets/cases/W01_allocation_ring/keyframes/reference-baseline_stacked.png",
+  "note": "resized to 1360x900",
+  "sha256": "e0333195dcf4c0f12701fb458ab8f07cacb6f434146e010a46f74b1caa055cf2"
+ },
+ {
+  "file": "counter-order-baseline.png",
+  "source": "paper/demo_video/assets/media/devops_before.png",
+  "note": "resized to 1372x460",
+  "sha256": "5d4a8ebb3c13b161b3818d132e39cd7e0c5bfcdc22bb3311a5eb0f8321fd0ee8"
+ },
+ {
+  "file": "mural-desk-baseline.png",
+  "source": "paper/demo_video/assets/media/mobile_before.png",
+  "note": "resized to 600x1200",
+  "sha256": "16c448f93605f7d9c49cfefa3a4ebdb29aaa790db5dcf791886acec49b6ed471"
+ },
+ {
+  "file": "cua-swe-demo-720p.mp4",
+  "source": "paper/demo_video/exports/CUA-SWE_demo_web_720p.mp4",
+  "note": "byte-identical copy",
+  "sha256": "69907ed2071580a2edb0fe50bd31c41ba98a38d21868aeeabf402f359f33d451"
+ },
+ {
+  "file": "cua-swe-demo-poster.jpg",
+  "source": "paper/demo_video/exports/poster.jpg",
+  "note": "byte-identical copy",
+  "sha256": "136249c692e9a4e1a630066132046c71646e144bdf0b59dcd93da4905a32a62a"
+ }
+]

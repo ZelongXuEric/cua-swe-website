@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CUA-SWE: software engineering with computer use</title>
+<meta name="description" content="CUA-SWE is a benchmark of 105 software repair tasks across Web, Game, DevOps and Mobile in which agents edit code, run the software, operate its interface and inspect screenshots, verified by hidden deterministic tests.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+
+<header class="wrap">
+  <nav class="nav" aria-label="Site">
+    <a class="brand" href="#top">CUA-SWE</a>
+    <ul>
+      <li><a href="tasks.html">Tasks</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="#cases">Cases</a></li>
+      <li><a href="#paper">Paper</a></li>
+      <li><a data-link="code" href="#">GitHub</a></li>
+      <li><a data-link="viewer" href="#">Data viewer</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="top">
+
+<section class="hero wrap wide">
+  <div class="wrap" style="padding:0">
+    <h1>Coding agents that use the software they change.</h1>
+    <p class="lead">CUA-SWE is a benchmark for software engineering with computer use. In each of its 105 tasks an agent edits a project, runs it, operates the interface, reads screenshots and submits a repair. Hidden deterministic tests decide whether the software now behaves as required.</p>
+    <div class="actions">
+      <a class="btn" href="tasks.html">Browse the 105 tasks</a>
+      <a class="btn ghost" data-link="paper" href="#">Read the paper</a>
+    </div>
+  </div>
+
+  <div class="episode" id="episode" tabindex="0" aria-label="One recorded repair episode, step by step">
+    <div class="episode-head">
+      <h2>One recorded episode: Vector Relay</h2>
+      <span class="who">A Game task, solved by GPT-5.6 Sol with computer use on 2 September 2026</span>
+    </div>
+    <div class="episode-body">
+      <div class="screen"></div>
+      <ol class="steps"></ol>
+    </div>
+    <div class="episode-foot">
+      <div class="legend"><span><i></i>computer use</span><span><i class="code"></i>coding</span><span><i class="verify"></i>independent test</span></div>
+      <span>Screenshots and patch come from the same attempt. On this task, matched trials succeeded 0 of 3 times code-only and 1 of 3 times with computer use.</span>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" id="why">
+  <div class="cols">
+    <div>
+      <h2>Source code does not show what the user sees.</h2>
+      <p>A platform game builds, starts, and looks right in a static screenshot, yet the character falls through a platform after a jump. Finding that bug means playing the game, watching the landing, and connecting what happened to the movement or collision code. Checking the fix means jumping again.</p>
+      <p>Computer-use agents operate interfaces from pixels. Coding agents read repositories and run commands. CUA-SWE puts both in one development episode and evaluates two conditions on the same tasks, with the same tests, so the effect of seeing and operating the software can be measured.</p>
+    </div>
+    <table class="conditions" aria-label="What each evaluation condition provides">
+      <thead><tr><th>In the episode</th><th class="code">Code-only</th><th class="gui">With computer use</th></tr></thead>
+      <tbody>
+        <tr><td>Read and edit the project source</td><td class="yes">yes</td><td class="yes">yes</td></tr>
+        <tr><td>Run shell commands, builds and local checks</td><td class="yes">yes</td><td class="yes">yes</td></tr>
+        <tr><td>Start and operate the running application</td><td class="no">no</td><td class="yes">yes</td></tr>
+        <tr><td>Screenshots of the interface</td><td class="no">no</td><td class="yes">yes, pixels only</td></tr>
+        <tr><td>Mouse, keyboard, navigation, resize</td><td class="no">no</td><td class="yes">yes</td></tr>
+        <tr><td>Hidden deterministic tests after submission</td><td class="yes">same</td><td class="yes">same</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="wrap" id="tasks">
+  <h2>105 tasks in four domains</h2>
+  <p class="lead" style="margin-top:14px">Every task starts from a certified broken application. The instruction describes the symptom a user would report, not the fix.</p>
+  <div class="domains">
+    <figure class="domain">
+      <div class="shot"><img src="assets/media/allocation-ring-baseline.png" alt="Allocation Ring Studio in the Stacked layout: the live ring is clipped and its legend overflows, next to the approved reference" width="1360" height="900" loading="lazy"></div>
+      <h3>Web <span class="count">36 tasks</span></h3>
+      <p>Interface geometry, selection and application contracts: ECharts and Fabric.js canvases, MapLibre maps, rich-text editors, data grids and product flows. Shown: Allocation Ring Studio's broken baseline, where the ring no longer fits its card in the Stacked layout.</p>
+    </figure>
+    <figure class="domain">
+      <div class="shot dark"><img src="assets/media/callisto-frame-03.jpg" alt="Captain Callisto: 3D platform level with the inventory reading 2/2 and a live cargo scanner listing route, alias, relay and receipt fields" width="1280" height="720" loading="lazy"></div>
+      <h3>Game <span class="count">29 tasks</span></h3>
+      <p>Temporal behavior, physics and state transitions in 12 games, from seeded 2048 restarts to 3D platforming. Tests replay fixed inputs on fixed seeds and read game state the agent cannot. Shown: a recorded agent screenshot from Captain Callisto, where one pickup credits two items and the live scanner exposes the runtime contract.</p>
+    </figure>
+    <figure class="domain">
+      <div class="shot dark devops"><img src="assets/media/counter-order-baseline.png" alt="Counter Order Console: requests per second chart with a 12516 req/s block during a rolling restart" width="1372" height="460" loading="lazy"></div>
+      <h3>DevOps <span class="count">20 tasks</span></h3>
+      <p>Operational consoles for traces, alerts, rates, sampling and SLOs. What the console shows has to be tied back to configuration and data-processing semantics in code. Shown: Counter Order Console's broken baseline, which renders a rolling restart as a 12,516 req/s traffic spike.</p>
+    </figure>
+    <figure class="domain">
+      <div class="shot mobile"><img src="assets/media/mural-desk-baseline.png" alt="Mural Desk mobile app: the wall plan shows the source artwork projected in the wrong orientation" width="600" height="1200" loading="lazy"></div>
+      <h3>Mobile <span class="count">20 tasks</span></h3>
+      <p>Mobile-web applications in a 400 by 800 viewport across 12 families, including nine Gantt variants. Visually specified relationships have to become editing behavior that survives save and reload. Shown: Mural Desk's broken baseline, which projects the imported artwork wrongly onto the wall plan.</p>
+    </figure>
+  </div>
+
+  <div class="validation">
+    <div>
+      <h2 style="font-size:26px">Three versions decide whether a task is admitted</h2>
+      <p style="margin-top:14px">Tests must reject the buggy baseline and a plausible but incomplete repair, and accept the reference repair. Tests vary service responses, layouts, seeds and input sequences so that a fix for one scenario is not enough.</p>
+      <p>After an episode, the evaluator applies only the submitted source changes to a clean copy of the project, rebuilds it, and runs the tests in isolation from the agent's workspace. Passing also requires that the agent respected the task's tool-access rules; computer-use runs must show that screenshots were actually viewed.</p>
+    </div>
+    <table aria-label="Task validation">
+      <thead><tr><th>Version</th><th>Tests</th></tr></thead>
+      <tbody>
+        <tr><td>Buggy baseline</td><td><span class="tag fail">fail</span></td></tr>
+        <tr><td>Incomplete repair, for example hardcoding one interaction</td><td><span class="tag fail">fail</span></td></tr>
+        <tr><td>Reference repair</td><td><span class="tag pass">pass</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="wrap" id="results">
+  <h2>Computer use raises task success for every model</h2>
+  <p class="lead" style="margin-top:14px">Eight API models were run in both conditions on identical tasks. The four-domain mean with computer use exceeds the code-only mean for each of them, by 13 to 48 percentage points.</p>
+  <div class="results-grid">
+    <div>
+      <svg id="paired-chart" class="chart" role="img" aria-label="Paired code-only and computer-use task success for eight models"></svg>
+      <p class="chart-note">Four-domain mean of task success (%) on matched tasks. Web 36, Game 29 and DevOps 20 tasks for every model; Mobile uses the tasks scorable in both conditions for that model (8 to 19).</p>
+    </div>
+    <div>
+      <div id="table1"></div>
+      <p class="chart-note">One selected attempt per task and condition. Mobile rates use each entry's scorable cohort: 20 tasks for GPT-6, Sol, Sonnet and Codex with computer use, 19 for Luna and Terra, 16 for Opus 4.8, 18 for Grok, 15 for Fable. A dash marks a pair that was not evaluated.</p>
+    </div>
+  </div>
+
+  <div class="findings">
+    <div>
+      <span class="n">59.9%</span>
+      <h3>GPT-6 Astra leads every domain</h3>
+      <p>Its four-domain mean with computer use is 59.9%, ahead of Claude Fable 5 at 43.2%, GPT-5.6 Sol at 42.2% and Codex with Sol at 41.9%. Among the API models it also reaches a success fastest, at 7.2 agent-minutes per solved task.</p>
+    </div>
+    <div>
+      <span class="n">0.6%</span>
+      <h3>DevOps needs the live console</h3>
+      <p>Across the nine API models, code-only success on the 20 DevOps tasks averages 0.6%. With the running console it averages 50.0%. The operative contract, such as a gauge's update mode, is visible only in live behavior.</p>
+    </div>
+    <div>
+      <span class="n">58.6%</span>
+      <h3>Game remains the open frontier</h3>
+      <p>No single model solves more than 37.9% of Game tasks, but the union of successful computer-use repairs covers 58.6% of them. Timing, restart and camera behavior separate the models.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" id="cases">
+  <h2>What the trajectories show</h2>
+  <p class="lead" style="margin-top:14px">Three more recorded attempts. Two pass and one fails, and in each the decisive evidence arrived through the interface.</p>
+  <div class="cases">
+    <article class="case">
+      <div class="media pair">
+        <figure><img src="assets/media/letter-arc-frame-17.png" alt="Letter Arc: the completed row ELEGY shown with green tiles after clicking Replay finish" width="800" height="880" loading="lazy"><figcaption>Screenshot 17: after Replay finish, the ELEGY row is revealed.</figcaption></figure>
+        <figure><img src="assets/media/letter-arc-frame-18.png" alt="Letter Arc: the same row paused mid-finish with dark tile faces and the revealed colors gone" width="800" height="880" loading="lazy"><figcaption>Screenshot 18: paused mid-finish, the tile faces turn dark.</figcaption></figure>
+      </div>
+      <div>
+        <h3>A replay exposes what the first edit missed</h3>
+        <div class="meta">Letter Arc, Game task gameqa.wordle-finish-replay-inspection.006</div>
+        <p>The agent identifies a conflict between the finish animation and the tile reveal transform and edits the CSS. Replaying the finish then shows a new problem: the revealed colors disappear in the paused frame. Further edits separate the animation layers and preserve the revealed status during the celebration.</p>
+        <p class="outcome"><span class="tag pass">pass</span>&nbsp; The independent evaluator records a passing build and 24 passing browser checkpoints for the final patch.</p>
+      </div>
+    </article>
+
+    <article class="case">
+      <div class="media">
+        <figure><img src="assets/media/core-ball-frame-11.png" alt="Core Ball: red collision screen reading Pins collided, try the sequence again, with an Attachment collision notice" width="1280" height="720" loading="lazy"><figcaption>Screenshot 11: the retained browser endpoint is still a collision.</figcaption></figure>
+      </div>
+      <div>
+        <h3>The agent's own replay is not the verifier</h3>
+        <div class="meta">Core Ball, Game task gameqa.core-ball-attachment-contract.003</div>
+        <p>The agent traces a queued pin's wrong attachment to an angle predicted before launch, changes the impact calculation, and promotes queued shots after the previous attachment updates the core's motion. Its own scripted replay completes four attachments and the build passes.</p>
+        <p class="outcome"><span class="tag fail">fail</span>&nbsp; The protected tests reject the patch: the impact resolves one simulation step late, and a rejected collision still occupies a pin position.</p>
+      </div>
+    </article>
+
+    <article class="case">
+      <div class="media pair">
+        <figure><img src="assets/media/callisto-frame-01.jpg" alt="Captain Callisto before the pickup: inventory 0/2, two cargo items visible near the lift" width="1280" height="720" loading="lazy"><figcaption>Screenshot 1: inventory 0/2, two items in the world.</figcaption></figure>
+        <figure><img src="assets/media/callisto-frame-03.jpg" alt="Captain Callisto after one pickup: inventory 2/2 while one item remains, scanner listing the cargo contract" width="1280" height="720" loading="lazy"><figcaption>Screenshot 3: one pickup, inventory 2/2, one item still on the platform.</figcaption></figure>
+      </div>
+      <div>
+        <h3>The decisive contract is only visible at runtime</h3>
+        <div class="meta">Captain Callisto, Game task gameqa.captain-callisto-visual-semantic-item.009</div>
+        <p>The editable parser credits the first cargo record it finds. Which record is active is defined by an external manifest that the agent cannot read from source; the in-game scanner displays it. The agent walks across the lift, sees one pickup credit two units, and maps the scanner's active route, alias, relay and receipt into the resolver.</p>
+        <p class="outcome"><span class="tag pass">pass</span>&nbsp; Matched trials on this task: code-only 0 of 3, computer use 3 of 3. Matching the visible quantity alone is not enough, since several receipts share it.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="wrap" id="paper">
+  <h2>Paper and resources</h2>
+  <div class="paper-grid">
+    <div>
+      <h3 style="font-size:22px;margin-bottom:12px">CUA-SWE: When Computer-Use Agents Meet Visual Software Engineering</h3>
+      <p>Software development requires more than editing code: developers repeatedly run software, interact with its interfaces, inspect its behavior, and use these observations to decide what to change next and whether a change works. Existing coding agents and computer-use agents are largely studied in isolation, leaving this integrated development process underexplored. We introduce CUA-SWE, a benchmark and evaluation pipeline for software engineering with computer use. CUA-SWE spans four software engineering domains and requires agents to modify code and configuration, execute commands, interact with running software, and inspect visual feedback within the same task. Each task includes deterministic, task-specific tests that verify whether the resulting software satisfies the requirements and preserves specified behavior. Our evaluation on CUA-SWE shows that combining coding with computer use improves average task success over coding alone. CUA-SWE provides a unified testbed for studying how agents use visual feedback and interaction to guide software development, with executable correctness criteria for the resulting software.</p>
+      <pre class="bib">@misc{wang2026cuaswe,
+  title  = {CUA-SWE: When Computer-Use Agents Meet Visual Software Engineering},
+  author = {Wang, Prince Zizhuang and Liang, Chenhao and Xu, Zelong and Yuan, Aojie and
+            Zhou, Xiaolin and Zhang, Haiyue and Zhao, Yue and Hu, Xiyang and Jiang, Shuli},
+  year   = {2026},
+  note   = {Preprint}
+}</pre>
+    </div>
+    <div>
+      <div class="authors">
+        Prince Zizhuang Wang*, Chenhao Liang*, Zelong Xu*, Aojie Yuan*, Xiaolin Zhou*, Haiyue Zhang, Yue Zhao, Xiyang Hu, Shuli Jiang
+        <div class="aff">Carnegie Mellon University, University of Southern California, University of Wisconsin–Madison, Arizona State University, and AWS Agentic AI. *Equal contribution.</div>
+      </div>
+      <ul class="links">
+        <li><a data-link="paper" href="#">Paper (PDF)</a></li>
+        <li><a data-link="code" href="#">Code and task bundles on GitHub</a></li>
+        <li><a href="tasks.html">Task explorer: all 105 tasks with instructions and budgets</a></li>
+        <li><a data-link="viewer" href="#">Data viewer: recorded trajectories, screenshots and audit ledger</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="demo">
+    <video controls muted playsinline preload="metadata" poster="assets/media/cua-swe-demo-poster.jpg" width="1280" height="720">
+      <source src="assets/media/cua-swe-demo-720p.mp4" type="video/mp4">
+    </video>
+    <p>Fifty-second overview. The Game scenes replay the retained Vector Relay agent patch; the Mobile scenes replay the reference repair for Mural Desk, not an agent run.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="wrap">
+  <span>CUA-SWE, 2026. Evaluation tests are kept separate from the agent's editable files; passing them does not make a change safe to deploy. Application screenshots come from the benchmark's locally hosted tasks, which include original examples and code adapted from existing projects; source and asset attribution is preserved in each task bundle.</span>
+  <span><a data-link="code" href="#">GitHub</a> · <a data-link="viewer" href="#">Data viewer</a></span>
+</footer>
+
+<script src="assets/js/site.js"></script>
+</body>
+</html>

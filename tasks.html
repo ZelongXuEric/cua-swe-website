@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CUA-SWE tasks</title>
+<meta name="description" content="All 105 CUA-SWE tasks with instructions, budgets, verifier types and recorded outcomes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<header class="wrap">
+  <nav class="nav" aria-label="Site">
+    <a class="brand" href="index.html">CUA-SWE</a>
+    <ul>
+      <li><a href="tasks.html" aria-current="page">Tasks</a></li>
+      <li><a href="index.html#results">Results</a></li>
+      <li><a href="index.html#cases">Cases</a></li>
+      <li><a href="index.html#paper">Paper</a></li>
+      <li><a data-link="code" href="#">GitHub</a></li>
+      <li><a data-link="viewer" href="#">Data viewer</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main class="wrap">
+  <div class="explorer-head">
+    <h1>105 tasks</h1>
+    <p class="lead">Every admitted task in the canonical registry, with the instruction the agent receives, its budget, the tests that score it, and the outcomes the release records.</p>
+  </div>
+
+  <div class="filters">
+    <div class="seg" id="domain-seg" role="group" aria-label="Domain">
+      <button type="button" data-domain="all" aria-pressed="true">All</button>
+      <button type="button" data-domain="web" aria-pressed="false">Web</button>
+      <button type="button" data-domain="game" aria-pressed="false">Game</button>
+      <button type="button" data-domain="devops" aria-pressed="false">DevOps</button>
+      <button type="button" data-domain="mobile" aria-pressed="false">Mobile</button>
+    </div>
+    <select id="family" aria-label="Application or family"><option value="">All applications</option></select>
+    <input id="q" type="search" placeholder="Search instructions and IDs" aria-label="Search tasks">
+  </div>
+  <p class="count-line" id="count"></p>
+  <p class="small muted" style="margin-top:6px;max-width:80ch">Outcomes count successful selected attempts where the release records them per task. Web: nine API models, one attempt each. Mobile: API-model cells that were scorable. Game: three construction attempts of GPT-5.6 Sol per condition. DevOps outcomes are reported per model only.</p>
+
+  <ol class="tasklist" id="list"></ol>
+</main>
+
+<footer class="wrap">
+  <span>CUA-SWE, 2026. Task bundles, verifiers and reference patches live in the repository; this page shows the agent-visible instruction only.</span>
+  <span><a href="index.html">Home</a> · <a data-link="viewer" href="#">Data viewer</a></span>
+</footer>
+
+<script src="data/tasks.js"></script>
+<script src="assets/js/tasks.js"></script>
+</body>
+</html>
