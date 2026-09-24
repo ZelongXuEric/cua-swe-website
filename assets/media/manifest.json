@@ -58,17 +58,5 @@
   "source": "paper/demo_video/assets/media/mobile_before.png",
   "note": "resized to 600x1200",
   "sha256": "16c448f93605f7d9c49cfefa3a4ebdb29aaa790db5dcf791886acec49b6ed471"
- },
- {
-  "file": "cua-swe-demo-720p.mp4",
-  "source": "paper/demo_video/exports/CUA-SWE_demo_web_720p.mp4",
-  "note": "byte-identical copy",
-  "sha256": "69907ed2071580a2edb0fe50bd31c41ba98a38d21868aeeabf402f359f33d451"
- },
- {
-  "file": "cua-swe-demo-poster.jpg",
-  "source": "paper/demo_video/exports/poster.jpg",
-  "note": "byte-identical copy",
-  "sha256": "136249c692e9a4e1a630066132046c71646e144bdf0b59dcd93da4905a32a62a"
  }
 ]

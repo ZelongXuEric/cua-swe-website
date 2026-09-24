@@ -4,6 +4,13 @@
   var LINKS = { code: "https://github.com/kingofspace0wzz/cua-swe", viewer: "https://kingofspace0wzz.github.io/cua-swe-viewer/" };
   document.querySelectorAll("a[data-link]").forEach(function (a) { var k = a.getAttribute("data-link"); if (LINKS[k]) a.href = LINKS[k]; });
 
+  (function () {
+    var h = document.querySelector(".site-header");
+    if (!h) return;
+    function on() { h.classList.toggle("scrolled", window.scrollY > 8); }
+    on(); window.addEventListener("scroll", on, { passive: true });
+  })();
+
   var DATA = window.CUA_SWE_TASKS, tasks = DATA.tasks;
   var DOMAIN = { web: "Web", game: "Game", devops: "DevOps", mobile: "Mobile" };
   var state = { domain: "all", family: "", q: "" };

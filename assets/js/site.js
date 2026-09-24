@@ -94,6 +94,9 @@
     ]
   };
 
+  var REDUCED = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var STEP_MS = 6500;
+
   function el(tag, cls, text) {
     var n = document.createElement(tag);
     if (cls) n.className = cls;
@@ -152,7 +155,8 @@
   function mountEpisode(root) {
     var screen = root.querySelector(".screen");
     var list = root.querySelector(".steps");
-    var current = -1, timer = null, userTouched = false;
+    var current = -1, timer = null, userTouched = REDUCED;
+    root.style.setProperty("--step-ms", STEP_MS + "ms");
     EPISODE.steps.forEach(function (st, i) {
       var li = el("li"); li.setAttribute("data-channel", st.channel); li.setAttribute("role", "button"); li.tabIndex = 0;
       li.appendChild(el("span", "dot"));
@@ -160,27 +164,35 @@
       body.appendChild(el("div", "t", (i + 1) + ". " + st.title));
       body.appendChild(el("div", "d", st.detail));
       li.appendChild(body);
-      li.addEventListener("click", function () { userTouched = true; show(i); });
-      li.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); userTouched = true; show(i); } });
+      li.appendChild(el("span", "timer"));
+      li.addEventListener("click", function () { stop(); show(i); });
+      li.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); stop(); show(i); } });
       list.appendChild(li);
     });
     function show(i) {
       if (i === current) return;
       current = i;
       screen.innerHTML = "";
+      screen.setAttribute("data-channel", EPISODE.steps[i].channel);
       screen.appendChild(renderScreen(EPISODE.steps[i]));
       Array.prototype.forEach.call(list.children, function (li, j) { li.setAttribute("aria-current", j === i ? "true" : "false"); });
     }
-    function tick() { if (!userTouched) show((current + 1) % EPISODE.steps.length); }
+    function stop() { userTouched = true; clearInterval(timer); root.classList.remove("autoplay", "paused"); }
+    function restartTimer() {
+      // Re-trigger the progress bar so it matches the fresh interval.
+      root.classList.remove("autoplay"); void root.offsetWidth; root.classList.add("autoplay");
+    }
+    function tick() { if (!userTouched) { show((current + 1) % EPISODE.steps.length); restartTimer(); } }
     show(0);
-    timer = setInterval(tick, 6500);
-    root.addEventListener("mouseenter", function () { clearInterval(timer); });
-    root.addEventListener("mouseleave", function () { if (!userTouched) timer = setInterval(tick, 6500); });
-    root.addEventListener("keydown", function (e) {
-      if (e.key === "ArrowRight" || e.key === "ArrowDown") { userTouched = true; show((current + 1) % EPISODE.steps.length); e.preventDefault(); }
-      if (e.key === "ArrowLeft" || e.key === "ArrowUp") { userTouched = true; show((current - 1 + EPISODE.steps.length) % EPISODE.steps.length); e.preventDefault(); }
+    if (!userTouched) { restartTimer(); timer = setInterval(tick, STEP_MS); }
+    root.addEventListener("mouseenter", function () { if (!userTouched) { clearInterval(timer); root.classList.add("paused"); } });
+    root.addEventListener("mouseleave", function () {
+      if (!userTouched) { root.classList.remove("paused"); restartTimer(); timer = setInterval(tick, STEP_MS); }
     });
-    // Preload the two screenshots so switching does not flash.
+    root.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowRight" || e.key === "ArrowDown") { stop(); show((current + 1) % EPISODE.steps.length); e.preventDefault(); }
+      if (e.key === "ArrowLeft" || e.key === "ArrowUp") { stop(); show((current - 1 + EPISODE.steps.length) % EPISODE.steps.length); e.preventDefault(); }
+    });
     ["assets/media/vector-relay-frame-03.png", "assets/media/vector-relay-frame-15.png"].forEach(function (u) { var im = new Image(); im.src = u; });
   }
 
@@ -204,6 +216,7 @@
   }
   function fmt1(x) { return (Math.round(x * 10 + 1e-9) / 10).toFixed(1); }
 
+  var chartShown = REDUCED;
   function renderPaired(svg) {
     var rows = PAIRED.map(function (r) { return { m: r.m, code: mean(r, 0), cua: mean(r, 1) }; })
       .sort(function (a, b) { return b.cua - a.cua; });
@@ -227,13 +240,17 @@
       var y = top + i * rowH + (narrow ? rowH - 14 : rowH / 2);
       if (narrow) add("text", { x: L, y: y - 16, "class": "lbl" }, r.m);
       else add("text", { x: L - 14, y: y + 5, "text-anchor": "end", "class": "lbl" }, r.m);
-      add("line", { x1: x(r.code), x2: x(r.cua), y1: y, y2: y, "class": "track" });
+      var len = x(r.cua) - x(r.code), delay = (i * 70) + "ms";
+      var track = add("line", { x1: x(r.code), x2: x(r.cua), y1: y, y2: y, "class": "track" });
+      track.style.strokeDasharray = len; track.style.strokeDashoffset = chartShown ? 0 : len; track.style.transitionDelay = delay;
       add("circle", { cx: x(r.code), cy: y, r: 6.5, "class": "code" });
-      add("circle", { cx: x(r.cua), cy: y, r: 7, "class": "cua" });
-      add("text", { x: x(r.cua) + 14, y: y + 5, "class": "gain" }, "+" + fmt1(r.cua - r.code));
+      var dot = add("circle", { cx: x(r.cua), cy: y, r: 7, "class": "cua" });
+      dot.style.transform = chartShown ? "none" : "translateX(" + (-len) + "px)"; dot.style.transitionDelay = delay;
+      var g = add("text", { x: x(r.cua) + 14, y: y + 5, "class": "gain" }, "+" + fmt1(r.cua - r.code));
+      g.style.opacity = chartShown ? 1 : 0; g.style.transitionDelay = (i * 70 + 900) + "ms";
       if (!narrow) add("text", { x: x(r.code) - 12, y: y + 5, "text-anchor": "end" }, fmt1(r.code));
     });
-    var lx = narrow ? L : L;
+    var lx = L;
     add("circle", { cx: lx + 6, cy: 12, r: 6, "class": "code" });
     add("text", { x: lx + 18, y: 16 }, "code-only");
     add("circle", { cx: lx + 116, cy: 12, r: 6, "class": "cua" });
@@ -307,13 +324,56 @@
     }
   }
 
+  function playChart(svg) {
+    svg.classList.add("animate");
+    requestAnimationFrame(function () { requestAnimationFrame(function () {
+      chartShown = true;
+      svg.querySelectorAll(".track").forEach(function (t) { t.style.strokeDashoffset = 0; });
+      svg.querySelectorAll(".cua").forEach(function (c) { c.style.transform = "none"; });
+      svg.querySelectorAll(".gain").forEach(function (g) { g.style.opacity = 1; });
+    }); });
+  }
+
+  function mountHeader() {
+    var h = document.querySelector(".site-header");
+    if (!h) return;
+    function on() { h.classList.toggle("scrolled", window.scrollY > 8); }
+    on(); window.addEventListener("scroll", on, { passive: true });
+  }
+
+  function mountVideo(v) {
+    if (REDUCED) { v.removeAttribute("autoplay"); v.pause(); }
+    var fig = v.parentNode;
+    fig.tabIndex = 0; fig.setAttribute("role", "button");
+    function full() {
+      if (v.requestFullscreen) v.requestFullscreen();
+      else if (v.webkitEnterFullscreen) v.webkitEnterFullscreen();
+      else if (v.webkitRequestFullscreen) v.webkitRequestFullscreen();
+      v.play();
+    }
+    fig.addEventListener("click", full);
+    fig.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); full(); } });
+    document.addEventListener("fullscreenchange", function () { v.controls = document.fullscreenElement === v; });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
+    mountHeader();
+    var video = document.getElementById("demo-video");
+    if (video) mountVideo(video);
     var ep = document.getElementById("episode");
     if (ep) mountEpisode(ep);
     var chart = document.getElementById("paired-chart");
     var t1 = document.getElementById("table1");
     function layout() { if (chart) renderPaired(chart); if (t1) renderTable1(t1); }
     layout();
+    if (chart && !chartShown) {
+      if ("IntersectionObserver" in window) {
+        var io = new IntersectionObserver(function (es) {
+          if (es.some(function (e) { return e.isIntersecting; })) { io.disconnect(); playChart(chart); }
+        }, { threshold: 0.35 });
+        io.observe(chart);
+      } else playChart(chart);
+    }
     var pending = null;
     window.addEventListener("resize", function () { clearTimeout(pending); pending = setTimeout(layout, 150); });
   });

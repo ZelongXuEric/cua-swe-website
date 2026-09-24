@@ -7,14 +7,14 @@
 <meta name="description" content="CUA-SWE is a benchmark of 105 software repair tasks across Web, Game, DevOps and Mobile in which agents edit code, run the software, operate its interface and inspect screenshots, verified by hidden deterministic tests.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/site.css">
 </head>
 <body>
 
-<header class="wrap">
-  <nav class="nav" aria-label="Site">
-    <a class="brand" href="#top">CUA-SWE</a>
+<header class="site-header">
+  <nav class="nav wrap" aria-label="Site">
+    <a class="brand" href="#top" aria-label="CUA-SWE home"><span class="cua">CUA</span><span class="bar" aria-hidden="true"></span><span class="swe">SWE</span></a>
     <ul>
       <li><a href="tasks.html">Tasks</a></li>
       <li><a href="#results">Results</a></li>
@@ -29,15 +29,23 @@
 <main id="top">
 
 <section class="hero wrap wide">
-  <div class="wrap" style="padding:0">
-    <h1>Coding agents that use the software they change.</h1>
-    <p class="lead">CUA-SWE is a benchmark for software engineering with computer use. In each of its 105 tasks an agent edits a project, runs it, operates the interface, reads screenshots and submits a repair. Hidden deterministic tests decide whether the software now behaves as required.</p>
-    <div class="actions">
+  <div class="hero-text">
+    <h1 class="enter">Coding agents that use the software they change.</h1>
+    <p class="lead enter">CUA-SWE is a benchmark for software engineering with computer use. In each of its 105 tasks an agent edits a project, runs it, operates the interface, reads screenshots and submits a repair. Hidden deterministic tests decide whether the software now behaves as required.</p>
+    <div class="actions enter">
       <a class="btn" href="tasks.html">Browse the 105 tasks</a>
       <a class="btn ghost" data-link="paper" href="#">Read the paper</a>
     </div>
   </div>
+  <figure class="hero-video enter">
+    <video id="demo-video" autoplay muted loop playsinline preload="auto" poster="assets/media/cua-swe-demo-poster.jpg" width="1280" height="720" aria-label="Fifty-second CUA-SWE overview. Click to play full screen.">
+      <source src="assets/media/cua-swe-demo-loop.mp4" type="video/mp4">
+    </video>
+    <span class="expand" aria-hidden="true"><svg viewBox="0 0 16 16" width="14" height="14"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span>
+  </figure>
+</section>
 
+<section class="wrap wide episode-section">
   <div class="episode" id="episode" tabindex="0" aria-label="One recorded repair episode, step by step">
     <div class="episode-head">
       <h2>One recorded episode: Vector Relay</h2>
@@ -221,12 +229,6 @@
         <li><a data-link="viewer" href="#">Data viewer: recorded trajectories, screenshots and audit ledger</a></li>
       </ul>
     </div>
-  </div>
-  <div class="demo">
-    <video controls muted playsinline preload="metadata" poster="assets/media/cua-swe-demo-poster.jpg" width="1280" height="720">
-      <source src="assets/media/cua-swe-demo-720p.mp4" type="video/mp4">
-    </video>
-    <p>Fifty-second overview. The Game scenes replay the retained Vector Relay agent patch; the Mobile scenes replay the reference repair for Mural Desk, not an agent run.</p>
   </div>
 </section>
 
