@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Copy the retained screenshots used by the website into website/assets/media.
+"""Copy retained screenshots and the full overview video into website/assets/media.
 Sources are byte-identical retained frames under paper/; large DPR-2 captures are downscaled.
 """
 import argparse, json, os, pathlib, shutil, hashlib
 from PIL import Image
 
-ap = argparse.ArgumentParser(description="Copy retained screenshots from a CUA-SWE checkout into assets/media.")
+ap = argparse.ArgumentParser(description="Copy retained screenshots and the full overview video into assets/media.")
 ap.add_argument("--root", default=os.environ.get("CUA_SWE_ROOT", str(pathlib.Path.home() / "projects/cua-swe")),
                 help="CUA-SWE research checkout containing paper/ (default: $CUA_SWE_ROOT or ~/projects/cua-swe)")
 ROOT = pathlib.Path(ap.parse_args().root)
@@ -27,6 +27,9 @@ ITEMS = [
     (F1 / "W01_allocation_ring/keyframes/reference-baseline_stacked.png", "allocation-ring-baseline.png", 1360),
     (DEMO / "assets/media/devops_before.png", "counter-order-baseline.png", 1372),
     (DEMO / "assets/media/mobile_before.png", "mural-desk-baseline.png", 600),
+    # Preserve the complete 50-second overview and its opening title card.
+    (DEMO / "exports/CUA-SWE_demo_web_720p.mp4", "cua-swe-demo-loop.mp4", None),
+    (DEMO / "exports/poster.jpg", "cua-swe-demo-poster.jpg", None),
 ]
 
 manifest = []
@@ -49,9 +52,3 @@ for src, dst, maxw in ITEMS:
                      "sha256": hashlib.sha256(target.read_bytes()).hexdigest()})
     print(f"{dst:40s} {target.stat().st_size/1024:7.0f} KB  {note}")
 json.dump(manifest, open(OUT / "manifest.json", "w"), indent=1)
-
-# The hero loop drops the 4.2 s title card, which repeats the headline beside it, and its poster is
-# the first remaining frame. Regenerate both from the 720p export in the research checkout:
-#   ffmpeg -ss 4.2 -i <cua-swe>/paper/demo_video/exports/CUA-SWE_demo_web_720p.mp4 -an -c:v libx264 -preset slow -crf 24 \
-#          -pix_fmt yuv420p -movflags +faststart assets/media/cua-swe-demo-loop.mp4
-#   ffmpeg -i assets/media/cua-swe-demo-loop.mp4 -frames:v 1 -q:v 3 assets/media/cua-swe-demo-poster.jpg

@@ -22,7 +22,7 @@ of its task data and retained media.
 | Per-domain pass@1 results | `TABLE1` in `assets/js/site.js`, transcribed from `paper/evaluation/final-evaluation-report.md` (September 24, 2026). On the homepage and `results.html`, the domain buttons switch the table and comparison plot together. |
 | Vector Relay repair episode | Retained screenshots, patch, shell outputs and verifier report in `paper/figure2_assets/cases/01_vector_relay`. The five steps are a selected excerpt of one recorded attempt. |
 | Other screenshots | `tools/prepare_media.py --root <research-checkout>` copies retained frames from `paper/figure1_assets`, `paper/figure2_assets` and `paper/demo_video`. `assets/media/manifest.json` records file sources and hashes. |
-| Overview video | `paper/demo_video/exports/CUA-SWE_demo_web_720p.mp4`, with the opening title card removed. This contains baseline and repair replays; it is not an original agent-run recording. See `tools/prepare_media.py` for export commands. |
+| Overview video | Byte-identical copy of the full 50-second `paper/demo_video/exports/CUA-SWE_demo_web_720p.mp4`, including the opening title and subtitle. This contains baseline and repair replays; it is not an original agent-run recording. The title-card poster is copied from `paper/demo_video/exports/poster.jpg`; `tools/prepare_media.py` copies both without trimming or re-encoding. |
 
 The task data was generated from research revision `2d86f0e1`: 36 Web,
 29 Game, 20 DevOps and 20 Mobile tasks. Generator inputs must come from
