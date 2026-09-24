@@ -54,6 +54,7 @@ two frames show a replay defect, not a successful repair before/after pair.
 `LINKS` in `assets/js/site.js` and `assets/js/tasks.js` defines external URLs.
 The `paper` URL stays `null`, hiding paper links until a public preprint exists.
 The research repository is currently private. Fonts load from Google Fonts
-(Inter and JetBrains Mono); all other assets are local.
+(Inter and JetBrains Mono, with Klee One only for “the interface.” in the hero);
+all other assets are local.
 
 Before any push or publication, obtain the project owner's approval.
