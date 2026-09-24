@@ -1,34 +1,56 @@
 # CUA-SWE project website
 
-Static site for the CUA-SWE benchmark: `index.html` (narrative), `tasks.html` (task explorer),
-`assets/`, `data/`. No build step; GitHub Pages serves the repository root. To preview locally:
+A static research site: `index.html` presents the benchmark and recorded repairs;
+`results.html` contains the per-domain model results; `tasks.html` explores all 105 tasks. GitHub Pages serves the repository root.
+No build step or JavaScript dependencies are required.
+
+Preview locally:
 
 ```bash
-python3 -m http.server 8000
+python3 -m http.server 8000 --bind 127.0.0.1
 ```
 
-The research repository (task bundles, verifiers, evaluation pipeline) is separate; this
-repository holds only the display copy of its data and media.
+## Sources of truth
 
-## Where the content comes from
+The research repository is separate. This repository contains display copies
+of its task data and retained media.
 
 | Content | Source |
 | --- | --- |
-| Task list, instructions, budgets, families | `tools/build_data.py` reads `dataset/registry.json`, the four domain manifests, every `task.yaml`, Mobile `INSTRUCTION.md`, and the Web-36 and Mobile-20 release evaluation summaries. Rerun it after a registry change: `python3 tools/build_data.py --root <cua-swe checkout>` |
-| Results table and paired chart | `assets/js/site.js` (`TABLE1`, `PAIRED`). Numbers are Table 1 of the paper; the paired chart is computed from the per-domain success counts of the same evaluation. |
-| Vector Relay episode | `assets/js/site.js` (`EPISODE`), transcribed from `paper/figure2_assets/cases/01_vector_relay` (frame manifest, agent messages, patch, shell output, verifier report). |
-| Screenshots and video | `tools/prepare_media.py --root <cua-swe checkout>` copies retained frames from `paper/figure1_assets`, `paper/figure2_assets` and `paper/demo_video`; `assets/media/manifest.json` records the source and hash of each file. |
+| Task inventory, original instructions, budgets and families | `tools/build_data.py` reads the canonical registry, domain manifests, task descriptors and release summaries. Run `python3 tools/build_data.py --root <research-checkout>`. |
+| Per-domain pass@1 results | `TABLE1` in `assets/js/site.js`, transcribed from `paper/evaluation/final-evaluation-report.md` (September 24, 2026). On `results.html`, the domain buttons switch the table and comparison plot together. |
+| Vector Relay repair episode | Retained screenshots, patch, shell outputs and verifier report in `paper/figure2_assets/cases/01_vector_relay`. The five steps are a selected excerpt of one recorded attempt. |
+| Other screenshots | `tools/prepare_media.py --root <research-checkout>` copies retained frames from `paper/figure1_assets`, `paper/figure2_assets` and `paper/demo_video`. `assets/media/manifest.json` records file sources and hashes. |
+| Overview video | `paper/demo_video/exports/CUA-SWE_demo_web_720p.mp4`, with the opening title card removed. This contains baseline and repair replays; it is not an original agent-run recording. See `tools/prepare_media.py` for export commands. |
 
-The current data was built from the `origin/main` snapshot `2d86f0e1` (canonical 105 tasks:
-36 Web, 29 Game, 20 DevOps, 20 Mobile). Both tools take `--root` (or `CUA_SWE_ROOT`) pointing at a
-checkout at that revision or later.
+The task data was generated from research revision `2d86f0e1`: 36 Web,
+29 Game, 20 DevOps and 20 Mobile tasks. Generator inputs must come from
+that revision or a later canonical release, not an older local `main`.
 
-## Before publishing
+Keep the four domain denominators separate. The Game table shows original
+pass@1, not the revised first attempts from the pass@3 cohort. Mobile Opus 5
+conditions are deferred and have no score. Do not convert them to zero.
 
-## Links
+The task explorer preserves original instructions and exposes budgets,
+provenance and recorded task-level outcomes on expansion. Game task-level
+outcomes are construction trials, as identified by their source labels;
+they are not the final pass@1 model comparison.
 
-`LINKS` at the top of `assets/js/site.js` and `assets/js/tasks.js` holds the external URLs.
-`paper` is `null` until the preprint is public, which hides the paper buttons. `code` points at the
-research repository and `viewer` at the public data viewer.
+## Presentation and interaction
 
-Fonts load from Google Fonts (Inter, JetBrains Mono). Everything else is self-contained.
+All pages use white backgrounds with blue and cyan interaction accents.
+Model comparisons have their own Results page. The homepage uses a manually controlled repair episode and an overview video
+with pause and full-screen controls. Reduced-motion preferences disable video
+autoplay. Results and task filters work with keyboard controls; task URL hashes
+open the corresponding original instruction.
+
+Keep the copy short. Use real evidence as the visual focus. Avoid decorative
+badges, repeated metadata rows and reconstructed agent actions. Letter Arc's
+two frames show a replay defect, not a successful repair before/after pair.
+
+`LINKS` in `assets/js/site.js` and `assets/js/tasks.js` defines external URLs.
+The `paper` URL stays `null`, hiding paper links until a public preprint exists.
+The research repository is currently private. Fonts load from Google Fonts
+(Inter and JetBrains Mono); all other assets are local.
+
+Before any push or publication, obtain the project owner's approval.

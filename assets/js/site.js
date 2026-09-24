@@ -1,24 +1,17 @@
-/* CUA-SWE site: episode player, paired chart, link wiring. No framework. */
+/* CUA-SWE: retained episode evidence and final-report success rates. */
 (function () {
   "use strict";
-
-  // ---- Links: edit here when the preprint and public repository URLs are final.
   var LINKS = {
-    paper: null,  // set to the arXiv or PDF URL when the preprint is public; null hides the paper links
+    paper: null,
     code: "https://github.com/kingofspace0wzz/cua-swe",
-    viewer: "https://kingofspace0wzz.github.io/cua-swe-viewer/",
-    tasks: "tasks.html"
+    viewer: "https://kingofspace0wzz.github.io/cua-swe-viewer/"
   };
   document.querySelectorAll("a[data-link]").forEach(function (a) {
-    var key = a.getAttribute("data-link");
-    if (LINKS[key]) a.href = LINKS[key];
-    else if (a.parentNode.tagName === "LI") a.parentNode.remove();
+    var url = LINKS[a.getAttribute("data-link")];
+    if (url) a.href = url;
     else a.remove();
   });
-
-  // ---- The recorded Vector Relay episode. Every string below is taken from the retained
-  // trajectory (paper/figure2_assets/cases/01_vector_relay): frame manifest, agent messages,
-  // patch, shell outputs and verifier report.
+  // Sources: paper/figure2_assets/cases/01_vector_relay; no synthetic screenshots.
   var EPISODE = {
     steps: [
       {
@@ -94,171 +87,6 @@
     ]
   };
 
-  var REDUCED = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var STEP_MS = 6500;
-
-  function el(tag, cls, text) {
-    var n = document.createElement(tag);
-    if (cls) n.className = cls;
-    if (text != null) n.textContent = text;
-    return n;
-  }
-
-  function renderScreen(step) {
-    var s = step.screen;
-    var frag = document.createDocumentFragment();
-    var media = el("div", "media");
-    if (s.type === "image") {
-      var img = el("img"); img.src = s.src; img.alt = s.alt; img.width = 1280; img.height = 720;
-      media.appendChild(img);
-    } else {
-      var pane = el("div", "pane");
-      if (s.type === "diff") {
-        s.files.forEach(function (f) {
-          pane.appendChild(el("div", "hdr", f.name));
-          var pre = el("pre");
-          f.lines.forEach(function (ln) { pre.appendChild(el("span", ln[0], ln[1] + "\n")); });
-          pane.appendChild(pre);
-        });
-      } else if (s.type === "shell") {
-        s.items.forEach(function (it) {
-          var pre = el("pre");
-          pre.appendChild(el("span", "cmd", "$ " + it.cmd + "\n"));
-          pre.appendChild(el("span", it.ok ? "ok" : "out", it.out + "\n"));
-          pane.appendChild(pre);
-        });
-      } else if (s.type === "verify") {
-        s.checks.forEach(function (c) {
-          var pre = el("pre");
-          pre.appendChild(el("span", "hdr", c.name + ": " + c.cmd + "\n"));
-          pre.appendChild(el("span", "out", c.result + "\n"));
-          pre.appendChild(el("span", c.pass ? "ok" : "fail", c.pass ? "passed\n" : "failed\n"));
-          pane.appendChild(pre);
-        });
-        pane.appendChild(el("pre", null, "")).appendChild(el("span", "ok", s.summary));
-      }
-      media.appendChild(pane);
-    }
-    frag.appendChild(media);
-    var note = el("div", "note");
-    note.appendChild(el("div", "cap", s.caption));
-    if (step.quote) {
-      var q = el("div", "quote");
-      q.appendChild(el("span", null, "Agent, as recorded: "));
-      q.appendChild(document.createTextNode("\u201c" + step.quote + "\u201d"));
-      note.appendChild(q);
-    }
-    frag.appendChild(note);
-    return frag;
-  }
-
-  function mountEpisode(root) {
-    var screen = root.querySelector(".screen");
-    var list = root.querySelector(".steps");
-    var current = -1, timer = null, userTouched = REDUCED;
-    root.style.setProperty("--step-ms", STEP_MS + "ms");
-    EPISODE.steps.forEach(function (st, i) {
-      var li = el("li"); li.setAttribute("data-channel", st.channel); li.setAttribute("role", "button"); li.tabIndex = 0;
-      li.appendChild(el("span", "dot"));
-      var body = el("div");
-      body.appendChild(el("div", "t", (i + 1) + ". " + st.title));
-      body.appendChild(el("div", "d", st.detail));
-      li.appendChild(body);
-      li.appendChild(el("span", "timer"));
-      li.addEventListener("click", function () { stop(); show(i); });
-      li.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); stop(); show(i); } });
-      list.appendChild(li);
-    });
-    function show(i) {
-      if (i === current) return;
-      current = i;
-      screen.innerHTML = "";
-      screen.setAttribute("data-channel", EPISODE.steps[i].channel);
-      screen.appendChild(renderScreen(EPISODE.steps[i]));
-      Array.prototype.forEach.call(list.children, function (li, j) { li.setAttribute("aria-current", j === i ? "true" : "false"); });
-    }
-    function stop() { userTouched = true; clearInterval(timer); root.classList.remove("autoplay", "paused"); }
-    function restartTimer() {
-      // Re-trigger the progress bar so it matches the fresh interval.
-      root.classList.remove("autoplay"); void root.offsetWidth; root.classList.add("autoplay");
-    }
-    function tick() { if (!userTouched) { show((current + 1) % EPISODE.steps.length); restartTimer(); } }
-    show(0);
-    if (!userTouched) { restartTimer(); timer = setInterval(tick, STEP_MS); }
-    root.addEventListener("mouseenter", function () { if (!userTouched) { clearInterval(timer); root.classList.add("paused"); } });
-    root.addEventListener("mouseleave", function () {
-      if (!userTouched) { root.classList.remove("paused"); restartTimer(); timer = setInterval(tick, STEP_MS); }
-    });
-    root.addEventListener("keydown", function (e) {
-      if (e.key === "ArrowRight" || e.key === "ArrowDown") { stop(); show((current + 1) % EPISODE.steps.length); e.preventDefault(); }
-      if (e.key === "ArrowLeft" || e.key === "ArrowUp") { stop(); show((current - 1 + EPISODE.steps.length) % EPISODE.steps.length); e.preventDefault(); }
-    });
-    ["assets/media/vector-relay-frame-03.png", "assets/media/vector-relay-frame-15.png"].forEach(function (u) { var im = new Image(); im.src = u; });
-  }
-
-  // ---- Paired comparison: identical tasks per model and domain, four domains weighted equally.
-  // Counts are successes out of the matched task set: [code-only, computer use, tasks].
-  // Every model covers all 36 Web, 29 Game, 20 DevOps and 20 Mobile tasks (final evaluation report, 2026-09-24).
-  var PAIRED = [
-    { m: "GPT-6 Astra",     web: [10, 24, 36], game: [5, 11, 29], devops: [0, 16, 20], mobile: [0, 11, 20] },
-    { m: "GPT-5.6 Sol",     web: [7, 21, 36],  game: [3, 3, 29],  devops: [0, 11, 20], mobile: [0, 9, 20] },
-    { m: "GPT-5.6 Luna",    web: [4, 2, 36],   game: [0, 2, 29],  devops: [0, 3, 20],  mobile: [0, 7, 20] },
-    { m: "GPT-5.6 Terra",   web: [4, 5, 36],   game: [1, 2, 29],  devops: [0, 5, 20],  mobile: [0, 7, 20] },
-    { m: "Claude Opus 4.8", web: [6, 10, 36],  game: [1, 6, 29],  devops: [0, 11, 20], mobile: [0, 8, 20] },
-    { m: "Claude Sonnet 5", web: [3, 0, 36],   game: [2, 1, 29],  devops: [0, 8, 20],  mobile: [0, 7, 20] },
-    { m: "Claude Fable 5",  web: [7, 17, 36],  game: [4, 5, 29],  devops: [1, 11, 20], mobile: [1, 8, 20] },
-    { m: "Grok 4.6",        web: [11, 20, 36], game: [3, 5, 29],  devops: [0, 13, 20], mobile: [0, 6, 20] }
-  ];
-  function mean(row, idx) {
-    var ds = ["web", "game", "devops", "mobile"], s = 0;
-    ds.forEach(function (d) { s += row[d][idx] / row[d][2]; });
-    return 100 * s / 4;
-  }
-  function fmt1(x) { return (Math.round(x * 10 + 1e-9) / 10).toFixed(1); }
-
-  var chartShown = REDUCED;
-  function renderPaired(svg) {
-    var rows = PAIRED.map(function (r) { return { m: r.m, code: mean(r, 0), cua: mean(r, 1) }; })
-      .sort(function (a, b) { return b.cua - a.cua; });
-    var cw = svg.parentNode.clientWidth || 960, narrow = cw < 620;
-    var W = Math.max(cw, 320), L = narrow ? 16 : 150, R = narrow ? 56 : 70, rowH = narrow ? 50 : 40, top = narrow ? 34 : 30, H = top + rows.length * rowH + 30;
-    var x = function (v) { return L + (W - L - R) * v / 100; };
-    var ns = "http://www.w3.org/2000/svg";
-    svg.setAttribute("viewBox", "0 0 " + W + " " + H);
-    svg.innerHTML = "";
-    function add(tag, attrs, text) {
-      var n = document.createElementNS(ns, tag);
-      Object.keys(attrs).forEach(function (k) { n.setAttribute(k, attrs[k]); });
-      if (text != null) n.textContent = text;
-      svg.appendChild(n); return n;
-    }
-    (narrow ? [0, 25, 50, 75] : [0, 20, 40, 60, 80]).forEach(function (v) {
-      add("line", { x1: x(v), x2: x(v), y1: top - 10, y2: H - 28, "class": "grid" });
-      add("text", { x: x(v), y: H - 10, "text-anchor": "middle", "class": "axis" }, v + "%");
-    });
-    rows.forEach(function (r, i) {
-      var y = top + i * rowH + (narrow ? rowH - 14 : rowH / 2);
-      if (narrow) add("text", { x: L, y: y - 16, "class": "lbl" }, r.m);
-      else add("text", { x: L - 14, y: y + 5, "text-anchor": "end", "class": "lbl" }, r.m);
-      var len = x(r.cua) - x(r.code), delay = (i * 70) + "ms";
-      var track = add("line", { x1: x(r.code), x2: x(r.cua), y1: y, y2: y, "class": "track" });
-      track.style.strokeDasharray = len; track.style.strokeDashoffset = chartShown ? 0 : len; track.style.transitionDelay = delay;
-      add("circle", { cx: x(r.code), cy: y, r: 6.5, "class": "code" });
-      var dot = add("circle", { cx: x(r.cua), cy: y, r: 7, "class": "cua" });
-      dot.style.transform = chartShown ? "none" : "translateX(" + (-len) + "px)"; dot.style.transitionDelay = delay;
-      var g = add("text", { x: x(r.cua) + 14, y: y + 5, "class": "gain" }, "+" + fmt1(r.cua - r.code));
-      g.style.opacity = chartShown ? 1 : 0; g.style.transitionDelay = (i * 70 + 900) + "ms";
-      if (!narrow) add("text", { x: x(r.code) - 12, y: y + 5, "text-anchor": "end" }, fmt1(r.code));
-    });
-    var lx = L;
-    add("circle", { cx: lx + 6, cy: 12, r: 6, "class": "code" });
-    add("text", { x: lx + 18, y: 16 }, "code-only");
-    add("circle", { cx: lx + 116, cy: 12, r: 6, "class": "cua" });
-    add("text", { x: lx + 128, y: 16 }, "with computer use");
-    if (!narrow) add("text", { x: lx + 268, y: 16, "class": "axis" }, "labels: gain in percentage points");
-  }
-
-  // ---- Table 1 of the paper. [code-only, with computer use] task success (%) per domain; null = not evaluated.
   var TABLE1 = {
     domains: [["web", "Web", 36], ["game", "Game", 29], ["devops", "DevOps", 20], ["mobile", "Mobile", 20]],
     rows: [
@@ -275,106 +103,185 @@
       { m: "Claude Code + Opus 5", sys: true, web: [null, 55.6], game: [null, 20.7], devops: [null, 65.0], mobile: [null, null] }
     ]
   };
-  function colMax(d, i) {
-    var mx = null;
-    TABLE1.rows.forEach(function (r) { var v = r[d][i]; if (v != null && (mx == null || v > mx)) mx = v; });
-    return mx;
+
+  // Values above are the original pass@1 results in
+  // paper/evaluation/final-evaluation-report.md (2026-09-24).
+  // Game pass@3 uses reviewed replacement attempts and is a separate cohort.
+  var NOTES = {
+    web: "Web success requires a passing patch and the required visual evidence. Rule exclusions remain in the 36-task denominator.",
+    game: "Original Game pass@1 results. The separate pass@3 evaluation uses reviewed runtime replacements for some first attempts.",
+    devops: "Valid records must follow the tool-use rules. Reviewed infrastructure errors receive replacements; genuine agent failures count as failures.",
+    mobile: "Opus 5 API and Claude Code evaluations are deferred. Deferred means no score, not zero success."
+  };
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+  function el(tag, cls, text) {
+    var node = document.createElement(tag);
+    if (cls) node.className = cls;
+    if (text != null) node.textContent = text;
+    return node;
   }
-  function cell(tr, r, d, i, mx) {
-    var v = r[d][i], td = el("td", "num" + (i === 1 ? " cua" : "") + (v != null && v === mx ? " max" : ""));
-    td.textContent = v == null ? "\u2014" : v.toFixed(1);
-    tr.appendChild(td);
-  }
-  function renderTable1(host) {
-    host.innerHTML = "";
-    var narrow = host.clientWidth < 700;
-    if (!narrow) {
-      var wrap = el("div", "table-scroll"), t = el("table", "t1"), thead = el("thead"), tr1 = el("tr"), tr2 = el("tr");
-      t.appendChild(el("caption", null, "Task success rate (%) by domain. Code: code-only. CUA: with computer use. Column maxima in teal."));
-      tr1.appendChild(el("th")); tr2.appendChild(el("th", null, "Model or system"));
-      TABLE1.domains.forEach(function (d) {
-        var th = el("th", null, d[1] + " (" + d[2] + ")"); th.colSpan = 2; tr1.appendChild(th);
-        tr2.appendChild(el("th", "num", "Code")); tr2.appendChild(el("th", "num", "CUA"));
-      });
-      thead.appendChild(tr1); thead.appendChild(tr2); t.appendChild(thead);
-      var tb = el("tbody");
-      TABLE1.rows.forEach(function (r, ri) {
-        var tr = el("tr", (r.sys ? "sys" : "") + (r.sys && !TABLE1.rows[ri - 1].sys ? " sep" : ""));
-        tr.appendChild(el("td", null, r.m));
-        TABLE1.domains.forEach(function (d) { cell(tr, r, d[0], 0, colMax(d[0], 0)); cell(tr, r, d[0], 1, colMax(d[0], 1)); });
-        tb.appendChild(tr);
-      });
-      t.appendChild(tb); wrap.appendChild(t); host.appendChild(wrap);
+
+  function renderScreen(step) {
+    var s = step.screen, frag = document.createDocumentFragment(), media = el("div", "media");
+    if (s.type === "image") {
+      var img = el("img"); img.src = s.src; img.alt = s.alt; img.width = 1280; img.height = 720;
+      media.appendChild(img);
     } else {
-      host.appendChild(el("p", "t1-title", "Task success rate (%) by domain. Code: code-only. CUA: with computer use. Column maxima in teal."));
-      TABLE1.domains.forEach(function (d) {
-        var t = el("table", "t1 narrow"), thead = el("thead"), tr = el("tr");
-        t.appendChild(el("caption", null, d[1] + ", " + d[2] + " tasks"));
-        tr.appendChild(el("th", null, "Model or system")); tr.appendChild(el("th", "num", "Code")); tr.appendChild(el("th", "num", "CUA"));
-        thead.appendChild(tr); t.appendChild(thead);
-        var tb = el("tbody");
-        TABLE1.rows.forEach(function (r, ri) {
-          if (r[d[0]][0] == null && r[d[0]][1] == null) return;
-          var row = el("tr", (r.sys ? "sys" : "") + (r.sys && !TABLE1.rows[ri - 1].sys ? " sep" : ""));
-          row.appendChild(el("td", null, r.m)); cell(row, r, d[0], 0, colMax(d[0], 0)); cell(row, r, d[0], 1, colMax(d[0], 1));
-          tb.appendChild(row);
+      var pane = el("div", "pane");
+      if (s.type === "diff") {
+        s.files.forEach(function (file) {
+          pane.appendChild(el("div", "hdr", file.name));
+          var pre = el("pre");
+          file.lines.forEach(function (line) { pre.appendChild(el("span", line[0], line[1] + "\n")); });
+          pane.appendChild(pre);
         });
-        t.appendChild(tb); host.appendChild(t);
+      } else if (s.type === "shell") {
+        s.items.forEach(function (item) {
+          var pre = el("pre");
+          pre.appendChild(el("span", "cmd", "$ " + item.cmd + "\n"));
+          pre.appendChild(el("span", item.ok ? "ok" : "out", item.out + "\n"));
+          pane.appendChild(pre);
+        });
+      } else if (s.type === "verify") {
+        s.checks.forEach(function (check) {
+          var pre = el("pre");
+          pre.appendChild(el("span", "hdr", check.name + ": " + check.cmd + "\n"));
+          pre.appendChild(el("span", "out", check.result + "\n"));
+          pre.appendChild(el("span", check.pass ? "ok" : "fail", check.pass ? "passed\n" : "failed\n"));
+          pane.appendChild(pre);
+        });
+        pane.appendChild(el("pre", "ok", s.summary));
+      }
+      media.appendChild(pane);
+    }
+    frag.appendChild(media);
+    frag.appendChild(el("div", "note", s.caption));
+    return frag;
+  }
+
+  function mountEpisode(root) {
+    var screen = root.querySelector(".screen"), list = root.querySelector(".steps"), buttons = [];
+    var titles = ["Observe the failure", "Repair the ownership logic", "Check the code", "Replay in the running game", "Verify on a clean copy"];
+    var details = [
+      "The return fractures. The relay stays armed and the score stays at zero.",
+      "Manual recall withdraws a pending return. Natural replacement transfers it to the new owner.",
+      "Check recall, handoff and duplicate contacts in Node, then build.",
+      "The rebuilt game completes the circuit: one sealed return and 500 points.",
+      "The evaluator applies the patch to a fresh project. Protected build and browser checks pass."
+    ];
+    function show(index) {
+      screen.replaceChildren(renderScreen(EPISODE.steps[index]));
+      screen.setAttribute("aria-label", "Step " + (index + 1) + ": " + titles[index]);
+      buttons.forEach(function (button, i) { button.setAttribute("aria-pressed", String(i === index)); });
+    }
+    EPISODE.steps.forEach(function (step, i) {
+      var li = el("li"), button = el("button");
+      button.type = "button"; button.setAttribute("aria-controls", "episode-screen");
+      button.appendChild(el("span", "step-number", String(i + 1).padStart(2, "0")));
+      var body = el("span"); body.appendChild(el("span", "t", titles[i])); body.appendChild(el("span", "d", details[i]));
+      button.appendChild(body); li.appendChild(button); list.appendChild(li); buttons.push(button);
+      button.addEventListener("click", function () { show(i); });
+      button.addEventListener("keydown", function (event) {
+        var target = i;
+        if (event.key === "ArrowRight" || event.key === "ArrowDown") target = (i + 1) % buttons.length;
+        else if (event.key === "ArrowLeft" || event.key === "ArrowUp") target = (i + buttons.length - 1) % buttons.length;
+        else if (event.key === "Home") target = 0;
+        else if (event.key === "End") target = buttons.length - 1;
+        else return;
+        event.preventDefault(); buttons[target].focus(); show(target);
       });
+    });
+    show(0);
+  }
+
+  function renderResults(domain) {
+    var meta = TABLE1.domains.find(function (d) { return d[0] === domain; });
+    var host = document.getElementById("results-table"), table = el("table", "score-table");
+    table.appendChild(el("caption", null, meta[1] + ": " + meta[2] + " tasks. Pass@1 success (%). CUA adds computer-use tools."));
+    var head = el("thead"), labels = el("tr");
+    [["Model / agent", ""], ["", "chart-head"], ["Code-only", "code-head"], ["CUA", "cua-head"]].forEach(function (entry) {
+      var th = el("th", entry[1], entry[0]); th.scope = "col";
+      if (!entry[0]) {
+        th.setAttribute("aria-label", "Comparison of success rates, from zero to 100 percent");
+        var scale = el("div", "chart-scale"); scale.setAttribute("aria-hidden", "true");
+        scale.appendChild(el("span", null, "0%")); scale.appendChild(el("span", null, "100%"));
+        th.appendChild(scale);
+      }
+      labels.appendChild(th);
+    });
+    head.appendChild(labels); table.appendChild(head);
+    var body = el("tbody");
+    var max = Math.max.apply(null, TABLE1.rows.map(function (r) { return r[domain][1] == null ? -1 : r[domain][1]; }));
+    TABLE1.rows.forEach(function (row, index) {
+      var values = row[domain], tr = el("tr", row.sys && !TABLE1.rows[index - 1].sys ? "system-start" : "");
+      var model = el("th", null, row.m); model.scope = "row"; tr.appendChild(model);
+      var graphic = el("td", "rail-cell"); graphic.setAttribute("aria-hidden", "true");
+      if (values[1] != null) {
+        var rail = el("div", "rail");
+        rail.style.setProperty("--cua-value", values[1] + "%");
+        if (values[0] != null) {
+          rail.style.setProperty("--code-value", values[0] + "%");
+          rail.style.setProperty("--start", Math.min(values[0], values[1]) + "%");
+          rail.style.setProperty("--length", Math.abs(values[1] - values[0]) + "%");
+          rail.appendChild(el("span", "range")); rail.appendChild(el("span", "point code"));
+        }
+        rail.appendChild(el("span", "point cua")); graphic.appendChild(rail);
+      }
+      tr.appendChild(graphic);
+      values.forEach(function (value, i) {
+        var td = el("td", "value" + (i === 1 ? " cua" : "") + (i === 1 && value === max ? " best" : ""));
+        if (value == null) {
+          var deferred = domain === "mobile" && (row.m === "Claude Opus 5" || (row.m === "Claude Code + Opus 5" && i === 1));
+          td.textContent = deferred ? "Deferred" : "—";
+          td.setAttribute("aria-label", deferred ? "Evaluation deferred" : "Not evaluated");
+        } else {
+          td.textContent = value.toFixed(1);
+          var count = Math.round(value * meta[2] / 100);
+          td.title = count + " / " + meta[2] + " tasks";
+          td.setAttribute("aria-label", count + " of " + meta[2] + " tasks, " + value.toFixed(1) + " percent");
+        }
+        tr.appendChild(td);
+      });
+      body.appendChild(tr);
+    });
+    table.appendChild(body); host.replaceChildren(table);
+    document.getElementById("results-note").textContent = NOTES[domain];
+  }
+
+  function mountVideo(video) {
+    var toggle = document.getElementById("video-toggle");
+    function reflectState() {
+      toggle.textContent = video.paused ? "Play" : "Pause";
+      toggle.setAttribute("aria-label", (video.paused ? "Play" : "Pause") + " overview video");
     }
+    function play() { var promise = video.play(); if (promise) promise.catch(reflectState); }
+    if (reduced.matches) { video.removeAttribute("autoplay"); video.pause(); }
+    toggle.addEventListener("click", function () { if (video.paused) play(); else video.pause(); });
+    video.addEventListener("play", reflectState); video.addEventListener("pause", reflectState);
+    reduced.addEventListener("change", function (event) { if (event.matches) video.pause(); });
+    document.getElementById("video-expand").addEventListener("click", function () {
+      video.controls = true;
+      if (video.requestFullscreen) video.requestFullscreen().catch(function () {});
+      else if (video.webkitEnterFullscreen) video.webkitEnterFullscreen();
+      play();
+    });
+    document.addEventListener("fullscreenchange", function () { video.controls = document.fullscreenElement === video; });
+    reflectState();
   }
 
-  function playChart(svg) {
-    svg.classList.add("animate");
-    requestAnimationFrame(function () { requestAnimationFrame(function () {
-      chartShown = true;
-      svg.querySelectorAll(".track").forEach(function (t) { t.style.strokeDashoffset = 0; });
-      svg.querySelectorAll(".cua").forEach(function (c) { c.style.transform = "none"; });
-      svg.querySelectorAll(".gain").forEach(function (g) { g.style.opacity = 1; });
-    }); });
-  }
-
-  function mountHeader() {
-    var h = document.querySelector(".site-header");
-    if (!h) return;
-    function on() { h.classList.toggle("scrolled", window.scrollY > 8); }
-    on(); window.addEventListener("scroll", on, { passive: true });
-  }
-
-  function mountVideo(v) {
-    if (REDUCED) { v.removeAttribute("autoplay"); v.pause(); }
-    var fig = v.parentNode;
-    fig.tabIndex = 0; fig.setAttribute("role", "button");
-    function full() {
-      if (v.requestFullscreen) v.requestFullscreen();
-      else if (v.webkitEnterFullscreen) v.webkitEnterFullscreen();
-      else if (v.webkitRequestFullscreen) v.webkitRequestFullscreen();
-      v.play();
-    }
-    fig.addEventListener("click", full);
-    fig.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); full(); } });
-    document.addEventListener("fullscreenchange", function () { v.controls = document.fullscreenElement === v; });
-  }
-
-  document.addEventListener("DOMContentLoaded", function () {
-    mountHeader();
-    var video = document.getElementById("demo-video");
-    if (video) mountVideo(video);
-    var ep = document.getElementById("episode");
-    if (ep) mountEpisode(ep);
-    var chart = document.getElementById("paired-chart");
-    var t1 = document.getElementById("table1");
-    function layout() { if (chart) renderPaired(chart); if (t1) renderTable1(t1); }
-    layout();
-    if (chart && !chartShown) {
-      if ("IntersectionObserver" in window) {
-        var io = new IntersectionObserver(function (es) {
-          if (es.some(function (e) { return e.isIntersecting; })) { io.disconnect(); playChart(chart); }
-        }, { threshold: 0.35 });
-        io.observe(chart);
-      } else playChart(chart);
-    }
-    var pending = null;
-    window.addEventListener("resize", function () { clearTimeout(pending); pending = setTimeout(layout, 150); });
+  var header = document.querySelector(".site-header");
+  function updateHeader() { header.classList.toggle("scrolled", window.scrollY > 8); }
+  updateHeader(); window.addEventListener("scroll", updateHeader, { passive: true });
+  var episode = document.getElementById("repair-player");
+  var video = document.getElementById("demo-video");
+  if (episode) mountEpisode(episode);
+  if (video) mountVideo(video);
+  document.querySelectorAll("[data-result-domain]").forEach(function (button) {
+    button.addEventListener("click", function () {
+      document.querySelectorAll("[data-result-domain]").forEach(function (other) { other.setAttribute("aria-pressed", String(other === button)); });
+      renderResults(button.getAttribute("data-result-domain"));
+    });
   });
+  if (document.getElementById("results-table")) renderResults("web");
+  else if (location.hash === "#results") location.replace("results.html");
 })();

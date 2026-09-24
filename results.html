@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Results — CUA-SWE</title>
+<meta name="description" content="CUA-SWE model results: code-only and computer-use success on Web, Game, DevOps and Mobile tasks, reported separately by domain.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <nav class="nav wrap" aria-label="Main navigation">
+    <a class="brand" href="index.html" aria-label="CUA-SWE home"><span class="cua">CUA</span><span class="bar" aria-hidden="true"></span><span class="swe">SWE</span></a>
+    <ul>
+      <li><a href="results.html" aria-current="page">Results</a></li>
+      <li><a href="tasks.html">Tasks</a></li>
+      <li><a href="index.html#paper">Resources</a></li>
+      <li class="nav-external"><a data-link="viewer" href="#">Data viewer <span aria-hidden="true">↗</span></a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main" class="wrap results-page">
+<section class="results-section" id="results">
+    <div class="section-head">
+      <h1>What changes when<br>agents can see?</h1>
+      <p>First-attempt success on the same tasks, reported separately for each domain.</p>
+    </div>
+    <div class="result-domains" role="group" aria-label="Results domain">
+      <button type="button" data-result-domain="web" aria-pressed="true">Web <span>36</span></button>
+      <button type="button" data-result-domain="game" aria-pressed="false">Game <span>29</span></button>
+      <button type="button" data-result-domain="devops" aria-pressed="false">DevOps <span>20</span></button>
+      <button type="button" data-result-domain="mobile" aria-pressed="false">Mobile <span>20</span></button>
+    </div>
+    <div id="results-table" class="results-table"></div>
+    <p id="results-note" class="results-note" aria-live="polite"></p>
+    <p class="results-note">Codex and Claude Code have CUA results only. Each domain retains its original scoring rules.</p>
+
+</section>
+</main>
+<footer class="wrap">
+  <a class="brand" href="index.html">CUA-SWE</a>
+  <p>2026. Task bundles retain source and asset attribution.</p>
+  <a href="index.html">Back to overview ↗</a>
+</footer>
+<script src="assets/js/site.js"></script>
+</body>
+</html>
