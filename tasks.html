@@ -8,28 +8,29 @@
 <meta name="description" content="Explore the instructions, budgets and tests behind all 105 CUA-SWE software repair tasks.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/site.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header class="site-header">
-  <nav class="nav wrap" aria-label="Main navigation">
-    <a class="brand" href="index.html" aria-label="CUA-SWE home"><span class="cua">CUA</span><span class="bar" aria-hidden="true"></span><span class="swe">SWE</span></a>
+<nav class="nav" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">CUA-SWE</a>
     <ul>
-      <li><a href="index.html#conditions">How it works</a></li>
+      <li><a href="index.html#overview">Overview</a></li>
       <li><a href="index.html#results">Results</a></li>
-      <li><a href="index.html#episode">Examples</a></li>
+      <li><a href="index.html#examples">Examples</a></li>
       <li><a href="tasks.html" aria-current="page">Tasks</a></li>
+      <li><a href="index.html#analysis">Analysis</a></li>
       <li><a href="index.html#evaluation">Evaluation</a></li>
-      <li class="nav-external"><a data-link="paper" href="#">Paper <span aria-hidden="true">↗</span></a></li>
+      <li><a href="index.html#citation">Citation</a></li>
     </ul>
-  </nav>
-</header>
+  </div>
+</nav>
 <main class="wrap" id="main">
   <div class="explorer-head">
-    <h1>Find a task.</h1>
-    <p>Explore the instructions, budgets and tests behind all 105 software repairs.</p>
+    <h1>Tasks</h1>
+    <p>The 105 tasks with their original instructions, budgets, tests and recorded outcomes. Filter by domain or application, or search.</p>
   </div>
   <div class="filters">
     <div class="seg" id="domain-seg" role="group" aria-label="Task domain">
@@ -49,11 +50,7 @@
     <button type="button" id="clear-filters">Clear filters</button>
   </div>
 </main>
-<footer class="wrap">
-  <a class="brand" href="index.html">CUA-SWE</a>
-  <p>105 tasks. Four domains. Original agent instructions.</p>
-  <a data-link="viewer" href="#">Data viewer ↗</a>
-</footer>
+<footer>CUA-SWE · 2026 · <a href="index.html">Back to overview</a> · <a data-link="viewer" href="#">Recorded trajectories ↗</a></footer>
 <script src="data/tasks.js"></script>
 <script src="assets/js/tasks.js"></script>
 </body>

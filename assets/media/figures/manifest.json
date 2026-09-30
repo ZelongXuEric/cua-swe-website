@@ -1,0 +1,50 @@
+[
+ {
+  "file": "figures/benchmark-environment.png",
+  "source": "paper/overleaf/figures/benchmark-environment.pdf",
+  "note": "rendered at scale 2.6, 1030x778",
+  "sha256": "dd7bbbfb06179ac1b3f2280e3ad88798181b54e602d771df35078e235f2d4714"
+ },
+ {
+  "file": "figures/captain-callisto-pipeline.png",
+  "source": "paper/overleaf/figures/captain-callisto-pipeline.pdf",
+  "note": "rendered at scale 2.6, 1755x897",
+  "sha256": "e1ca42f9c3869dadaa5cbce32010476551b8860de3f3d3202461265fdd08bea1"
+ },
+ {
+  "file": "figures/paired-task-gains.png",
+  "source": "paper/overleaf/figures/paired-task-gains.pdf",
+  "note": "rendered at scale 2.6, 1030x1049",
+  "sha256": "ee32f4b9eee53b380290525b2e8083bd6d82c322d1305cab0f987b2867697503"
+ },
+ {
+  "file": "figures/repair-case-web.png",
+  "source": "paper/overleaf/figures/repair-case-web.pdf",
+  "note": "rendered at scale 2.6, 1030x1292",
+  "sha256": "977ded46866eef1d8f506fb9916df76218a88aedae6bdb23eb81e8b7ef21c466"
+ },
+ {
+  "file": "figures/repair-case-game.png",
+  "source": "paper/overleaf/figures/repair-case-game.pdf",
+  "note": "rendered at scale 2.6, 1030x1292",
+  "sha256": "53d166b5ebf96ea435d9820b41c6eafec9cc678a161c6d21c108c4874e160f5e"
+ },
+ {
+  "file": "figures/repair-case-devops.png",
+  "source": "paper/overleaf/figures/repair-case-devops.pdf",
+  "note": "rendered at scale 2.6, 1030x1395",
+  "sha256": "572399d5652ba64b04fb555961ef5b13b2d81904c480b22ab0ade7242ddc8977"
+ },
+ {
+  "file": "figures/repair-case-mobile.png",
+  "source": "paper/overleaf/figures/repair-case-mobile.pdf",
+  "note": "rendered at scale 2.6, 1030x1423",
+  "sha256": "a9c6c0bf99875919128b45c73d7ab657d27580114684b2080739d04352160924"
+ },
+ {
+  "file": "figures/game-repair-iteration.png",
+  "source": "paper/overleaf/figures/game-repair-iteration.pdf",
+  "note": "rendered at scale 2.6, 1142x379",
+  "sha256": "0553ab5375c0967d800f2e43a2c29b2c5c772901f0e5e3b8889ac16abbd94582"
+ }
+]

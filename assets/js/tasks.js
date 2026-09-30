@@ -3,9 +3,6 @@
   "use strict";
   var LINKS = { paper: "https://arxiv.org/abs/2609.32600", code: "https://github.com/kingofspace0wzz/cua-swe", viewer: "https://kingofspace0wzz.github.io/cua-swe-viewer/" };
   document.querySelectorAll("a[data-link]").forEach(function (a) { var url = LINKS[a.getAttribute("data-link")]; if (url) a.href = url; });
-  var header = document.querySelector(".site-header");
-  function updateHeader() { header.classList.toggle("scrolled", window.scrollY > 8); }
-  updateHeader(); window.addEventListener("scroll", updateHeader, { passive: true });
 
   var tasks = window.CUA_SWE_TASKS.tasks;
   var DOMAIN = { web: "Web", game: "Game", devops: "DevOps", mobile: "Mobile" };
