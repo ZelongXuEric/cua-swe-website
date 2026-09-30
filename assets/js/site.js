@@ -1,8 +1,9 @@
-/* CUA-SWE: retained episode evidence and final-report success rates. */
+/* CUA-SWE: hero evidence collage, retained episode evidence and final-report success rates. */
 (function () {
   "use strict";
   var LINKS = {
-    paper: null,
+    paper: "https://arxiv.org/abs/2609.32600",
+    pdf: "https://arxiv.org/pdf/2609.32600",
     code: "https://github.com/kingofspace0wzz/cua-swe",
     viewer: "https://kingofspace0wzz.github.io/cua-swe-viewer/"
   };
@@ -197,9 +198,9 @@
   function renderResults(domain) {
     var meta = TABLE1.domains.find(function (d) { return d[0] === domain; });
     var host = document.getElementById("results-table"), table = el("table", "score-table");
-    table.appendChild(el("caption", null, meta[1] + ": " + meta[2] + " tasks. Pass@1 success (%). CUA adds computer-use tools."));
+    table.appendChild(el("caption", null, meta[1] + ": " + meta[2] + " tasks. Pass@1 success (%). Hybrid adds computer use to the coding tools."));
     var head = el("thead"), labels = el("tr");
-    [["Model / agent", ""], ["", "chart-head"], ["Code-only", "code-head"], ["CUA", "cua-head"]].forEach(function (entry) {
+    [["Model / agent", ""], ["", "chart-head"], ["Code-only", "code-head"], ["Hybrid", "cua-head"]].forEach(function (entry) {
       var th = el("th", entry[1], entry[0]); th.scope = "col";
       if (!entry[0]) {
         th.setAttribute("aria-label", "Comparison of success rates, from zero to 100 percent");
@@ -248,34 +249,67 @@
     document.getElementById("results-note").textContent = NOTES[domain];
   }
 
-  function mountVideo(video) {
-    var toggle = document.getElementById("video-toggle");
-    function reflectState() {
-      toggle.textContent = video.paused ? "Play" : "Pause";
-      toggle.setAttribute("aria-label", (video.paused ? "Play" : "Pause") + " overview video");
+  // Hero collage: each tile holds a matched baseline/repaired pair; the cycle reveals the
+  // repaired states one domain at a time, then resets. Clicking a tile compares it manually.
+  function mountCollage(root) {
+    var tiles = Array.prototype.slice.call(root.querySelectorAll(".tile"));
+    var toggle = document.getElementById("collage-toggle");
+    var timer = null, step = 0, period = 2200, visible = true;
+    function setState(tile, after) {
+      tile.classList.toggle("is-after", after);
+      tile.setAttribute("aria-pressed", String(after));
+      ["state", "what"].forEach(function (cls) {
+        var node = tile.querySelector("." + cls);
+        node.textContent = node.getAttribute(after ? "data-after" : "data-before");
+      });
     }
-    function play() { var promise = video.play(); if (promise) promise.catch(reflectState); }
-    if (reduced.matches) { video.removeAttribute("autoplay"); video.pause(); }
-    toggle.addEventListener("click", function () { if (video.paused) play(); else video.pause(); });
-    video.addEventListener("play", reflectState); video.addEventListener("pause", reflectState);
-    reduced.addEventListener("change", function (event) { if (event.matches) video.pause(); });
-    document.getElementById("video-expand").addEventListener("click", function () {
-      video.controls = true;
-      if (video.requestFullscreen) video.requestFullscreen().catch(function () {});
-      else if (video.webkitEnterFullscreen) video.webkitEnterFullscreen();
-      play();
+    function apply() { tiles.forEach(function (tile, i) { setState(tile, step > i); }); }
+    function tick() { step = (step + 1) % (tiles.length + 2); apply(); }
+    function reflect() {
+      var running = timer !== null;
+      toggle.textContent = running ? "Pause" : "Play";
+      toggle.setAttribute("aria-label", (running ? "Pause" : "Play") + " the before and after cycle");
+    }
+    function start() { if (timer === null && visible) { timer = setInterval(tick, period); } reflect(); }
+    function stop() { if (timer !== null) { clearInterval(timer); timer = null; } reflect(); }
+    tiles.forEach(function (tile) {
+      tile.addEventListener("click", function () { stop(); setState(tile, !tile.classList.contains("is-after")); });
     });
-    document.addEventListener("fullscreenchange", function () { video.controls = document.fullscreenElement === video; });
-    reflectState();
+    toggle.addEventListener("click", function () { if (timer === null) { visible = true; start(); } else stop(); });
+    if ("IntersectionObserver" in window) {
+      var wasRunning = false;
+      new IntersectionObserver(function (entries) {
+        visible = entries[0].isIntersecting;
+        if (!visible && timer !== null) { wasRunning = true; clearInterval(timer); timer = null; }
+        else if (visible && wasRunning && timer === null) { wasRunning = false; timer = setInterval(tick, period); }
+      }, { threshold: 0.2 }).observe(root);
+    }
+    apply();
+    if (reduced.matches) reflect(); else start();
+    reduced.addEventListener("change", function (event) { if (event.matches) stop(); });
+  }
+
+  function mountOverview(dialog) {
+    var video = document.getElementById("overview-video"), open = document.getElementById("overview-open");
+    function close() { video.pause(); if (dialog.open) dialog.close(); }
+    open.addEventListener("click", function () {
+      if (dialog.showModal) dialog.showModal(); else dialog.setAttribute("open", "");
+      var promise = video.play(); if (promise) promise.catch(function () {});
+    });
+    document.getElementById("overview-close").addEventListener("click", close);
+    dialog.addEventListener("click", function (event) { if (event.target === dialog) close(); });
+    dialog.addEventListener("close", function () { video.pause(); });
   }
 
   var header = document.querySelector(".site-header");
   function updateHeader() { header.classList.toggle("scrolled", window.scrollY > 8); }
   updateHeader(); window.addEventListener("scroll", updateHeader, { passive: true });
   var episode = document.getElementById("repair-player");
-  var video = document.getElementById("demo-video");
+  var collage = document.getElementById("collage");
+  var overview = document.getElementById("overview-dialog");
   if (episode) mountEpisode(episode);
-  if (video) mountVideo(video);
+  if (collage) mountCollage(collage);
+  if (overview) mountOverview(overview);
   document.querySelectorAll("[data-result-domain]").forEach(function (button) {
     button.addEventListener("click", function () {
       document.querySelectorAll("[data-result-domain]").forEach(function (other) { other.setAttribute("aria-pressed", String(other === button)); });

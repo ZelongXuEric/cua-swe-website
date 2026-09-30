@@ -70,5 +70,53 @@
   "source": "paper/demo_video/exports/poster.jpg",
   "note": "byte-identical copy",
   "sha256": "136249c692e9a4e1a630066132046c71646e144bdf0b59dcd93da4905a32a62a"
+ },
+ {
+  "file": "hero/web-before.webp",
+  "source": "paper/figure1_assets/cases/W01_allocation_ring/keyframes/reference-baseline_stacked.png",
+  "note": "cropped to (0, 0, 1700, 1062) then encoded as WebP at 1000x625",
+  "sha256": "b8e0966d234850a531d16fb7649acf368a32a7c6fbe53c4b430237e80770e981"
+ },
+ {
+  "file": "hero/web-after.webp",
+  "source": "paper/figure1_assets/cases/W01_allocation_ring/keyframes/reference-gold_stacked.png",
+  "note": "cropped to (0, 0, 1700, 1062) then encoded as WebP at 1000x625",
+  "sha256": "7805cc2107530df3d404075aed0f7714a5e689ef448b802233b500b6043961c3"
+ },
+ {
+  "file": "hero/game-before.webp",
+  "source": "paper/figure2_assets/cases/01_vector_relay/originals/agent_0003.png",
+  "note": "encoded as WebP at 1000x562",
+  "sha256": "cd12652eef1d906f0baa7898ef7ad03d06e08ab676b8cb1c553cfe6c176df0c5"
+ },
+ {
+  "file": "hero/game-after.webp",
+  "source": "paper/figure2_assets/cases/01_vector_relay/originals/agent_0015.png",
+  "note": "encoded as WebP at 1000x562",
+  "sha256": "83f9afa8b7b18fe77020ff7ba0a5fee092aaf5ac19ee19b8702a6d749efca975"
+ },
+ {
+  "file": "hero/devops-before.webp",
+  "source": "paper/figure1_assets/cases/D01_counter_order/keyframes/baseline_rolling-restart_layout.png",
+  "note": "cropped to (0, 0, 2120, 920) then encoded as WebP at 1000x434",
+  "sha256": "1d16659c7915d10cc9366cdf1cc116cb0235e470eed59013e705698217e74005"
+ },
+ {
+  "file": "hero/devops-after.webp",
+  "source": "paper/figure1_assets/cases/D01_counter_order/keyframes/gold_rolling-restart_layout.png",
+  "note": "cropped to (0, 0, 2120, 920) then encoded as WebP at 1000x434",
+  "sha256": "aa46ecc5cb6ccce6fda0e2177971dfcefc9953387296eb31f2776cf172889a95"
+ },
+ {
+  "file": "hero/mobile-before.webp",
+  "source": "paper/demo_video/assets/media/mobile_before.png",
+  "note": "cropped to (20, 567, 780, 1042) then encoded as WebP at 760x475",
+  "sha256": "14c17b2c044fe5d9296bc5522e3eed5b958c6a32f3ee438ba8634f7b427a9762"
+ },
+ {
+  "file": "hero/mobile-after.webp",
+  "source": "paper/demo_video/assets/media/mobile_after.png",
+  "note": "cropped to (20, 567, 780, 1042) then encoded as WebP at 760x475",
+  "sha256": "cfbba9c7a7d4a96f96f28ee71c9216a9abec4408ab686744740ceb9af3cbf03e"
  }
 ]

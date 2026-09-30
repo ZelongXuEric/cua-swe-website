@@ -32,6 +32,23 @@ ITEMS = [
     (DEMO / "exports/poster.jpg", "cua-swe-demo-poster.jpg", None),
 ]
 
+# Hero collage: matched baseline/repaired pairs, cropped to the same window per domain and
+# encoded as WebP. Web and Mobile are 16:10 crops; Game (16:9) and the full DevOps chart panel
+# are kept whole and letterboxed by the page. Web, DevOps and Mobile pairs are reference-repair replays; the Game
+# pair is two recorded GPT-5.6 Sol screenshots from the selected Vector Relay attempt.
+HERO = [
+    # (source, destination, crop box (left, top, right, bottom) or None)
+    (F1 / "W01_allocation_ring/keyframes/reference-baseline_stacked.png", "hero/web-before.webp", (0, 0, 1700, 1062)),
+    (F1 / "W01_allocation_ring/keyframes/reference-gold_stacked.png", "hero/web-after.webp", (0, 0, 1700, 1062)),
+    (F2 / "01_vector_relay/originals/agent_0003.png", "hero/game-before.webp", None),
+    (F2 / "01_vector_relay/originals/agent_0015.png", "hero/game-after.webp", None),
+    (F1 / "D01_counter_order/keyframes/baseline_rolling-restart_layout.png", "hero/devops-before.webp", (0, 0, 2120, 920)),
+    (F1 / "D01_counter_order/keyframes/gold_rolling-restart_layout.png", "hero/devops-after.webp", (0, 0, 2120, 920)),
+    (DEMO / "assets/media/mobile_before.png", "hero/mobile-before.webp", (20, 567, 780, 1042)),
+    (DEMO / "assets/media/mobile_after.png", "hero/mobile-after.webp", (20, 567, 780, 1042)),
+]
+HERO_WIDTH = 1000
+
 manifest = []
 for src, dst, maxw in ITEMS:
     target = OUT / dst
@@ -48,6 +65,19 @@ for src, dst, maxw in ITEMS:
     else:
         shutil.copyfile(src, target)
         note = "byte-identical copy"
+    manifest.append({"file": dst, "source": str(src.relative_to(ROOT)), "note": note,
+                     "sha256": hashlib.sha256(target.read_bytes()).hexdigest()})
+    print(f"{dst:40s} {target.stat().st_size/1024:7.0f} KB  {note}")
+(OUT / "hero").mkdir(exist_ok=True)
+for src, dst, box in HERO:
+    target = OUT / dst
+    im = Image.open(src).convert("RGB")
+    if box:
+        im = im.crop(box)
+    if im.width > HERO_WIDTH:
+        im = im.resize((HERO_WIDTH, round(im.height * HERO_WIDTH / im.width)), Image.LANCZOS)
+    im.save(target, "WEBP", quality=88, method=6)
+    note = (f"cropped to {box} then " if box else "") + f"encoded as WebP at {im.width}x{im.height}"
     manifest.append({"file": dst, "source": str(src.relative_to(ROOT)), "note": note,
                      "sha256": hashlib.sha256(target.read_bytes()).hexdigest()})
     print(f"{dst:40s} {target.stat().st_size/1024:7.0f} KB  {note}")

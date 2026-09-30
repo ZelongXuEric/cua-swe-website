@@ -1,7 +1,7 @@
 /* Browse the canonical tasks without altering the original instructions or outcomes. */
 (function () {
   "use strict";
-  var LINKS = { code: "https://github.com/kingofspace0wzz/cua-swe", viewer: "https://kingofspace0wzz.github.io/cua-swe-viewer/" };
+  var LINKS = { paper: "https://arxiv.org/abs/2609.32600", code: "https://github.com/kingofspace0wzz/cua-swe", viewer: "https://kingofspace0wzz.github.io/cua-swe-viewer/" };
   document.querySelectorAll("a[data-link]").forEach(function (a) { var url = LINKS[a.getAttribute("data-link")]; if (url) a.href = url; });
   var header = document.querySelector(".site-header");
   function updateHeader() { header.classList.toggle("scrolled", window.scrollY > 8); }
@@ -42,7 +42,7 @@
     detail.appendChild(dl);
     if (task.outcomes) {
       var outcomes = task.outcomes;
-      detail.appendChild(el("p", "out", "Selected outcomes: code-only " + outcomes.code.k + "/" + outcomes.code.n + ", computer use " + outcomes.cua.k + "/" + outcomes.cua.n + ". " + outcomes.label + "."));
+      detail.appendChild(el("p", "out", "Selected outcomes: code-only " + outcomes.code.k + "/" + outcomes.code.n + ", hybrid " + outcomes.cua.k + "/" + outcomes.cua.n + ". " + outcomes.label + "."));
     }
     var links = el("div", "detail-links");
     var bundle = el("a", null, "View task bundle ↗"); bundle.href = LINKS.code + "/tree/main/" + task.path;
