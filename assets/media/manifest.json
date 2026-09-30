@@ -70,5 +70,95 @@
   "source": "paper/demo_video/exports/poster.jpg",
   "note": "byte-identical copy",
   "sha256": "136249c692e9a4e1a630066132046c71646e144bdf0b59dcd93da4905a32a62a"
+ },
+ {
+  "file": "episodes/minesweeper-002/frame-01.png",
+  "source": "media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.002/agent/frames/frame-0001.png",
+  "note": "byte-identical copy",
+  "sha256": "bc6d96529728bc90aa3c18abb71be22c6e8820fdb126c5a2e6f5e2c6d4dc39aa"
+ },
+ {
+  "file": "episodes/minesweeper-002/frame-02.png",
+  "source": "media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.002/agent/frames/frame-0002.png",
+  "note": "byte-identical copy",
+  "sha256": "3efdff5e4ae1dc7af688200bcdd91b7d1111fdf82b23eacf0bc1e33e15135fd3"
+ },
+ {
+  "file": "episodes/minesweeper-002/frame-03.png",
+  "source": "media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.002/agent/frames/frame-0003.png",
+  "note": "byte-identical copy",
+  "sha256": "3936acc9034f9858d70f0de8447024dd14709fe07fba968dc212366aa353c4fe"
+ },
+ {
+  "file": "episodes/minesweeper-002/frame-04.png",
+  "source": "media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.002/agent/frames/frame-0004.png",
+  "note": "byte-identical copy",
+  "sha256": "494593041e75a0a0a7e9b184f646aed3b73844e507d18b746dd617ef2b886897"
+ },
+ {
+  "file": "episodes/minesweeper-002/frame-05.png",
+  "source": "media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.002/agent/frames/frame-0005.png",
+  "note": "byte-identical copy",
+  "sha256": "9af4ab915988adde9c49073ccfaacef42d9d65eddbe603dbaafc6d860229c318"
+ },
+ {
+  "file": "episodes/minesweeper-002/frame-08.png",
+  "source": "media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.002/agent/frames/frame-0008.png",
+  "note": "byte-identical copy",
+  "sha256": "a96207d225fb1e148a77d10d90a7164be37756725821fdf140d166059ba8db2e"
+ },
+ {
+  "file": "episodes/minesweeper-002/frame-11.png",
+  "source": "media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.002/agent/frames/frame-0011.png",
+  "note": "byte-identical copy",
+  "sha256": "1f6e71ae768129bd18a70bdf05019811266db2bf4547c61ec54a33d65189c744"
+ },
+ {
+  "file": "episodes/minesweeper-002/frame-12.png",
+  "source": "media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.002/agent/frames/frame-0012.png",
+  "note": "byte-identical copy",
+  "sha256": "02c16397b46d7f9ceb85c770fcc822399267f98b822152ad5614db2630e2f4fe"
+ },
+ {
+  "file": "episodes/minesweeper-002/frame-13.png",
+  "source": "media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.002/agent/frames/frame-0013.png",
+  "note": "byte-identical copy",
+  "sha256": "70f2b296258dd3e1177d72b1419f434c01bc10c2edd62ffdd8f2600188a034a0"
+ },
+ {
+  "file": "episodes/minesweeper-002/frame-14.png",
+  "source": "media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.002/agent/frames/frame-0014.png",
+  "note": "byte-identical copy",
+  "sha256": "c508fc890d7da2a5194464aa4779011e9db61eb5d0aec6cc9b93adbe1dab98a6"
+ },
+ {
+  "file": "episodes/minesweeper-002/frame-15.png",
+  "source": "media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.002/agent/frames/frame-0015.png",
+  "note": "byte-identical copy",
+  "sha256": "9928bad787dab26d676d658c3b98769ef7debb31458a4c1ce6cfc326dea31e40"
+ },
+ {
+  "file": "episodes/minesweeper-002/frame-16.png",
+  "source": "media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.002/agent/frames/frame-0016.png",
+  "note": "byte-identical copy",
+  "sha256": "5d12fe6d56df213dfd2eb725037fec7a1570e8eaccde50849362e90067999081"
+ },
+ {
+  "file": "episodes/minesweeper-002/frame-17.png",
+  "source": "media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.002/agent/frames/frame-0017.png",
+  "note": "byte-identical copy",
+  "sha256": "6c7a52eedbac1307851e8f80728480e1b26bfd13ec4ace7b913c94d9fa0e15ca"
+ },
+ {
+  "file": "episodes/minesweeper-002/frame-18.png",
+  "source": "media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.002/agent/frames/frame-0018.png",
+  "note": "byte-identical copy",
+  "sha256": "6c367b4e2e4dce0116d1d899174e44c037346d949139632e8e7eaa547c308348"
+ },
+ {
+  "file": "episodes/minesweeper-002/frame-19.png",
+  "source": "media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.002/agent/frames/frame-0019.png",
+  "note": "byte-identical copy",
+  "sha256": "bbc5c22400f283a948563539a7a43254b1d524c6f220d77dde09e6ae2b55f9eb"
  }
 ]

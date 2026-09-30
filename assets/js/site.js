@@ -108,6 +108,7 @@
   // paper/evaluation/final-evaluation-report.md (2026-09-24).
   // Game pass@3 uses reviewed replacement attempts and is a separate cohort.
   var NOTES = {
+    all: "Overall is the equal-weighted mean of the four domain success rates, as in the paper. Claude Opus 5 and Claude Code have no Mobile result, so they have no overall score and are not ranked.",
     web: "Web success requires a passing patch and the required visual evidence. Rule exclusions remain in the 36-task denominator.",
     game: "Original Game pass@1 results. The separate pass@3 evaluation uses reviewed runtime replacements for some first attempts.",
     devops: "Valid records must follow the tool-use rules. Reviewed infrastructure errors receive replacements; genuine agent failures count as failures.",
@@ -194,12 +195,39 @@
     show(0);
   }
 
+  function count(value, n) { return Math.round(value * n / 100); }
+  // Equal-weighted mean of the four domain rates, from exact counts; matches the paper's four-domain means.
+  function overall(row, i) {
+    var sum = 0;
+    for (var k = 0; k < TABLE1.domains.length; k++) {
+      var d = TABLE1.domains[k], value = row[d[0]][i];
+      if (value == null) return null;
+      sum += count(value, d[2]) / d[2];
+    }
+    return 100 * sum / TABLE1.domains.length;
+  }
+  function signed(delta) {
+    var text = Math.abs(delta).toFixed(1);
+    return text === "0.0" ? text : (delta > 0 ? "+" : "−") + text;
+  }
+
   function renderResults(domain) {
-    var meta = TABLE1.domains.find(function (d) { return d[0] === domain; });
-    var host = document.getElementById("results-table"), table = el("table", "score-table");
-    table.appendChild(el("caption", null, meta[1] + ": " + meta[2] + " tasks. Pass@1 success (%). CUA adds computer-use tools."));
+    var all = domain === "all", meta = TABLE1.domains.find(function (d) { return d[0] === domain; });
+    var host = document.getElementById("results-table"), table = el("table", "score-table" + (all ? " overall" : ""));
+    table.appendChild(el("caption", null, all
+      ? "All four domains: mean pass@1 success (%), each domain weighted equally. CUA adds computer-use tools."
+      : meta[1] + ": " + meta[2] + " tasks. Pass@1 success (%). CUA adds computer-use tools."));
+    // Models and agent systems share one ranking by CUA success; equal shown values share a rank,
+    // and entries without a score come last, unranked.
+    function score(e) { return e.v[1] == null ? -1 : Number(e.v[1].toFixed(1)); }
+    // Exact rates from task counts, so gains match the paper (e.g. 2/36 − 4/36 = −5.6, not 5.6 − 11.1).
+    function exact(row) { return row[domain].map(function (p) { return p == null ? null : 100 * count(p, meta[2]) / meta[2]; }); }
+    var entries = TABLE1.rows.map(function (row) { return { row: row, v: all ? [overall(row, 0), overall(row, 1)] : exact(row) }; })
+      .sort(function (a, b) { return score(b) - score(a); });
     var head = el("thead"), labels = el("tr");
-    [["Model / agent", ""], ["", "chart-head"], ["Code-only", "code-head"], ["CUA", "cua-head"]].forEach(function (entry) {
+    var columns = [["Model / agent", "model-head"], ["", "chart-head"], ["Code-only", "code-head"], ["CUA", "cua-head"], ["Gain", "gain-head"]];
+    if (all) TABLE1.domains.forEach(function (d) { columns.push([d[1], "dom-head"]); });
+    columns.forEach(function (entry) {
       var th = el("th", entry[1], entry[0]); th.scope = "col";
       if (!entry[0]) {
         th.setAttribute("aria-label", "Comparison of success rates, from zero to 100 percent");
@@ -211,13 +239,17 @@
     });
     head.appendChild(labels); table.appendChild(head);
     var body = el("tbody");
-    var max = Math.max.apply(null, TABLE1.rows.map(function (r) { return r[domain][1] == null ? -1 : r[domain][1]; }));
-    TABLE1.rows.forEach(function (row, index) {
-      var values = row[domain], tr = el("tr", row.sys && !TABLE1.rows[index - 1].sys ? "system-start" : "");
-      var model = el("th", null, row.m); model.scope = "row"; tr.appendChild(model);
+    var max = Math.max.apply(null, entries.map(score));
+    entries.forEach(function (entry) {
+      var row = entry.row, values = entry.v, tr = el("tr");
+      var model = el("th"); model.scope = "row";
+      var rank = values[1] == null ? "" : String(1 + entries.filter(function (o) { return score(o) > score(entry); }).length);
+      model.appendChild(el("span", "rank", rank)); model.appendChild(document.createTextNode(row.m));
+      tr.appendChild(model);
       var graphic = el("td", "rail-cell"); graphic.setAttribute("aria-hidden", "true");
       if (values[1] != null) {
         var rail = el("div", "rail");
+        rail.title = (values[0] != null ? "Code-only " + values[0].toFixed(1) + " → " : "") + "CUA " + values[1].toFixed(1);
         rail.style.setProperty("--cua-value", values[1] + "%");
         if (values[0] != null) {
           rail.style.setProperty("--code-value", values[0] + "%");
@@ -229,18 +261,32 @@
       }
       tr.appendChild(graphic);
       values.forEach(function (value, i) {
-        var td = el("td", "value" + (i === 1 ? " cua" : "") + (i === 1 && value === max ? " best" : ""));
+        var td = el("td", "value" + (i === 1 ? " cua" : "") + (i === 1 && value != null && score(entry) === max ? " best" : ""));
         if (value == null) {
           var deferred = domain === "mobile" && (row.m === "Claude Opus 5" || (row.m === "Claude Code + Opus 5" && i === 1));
           td.textContent = deferred ? "Deferred" : "—";
-          td.setAttribute("aria-label", deferred ? "Evaluation deferred" : "Not evaluated");
+          td.setAttribute("aria-label", deferred ? "Evaluation deferred" : all && !(row.sys && i === 0) ? "No overall score: Mobile deferred" : "Not evaluated");
+        } else if (all) {
+          td.textContent = value.toFixed(1);
+          td.title = "Mean of the four domain rates";
+          td.setAttribute("aria-label", value.toFixed(1) + " percent, mean of the four domain rates");
         } else {
           td.textContent = value.toFixed(1);
-          var count = Math.round(value * meta[2] / 100);
-          td.title = count + " / " + meta[2] + " tasks";
-          td.setAttribute("aria-label", count + " of " + meta[2] + " tasks, " + value.toFixed(1) + " percent");
+          var k = count(value, meta[2]);
+          td.title = k + " / " + meta[2] + " tasks";
+          td.setAttribute("aria-label", k + " of " + meta[2] + " tasks, " + value.toFixed(1) + " percent");
         }
         tr.appendChild(td);
+      });
+      var gain = values[0] != null && values[1] != null;
+      var gainCell = el("td", "value gain", gain ? signed(values[1] - values[0]) : "—");
+      gainCell.setAttribute("aria-label", gain ? signed(values[1] - values[0]) + " percentage points with CUA" : "No code-only comparison");
+      tr.appendChild(gainCell);
+      if (all) TABLE1.domains.forEach(function (d) {
+        var value = row[d[0]][1], cell = el("td", "value dom", value == null ? "—" : value.toFixed(1));
+        if (value != null) cell.style.setProperty("--v", value / 100);
+        cell.setAttribute("aria-label", d[1] + " CUA: " + (value == null ? "deferred" : value.toFixed(1) + " percent"));
+        tr.appendChild(cell);
       });
       body.appendChild(tr);
     });
@@ -282,6 +328,6 @@
       renderResults(button.getAttribute("data-result-domain"));
     });
   });
-  if (document.getElementById("results-table")) renderResults("web");
+  if (document.getElementById("results-table")) renderResults("all");
   else if (location.hash === "#results") location.replace("results.html");
 })();

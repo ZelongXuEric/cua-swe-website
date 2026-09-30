@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Kalam:wght@400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/site.css?v=20260930">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -18,6 +18,7 @@
     <a class="brand" href="#top" aria-label="CUA-SWE home"><span class="cua">CUA</span><span class="bar" aria-hidden="true"></span><span class="swe">SWE</span></a>
     <ul>
       <li><a href="#results">Results</a></li>
+      <li><a href="#examples">Examples</a></li>
       <li><a href="tasks.html">Tasks</a></li>
       <li><a href="#paper">Resources</a></li>
       <li class="nav-external"><a data-link="viewer" href="#">Data viewer <span aria-hidden="true">↗</span></a></li>
@@ -32,7 +33,7 @@
     <p class="lead enter">CUA-SWE tests whether coding agents can repair software by using it. Edit code, inspect the running app, submit a patch. Hidden tests judge the result.</p>
     <div class="actions enter">
       <a class="btn" href="tasks.html"><span>Explore 105 tasks</span><span aria-hidden="true">↗</span></a>
-      <a class="text-link" href="#episode">See a real repair <span aria-hidden="true">↓</span></a>
+      <a class="text-link" href="#examples">See a real repair <span aria-hidden="true">↓</span></a>
       <a class="text-link" data-link="paper" href="#">Read the paper</a>
     </div>
   </div>
@@ -69,10 +70,11 @@
 <section class="wrap section results-section" id="results">
     <div class="section-head">
       <h2>What changes when<br>agents can see?</h2>
-      <p>First-attempt success on the same tasks, reported separately for each domain.</p>
+      <p>First-attempt success on the same tasks, ranked overall and within each domain.</p>
     </div>
     <div class="result-domains" role="group" aria-label="Results domain">
-      <button type="button" data-result-domain="web" aria-pressed="true">Web <span>36</span></button>
+      <button type="button" data-result-domain="all" aria-pressed="true">Overall</button>
+      <button type="button" data-result-domain="web" aria-pressed="false">Web <span>36</span></button>
       <button type="button" data-result-domain="game" aria-pressed="false">Game <span>29</span></button>
       <button type="button" data-result-domain="devops" aria-pressed="false">DevOps <span>20</span></button>
       <button type="button" data-result-domain="mobile" aria-pressed="false">Mobile <span>20</span></button>
@@ -81,6 +83,14 @@
     <p id="results-note" class="results-note" aria-live="polite"></p>
     <p class="results-note">Codex and Claude Code have CUA results only. Each domain retains its original scoring rules.</p>
 
+</section>
+
+<section class="wrap section" id="examples">
+  <div class="section-head">
+    <h2>Watch an agent<br>repair the app.</h2>
+    <p>A recorded attempt, replayed as it happened: what the agent read, ran and saw.</p>
+  </div>
+  <article class="replay" data-episode="minesweeper-002"></article>
 </section>
 
 <section class="wrap section" id="episode">
@@ -190,6 +200,8 @@
   <p>2026. Task bundles retain source and asset attribution.</p>
   <a href="#top">Back to top ↑</a>
 </footer>
-<script src="assets/js/site.js"></script>
+<script src="assets/js/site.js?v=20260930"></script>
+<script src="data/episodes/minesweeper-002.js?v=20260930"></script>
+<script src="assets/js/replay.js?v=20260930"></script>
 </body>
 </html>

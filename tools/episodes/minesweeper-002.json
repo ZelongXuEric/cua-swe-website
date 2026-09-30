@@ -1,0 +1,22 @@
+{
+  "id": "minesweeper-002",
+  "task_id": "gameqa.minesweeper-delayed-loss-episode-identity.002",
+  "source": "kingofspace0wzz/cua-swe-viewer media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.002",
+  "kicker": "Game · Minesweeper",
+  "title": "The target is on the screen.",
+  "summary": "The integrity panel gives the required timing only in the running game. The agent reads it, repairs the engine, checks the fix live and catches a bug in its own first edit.",
+  "highlight": "Episode integrity panel",
+  "end_note": "The panel went offline before a final live check, as the agent reports. The independent verifier checked the submitted patch.",
+  "stages": [
+    { "from": 1, "to": 7, "title": "Reproduce in the running game",
+      "insight": "The panel reports TIMING MISMATCH against a 1.6 s target shown only in the interface." },
+    { "from": 8, "to": 15, "title": "Locate the fault in source",
+      "insight": "Loss is hard-coded to 3.2 s, and reset never cancels the pending callback." },
+    { "from": 16, "to": 23, "title": "Make the first repair",
+      "insight": "A 1.6 s delay, cancellation on reset and an episode token. Syntax checks pass; no build script exists." },
+    { "from": 24, "to": 39, "title": "Check the repair live",
+      "insight": "The live pass exposes a bug in the first edit: a local e shadows the browser global." },
+    { "from": 40, "to": 46, "title": "Correct and submit",
+      "insight": "The scheduler now uses window.setTimeout. The protected verifier passes all 10 checks." }
+  ]
+}
