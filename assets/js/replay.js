@@ -5,10 +5,10 @@
 
   // ---- Pure timeline, exported for tools/check_replay.mjs ----
   function clamp(value, lo, hi) { return Math.round(Math.min(hi, Math.max(lo, value))); }
-  function streams(kind) { return kind === "agent_message" || kind === "plan" || kind === "command" || kind === "insight"; }
+  function streams(kind) { return kind === "agent_message" || kind === "plan" || kind === "finish" || kind === "command" || kind === "insight"; }
   // Reveal time grows sublinearly with length; a separate hold leaves time to read.
   function pace(n, kind) {
-    if (kind === "agent_message" || kind === "plan") return { reveal: clamp(700 + 2.6 * Math.pow(n, 0.94), 900, 6000), hold: clamp(600 + 0.5 * n, 900, 2000) };
+    if (kind === "agent_message" || kind === "plan" || kind === "finish") return { reveal: clamp(700 + 2.6 * Math.pow(n, 0.94), 900, 6000), hold: clamp(600 + 0.5 * n, 900, 2000) };
     if (kind === "command") return { reveal: clamp(400 + 1.2 * Math.pow(n, 0.9), 500, 1800), hold: 350 };
     if (kind === "insight") return { reveal: clamp(300 + 1.5 * n, 500, 1200), hold: 1200 };
     if (kind === "stage") return { reveal: 0, hold: 300 };
@@ -74,14 +74,16 @@
   }
   function pad(n) { return String(n).padStart(2, "0"); }
   function describe(e) {
-    if (e.title === "visual_cua.start") return "Open the game in the browser";
+    if (e.title === "visual_cua.start") return "Open the app in the browser";
     if (e.title === "visual_cua.observe") return "Take a screenshot";
+    if (e.title === "view_image") return "View screenshot " + (e.frame + 1);
     var a;
     try { a = JSON.parse(e.text.split("\n")[0]); } catch (error) { return e.text; }
     if (a.kind === "click") return "Click (" + a.x + ", " + a.y + ")";
     if (a.kind === "wait") return "Wait " + a.duration_ms + " ms";
     if (a.kind === "press") return "Press " + a.text;
     if (a.kind === "type") return "Type “" + a.text + "”";
+    if (a.kind === "drag") return "Drag (" + a.x + ", " + a.y + ") → (" + a.end_x + ", " + a.end_y + ")";
     return a.kind;
   }
 
@@ -105,8 +107,7 @@
       instruction.appendChild(document.createTextNode(ep.instruction.slice(at + ep.highlight.length)));
     }
     task.appendChild(instruction);
-    task.appendChild(el("p", "rp-run", ep.run.model.replace("gpt-", "GPT-").replace("-sol", " Sol") + " · construction trial " + ep.run.label +
-      " · code-only " + ep.run.code[0] + "/" + ep.run.code[1] + " · with computer use " + ep.run.cua[0] + "/" + ep.run.cua[1]));
+    task.appendChild(el("p", "rp-run", ep.run_text));
     root.appendChild(task);
 
     var nav = el("ol", "rp-stages"), stageButtons = [];
@@ -145,8 +146,11 @@
 
     var browser = el("aside", "rp-browser"), bar = el("div", "rp-bar"), view = el("div", "rp-view");
     browser.setAttribute("aria-label", "Recorded browser frames");
-    var img = el("img"), empty = el("p", "rp-empty", "The browser opens when the agent starts it."), marker = el("span", "rp-marker"), keycap = el("span", "rp-key");
-    img.width = 1280; img.height = 720; img.alt = ""; img.hidden = true; marker.hidden = true; keycap.hidden = true;
+    var img = el("img"), empty = el("p", "rp-empty", "The browser opens when the agent starts it."), keycap = el("span", "rp-key");
+    var W = ep.viewport[0], H = ep.viewport[1], NS = "http://www.w3.org/2000/svg", marker = document.createElementNS(NS, "svg");
+    view.style.aspectRatio = W + " / " + H;
+    marker.setAttribute("viewBox", "0 0 " + W + " " + H); marker.setAttribute("class", "rp-marks"); marker.setAttribute("aria-hidden", "true");
+    img.width = W; img.height = H; img.alt = ""; img.hidden = true; keycap.hidden = true;
     var open = el("a");
     open.target = "_blank"; open.rel = "noopener"; open.title = "Open the full-size frame";
     open.appendChild(img);
@@ -197,8 +201,8 @@
       if (seg.type === "verify") return { el: verifyCard(), fill: noop };
       var e = ep.events[seg.index];
       if (e.kind === "command") {
-        var box = el("div", "rp-entry rp-cmd" + (e.status === "failed" ? " failed" : "")), pre = el("pre"), c = el("span", "c"), o = el("span", "o"), expanded = false;
-        box.appendChild(el("span", "rp-who", "Shell"));
+        var box = el("div", "rp-entry rp-cmd" + (e.edit ? " edit" : "") + (e.status === "failed" ? " failed" : "")), pre = el("pre"), c = el("span", "c"), o = el("span", "o"), expanded = false;
+        box.appendChild(el("span", "rp-who", e.edit ? "Edit" : "Shell"));
         pre.appendChild(c); pre.appendChild(o); box.appendChild(pre);
         var foot = el("div", "rp-foot");
         if (e.exit) foot.appendChild(el("span", "rp-bad", "exit " + e.exit));
@@ -221,9 +225,9 @@
           o.textContent = cut < 0 ? "" : text.slice(cut);
         } };
       }
-      if (e.kind === "agent_message" || e.kind === "plan") {
+      if (e.kind === "agent_message" || e.kind === "plan" || e.kind === "finish") {
         var msg = el("div", "rp-entry rp-msg"), body = el("p");
-        msg.appendChild(el("span", "rp-who", e.kind === "plan" ? "Plan" : "Agent"));
+        msg.appendChild(el("span", "rp-who", { plan: "Plan", finish: "Finish" }[e.kind] || "Agent"));
         msg.appendChild(body);
         return { el: msg, fill: function (n) { body.textContent = seg.text.slice(0, n); } };
       }
@@ -246,12 +250,21 @@
         card.appendChild(pre);
       });
       card.appendChild(el("p", null, ep.end_note));
+      if (ep.comparisons && ep.comparisons.length) {
+        var others = el("div", "rp-others");
+        others.appendChild(el("span", "rp-tag", "Same task, other agents with computer use"));
+        ep.comparisons.forEach(function (c) {
+          var p = el("p"); p.appendChild(el("strong", null, c.label + ": ")); p.appendChild(document.createTextNode(c.text)); others.appendChild(p);
+        });
+        card.appendChild(others);
+      }
       var patch = el("details"), code = el("pre", "rp-diff");
       patch.appendChild(el("summary", null, "Submitted patch"));
       ep.patch.split("\n").forEach(function (line) {
         var cls = /^\+(?!\+\+)/.test(line) ? "add" : /^-(?!--)/.test(line) ? "del" : /^@@/.test(line) ? "hunk" : null;
         code.appendChild(el("span", cls, line + "\n"));
       });
+      if (ep.patch_note) patch.appendChild(el("p", "rp-h-source", ep.patch_note));
       patch.appendChild(code); card.appendChild(patch);
       return card;
     }
@@ -264,7 +277,7 @@
         headLine.appendChild(el("span", "k", e.kind.replace("_", " ") + (e.status === "failed" ? " · failed" : "") + (e.frame != null ? " · frame " + (e.frame + 1) : "")));
         headLine.appendChild(el("code", null, e.title));
         li.appendChild(headLine);
-        if (e.text) li.appendChild(el("pre", null, e.text));
+        if (e.full || e.text) li.appendChild(el("pre", null, e.full || e.text));
         list.appendChild(li);
       });
       history.appendChild(el("p", "rp-h-source", "Source: " + ep.source));
@@ -276,16 +289,20 @@
       if (i === st.frame) return;
       st.frame = i;
       var f = ep.frames[i];
-      img.hidden = marker.hidden = keycap.hidden = true; empty.hidden = i >= 0;
+      img.hidden = keycap.hidden = true; marker.replaceChildren(); empty.hidden = i >= 0;
       bar.textContent = i < 0 ? "Browser · no frame yet" : "Frame " + (i + 1) + " of " + ep.frames.length + " · " + f.time + " UTC";
       if (i < 0) return;
       img.src = open.href = f.src; img.hidden = false;
-      img.alt = "Recorded game frame " + (i + 1) + (f.action ? " after: " + describe({ title: "visual_cua.act", text: JSON.stringify(f.action) }) : "");
+      img.alt = "Recorded frame " + (i + 1) + (f.action ? " after: " + describe({ title: "visual_cua.act", text: JSON.stringify(f.action) }) : "");
       if (!reduced.matches && img.animate) img.animate([{ opacity: 0.35 }, { opacity: 1 }], { duration: 250 });
       var a = f.action;
-      if (a && a.x != null) {
-        marker.style.left = (a.x / 1280 * 100) + "%"; marker.style.top = (a.y / 720 * 100) + "%"; marker.hidden = false;
-      }
+      // Recorded input positions, in the frame's own pixel space.
+      function mark(tag, attrs) { var n = document.createElementNS(NS, tag); for (var k in attrs) n.setAttribute(k, attrs[k]); marker.appendChild(n); }
+      if (a && a.end_x != null) {
+        mark("line", { x1: a.x, y1: a.y, x2: a.end_x, y2: a.end_y, "class": "trail" });
+        mark("circle", { cx: a.x, cy: a.y, r: 5, "class": "from" });
+        mark("circle", { cx: a.end_x, cy: a.end_y, r: 11, "class": "to" });
+      } else if (a && a.x != null) mark("circle", { cx: a.x, cy: a.y, r: 11, "class": "to" });
       if (a) { keycap.textContent = "Recorded input: " + describe({ title: "visual_cua.act", text: JSON.stringify(a) }); keycap.hidden = false; }
     }
     function render(rebuild) {

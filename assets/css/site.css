@@ -119,6 +119,7 @@ img, video { max-width: 100%; height: auto; display: block; }
 .steps button[aria-pressed="false"] .d { display: none; }
 .episode-foot { border-top: 1px solid var(--line); padding: 18px 24px; font-size: 14px; line-height: 1.55; }
 /* Timed replay of a recorded episode (assets/js/replay.js). Shell/edits use the code teal, browser actions the GUI blue. */
+.replay + .replay { margin-top: 40px; }
 .replay { border: 1px solid #cad8ec; border-radius: 4px; background: var(--paper); padding: 28px 28px 20px; }
 .rp-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 8px 48px; align-items: end; }
 .rp-kicker { grid-column: 1 / -1; font-family: var(--mono); font-size: 13px; color: var(--gui); }
@@ -141,11 +142,20 @@ img, video { max-width: 100%; height: auto; display: block; }
 .rp-status { font-size: 13px; font-weight: 400; color: var(--muted); }
 .rp-stream { height: 470px; overflow-y: auto; overscroll-behavior: contain; padding: 12px 6px 40px 0; }
 .rp-entry { display: grid; grid-template-columns: 58px minmax(0, 1fr); gap: 2px 10px; padding: 6px 0; font-size: 14px; line-height: 1.5; }
-.rp-who { font-size: 12px; color: var(--muted); padding-top: 2px; }
+/* Each record type gets its own label color and, for actions, a tinted box: Agent ink, Shell teal, Browser blue, Edit amber. */
+.rp-who { justify-self: start; align-self: start; margin-top: 1px; padding: 0 6px; border-radius: 3px; background: var(--ink); color: #fff; font-size: 11px; font-weight: 600; line-height: 19px; }
 .rp-msg p { color: var(--ink); white-space: pre-wrap; }
-.rp-cmd .rp-who, .rp-row.edit .rp-who { color: var(--code); }
-.rp-row.gui .rp-who { color: var(--gui); }
-.rp-cmd pre { margin: 0; max-height: 220px; overflow: auto; padding: 8px 10px; border-radius: 3px; background: #f4f7fb; font-family: var(--mono); font-size: 12px; line-height: 1.55; white-space: pre-wrap; overflow-wrap: anywhere; }
+.rp-msg { padding: 8px 0 8px 11px; }
+.rp-cmd, .rp-row { margin: 5px 0; padding: 7px 8px; border-left: 3px solid; border-radius: 3px; }
+.rp-cmd { background: #edf7f9; border-color: #00809a; }
+.rp-cmd .rp-who { background: #00809a; }
+.rp-row.gui { background: #eef3ff; border-color: var(--gui); }
+.rp-row.gui .rp-who { background: var(--gui); }
+.rp-row.edit { background: #fdf3e7; border-color: #b45309; }
+.rp-row.edit .rp-who, .rp-cmd.edit .rp-who { background: #b45309; }
+.rp-cmd.edit { background: #fdf3e7; border-color: #b45309; }
+.rp-cmd.edit .c { color: #8a4206; }
+.rp-cmd pre { margin: 0; max-height: 220px; overflow: auto; padding: 8px 10px; border-radius: 3px; background: #fff; font-family: var(--mono); font-size: 12px; line-height: 1.55; white-space: pre-wrap; overflow-wrap: anywhere; }
 .rp-cmd .c { color: var(--code); }
 .rp-cmd .o { color: #3c4a60; }
 .rp-foot { grid-column: 2; display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12px; color: var(--muted); }
@@ -158,12 +168,14 @@ img, video { max-width: 100%; height: auto; display: block; }
 .rp-stage-mark { display: flex; gap: 10px; margin: 14px 0 4px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 13px; font-weight: 600; color: var(--ink); }
 .rp-stage-mark:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
 .rp-stage-mark .n { font-family: var(--mono); font-weight: 400; color: var(--gui); }
-.rp-insight { margin: 6px 0 4px 68px; padding: 8px 12px; border-left: 2px solid #9db4f5; background: #f7f9ff; font-size: 14px; line-height: 1.5; }
+.rp-insight { margin: 6px 0 4px 79px; padding: 8px 12px; border-left: 2px solid #9db4f5; background: #f7f9ff; font-size: 14px; line-height: 1.5; }
 .rp-tag { display: block; margin-bottom: 2px; font-size: 11px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
 .rp-verify { margin: 12px 0 4px; padding: 12px 14px; border: 1px solid #bfe3cf; border-radius: 4px; background: #f5fbf7; font-size: 14px; line-height: 1.5; }
 .rp-verify-head { display: flex; justify-content: space-between; }
 .rp-verify pre { margin: 8px 0; font-family: var(--mono); font-size: 12px; white-space: pre-wrap; overflow-wrap: anywhere; }
 .rp-verify .c { color: var(--code); }
+.rp-others { margin-top: 10px; padding-top: 8px; border-top: 1px solid #cfe8da; }
+.rp-others p { margin-top: 4px; }
 .rp-verify summary { margin-top: 8px; cursor: pointer; font-size: 13px; color: var(--ink); }
 .rp-diff { max-height: 260px; overflow: auto; padding: 10px; border-radius: 3px; background: #0e191e; color: #d6e2e4; }
 .rp-diff .add { color: #9fdec0; }
@@ -177,7 +189,10 @@ img, video { max-width: 100%; height: auto; display: block; }
 .rp-view a { display: block; cursor: zoom-in; }
 .rp-view img { width: 100%; height: 100%; }
 .rp-empty { position: absolute; inset: 0; display: grid; place-items: center; font-size: 14px; color: #8a979b; }
-.rp-marker { position: absolute; width: 26px; height: 26px; margin: -13px 0 0 -13px; border: 2px solid var(--gui); border-radius: 50%; background: rgb(36 88 237 / .18); box-shadow: 0 0 0 3px rgb(255 255 255 / .75); pointer-events: none; }
+.rp-marks { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+.rp-marks .to { fill: rgb(36 88 237 / .2); stroke: var(--gui); stroke-width: 2.5; vector-effect: non-scaling-stroke; }
+.rp-marks .from { fill: var(--gui); }
+.rp-marks .trail { stroke: var(--gui); stroke-width: 2; stroke-dasharray: 5 4; vector-effect: non-scaling-stroke; }
 .rp-key { position: absolute; left: 10px; bottom: 10px; padding: 4px 8px; border-radius: 3px; background: rgb(17 27 48 / .82); font-family: var(--mono); font-size: 12px; color: #fff; }
 .rp-frame-note { padding: 10px 14px; font-size: 12px; color: #9fb0b5; }
 .rp-controls { margin-top: 18px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; font-size: 14px; }
@@ -435,11 +450,12 @@ footer > a:last-child { text-decoration: none; white-space: nowrap; }
   .task dd { margin-bottom: 10px; }
   .replay { margin-inline: -8px; padding: 18px 14px 14px; }
   .rp-head h3 { font-size: 24px; }
-  .rp-entry { grid-template-columns: 50px minmax(0, 1fr); }
-  .rp-row { grid-template-columns: 50px minmax(0, 1fr) auto; }
+  .rp-entry { grid-template-columns: 58px minmax(0, 1fr); }
+  .rp-row { grid-template-columns: 58px minmax(0, 1fr) auto; }
   .rp-row .rp-chip { display: none; }
   .rp-insight { margin-left: 0; }
   .rp-stream { height: 360px; }
+  .rp-key { left: 6px; bottom: 6px; padding: 2px 6px; font-size: 10px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .btn > span { animation: none !important; background-position: 50% 50%; }
