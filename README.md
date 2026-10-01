@@ -59,6 +59,8 @@ Keep the copy short and factual. Use real evidence as the visual focus. Avoid de
 badges, repeated metadata rows and reconstructed agent actions.
 
 `LINKS` in `assets/js/site.js` and `assets/js/tasks.js` defines external URLs, including
-the arXiv abstract and PDF (2609.32600).
+the arXiv abstract and PDF (2609.32600). Author names in the front matter link to the
+authors' personal homepages (verified 2026-10-01); a name without a confirmed homepage is
+rendered in ink color with the `plain` class rather than in link blue.
 
 Before any push or publication, obtain the project owner's approval.
