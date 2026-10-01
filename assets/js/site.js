@@ -1,4 +1,4 @@
-/* CUA-SWE: results charts and table from the final evaluation report, plus the retained episode evidence. */
+/* CUA-SWE: results charts and table (final evaluation report, 2026-09-24; arXiv 2609.32600v1), plus the retained episode evidence. */
 (function () {
   "use strict";
   var LINKS = {
@@ -33,28 +33,17 @@
     "Opus 5": "#d2603a", "Opus 4.8": "#e39a6c", "Sonnet 5": "#b8963a", "Fable 5": "#a5545a",
     "Grok 4.6": "#4d5566", "Codex + Sol": "#7a5fc7", "Claude Code + Opus 5": "#9c7b62"
   };
-  // Panel a: Figure 3a of the paper. Four-domain mean on matched tasks within each model and domain,
-  // eight API models (Opus 5 is deferred on Mobile). Values are transcribed from the figure.
-  var MEAN = [
-    { m: "GPT-6 Astra", code: 11.3, cua: 59.3 }, { m: "Fable 5", code: 12.7, cua: 45.5 },
-    { m: "Grok 4.6", code: 10.2, cua: 43.8 }, { m: "GPT-5.6 Sol", code: 7.4, cua: 42.8 },
-    { m: "Opus 4.8", code: 5.0, cua: 34.2 }, { m: "GPT-5.6 Terra", code: 3.6, cua: 20.7 },
-    { m: "Sonnet 5", code: 3.8, cua: 17.1 }, { m: "GPT-5.6 Luna", code: 2.8, cua: 16.1 }
-  ];
-  // Panel c: complete scored Hybrid cohorts (Figure 1b), the four reported domain rates weighted equally.
+  // Panel a: four-domain mean for the eight frontier models evaluated under both conditions in every
+  // domain (Opus 5 is deferred on Mobile), each domain weighted equally. This reproduces the right
+  // panel of Figure 1 in the paper (GPT-6 Astra 11.3 -> 59.9, gains from 12.8 to 48.6 points).
   function fourDomainMean(row, i) {
     var vals = DOMAINS.map(function (d) { return row[d[0]][i]; });
     if (vals.some(function (v) { return v == null; })) return null;
     return Math.round(vals.reduce(function (a, b) { return a + b; }, 0) / vals.length * 10) / 10;
   }
-  // Execution profile (paper Figure 3b): agent minutes per success and Hybrid steps per task.
-  var PROFILE = {
-    "GPT-6 Astra": [7.2, 46.3], "Fable 5": [33.1, 51.1], "Grok 4.6": [32.2, 56.7], "GPT-5.6 Sol": [8.7, 37.7],
-    "Opus 4.8": [24.5, 54.5], "GPT-5.6 Terra": [11.8, 23.9], "Sonnet 5": [60.9, 69.4], "GPT-5.6 Luna": [14.6, 27.9]
-  };
-  var LABEL_SIDE = { "Fable 5": "above", "Grok 4.6": "left", "Sonnet 5": "left", "Opus 4.8": "right" };
-  var EFFICIENCY = TABLE1.filter(function (r) { return PROFILE[r.m] && fourDomainMean(r, 1) != null; })
-    .map(function (r) { return { m: r.m, success: fourDomainMean(r, 1), minutes: PROFILE[r.m][0], steps: PROFILE[r.m][1] }; });
+  var MEAN = TABLE1.filter(function (r) { return !r.sys && fourDomainMean(r, 0) != null; })
+    .map(function (r) { return { m: r.m, code: fourDomainMean(r, 0), cua: fourDomainMean(r, 1) }; })
+    .sort(function (a, b) { return b.cua - a.cua; });
 
   function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;"); }
 
@@ -93,34 +82,6 @@
     s.push('</svg>'); el.innerHTML = s.join("");
   }
 
-  // Scatter: Hybrid success against agent minutes per success (log scale).
-  function drawScatter(el, rows) {
-    var W = 440, H = 300, padL = 40, padR = 14, padT = 14, padB = 44, innerW = W - padL - padR, innerH = H - padT - padB;
-    var xmin = Math.log(5), xmax = Math.log(80), ymax = 70;
-    function X(v) { return padL + (Math.log(v) - xmin) / (xmax - xmin) * innerW; }
-    function Y(v) { return padT + innerH - v / ymax * innerH; }
-    var s = ['<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Hybrid task success against agent minutes per success">'];
-    [0, 10, 20, 30, 40, 50, 60, 70].forEach(function (v) {
-      s.push('<line x1="' + padL + '" x2="' + (W - padR) + '" y1="' + Y(v) + '" y2="' + Y(v) + '" stroke="#e6e6e6"/>');
-      s.push('<text x="' + (padL - 6) + '" y="' + (Y(v) + 3.5) + '" text-anchor="end" font-size="10" fill="#666">' + v + '</text>');
-    });
-    [5, 10, 20, 40, 80].forEach(function (v) {
-      s.push('<line y1="' + padT + '" y2="' + (padT + innerH) + '" x1="' + X(v) + '" x2="' + X(v) + '" stroke="#f0f0f0"/>');
-      s.push('<text x="' + X(v) + '" y="' + (padT + innerH + 14) + '" text-anchor="middle" font-size="10" fill="#666">' + v + '</text>');
-    });
-    s.push('<text x="' + (padL + innerW / 2) + '" y="' + (H - 6) + '" text-anchor="middle" font-size="11" fill="#444">Agent minutes per success (log scale)</text>');
-    s.push('<text transform="translate(11,' + (padT + innerH / 2) + ') rotate(-90)" text-anchor="middle" font-size="11" fill="#444">Hybrid task success (%)</text>');
-    rows.forEach(function (r) {
-      var x = X(r.minutes), y = Y(r.success), color = COLOR[r.m] || "#888";
-      var side = LABEL_SIDE[r.m] || "right", tx = x, ty = y + 3.5, anchor = "start";
-      if (side === "right") tx = x + 9; else if (side === "left") { tx = x - 9; anchor = "end"; }
-      else if (side === "above") { ty = y - 9; anchor = "middle"; } else if (side === "below") { ty = y + 16; anchor = "middle"; }
-      s.push('<circle cx="' + x + '" cy="' + y + '" r="6" fill="' + color + '"><title>' + esc(r.m + ": " + r.success.toFixed(1) + "% success, " + r.minutes.toFixed(1) + " agent minutes per success, " + r.steps.toFixed(1) + " steps per task") + '</title></circle>');
-      s.push('<text x="' + tx + '" y="' + ty + '" text-anchor="' + anchor + '" font-size="10.5" fill="#222">' + esc(r.m) + '</text>');
-    });
-    s.push('</svg>'); el.innerHTML = s.join("");
-  }
-
   function renderTable(host) {
     var maxima = {};
     DOMAINS.forEach(function (d) { [0, 1].forEach(function (i) {
@@ -151,8 +112,6 @@
   function mountResults() {
     var mean = document.getElementById("chart-mean");
     if (mean) drawGrouped(mean, MEAN, { w: 640, h: 300, bw: 26, gain: true, fs: 11, label: "Four-domain mean task success, Code-only and Hybrid, eight API models" });
-    var eff = document.getElementById("chart-eff");
-    if (eff) drawScatter(eff, EFFICIENCY);
     DOMAINS.forEach(function (d) {
       var el = document.querySelector('[data-chart="' + d[0] + '"]'); if (!el) return;
       var rows = TABLE1.map(function (r) { return { m: r.m, code: r[d[0]][0], cua: r[d[0]][1], n: d[2], deferred: r.deferredMobile && d[0] === "mobile" }; });

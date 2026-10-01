@@ -139,6 +139,16 @@ button { font: inherit; cursor: pointer; }
 .fig { margin: 0; }
 .fig img { border: 1px solid var(--line); }
 .fig.wide { max-width: 900px; margin: 0 auto 26px; }
+.overview-fig { max-width: 980px; margin-top: 30px; }
+.overview-fig img { border: 0; }
+.examples-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 22px; }
+.panel-img { display: block; width: 100%; height: auto; max-width: 520px; margin: 4px auto 8px; }
+.info-table { border-collapse: collapse; font-size: 13.5px; margin: 16px 0; width: 100%; }
+.info-table caption { text-align: left; font-size: 13px; color: var(--muted); padding-bottom: 6px; caption-side: bottom; }
+.info-table th, .info-table td { padding: 5px 8px; border-bottom: 1px solid var(--line); text-align: right; font-variant-numeric: tabular-nums; }
+.info-table th:nth-child(-n+2), .info-table td:nth-child(-n+2) { text-align: left; }
+.info-table thead th { border-bottom: 2px solid #bbb; font-weight: 700; color: var(--ink); }
+.info-table td.up { color: var(--fail); font-weight: 700; }
 .fig figcaption, .case figcaption { font-size: 13.5px; line-height: 1.55; color: #444; margin-top: 10px; }
 .zoomable img { cursor: zoom-in; }
 .cases { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
@@ -208,6 +218,7 @@ footer a { margin-left: 10px; }
   .domain-charts { grid-template-columns: 1fr; }
   .cases { grid-template-columns: repeat(2, 1fr); }
   .two { grid-template-columns: 1fr; }
+  .examples-grid { grid-template-columns: 1fr; }
   .episode-body { grid-template-columns: 1.3fr 1fr; }
   .screen .media { min-height: 320px; }
 }

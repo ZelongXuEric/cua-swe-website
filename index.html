@@ -31,12 +31,13 @@
 <main id="main" class="wrap">
 <header class="hero" id="top">
   <h1>CUA-SWE: When Computer-Use Agents Meet <em>Visual Software Engineering</em></h1>
-  <p class="authors">Prince Zizhuang Wang<sup>*</sup>, Chenhao Liang<sup>*</sup>, Zelong Xu<sup>*</sup>, Aojie Yuan<sup>*</sup>, Xiaolin Zhou<sup>*</sup>, Haiyue Zhang, Yue Zhao, Xiyang Hu, Shuli Jiang</p>
-  <p class="affil">Carnegie Mellon University · University of Southern California · University of Wisconsin–Madison · Arizona State University · AWS Agentic AI &nbsp;·&nbsp; <sup>*</sup>Equal contribution</p>
+  <p class="authors">Prince Zizhuang Wang<sup>*†</sup>, Chenhao Liang<sup>*</sup>, Zelong Xu<sup>*</sup>, Aojie Yuan<sup>*</sup>, Xiaolin Zhou<sup>*</sup>, Haiyue Zhang, Yue Zhao, Xiyang Hu, Shuli Jiang</p>
+  <p class="affil">Carnegie Mellon University · University of Southern California · University of Wisconsin–Madison · Arizona State University · AWS Agentic AI &nbsp;·&nbsp; <sup>*</sup>Equal contribution &nbsp;·&nbsp; <sup>†</sup>Project lead</p>
   <div class="buttons">
     <a class="pill" href="https://arxiv.org/abs/2609.32600"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h6"/></svg>Paper</a>
     <a class="pill" href="https://arxiv.org/pdf/2609.32600"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4v16h16V8l-4-4z"/><path d="M8 15h1.5a1.5 1.5 0 0 0 0-3H8v5M12.5 12v5h1a2.5 2.5 0 0 0 0-5zM17 17v-5h2M17 14.5h1.5"/></svg>PDF</a>
     <a class="pill" href="https://github.com/kingofspace0wzz/cua-swe"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg>Code</a>
+    <a class="pill" href="https://huggingface.co/datasets/kingofspace0wzz/CUA-SWE"><svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg>Dataset</a>
     <a class="pill" href="tasks.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>Tasks</a>
     <a class="pill" href="https://kingofspace0wzz.github.io/cua-swe-viewer/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4v16l14-8z"/></svg>Trajectories</a>
     <a class="pill" href="#citation"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h4v4H7zM13 7h4v4h-4zM11 11c0 3-1 4-4 5M17 11c0 3-1 4-4 5"/></svg>BibTeX</a>
@@ -50,8 +51,12 @@
     <li><b>4</b> domains: Web 36 · Game 29 · DevOps 20 · Mobile 20</li>
     <li><b>11</b> models and agent systems</li>
     <li><b>2</b> conditions: Code-only, Hybrid</li>
-    <li><b>3</b> versions validate every test: buggy, incomplete, reference</li>
+    <li><b>63</b> tasks need application materials, <b>42</b> are source-specified</li>
   </ul>
+  <figure class="fig wide overview-fig zoomable">
+    <img src="assets/media/figures/figure1.png" alt="CUA-SWE overview: task domains and buggy software, the edit, check, screenshot, interact and revise loop, and the independent deterministic verifier" width="1512" height="596">
+    <figcaption>Agents inspect screenshots, interact with the application and edit code; an independent deterministic verifier checks the requested behavior and preserved functionality on a clean copy. Figure 1 (left) in the paper.</figcaption>
+  </figure>
   <figure class="strip">
     <div class="col web">
       <h4><span class="dom">Web</span> Allocation Ring Studio</h4>
@@ -90,12 +95,12 @@
   <p class="intro">Task success (%) on one selected attempt per task, model and condition. <b>Code-only</b> uses the coding interface: read and edit source, run commands. <b>Hybrid</b> adds computer use: screenshots of the running application and mouse and keyboard actions. Both conditions share the same tasks, budgets and hidden tests, so the gap isolates what visual feedback and interaction contribute.</p>
   <div class="panels">
     <figure class="panel panel-a">
-      <figcaption><b>a</b> Overall: four-domain mean on matched tasks, eight API models</figcaption>
+      <figcaption><b>a</b> Overall: four-domain mean for the eight frontier models evaluated under both conditions in every domain</figcaption>
       <div id="chart-mean" class="chart"></div>
     </figure>
-    <figure class="panel panel-c">
-      <figcaption><b>c</b> Hybrid success against agent minutes per success</figcaption>
-      <div id="chart-eff" class="chart"></div>
+    <figure class="panel panel-c zoomable">
+      <figcaption><b>c</b> Success and development time: mean Hybrid task success against mean agent time, nine models and systems</figcaption>
+      <img class="panel-img" src="assets/media/figures/hybrid-success-time-aggregate.png" alt="Mean task success against mean agent time in minutes for nine models and systems; GPT-6 Astra is highest at about 4 minutes" width="960" height="610" loading="lazy">
     </figure>
     <figure class="panel panel-b">
       <figcaption><b>b</b> By domain: Code-only and Hybrid for every evaluated model and agent system</figcaption>
@@ -108,10 +113,10 @@
     </figure>
   </div>
   <p class="legend"><span class="sw tint"></span> lighter bar: Code-only &nbsp;&nbsp; <span class="sw solid"></span> solid bar: Hybrid (computer use + coding) &nbsp;&nbsp; <span class="gain">+pp</span> gain from computer use &nbsp;&nbsp; Hue identifies the model: <span class="fam openai">GPT</span> · <span class="fam anthropic">Claude</span> · <span class="fam xai">Grok</span> · <span class="fam system">agent systems</span></p>
-  <p class="note">Panel a reproduces Figure 3a of the paper: matched tasks within each model and domain, four domains weighted equally; Opus 5 is omitted because its Mobile evaluation is deferred. Panel c uses each model's complete scored Hybrid cohort (Figure 1b) and agent minutes per success, which divides mean episode time by task-success probability (Figure 3b). Opus 5 and Claude Code on Mobile are deferred and have no score. Codex and Claude Code are evaluated as complete agent systems in the Hybrid condition only.</p>
-  <h3>Task success rate (%) across four domains</h3>
+  <p class="note">Panel a weights the four domains equally and matches the right panel of Figure 1 in the paper; Opus 5 is omitted because its Mobile evaluation is deferred. Panel c is Figure 6a of the paper (circles: frontier models; open square: Codex). Codex and Claude Code are evaluated as complete agent systems in the Hybrid condition only. Every frontier model gains with Hybrid access; the gains concentrate on tasks whose requirements include application materials (see Analysis).</p>
+  <h3>Single-attempt task success (%) across four domains</h3>
   <div id="results-table" class="table-wrap"></div>
-  <p class="note">Column maxima are in bold. Hover a cell for the number of solved tasks. Each domain retains its original scoring rules: Web success also requires the required visual evidence; DevOps and Mobile exclude infrastructure errors and count genuine agent failures. Pass@3 evaluations exist for GPT-6 Astra, GPT-5.6 Sol and Fable 5 under Hybrid; see the paper's appendix.</p>
+  <p class="note">Column maxima are in bold. Hover a cell for the number of solved tasks. Each domain retains its original scoring rules: Web success also requires the required visual evidence; DevOps and Mobile exclude infrastructure errors and count genuine agent failures. Table 1 in the paper; Table 4 there reports a three-attempt Hybrid evaluation of GPT-6 Astra, GPT-5.6 Sol and Fable 5.</p>
 </section>
 
 <section id="examples" class="section">
@@ -151,6 +156,23 @@
       <blockquote>Foldnote is a mobile web packaging-proof review mockup. Review markers no longer stay correctly placed and oriented when switching between Flat sheet and Individual panel.</blockquote>
     </div>
   </div>
+  <h3>Specification basis</h3>
+  <p class="intro">Tasks differ in where their requirements are specified. In <b>source-specified</b> tasks (42), the instruction and readable project code define the target behavior; running the application supports diagnosis and checking. In <b>application-material-dependent</b> tasks (63), part of the behavior is specified only through application materials such as an imported drawing, a displayed service contract or a graphical reference card, which the code-only interface does not expose. Both groups require implementing the behavior and verifying the resulting software.</p>
+  <h3>Three example tasks</h3>
+  <figure class="fig wide zoomable">
+    <img src="assets/media/figures/captain-callisto-pipeline.png" alt="A concrete benchmark task: repairing inventory updates in Captain Callisto" width="1350" height="690" loading="lazy">
+    <figcaption><b>Game.</b> In Captain Callisto one pickup changes the inventory from 0/2 to 2/2. The agent reproduces the fault with game controls and screenshots and edits the inventory logic; independent checks test collection and level completion under two replay scenarios, while the episode record links the patch to the agent's actions and observations. Figure 3 in the paper.</figcaption>
+  </figure>
+  <div class="examples-grid">
+    <figure class="fig zoomable">
+      <img src="assets/media/figures/example-mobile-preprint.png" alt="Mobile example: repairing imported routes in Campus Pocket" width="1350" height="690" loading="lazy">
+      <figcaption><b>Mobile.</b> Campus Pocket: the provider report identifies a closed lift and the travel costs used to build a step-free route; the faulty route uses the closed H6 lift, the repaired one avoids it. Figure 4 in the paper.</figcaption>
+    </figure>
+    <figure class="fig zoomable">
+      <img src="assets/media/figures/example-web-preprint.png" alt="Web example: preserving distinct masked-date input behaviors" width="1350" height="690" loading="lazy">
+      <figcaption><b>Web.</b> A masked date input: clearing the date and leaving the field must remove the selection, while invalid nonempty input must keep the previous date. A repair that clears in both cases fails verification. Figure 5 in the paper.</figcaption>
+    </figure>
+  </div>
   <p class="cta"><a class="pill" href="tasks.html">Browse all 105 tasks with their original instructions, budgets and tests</a></p>
 </section>
 
@@ -159,33 +181,44 @@
   <h3>Computer use improves task success on every model</h3>
   <div class="two">
     <figure class="fig zoomable">
-      <img src="assets/media/figures/paired-task-gains.png" alt="Task-paired contribution of computer use for nine API models across four domains" width="1030" height="1049" loading="lazy">
-      <figcaption>Task-paired contribution of computer use. Each bar partitions a model's matched tasks by the joint Code-only and Hybrid outcome; the four segments sum to 100%. The value at right is the Hybrid gain in percentage points: tasks solved only with computer use minus tasks solved only with code. Figure 6 in the paper.</figcaption>
+      <img src="assets/media/figures/paired-task-gains.png" alt="Task-paired contribution of computer use for nine API models across four domains" width="951" height="951" loading="lazy">
+      <figcaption>Task-paired outcomes under the two access conditions. Each bar partitions a model's matched tasks by the joint Code-only and Hybrid outcome; the value at right is the Hybrid gain in percentage points: tasks solved only with computer use minus tasks solved only with code. Figure 20 in the paper.</figcaption>
     </figure>
     <div class="prose">
-      <p>Computer use improves domain-averaged task success for all eight API models in the paired comparison. On matched tasks GPT-6 Astra improves from 11.3% to 59.3%, a gain of 48.1 percentage points, and every other model gains between 13.3 and 35.3 points.</p>
-      <p>The gains span different repair requirements. On DevOps, the nine API models average 50.0% with Hybrid and 0.6% with code alone: the operational contracts are only visible by driving the running consoles. On Mobile, GPT-5.6 Sol improves from 0.0% to 45.0% and GPT-6 from 0.0% to 55.0%. On Game, where timing and physics must be observed over time, the union of successful Hybrid repairs covers 58.6% of tasks.</p>
-      <p>The same panel also shows the limits: Sonnet 5 and GPT-5.6 Luna solve a few Web tasks only with code, and most Game tasks remain unsolved under both conditions.</p>
+      <p>Every frontier model in the four-domain comparison achieves higher aggregate task success with Hybrid access; GPT-6 Astra gains 48.6 percentage points, from 11.3% to 59.9%. The gains concentrate on tasks whose requirements include application materials, while source-specified subsets have near-zero domain-average changes and substantial variation across models.</p>
+      <table class="info-table">
+        <caption>Success by task information requirement (%), averaged over the eight frontier models. Table 9 in the paper.</caption>
+        <thead><tr><th>Domain</th><th>Type</th><th>Tasks</th><th>Code-only</th><th>Hybrid</th><th>Δ pp</th></tr></thead>
+        <tbody>
+          <tr><td>Web</td><td>S</td><td>22</td><td>23.9</td><td>23.9</td><td>+0.0</td></tr>
+          <tr><td>Web</td><td>M</td><td>14</td><td>8.9</td><td>50.9</td><td class="up">+42.0</td></tr>
+          <tr><td>Game</td><td>S</td><td>20</td><td>10.6</td><td>10.0</td><td>−0.6</td></tr>
+          <tr><td>Game</td><td>M</td><td>9</td><td>2.8</td><td>26.4</td><td class="up">+23.6</td></tr>
+          <tr><td>DevOps</td><td>M</td><td>20</td><td>0.6</td><td>48.8</td><td class="up">+48.1</td></tr>
+          <tr><td>Mobile</td><td>M</td><td>20</td><td>0.6</td><td>39.4</td><td class="up">+38.8</td></tr>
+        </tbody>
+      </table>
+      <p>In material-dependent (M) tasks the agent must recover requirements from drawings or displayed behavior, implement them and preserve the surrounding workflow. Source-level execution tests the implementation; application observations supply requirements and feedback that those executions alone may not expose. The same figure also shows the limits: a few Web tasks are solved only with code, and most Game tasks remain unsolved under both conditions.</p>
     </div>
   </div>
   <h3>How agents turn runtime observations into correct changes</h3>
-  <p class="intro">Four selected GPT-6 Astra attempts, one per domain, as reviewed in the paper. Each card shows what the agent observed, the consequential source change, and the evaluator's verdict. Click a card to enlarge.</p>
+  <p class="intro">Four released GPT-6 Astra attempts, one per domain, as reviewed in the paper (Figures 28 to 31). Each card shows what the agent observed, the consequential source change, and the evaluator's verdict. Click a card to enlarge.</p>
   <div class="cases">
     <figure class="case zoomable">
-      <img src="assets/media/figures/repair-case-web.png" alt="Web case: preserve nested selection after resizing" width="1030" height="1292" loading="lazy">
-      <figcaption><b>Web · interaction guides successive edits.</b> After repairing resizing, the agent drags a shape beyond its containing frame; the resulting selection behavior motivates a second edit that extends hit testing to selectable descendants.</figcaption>
+      <img src="assets/media/figures/repair-case-web.png" alt="Web case: preserve nested selection after resizing" width="951" height="1193" loading="lazy">
+      <figcaption><b>Web · following the consequences of a code change.</b> After repairing resizing, the agent drags the object beyond its containing frame; when selection is lost it extends hit testing to selectable descendants and repeats the interaction. GPT-5.6 Sol and Claude Opus 5 repair the resize but leave the selection defect.</figcaption>
     </figure>
     <figure class="case zoomable">
-      <img src="assets/media/figures/repair-case-game.png" alt="Game case: restore checkpoint state from geometry" width="1030" height="1292" loading="lazy">
+      <img src="assets/media/figures/repair-case-game.png" alt="Game case: restore checkpoint state from geometry" width="951" height="1193" loading="lazy">
       <figcaption><b>Game · state updates jointly restore the scene.</b> The checkpoint stores geometry; the agent reconstructs lift phase from a faded reference frame, restores camera progress in course coordinates, and reattaches the player at its saved height.</figcaption>
     </figure>
     <figure class="case zoomable">
-      <img src="assets/media/figures/repair-case-devops.png" alt="DevOps case: infer each producer's gauge-update semantics" width="1030" height="1395" loading="lazy">
+      <img src="assets/media/figures/repair-case-devops.png" alt="DevOps case: infer each producer's gauge-update semantics" width="951" height="1287" loading="lazy">
       <figcaption><b>DevOps · live behavior identifies the operative contract.</b> A pulse–pulse–settle sequence in the gauge console reveals each endpoint's update mode; the repair relearns the mode at each epoch and preserves receipt order.</figcaption>
     </figure>
     <figure class="case zoomable">
-      <img src="assets/media/figures/repair-case-mobile.png" alt="Mobile case: recover gear connections from the received drawings" width="1030" height="1423" loading="lazy">
-      <figcaption><b>Mobile · visual structure becomes executable behavior.</b> Enlarged maker drawings expose shared axes and belt routing; the agent reconstructs all 23 gear relations and their phase, angle and editing behavior.</figcaption>
+      <img src="assets/media/figures/repair-case-mobile.png" alt="Mobile case: recover gear connections from the received drawings" width="951" height="1313" loading="lazy">
+      <figcaption><b>Mobile · recovering relations from drawings.</b> Enlarged maker drawings expose shared axes and belt routing; the agent reconstructs all 23 driving relations and implements their angle, phase and editing behavior. GPT-5.6 Sol chooses the wrong driving rim at two compound assemblies.</figcaption>
     </figure>
   </div>
   <h3>Where repairs still fail</h3>
@@ -204,24 +237,27 @@
 <section id="evaluation" class="section">
   <h2>Evaluation</h2>
   <figure class="fig wide zoomable">
-    <img src="assets/media/figures/benchmark-environment.png" alt="The CUA-SWE development and evaluation pipeline" width="1030" height="778" loading="lazy">
-    <figcaption>The development and evaluation pipeline. The agent combines source edits with interaction and screenshots of the running application. Each episode records the submitted patch, actions and observations. Independent tests check the resulting software against the task requirements, and trajectory auditing checks interaction-rule compliance. Figure 1 in the paper.</figcaption>
+    <img src="assets/media/figures/figure2.png" alt="The CUA-SWE development and evaluation pipeline: task package, matched comparison of a code-only agent and a hybrid computer-use agent, and the shared evaluator-private deterministic verifier" width="1378" height="793" loading="lazy">
+    <figcaption>The development and evaluation pipeline. A task package gives the agent a bug report and an editable repository. The Code-only agent reads code, edits files and runs commands; the Hybrid agent additionally views screenshots, clicks, types and scrolls in the running application. The same evaluator-private verifier applies the permitted edits to a clean baseline, rebuilds the application and runs the task-specific tests. Figure 2 in the paper.</figcaption>
   </figure>
+  <h3>What counts as a success</h3>
   <div class="checks">
-    <div><h3>Task check</h3><p>Does the requested behavior work? Tests drive the rebuilt application through interaction sequences and assert on the rendered interface and runtime state, under several service responses, layouts, seeds or inputs.</p></div>
+    <div><h3>Task check</h3><p>Does the requested behavior work? Tests execute the rebuilt application under controlled interaction sequences and assert on the rendered interface, runtime behavior or internal application state.</p></div>
     <div><h3>Regression check</h3><p>Does designated existing behavior still work? The same tests cover the functionality the task says must be preserved, so a fix that breaks normal play, editing or navigation fails.</p></div>
     <div><h3>Permitted-change check</h3><p>Did the patch stay inside the allowed scope? Edits outside the files the task permits fail regardless of test results.</p></div>
   </div>
-  <p class="prose-p">A submission counts as a repair only when all three checks pass on a fresh copy of the project; the agent never sees the tests, and the evaluator can inspect state the agent cannot, such as game-board contents. Every test is validated against three versions before release: the buggy baseline and a plausible but incomplete repair must fail, and the reference repair must pass. In the support-scheduling task, for example, an incomplete repair displayed the first appointment correctly but reused that value for the second; the tests reject it. Reported success additionally requires following each condition's tool-use rules, checked by a trajectory audit.</p>
+  <p class="prose-p">These three checks give <b>patch correctness</b>. Reported <b>task success</b> additionally requires a valid trajectory: the run used only the interfaces allowed by its condition and, for Hybrid runs, actually observed the screenshots. Correctness depends on the behavior of the submitted program, not on matching the reference patch; the evaluator may inspect privileged state such as a game board that the agent only sees rendered.</p>
+  <h3>How tasks are built and validated</h3>
+  <p class="prose-p">Each task starts from a software behavior that can be reproduced in the running application and modified in the codebase. An LLM author constructs the instruction, initial codebase, runtime setup, gold reference repair, plausible <b>negative repairs</b> and protected tests; human review checks that the requirement is meaningful and that the relevant runtime evidence is observable through the benchmark interface. The verifier must reject the broken project and every negative repair and accept the gold repair. In the masked-date task, for example, clearing the field should remove the selected date while invalid input should keep it; a repair that clears the selection in both cases fails. Reviewed construction-time agent trials then guide neighboring variants that extend each task family's difficulty range.</p>
   <figure class="fig wide zoomable">
-    <img src="assets/media/figures/captain-callisto-pipeline.png" alt="A concrete benchmark task: repairing inventory updates in Captain Callisto" width="1148" height="587" loading="lazy">
-    <figcaption>A concrete task. In Captain Callisto one pickup incorrectly changes the inventory from 0/2 to 2/2. The agent uses game controls and screenshots to inspect the discrepancy and edits the inventory logic; independent checks then test collection and level completion under two replay scenarios, while the episode record links the patch to the agent's actions and observations. Figure 2 in the paper.</figcaption>
+    <img src="assets/media/figures/task-construction.png" alt="From a seed example to a verified difficulty ladder: seed, LLM author, human review, validation, hybrid trials and difficulty ladder" width="951" height="723" loading="lazy">
+    <figcaption>From a seed example to a verified difficulty ladder. Human review and executable checks establish task validity; reviewed agent trials drive a separate expansion loop, with every new variant returning through both gates. Figure 8 in the paper.</figcaption>
   </figure>
 </section>
 
 <section id="citation" class="section">
   <h2>Citation</h2>
-  <p class="paper-title">CUA-SWE: When Computer-Use Agents Meet Visual Software Engineering. arXiv:2609.32600, 2026. <a href="https://arxiv.org/abs/2609.32600">Abstract ↗</a> · <a href="https://arxiv.org/pdf/2609.32600">PDF ↗</a> · <a href="https://github.com/kingofspace0wzz/cua-swe">Code and task bundles ↗</a> · <a href="https://kingofspace0wzz.github.io/cua-swe-viewer/">Recorded trajectories ↗</a></p>
+  <p class="paper-title">CUA-SWE: When Computer-Use Agents Meet Visual Software Engineering. arXiv:2609.32600, 2026. <a href="https://arxiv.org/abs/2609.32600">Abstract ↗</a> · <a href="https://arxiv.org/pdf/2609.32600">PDF ↗</a> · <a href="https://github.com/kingofspace0wzz/cua-swe">Code and task bundles ↗</a> · <a href="https://huggingface.co/datasets/kingofspace0wzz/CUA-SWE">Dataset on Hugging Face ↗</a> · <a href="https://kingofspace0wzz.github.io/cua-swe-viewer/">Recorded trajectories ↗</a></p>
   <pre class="bibtex">@misc{wang2026cuaswe,
   title         = {CUA-SWE: When Computer-Use Agents Meet Visual Software Engineering},
   author        = {Wang, Prince Zizhuang and Liang, Chenhao and Xu, Zelong and Yuan, Aojie and Zhou, Xiaolin and Zhang, Haiyue and Zhao, Yue and Hu, Xiyang and Jiang, Shuli},
