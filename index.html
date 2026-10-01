@@ -158,11 +158,7 @@
   </div>
   <h3>Specification basis</h3>
   <p class="intro">Tasks differ in where their requirements are specified. In <b>source-specified</b> tasks (42), the instruction and readable project code define the target behavior; running the application supports diagnosis and checking. In <b>application-material-dependent</b> tasks (63), part of the behavior is specified only through application materials such as an imported drawing, a displayed service contract or a graphical reference card, which the code-only interface does not expose. Both groups require implementing the behavior and verifying the resulting software.</p>
-  <h3>Three example tasks</h3>
-  <figure class="fig wide zoomable">
-    <img src="assets/media/figures/captain-callisto-pipeline.png" alt="A concrete benchmark task: repairing inventory updates in Captain Callisto" width="1350" height="690" loading="lazy">
-    <figcaption><b>Game.</b> In Captain Callisto one pickup changes the inventory from 0/2 to 2/2. The agent reproduces the fault with game controls and screenshots and edits the inventory logic; independent checks test collection and level completion under two replay scenarios, while the episode record links the patch to the agent's actions and observations. Figure 3 in the paper.</figcaption>
-  </figure>
+  <h3>Two example tasks</h3>
   <div class="examples-grid">
     <figure class="fig zoomable">
       <img src="assets/media/figures/example-mobile-preprint.png" alt="Mobile example: repairing imported routes in Campus Pocket" width="1350" height="690" loading="lazy">
@@ -250,8 +246,8 @@
   <h3>How tasks are built and validated</h3>
   <p class="prose-p">Each task starts from a software behavior that can be reproduced in the running application and modified in the codebase. An LLM author constructs the instruction, initial codebase, runtime setup, gold reference repair, plausible <b>negative repairs</b> and protected tests; human review checks that the requirement is meaningful and that the relevant runtime evidence is observable through the benchmark interface. The verifier must reject the broken project and every negative repair and accept the gold repair. In the masked-date task, for example, clearing the field should remove the selected date while invalid input should keep it; a repair that clears the selection in both cases fails. Reviewed construction-time agent trials then guide neighboring variants that extend each task family's difficulty range.</p>
   <figure class="fig wide zoomable">
-    <img src="assets/media/figures/task-construction.png" alt="From a seed example to a verified difficulty ladder: seed, LLM author, human review, validation, hybrid trials and difficulty ladder" width="951" height="723" loading="lazy">
-    <figcaption>From a seed example to a verified difficulty ladder. Human review and executable checks establish task validity; reviewed agent trials drive a separate expansion loop, with every new variant returning through both gates. Figure 8 in the paper.</figcaption>
+    <img src="assets/media/figures/captain-callisto-pipeline.png" alt="A concrete benchmark task: repairing inventory updates in Captain Callisto, from task instruction and environment through the agent's screenshots and code edits to independent evaluation and the episode record" width="1350" height="690" loading="lazy">
+    <figcaption>One task end to end. The seed behavior is reproducible in the running game: collecting one item changes the inventory from 0/2 to 2/2. The task instruction asks for the repair while preserving cargo removal and level completion; the agent reproduces the fault with game controls and screenshots and edits the inventory logic. Independent evaluation runs the protected behavioral checks under two replay scenarios and audits the trajectory, and the episode record links the patch to the agent's actions and observations. Figure 3 in the paper.</figcaption>
   </figure>
 </section>
 

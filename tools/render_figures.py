@@ -15,7 +15,7 @@ SRC = ROOT / "paper/arxiv-2609.32600v1/figures"
 OUT = pathlib.Path(__file__).resolve().parents[1] / "assets/media/figures"
 OUT.mkdir(parents=True, exist_ok=True)
 FIGURES = ["figure1", "figure2", "captain-callisto-pipeline", "example-web-preprint", "example-mobile-preprint",
-           "task-construction", "hybrid-success-time-aggregate", "paired-task-gains",
+           "hybrid-success-time-aggregate", "paired-task-gains",
            "repair-case-web", "repair-case-game", "repair-case-devops", "repair-case-mobile"]
 SCALE = {"hybrid-success-time-aggregate": 5.0, "figure1": 3.0, "captain-callisto-pipeline": 2.0,
          "example-web-preprint": 2.0, "example-mobile-preprint": 2.0}

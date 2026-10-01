@@ -30,12 +30,6 @@
   "sha256": "e476eab596e693ec1d3cf0cd415504b51a44ddd7657b803c01bd254f99fbf467"
  },
  {
-  "file": "figures/task-construction.png",
-  "source": "paper/arxiv-2609.32600v1/figures/task-construction.pdf",
-  "note": "rendered at scale 2.4, 951x723",
-  "sha256": "e2efcd1533487bb8278251c3084bcb538ffe08dd31272183b63412973f6347e4"
- },
- {
   "file": "figures/hybrid-success-time-aggregate.png",
   "source": "paper/arxiv-2609.32600v1/figures/hybrid-success-time-aggregate.pdf",
   "note": "rendered at scale 5.0, 960x610",
