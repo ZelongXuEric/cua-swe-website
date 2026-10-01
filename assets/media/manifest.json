@@ -118,5 +118,197 @@
   "source": "paper/demo_video/assets/media/mobile_after.png",
   "note": "cropped to (20, 567, 780, 1042) then encoded as WebP at 760x475",
   "sha256": "cfbba9c7a7d4a96f96f28ee71c9216a9abec4408ab686744740ceb9af3cbf03e"
+ },
+ {
+  "file": "episodes/minesweeper-002/frame-01.png",
+  "source": "kingofspace0wzz/cua-swe-viewer media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.002/agent/frames/frame-0001.png",
+  "note": "byte-identical copy",
+  "sha256": "bc6d96529728bc90aa3c18abb71be22c6e8820fdb126c5a2e6f5e2c6d4dc39aa"
+ },
+ {
+  "file": "episodes/minesweeper-002/frame-02.png",
+  "source": "kingofspace0wzz/cua-swe-viewer media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.002/agent/frames/frame-0002.png",
+  "note": "byte-identical copy",
+  "sha256": "3efdff5e4ae1dc7af688200bcdd91b7d1111fdf82b23eacf0bc1e33e15135fd3"
+ },
+ {
+  "file": "episodes/minesweeper-002/frame-03.png",
+  "source": "kingofspace0wzz/cua-swe-viewer media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.002/agent/frames/frame-0003.png",
+  "note": "byte-identical copy",
+  "sha256": "3936acc9034f9858d70f0de8447024dd14709fe07fba968dc212366aa353c4fe"
+ },
+ {
+  "file": "episodes/minesweeper-002/frame-04.png",
+  "source": "kingofspace0wzz/cua-swe-viewer media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.002/agent/frames/frame-0004.png",
+  "note": "byte-identical copy",
+  "sha256": "494593041e75a0a0a7e9b184f646aed3b73844e507d18b746dd617ef2b886897"
+ },
+ {
+  "file": "episodes/minesweeper-002/frame-05.png",
+  "source": "kingofspace0wzz/cua-swe-viewer media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.002/agent/frames/frame-0005.png",
+  "note": "byte-identical copy",
+  "sha256": "9af4ab915988adde9c49073ccfaacef42d9d65eddbe603dbaafc6d860229c318"
+ },
+ {
+  "file": "episodes/minesweeper-002/frame-08.png",
+  "source": "kingofspace0wzz/cua-swe-viewer media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.002/agent/frames/frame-0008.png",
+  "note": "byte-identical copy",
+  "sha256": "a96207d225fb1e148a77d10d90a7164be37756725821fdf140d166059ba8db2e"
+ },
+ {
+  "file": "episodes/minesweeper-002/frame-11.png",
+  "source": "kingofspace0wzz/cua-swe-viewer media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.002/agent/frames/frame-0011.png",
+  "note": "byte-identical copy",
+  "sha256": "1f6e71ae768129bd18a70bdf05019811266db2bf4547c61ec54a33d65189c744"
+ },
+ {
+  "file": "episodes/minesweeper-002/frame-12.png",
+  "source": "kingofspace0wzz/cua-swe-viewer media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.002/agent/frames/frame-0012.png",
+  "note": "byte-identical copy",
+  "sha256": "02c16397b46d7f9ceb85c770fcc822399267f98b822152ad5614db2630e2f4fe"
+ },
+ {
+  "file": "episodes/minesweeper-002/frame-13.png",
+  "source": "kingofspace0wzz/cua-swe-viewer media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.002/agent/frames/frame-0013.png",
+  "note": "byte-identical copy",
+  "sha256": "70f2b296258dd3e1177d72b1419f434c01bc10c2edd62ffdd8f2600188a034a0"
+ },
+ {
+  "file": "episodes/minesweeper-002/frame-14.png",
+  "source": "kingofspace0wzz/cua-swe-viewer media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.002/agent/frames/frame-0014.png",
+  "note": "byte-identical copy",
+  "sha256": "c508fc890d7da2a5194464aa4779011e9db61eb5d0aec6cc9b93adbe1dab98a6"
+ },
+ {
+  "file": "episodes/minesweeper-002/frame-15.png",
+  "source": "kingofspace0wzz/cua-swe-viewer media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.002/agent/frames/frame-0015.png",
+  "note": "byte-identical copy",
+  "sha256": "9928bad787dab26d676d658c3b98769ef7debb31458a4c1ce6cfc326dea31e40"
+ },
+ {
+  "file": "episodes/minesweeper-002/frame-16.png",
+  "source": "kingofspace0wzz/cua-swe-viewer media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.002/agent/frames/frame-0016.png",
+  "note": "byte-identical copy",
+  "sha256": "5d12fe6d56df213dfd2eb725037fec7a1570e8eaccde50849362e90067999081"
+ },
+ {
+  "file": "episodes/minesweeper-002/frame-17.png",
+  "source": "kingofspace0wzz/cua-swe-viewer media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.002/agent/frames/frame-0017.png",
+  "note": "byte-identical copy",
+  "sha256": "6c7a52eedbac1307851e8f80728480e1b26bfd13ec4ace7b913c94d9fa0e15ca"
+ },
+ {
+  "file": "episodes/minesweeper-002/frame-18.png",
+  "source": "kingofspace0wzz/cua-swe-viewer media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.002/agent/frames/frame-0018.png",
+  "note": "byte-identical copy",
+  "sha256": "6c367b4e2e4dce0116d1d899174e44c037346d949139632e8e7eaa547c308348"
+ },
+ {
+  "file": "episodes/minesweeper-002/frame-19.png",
+  "source": "kingofspace0wzz/cua-swe-viewer media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.002/agent/frames/frame-0019.png",
+  "note": "byte-identical copy",
+  "sha256": "bbc5c22400f283a948563539a7a43254b1d524c6f220d77dde09e6ae2b55f9eb"
+ },
+ {
+  "file": "episodes/fabric-nested-05/frame-01.png",
+  "source": "EFS export runs/candidate-05/api-gpt6-astra/cua (paths and host redacted)/web-cua/screenshot-0001.png",
+  "note": "byte-identical copy",
+  "sha256": "4ec9d83d6637faf2ff13aab341f6426f3c756adbca9f7ca9c034805688facf45"
+ },
+ {
+  "file": "episodes/fabric-nested-05/frame-02.png",
+  "source": "EFS export runs/candidate-05/api-gpt6-astra/cua (paths and host redacted)/web-cua/screenshot-0002.png",
+  "note": "byte-identical copy",
+  "sha256": "f5fd9418e393da7a67f12592de73c1ba3e2d21fcd667b3c34f26115971793a10"
+ },
+ {
+  "file": "episodes/fabric-nested-05/frame-03.png",
+  "source": "EFS export runs/candidate-05/api-gpt6-astra/cua (paths and host redacted)/web-cua/screenshot-0003.png",
+  "note": "byte-identical copy",
+  "sha256": "35ab39f94a51ebb876bc95d0658d8d79ad40c30701bf7da883e17928c2c8ad46"
+ },
+ {
+  "file": "episodes/fabric-nested-05/frame-04.png",
+  "source": "EFS export runs/candidate-05/api-gpt6-astra/cua (paths and host redacted)/web-cua/screenshot-0004.png",
+  "note": "byte-identical copy",
+  "sha256": "84f9b920e7dc59b67d5aa6bfaf8661610576cf90f652671a3a7825dfabbdb0f5"
+ },
+ {
+  "file": "episodes/fabric-nested-05/frame-05.png",
+  "source": "EFS export runs/candidate-05/api-gpt6-astra/cua (paths and host redacted)/web-cua/screenshot-0005.png",
+  "note": "byte-identical copy",
+  "sha256": "2ee091df0c069ca2175b0d13bfd2b0c45a13427be1b3e460faf249ca5b80f959"
+ },
+ {
+  "file": "episodes/fabric-nested-05/frame-06.png",
+  "source": "EFS export runs/candidate-05/api-gpt6-astra/cua (paths and host redacted)/web-cua/screenshot-0006.png",
+  "note": "byte-identical copy",
+  "sha256": "13c68672bddc511fb576e685f1b78de067a7a3998b2c6e01b2507b4caa63708f"
+ },
+ {
+  "file": "episodes/fabric-nested-05/frame-07.png",
+  "source": "EFS export runs/candidate-05/api-gpt6-astra/cua (paths and host redacted)/web-cua/screenshot-0007.png",
+  "note": "byte-identical copy",
+  "sha256": "d2f160bda5861ef54d2dbc9ea49bf3b10b5bdedff48453939dc8d118fd195bcb"
+ },
+ {
+  "file": "episodes/fabric-nested-05/frame-10.png",
+  "source": "EFS export runs/candidate-05/api-gpt6-astra/cua (paths and host redacted)/web-cua/screenshot-0010.png",
+  "note": "byte-identical copy",
+  "sha256": "77a8cb70ec621863a57ebb388a74ac358f665110f6c51069e0c43b54edd82e04"
+ },
+ {
+  "file": "episodes/fabric-nested-05/frame-11.png",
+  "source": "EFS export runs/candidate-05/api-gpt6-astra/cua (paths and host redacted)/web-cua/screenshot-0011.png",
+  "note": "byte-identical copy",
+  "sha256": "2f433a79f1e9aa069dd853cb7c0b0c185cc5e35b9672c433c21bc6405dc103ea"
+ },
+ {
+  "file": "episodes/fabric-nested-05/frame-12.png",
+  "source": "EFS export runs/candidate-05/api-gpt6-astra/cua (paths and host redacted)/web-cua/screenshot-0012.png",
+  "note": "byte-identical copy",
+  "sha256": "c1e17742aff93f4b8f5ebdb1622f261bd6c666e9c559f6a5d31ab0e4b53728e3"
+ },
+ {
+  "file": "episodes/fabric-nested-05/frame-13.png",
+  "source": "EFS export runs/candidate-05/api-gpt6-astra/cua (paths and host redacted)/web-cua/screenshot-0013.png",
+  "note": "byte-identical copy",
+  "sha256": "5a6e2291e6b911a4b4560b84f4eb37683d181e9b82bfb812d5d2e0c56b5b886e"
+ },
+ {
+  "file": "episodes/fabric-nested-05/frame-14.png",
+  "source": "EFS export runs/candidate-05/api-gpt6-astra/cua (paths and host redacted)/web-cua/screenshot-0014.png",
+  "note": "byte-identical copy",
+  "sha256": "ff177b93149e57a4156da79770862ba49eaf9d0448f799815af339b0685c196a"
+ },
+ {
+  "file": "episodes/fabric-nested-05/frame-15.png",
+  "source": "EFS export runs/candidate-05/api-gpt6-astra/cua (paths and host redacted)/web-cua/screenshot-0015.png",
+  "note": "byte-identical copy",
+  "sha256": "f3e9b76ab81752b1f7337bff4a0f1db7456483554ec119f9afa60e51acc02d35"
+ },
+ {
+  "file": "episodes/fabric-nested-05/frame-16.png",
+  "source": "EFS export runs/candidate-05/api-gpt6-astra/cua (paths and host redacted)/web-cua/screenshot-0016.png",
+  "note": "byte-identical copy",
+  "sha256": "6a998e28c9c92acb16529c5bc47f3240f32432bd89a36f62d7edddcad5301e4f"
+ },
+ {
+  "file": "episodes/fabric-nested-05/frame-17.png",
+  "source": "EFS export runs/candidate-05/api-gpt6-astra/cua (paths and host redacted)/web-cua/screenshot-0017.png",
+  "note": "byte-identical copy",
+  "sha256": "96d33ec15e31ac6f4014bba7cbabcd21ebea5c77dc6a2ee5aafaf5654efb4ed0"
+ },
+ {
+  "file": "episodes/fabric-nested-05/frame-18.png",
+  "source": "EFS export runs/candidate-05/api-gpt6-astra/cua (paths and host redacted)/web-cua/screenshot-0018.png",
+  "note": "byte-identical copy",
+  "sha256": "59202a7b0551f8821ee51f91393a249fa3c7f26efdfc983846aca74e15aa94f1"
+ },
+ {
+  "file": "episodes/fabric-nested-05/frame-19.png",
+  "source": "EFS export runs/candidate-05/api-gpt6-astra/cua (paths and host redacted)/web-cua/screenshot-0019.png",
+  "note": "byte-identical copy",
+  "sha256": "27b8a9e0467b98eb4ae4a3426dfa59d94f1b384cd3584eabc48ff56b87e35f42"
  }
 ]

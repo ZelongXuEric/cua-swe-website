@@ -117,11 +117,24 @@
   <h3>Single-attempt task success (%) across four domains</h3>
   <div id="results-table" class="table-wrap"></div>
   <p class="note">Column maxima are in bold. Hover a cell for the number of solved tasks. Each domain retains its original scoring rules: Web success also requires the required visual evidence; DevOps and Mobile exclude infrastructure errors and count genuine agent failures. Table 1 in the paper; Table 4 there reports a three-attempt Hybrid evaluation of GPT-6 Astra, GPT-5.6 Sol and Fable 5.</p>
+  <h3>Ranking</h3>
+  <p class="note">Models and agent systems ranked by Hybrid success, overall and within each domain. The rail runs from Code-only (open circle) to Hybrid (filled circle).</p>
+  <div class="result-domains" role="group" aria-label="Ranking scope">
+    <button type="button" data-rank-domain="all" aria-pressed="true">Overall</button>
+    <button type="button" data-rank-domain="web" aria-pressed="false">Web <span>36</span></button>
+    <button type="button" data-rank-domain="game" aria-pressed="false">Game <span>29</span></button>
+    <button type="button" data-rank-domain="devops" aria-pressed="false">DevOps <span>20</span></button>
+    <button type="button" data-rank-domain="mobile" aria-pressed="false">Mobile <span>20</span></button>
+  </div>
+  <div id="ranking-table" class="table-wrap"></div>
+  <p id="ranking-note" class="note" aria-live="polite"></p>
 </section>
 
 <section id="examples" class="section">
   <h2>Examples</h2>
-  <p class="intro">Recorded runs, step by step: what the agent saw, what it changed, and what the verifier decided. This one follows GPT-5.6 Sol through a Vector Relay attempt; players for Web, DevOps and Mobile follow the same layout.</p>
+  <p class="intro">Recorded runs, step by step: what the agent saw, what it changed, and what the verifier decided. The timed replays below play GPT-6 Astra’s scored Web attempt and a GPT-5.6 Sol Minesweeper run as they happened; the step player after them follows GPT-5.6 Sol through Vector Relay.</p>
+  <article class="replay" data-episode="fabric-nested-05"></article>
+  <article class="replay" data-episode="minesweeper-002"></article>
   <div class="episode" id="repair-player">
     <div class="episode-body">
       <div class="screen" id="episode-screen" role="region" aria-label="Selected repair step"></div>
@@ -267,5 +280,8 @@
 <footer>CUA-SWE · 2026 · Task bundles retain source and asset attribution. <a href="#top">Back to top ↑</a></footer>
 <div class="lightbox" id="lightbox" hidden><button type="button" class="lightbox-close" aria-label="Close">✕</button><img alt=""></div>
 <script src="assets/js/site.js"></script>
+<script src="data/episodes/fabric-nested-05.js"></script>
+<script src="data/episodes/minesweeper-002.js"></script>
+<script src="assets/js/replay.js"></script>
 </body>
 </html>
