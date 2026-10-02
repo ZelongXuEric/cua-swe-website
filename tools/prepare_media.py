@@ -14,6 +14,8 @@ OUT.mkdir(parents=True, exist_ok=True)
 F2 = ROOT / "paper/figure2_assets/cases"
 F1 = ROOT / "paper/figure1_assets/cases"
 DEMO = ROOT / "paper/demo_video"
+# Released GPT-6 Astra Hybrid attempt at web.fabric-nested-selection-05.001 (the Web case in Figure 28).
+FABRIC = ROOT / "artifacts/trajectories/cua_results/gpt6-cua/web-cua"
 
 ITEMS = [
     # (source, destination, max_width or None)
@@ -24,6 +26,10 @@ ITEMS = [
     (F2 / "02_letter_arc/originals/agent_0017.png", "letter-arc-frame-17.png", 800),
     (F2 / "02_letter_arc/originals/agent_0018.png", "letter-arc-frame-18.png", 800),
     (F1 / "G04_core_ball/keyframes/agent_0011.png", "core-ball-frame-11.png", None),
+    (FABRIC / "screenshot-0002.png", "fabric-nested-selection/frame-02.png", None),
+    (FABRIC / "screenshot-0006.png", "fabric-nested-selection/frame-06.png", None),
+    (FABRIC / "screenshot-0007.png", "fabric-nested-selection/frame-07.png", None),
+    (FABRIC / "screenshot-0011.png", "fabric-nested-selection/frame-11.png", None),
     (F1 / "W01_allocation_ring/keyframes/reference-baseline_stacked.png", "allocation-ring-baseline.png", 1360),
     (DEMO / "assets/media/devops_before.png", "counter-order-baseline.png", 1372),
     (DEMO / "assets/media/mobile_before.png", "mural-desk-baseline.png", 600),
@@ -52,6 +58,7 @@ HERO_WIDTH = 1000
 manifest = []
 for src, dst, maxw in ITEMS:
     target = OUT / dst
+    target.parent.mkdir(parents=True, exist_ok=True)
     if src.suffix.lower() in (".png", ".jpg", ".jpeg") and (maxw or src.suffix.lower() != target.suffix.lower()):
         im = Image.open(src)
         if maxw and im.width > maxw:
@@ -96,4 +103,9 @@ for dst, size, background in (("favicon.png", 64, (0, 0, 0, 0)), ("apple-touch-i
     manifest.append({"file": dst, "source": str(LOGO.relative_to(ROOT)), "note": f"robot mark cropped from the logo, {size}x{size}",
                      "sha256": hashlib.sha256(target.read_bytes()).hexdigest()})
     print(f"{dst:40s} {target.stat().st_size/1024:7.0f} KB  {size}x{size}")
+# The link preview is rendered separately by tools/render_og_image.py; keep its manifest entry.
+if (OUT / "og-image.png").exists():
+    manifest.append({"file": "og-image.png", "source": "tools/og-image.html",
+                     "note": "1200x630 screenshot rendered by tools/render_og_image.py from the hero pairs",
+                     "sha256": hashlib.sha256((OUT / "og-image.png").read_bytes()).hexdigest()})
 json.dump(manifest, open(OUT / "manifest.json", "w"), indent=1)

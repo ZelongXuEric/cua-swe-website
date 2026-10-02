@@ -117,10 +117,11 @@ button { font: inherit; cursor: pointer; }
 .screen .hdr { color: #bcc9ce; margin-bottom: 7px; }
 .screen .ctx { color: #b0c2c7; }
 .screen .add, .screen .ok { color: #9fdec0; }
+.screen .del { color: #f3a9a0; }
 .screen .cmd { color: #f4bf8a; }
 .screen .note { margin-top: auto; border-top: 1px solid #314047; padding: 14px 24px; font-size: 13px; color: #c2cdd0; }
-.steps { list-style: none; margin: 0; padding: 14px 0; display: flex; flex-direction: column; justify-content: center; }
-.steps button { display: grid; grid-template-columns: 30px 1fr; gap: 12px; text-align: left; width: 100%; border: 0; background: transparent; color: var(--text); padding: 16px 24px; border-left: 3px solid transparent; }
+.steps { list-style: none; margin: 0; padding: 8px 0; display: flex; flex-direction: column; justify-content: center; }
+.steps button { display: grid; grid-template-columns: 30px 1fr; gap: 12px; text-align: left; width: 100%; border: 0; background: transparent; color: var(--text); padding: 12px 24px; border-left: 3px solid transparent; }
 .steps button:hover { background: #f5f8fc; }
 .steps button[aria-pressed="true"] { background: #eef4fd; border-left-color: var(--link); }
 .steps button[aria-pressed="true"] .step-number { color: var(--link); }
@@ -129,6 +130,9 @@ button { font: inherit; cursor: pointer; }
 .steps .d { display: block; font-size: 14px; line-height: 1.5; margin-top: 5px; }
 .steps button[aria-pressed="false"] .d { display: none; }
 .episode-foot { border-top: 1px solid var(--line); padding: 14px 22px; font-size: 13.5px; line-height: 1.55; color: var(--muted); }
+.episode-tabs { margin-bottom: 4px; }
+#episode-title { margin-top: 22px; }
+#episode-task { margin-bottom: 16px; }
 
 /* Tasks */
 .domains { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 40px; }

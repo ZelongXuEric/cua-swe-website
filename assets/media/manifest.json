@@ -42,6 +42,30 @@
   "sha256": "571a0eb84a540c84308394e79dd475b4393975de2a17bebc4a7fe3c47e668b32"
  },
  {
+  "file": "fabric-nested-selection/frame-02.png",
+  "source": "artifacts/trajectories/cua_results/gpt6-cua/web-cua/screenshot-0002.png",
+  "note": "byte-identical copy",
+  "sha256": "f5fd9418e393da7a67f12592de73c1ba3e2d21fcd667b3c34f26115971793a10"
+ },
+ {
+  "file": "fabric-nested-selection/frame-06.png",
+  "source": "artifacts/trajectories/cua_results/gpt6-cua/web-cua/screenshot-0006.png",
+  "note": "byte-identical copy",
+  "sha256": "13c68672bddc511fb576e685f1b78de067a7a3998b2c6e01b2507b4caa63708f"
+ },
+ {
+  "file": "fabric-nested-selection/frame-07.png",
+  "source": "artifacts/trajectories/cua_results/gpt6-cua/web-cua/screenshot-0007.png",
+  "note": "byte-identical copy",
+  "sha256": "d2f160bda5861ef54d2dbc9ea49bf3b10b5bdedff48453939dc8d118fd195bcb"
+ },
+ {
+  "file": "fabric-nested-selection/frame-11.png",
+  "source": "artifacts/trajectories/cua_results/gpt6-cua/web-cua/screenshot-0011.png",
+  "note": "byte-identical copy",
+  "sha256": "2f433a79f1e9aa069dd853cb7c0b0c185cc5e35b9672c433c21bc6405dc103ea"
+ },
+ {
   "file": "allocation-ring-baseline.png",
   "source": "paper/figure1_assets/cases/W01_allocation_ring/keyframes/reference-baseline_stacked.png",
   "note": "resized to 1360x900",

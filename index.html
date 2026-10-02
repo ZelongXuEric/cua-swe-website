@@ -127,15 +127,16 @@
 
 <section id="examples" class="section">
   <h2>Examples</h2>
-  <p class="intro">A recorded run, step by step: what the agent saw, what it changed and what the verifier decided.</p>
-  <h3>Game: Vector Relay, GPT-5.6 Sol with Hybrid access</h3>
-  <p class="intro">The player launches an orb at a relay; when the orb returns, the relay should clear and score. The task asks the agent to make a return count exactly once after the orb falls out and a replacement docks, and not at all after the player recalls the orb. <a href="tasks.html#gameqa.vector-relay-primed-pulse-balance-handoff.011">Full instruction</a></p>
+  <p class="intro">Two recorded runs, step by step: what the agent saw, what it changed and what the verifier decided.</p>
+  <div class="seg episode-tabs" id="episode-tabs" role="group" aria-label="Recorded run"></div>
+  <h3 id="episode-title"></h3>
+  <p class="intro" id="episode-task"></p>
   <div class="episode" id="repair-player">
     <div class="episode-body">
       <div class="screen" id="episode-screen" role="region" aria-label="Selected repair step"></div>
       <ol class="steps" aria-label="Repair steps"></ol>
     </div>
-    <p class="episode-foot">Screenshots, patch and verifier result come from this attempt. In the task’s three matched trials, Code-only solved 0/3 and Hybrid solved 1/3.</p>
+    <p class="episode-foot"></p>
   </div>
 </section>
 
