@@ -1,0 +1,40 @@
+<!doctype html>
+<!-- Source of assets/media/og-image.png (1200x630 link preview). Render with tools/render_og_image.py. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  body { width: 1200px; height: 630px; background: #fff; color: #1f1f1f; font-family: "Noto Sans", sans-serif; padding: 58px 40px 0; }
+  h1 { font-family: "Inconsolata", monospace; font-size: 52px; line-height: 1; }
+  p.def { font-size: 24px; line-height: 1.35; margin-top: 12px; color: #333; }
+  .strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 32px; }
+  h2 { font-family: "Inconsolata", monospace; font-size: 22px; margin-bottom: 8px; }
+  .shot { position: relative; aspect-ratio: 16 / 10; border: 1px solid #e4e4e4; overflow: hidden; background: #f4f6f9; margin-bottom: 10px; }
+  .shot.dark { background: #0b1220; }
+  .shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .shot.dark img { object-fit: contain; }
+  .tag { position: absolute; left: 7px; top: 7px; font-size: 13px; font-weight: 700; padding: 2px 8px; border-radius: 3px; color: #fff; background: #d93025; }
+  .after .tag { background: #188038; }
+</style>
+</head>
+<body>
+<h1>CUA-SWE</h1>
+<p class="def">A benchmark where coding agents repair software by using it and visually inspecting it</p>
+<div class="strip">
+  <div><h2>Web</h2>
+    <div class="shot"><img src="../assets/media/hero/web-before.webp" alt=""><span class="tag">Bug</span></div>
+    <div class="shot after"><img src="../assets/media/hero/web-after.webp" alt=""><span class="tag">Repaired</span></div></div>
+  <div><h2>Game</h2>
+    <div class="shot dark"><img src="../assets/media/hero/game-before.webp" alt=""><span class="tag">Bug</span></div>
+    <div class="shot dark after"><img src="../assets/media/hero/game-after.webp" alt=""><span class="tag">Repaired</span></div></div>
+  <div><h2>DevOps</h2>
+    <div class="shot dark"><img src="../assets/media/hero/devops-before.webp" alt=""><span class="tag">Bug</span></div>
+    <div class="shot dark after"><img src="../assets/media/hero/devops-after.webp" alt=""><span class="tag">Repaired</span></div></div>
+  <div><h2>Mobile</h2>
+    <div class="shot"><img src="../assets/media/hero/mobile-before.webp" alt=""><span class="tag">Bug</span></div>
+    <div class="shot after"><img src="../assets/media/hero/mobile-after.webp" alt=""><span class="tag">Repaired</span></div></div>
+</div>
+</body>
+</html>

@@ -1,11 +1,5 @@
 [
  {
-  "file": "figures/figure1.png",
-  "source": "paper/arxiv-2609.32600v1/figures/figure1.pdf",
-  "note": "rendered at scale 3.0, 1512x596",
-  "sha256": "daaedcf94f6e246becdd00f282c0edff160488a78a80b00951691950e0cf0848"
- },
- {
   "file": "figures/figure2.png",
   "source": "paper/arxiv-2609.32600v1/figures/figure2.pdf",
   "note": "rendered at scale 2.4, 1378x793",

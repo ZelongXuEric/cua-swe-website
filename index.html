@@ -6,6 +6,16 @@
 <meta name="theme-color" content="#ffffff">
 <title>CUA-SWE: When Computer-Use Agents Meet Visual Software Engineering</title>
 <meta name="description" content="CUA-SWE is a benchmark and environment where coding agents repair software by using it and visually inspecting it. 105 tasks across Web, Game, DevOps and Mobile; deterministic tests judge every patch on a clean copy.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CUA-SWE: When Computer-Use Agents Meet Visual Software Engineering">
+<meta property="og:description" content="A benchmark and environment where coding agents repair software by using it and visually inspecting it. 105 tasks across Web, Game, DevOps and Mobile.">
+<meta property="og:url" content="https://zelongxueric.github.io/cua-swe-website/">
+<meta property="og:image" content="https://zelongxueric.github.io/cua-swe-website/assets/media/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="assets/media/favicon.png">
+<link rel="apple-touch-icon" href="assets/media/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
@@ -31,8 +41,9 @@
 <main id="main" class="wrap">
 <header class="hero" id="top">
   <h1>CUA-SWE: When Computer-Use Agents Meet <em>Visual Software Engineering</em></h1>
-  <p class="authors"><a href="https://kingofspace0wzz.github.io/">Prince Zizhuang Wang</a><sup>*†</sup>, <a href="https://liangchenhao.com/">Chenhao Liang</a><sup>*</sup>, <a href="https://zelongxueric.github.io/">Zelong Xu</a><sup>*</sup>, <a href="https://aojieyuan.com/">Aojie Yuan</a><sup>*</sup>, <a href="https://willchow66.github.io/">Xiaolin Zhou</a><sup>*</sup>, <a href="https://headyzhang.github.io/">Haiyue Zhang</a>, <a href="https://viterbi-web.usc.edu/~yzhao010/">Yue Zhao</a>, <a href="https://xiyanghu.github.io/">Xiyang Hu</a>, <a href="https://11hifish.github.io/">Shuli Jiang</a></p>
-  <p class="affil">Carnegie Mellon University · University of Southern California · University of Wisconsin–Madison · Arizona State University · AWS Agentic AI &nbsp;·&nbsp; <sup>*</sup>Equal contribution &nbsp;·&nbsp; <sup>†</sup>Project lead</p>
+  <p class="authors"><a href="https://kingofspace0wzz.github.io/">Prince Zizhuang Wang</a><sup>1,*,†</sup>, <a href="https://liangchenhao.com/">Chenhao Liang</a><sup>2,*</sup>, <a href="https://zelongxueric.github.io/">Zelong Xu</a><sup>3,*</sup>, <a href="https://aojieyuan.com/">Aojie Yuan</a><sup>2,*</sup>, <a href="https://willchow66.github.io/">Xiaolin Zhou</a><sup>4,*</sup>,<br> <a href="https://headyzhang.github.io/">Haiyue Zhang</a><sup>2</sup>, <a href="https://viterbi-web.usc.edu/~yzhao010/">Yue Zhao</a><sup>2</sup>, <a href="https://xiyanghu.github.io/">Xiyang Hu</a><sup>4</sup>, <a href="https://11hifish.github.io/">Shuli Jiang</a><sup>5</sup></p>
+  <p class="affil"><span><sup>1</sup>Carnegie Mellon University</span> <span><sup>2</sup>University of Southern California</span> <span><sup>3</sup>University of Wisconsin–Madison</span> <span><sup>4</sup>Arizona State University</span> <span><sup>5</sup>AWS Agentic AI</span></p>
+  <p class="affil"><span><sup>*</sup>Equal contribution</span> <span><sup>†</sup>Project lead</span></p>
   <div class="buttons">
     <a class="pill" href="https://arxiv.org/abs/2609.32600"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h6"/></svg>Paper</a>
     <a class="pill" href="https://arxiv.org/pdf/2609.32600"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4v16h16V8l-4-4z"/><path d="M8 15h1.5a1.5 1.5 0 0 0 0-3H8v5M12.5 12v5h1a2.5 2.5 0 0 0 0-5zM17 17v-5h2M17 14.5h1.5"/></svg>PDF</a>
@@ -45,18 +56,7 @@
 </header>
 
 <section id="overview" class="section overview">
-  <p class="abstract">CUA-SWE provides a benchmark and environment where coding agents need to repair the software by using it and visually inspecting it. Each of the 105 tasks gives the agent an editable project and the running application; deterministic, task-specific tests then judge the repaired software on a clean copy of the project. Across Web, Game, DevOps and Mobile, adding computer use to coding raises task success for all eight API models in the paired comparison.</p>
-  <ul class="stats" aria-label="Benchmark at a glance">
-    <li><b>105</b> repair tasks</li>
-    <li><b>4</b> domains: Web 36 · Game 29 · DevOps 20 · Mobile 20</li>
-    <li><b>11</b> models and agent systems</li>
-    <li><b>2</b> conditions: Code-only, Hybrid</li>
-    <li><b>63</b> tasks need application materials, <b>42</b> are source-specified</li>
-  </ul>
-  <figure class="fig wide overview-fig zoomable">
-    <img src="assets/media/figures/figure1.png" alt="CUA-SWE overview: task domains and buggy software, the edit, check, screenshot, interact and revise loop, and the independent deterministic verifier" width="1512" height="596">
-    <figcaption>Agents inspect screenshots, interact with the application and edit code; an independent deterministic verifier checks the requested behavior and preserved functionality on a clean copy. Figure 1 (left) in the paper.</figcaption>
-  </figure>
+  <p class="abstract">CUA-SWE provides a benchmark and environment where coding agents need to repair the software by using it and visually inspecting it. Each of the 105 tasks (36 Web, 29 Game, 20 DevOps, 20 Mobile) gives the agent an editable project and the running application; deterministic, task-specific tests then judge the repaired software on a clean copy of the project. Adding computer use to coding raises task success for all eight models evaluated with and without it in every domain.</p>
   <figure class="strip">
     <div class="col web">
       <h4><span class="dom">Web</span> Allocation Ring Studio</h4>
@@ -68,9 +68,9 @@
     <div class="col game">
       <h4><span class="dom">Game</span> Vector Relay</h4>
       <div class="shot before"><img src="assets/media/hero/game-before.webp" alt="Vector Relay before the repair: relay armed, orb replaced, score 0" width="1000" height="562"><span class="tag">Bug</span></div>
-      <p class="cap">Return fractured, relay stays armed, score 0</p>
+      <p class="cap">A replacement orb docks, but the yellow relay never clears; score stays 0</p>
       <div class="shot after"><img src="assets/media/hero/game-after.webp" alt="Vector Relay after the repair: circuit complete, score 500" width="1000" height="562" loading="lazy"><span class="tag">Repaired</span></div>
-      <p class="cap">Circuit complete, +500</p>
+      <p class="cap">Relay cleared, circuit complete, score 500</p>
     </div>
     <div class="col devops">
       <h4><span class="dom">DevOps</span> Counter Order Console</h4>
@@ -88,11 +88,16 @@
     </div>
     <figcaption>One task per domain, before and after the repair. Web, DevOps and Mobile show reference-repair replays; Game shows two screenshots from a recorded GPT-5.6 Sol attempt.</figcaption>
   </figure>
+  <figure class="fig wide overview-fig zoomable">
+    <img src="assets/media/figures/figure2.png" alt="The CUA-SWE development and evaluation pipeline: task package, matched comparison of a code-only agent and a hybrid computer-use agent, and the shared evaluator-private deterministic verifier" width="1378" height="793" loading="lazy">
+    <figcaption>How a task is run and judged. A task package gives the agent a bug report and an editable repository. The Code-only agent reads code, edits files and runs commands; the Hybrid agent additionally views screenshots, clicks, types and scrolls in the running application. The same evaluator-private verifier applies the permitted edits to a clean baseline, rebuilds the application and runs the task-specific tests. Figure 2 in the paper.</figcaption>
+  </figure>
 </section>
 
 <section id="results" class="section">
   <h2>Results</h2>
-  <p class="intro">Task success (%) on one selected attempt per task, model and condition. <b>Code-only</b> uses the coding interface: read and edit source, run commands. <b>Hybrid</b> adds computer use: screenshots of the running application and mouse and keyboard actions. Both conditions share the same tasks, budgets and hidden tests, so the gap isolates what visual feedback and interaction contribute.</p>
+  <p class="intro">Task success (%) on a single attempt per task, model and condition. <b>Code-only</b> uses the coding interface: read and edit source, run commands. <b>Hybrid</b> adds computer use: screenshots of the running application and mouse and keyboard actions. Both conditions share the same tasks, budgets and hidden tests, so the gap isolates what visual feedback and interaction contribute.</p>
+  <p class="legend"><span><i class="sw tint"></i>Lighter bar: Code-only</span> <span><i class="sw"></i>Solid bar: Hybrid (computer use + coding)</span> <span><b class="gain">+pp</b> Red label: Hybrid gain in percentage points</span> <span>One hue per model: <b class="fam openai">GPT</b>, <b class="fam anthropic">Claude</b>, <b class="fam xai">Grok</b>, <b class="fam system">agent systems</b></span></p>
   <div class="panels">
     <figure class="panel panel-a">
       <figcaption><b>a</b> Overall: four-domain mean for the eight frontier models evaluated under both conditions in every domain</figcaption>
@@ -112,16 +117,19 @@
       </div>
     </figure>
   </div>
-  <p class="legend"><span class="sw tint"></span> lighter bar: Code-only &nbsp;&nbsp; <span class="sw solid"></span> solid bar: Hybrid (computer use + coding) &nbsp;&nbsp; <span class="gain">+pp</span> gain from computer use &nbsp;&nbsp; Hue identifies the model: <span class="fam openai">GPT</span> · <span class="fam anthropic">Claude</span> · <span class="fam xai">Grok</span> · <span class="fam system">agent systems</span></p>
-  <p class="note">Panel a weights the four domains equally and matches the right panel of Figure 1 in the paper; Opus 5 is omitted because its Mobile evaluation is deferred. Panel c is Figure 6a of the paper (circles: frontier models; open square: Codex). Codex and Claude Code are evaluated as complete agent systems in the Hybrid condition only. Every frontier model gains with Hybrid access; the gains concentrate on tasks whose requirements include application materials (see Analysis).</p>
-  <h3>Single-attempt task success (%) across four domains</h3>
-  <div id="results-table" class="table-wrap"></div>
-  <p class="note">Column maxima are in bold. Hover a cell for the number of solved tasks. Each domain retains its original scoring rules: Web success also requires the required visual evidence; DevOps and Mobile exclude infrastructure errors and count genuine agent failures. Table 1 in the paper; Table 4 there reports a three-attempt Hybrid evaluation of GPT-6 Astra, GPT-5.6 Sol and Fable 5.</p>
+  <p class="note">Panel a weights the four domains equally and matches the right panel of Figure 1 in the paper; Opus 5 is omitted because its Mobile evaluation is deferred. Panel c is Figure 6a of the paper (circles: frontier models; open square: Codex). Codex and Claude Code are evaluated as complete agent systems in the Hybrid condition only. Each domain retains its original scoring rules: Web success also requires the required visual evidence; DevOps and Mobile exclude infrastructure errors and count genuine agent failures. Table 4 in the paper reports a three-attempt Hybrid evaluation of GPT-6 Astra, GPT-5.6 Sol and Fable 5.</p>
+  <details class="table-details">
+    <summary>Table 1 in the paper: single-attempt task success (%) for every model, domain and condition</summary>
+    <div id="results-table" class="table-wrap"></div>
+    <p class="note">Column maxima are in bold. Hover a cell for the number of solved tasks.</p>
+  </details>
 </section>
 
 <section id="examples" class="section">
   <h2>Examples</h2>
-  <p class="intro">Recorded runs, step by step: what the agent saw, what it changed, and what the verifier decided. This one follows GPT-5.6 Sol through a Vector Relay attempt; players for Web, DevOps and Mobile follow the same layout.</p>
+  <p class="intro">A recorded run, step by step: what the agent saw, what it changed and what the verifier decided.</p>
+  <h3>Game: Vector Relay, GPT-5.6 Sol with Hybrid access</h3>
+  <p class="intro">The player launches an orb at a relay; when the orb returns, the relay should clear and score. The task asks the agent to make a return count exactly once after the orb falls out and a replacement docks, and not at all after the player recalls the orb. <a href="tasks.html#gameqa.vector-relay-primed-pulse-balance-handoff.011">Full instruction</a></p>
   <div class="episode" id="repair-player">
     <div class="episode-body">
       <div class="screen" id="episode-screen" role="region" aria-label="Selected repair step"></div>
@@ -136,28 +144,28 @@
   <p class="intro">Every task starts from a verified bug in a working application and specifies the failure to fix, the behavior to implement and the existing functionality to preserve. Related variants share application code and test different interactions or configurations.</p>
   <div class="domains">
     <div class="domain">
-      <h3>Web <span>36 tasks · 20 applications</span></h3>
-      <p>Interface geometry, selection and application contracts in Fabric.js (9 tasks), MapLibre (7), React Spectrum, Saleor, JupyterLab, Quill, Tiptap, Handsontable, ECharts, Recharts and business workflows such as account recovery, tax rounding and warehouse cutoffs.</p>
-      <blockquote>Make the account recovery page display the channel selected by the live identity risk policy for the account being viewed, including ACC-731, while preserving the recovery decision trace.</blockquote>
+      <h3>Web <span>36 tasks, 20 applications</span></h3>
+      <p>Bugs in visual layout, geometry and interaction state. The applications use Fabric.js (9 tasks), MapLibre (7), React Spectrum, JupyterLab, Quill, ECharts and other open-source libraries, or implement business workflows such as account recovery, tax rounding and warehouse cutoffs.</p>
+      <blockquote><span class="q-label">Example instruction</span>Make the account recovery page display the channel selected by the live identity risk policy for the account being viewed, including ACC-731, while preserving the recovery decision trace.</blockquote>
     </div>
     <div class="domain">
-      <h3>Game <span>29 tasks · 12 games</span></h3>
-      <p>Temporal behavior, physics and state transitions in Captain Callisto (7), Boxel Rebound (5), Flappy Bird (4), 2048, Hextris, Minesweeper, Vector Relay, Astray, Core Ball, Letter Arc, Maze Signal and Phase Relay. Tests set initial states, apply inputs and restart with fixed seeds.</p>
-      <blockquote>The deterministic Level 3 benchmark build contains a gameplay regression. Play the pulse lane and compare the start, release, and restart of several short jetpack bursts.</blockquote>
+      <h3>Game <span>29 tasks, 12 games</span></h3>
+      <p>Bugs in motion, timing and state transitions in browser games, among them 2048, Flappy Bird, Minesweeper, Hextris and Captain Callisto. Tests set initial states, apply inputs and restart with fixed seeds.</p>
+      <blockquote><span class="q-label">Example instruction</span>The deterministic Level 3 benchmark build contains a gameplay regression. Play the pulse lane and compare the start, release, and restart of several short jetpack bursts.</blockquote>
     </div>
     <div class="domain">
-      <h3>DevOps <span>20 tasks · 10 contracts</span></h3>
-      <p>Operational observations tied to configuration and data-processing semantics: rate before aggregation, alert inhibition, log severity normalization, pending-alert identity, SLO rollups, StatsD gauge modes, tail sampling, trace clock skew and trace context across awaits, on Prometheus, Alertmanager, Jaeger and OpenTelemetry code.</p>
-      <blockquote>After the collector rollout, failed operations are missing from the log workbench’s severe view while a routine event appears as an error. Investigate the live records and receiver fleet, then repair severity classification.</blockquote>
+      <h3>DevOps <span>20 tasks, 10 fault types</span></h3>
+      <p>Service consoles in which a displayed observation traces back to configuration or processing logic: rate before aggregation, alert inhibition, log severity, SLO rollups, tail sampling and trace clock skew, on Prometheus, Alertmanager, Jaeger and OpenTelemetry code.</p>
+      <blockquote><span class="q-label">Example instruction</span>After the collector rollout, failed operations are missing from the log workbench’s severe view while a routine event appears as an error. Investigate the live records and receiver fleet, then repair severity classification.</blockquote>
     </div>
     <div class="domain">
-      <h3>Mobile <span>20 tasks · 12 families</span></h3>
-      <p>Visually specified relationships and editing behavior in mobile-web applications run in Chromium at 400×800: nine Gantt variants plus Mural Desk, Foldnote, Pass wallet, Lamp courier, Northline, Tideglass, Marble Post, Lantern, Campus Pocket and inspection and plate-integration workflows.</p>
-      <blockquote>Foldnote is a mobile web packaging-proof review mockup. Review markers no longer stay correctly placed and oriented when switching between Flat sheet and Individual panel.</blockquote>
+      <h3>Mobile <span>20 tasks, 12 applications</span></h3>
+      <p>Mobile-web applications, run in Chromium at 400×800, whose displayed behavior is tied to application state and specified in part by imported drawings or documents: nine Gantt wall-chart variants and eleven other applications such as Mural Desk, Foldnote, Pass wallet and Campus Pocket.</p>
+      <blockquote><span class="q-label">Example instruction</span>Foldnote is a mobile web packaging-proof review mockup. Review markers no longer stay correctly placed and oriented when switching between Flat sheet and Individual panel.</blockquote>
     </div>
   </div>
-  <h3>Specification basis</h3>
-  <p class="intro">Tasks differ in where their requirements are specified. In <b>source-specified</b> tasks (42), the instruction and readable project code define the target behavior; running the application supports diagnosis and checking. In <b>application-material-dependent</b> tasks (63), part of the behavior is specified only through application materials such as an imported drawing, a displayed service contract or a graphical reference card, which the code-only interface does not expose. Both groups require implementing the behavior and verifying the resulting software.</p>
+  <h3>Where the requirements are specified</h3>
+  <p class="intro">Tasks differ in where their requirements are specified; the paper calls this the specification basis. In <b>source-specified</b> tasks (42), the instruction and readable project code define the target behavior; running the application supports diagnosis and checking. In <b>application-material-dependent</b> tasks (63, material-dependent for short), part of the behavior is specified only through application materials such as an imported drawing, a displayed service contract or a graphical reference card, which the code-only interface does not expose. Both groups require implementing the behavior and verifying the resulting software.</p>
   <h3>Two example tasks</h3>
   <div class="examples-grid">
     <figure class="fig zoomable">
@@ -174,27 +182,27 @@
 
 <section id="analysis" class="section">
   <h2>Analysis</h2>
-  <h3>Computer use improves task success on every model</h3>
+  <h3>Where the gains come from</h3>
   <div class="two">
     <figure class="fig zoomable">
       <img src="assets/media/figures/paired-task-gains.png" alt="Task-paired contribution of computer use for nine API models across four domains" width="951" height="951" loading="lazy">
       <figcaption>Task-paired outcomes under the two access conditions. Each bar partitions a model's matched tasks by the joint Code-only and Hybrid outcome; the value at right is the Hybrid gain in percentage points: tasks solved only with computer use minus tasks solved only with code. Figure 20 in the paper.</figcaption>
     </figure>
     <div class="prose">
-      <p>Every frontier model in the four-domain comparison achieves higher aggregate task success with Hybrid access; GPT-6 Astra gains 48.6 percentage points, from 11.3% to 59.9%. The gains concentrate on tasks whose requirements include application materials, while source-specified subsets have near-zero domain-average changes and substantial variation across models.</p>
+      <p>The gains concentrate on material-dependent tasks, while source-specified subsets have near-zero domain-average changes and substantial variation across models.</p>
       <table class="info-table">
-        <caption>Success by task information requirement (%), averaged over the eight frontier models. Table 9 in the paper.</caption>
-        <thead><tr><th>Domain</th><th>Type</th><th>Tasks</th><th>Code-only</th><th>Hybrid</th><th>Δ pp</th></tr></thead>
+        <caption>Success by where the requirements are specified (%), averaged over the eight frontier models. Table 9 in the paper.</caption>
+        <thead><tr><th>Domain</th><th>Requirements</th><th>Tasks</th><th>Code-only</th><th>Hybrid</th><th>Δ pp</th></tr></thead>
         <tbody>
-          <tr><td>Web</td><td>S</td><td>22</td><td>23.9</td><td>23.9</td><td>+0.0</td></tr>
-          <tr><td>Web</td><td>M</td><td>14</td><td>8.9</td><td>50.9</td><td class="up">+42.0</td></tr>
-          <tr><td>Game</td><td>S</td><td>20</td><td>10.6</td><td>10.0</td><td>−0.6</td></tr>
-          <tr><td>Game</td><td>M</td><td>9</td><td>2.8</td><td>26.4</td><td class="up">+23.6</td></tr>
-          <tr><td>DevOps</td><td>M</td><td>20</td><td>0.6</td><td>48.8</td><td class="up">+48.1</td></tr>
-          <tr><td>Mobile</td><td>M</td><td>20</td><td>0.6</td><td>39.4</td><td class="up">+38.8</td></tr>
+          <tr><td>Web</td><td>Source-specified</td><td>22</td><td>23.9</td><td>23.9</td><td>+0.0</td></tr>
+          <tr><td>Web</td><td>Material-dependent</td><td>14</td><td>8.9</td><td>50.9</td><td class="up">+42.0</td></tr>
+          <tr><td>Game</td><td>Source-specified</td><td>20</td><td>10.6</td><td>10.0</td><td>−0.6</td></tr>
+          <tr><td>Game</td><td>Material-dependent</td><td>9</td><td>2.8</td><td>26.4</td><td class="up">+23.6</td></tr>
+          <tr><td>DevOps</td><td>Material-dependent</td><td>20</td><td>0.6</td><td>48.8</td><td class="up">+48.1</td></tr>
+          <tr><td>Mobile</td><td>Material-dependent</td><td>20</td><td>0.6</td><td>39.4</td><td class="up">+38.8</td></tr>
         </tbody>
       </table>
-      <p>In material-dependent (M) tasks the agent must recover requirements from drawings or displayed behavior, implement them and preserve the surrounding workflow. Source-level execution tests the implementation; application observations supply requirements and feedback that those executions alone may not expose. The same figure also shows the limits: a few Web tasks are solved only with code, and most Game tasks remain unsolved under both conditions.</p>
+      <p>In material-dependent tasks the agent must recover requirements from drawings or displayed behavior, implement them and preserve the surrounding workflow. Source-level execution tests the implementation; application observations supply requirements and feedback that those executions alone may not expose. The same figure also shows the limits: a few Web tasks are solved only with code, and most Game tasks remain unsolved under both conditions.</p>
     </div>
   </div>
   <h3>How agents turn runtime observations into correct changes</h3>
@@ -232,19 +240,18 @@
 
 <section id="evaluation" class="section">
   <h2>Evaluation</h2>
-  <figure class="fig wide zoomable">
-    <img src="assets/media/figures/figure2.png" alt="The CUA-SWE development and evaluation pipeline: task package, matched comparison of a code-only agent and a hybrid computer-use agent, and the shared evaluator-private deterministic verifier" width="1378" height="793" loading="lazy">
-    <figcaption>The development and evaluation pipeline. A task package gives the agent a bug report and an editable repository. The Code-only agent reads code, edits files and runs commands; the Hybrid agent additionally views screenshots, clicks, types and scrolls in the running application. The same evaluator-private verifier applies the permitted edits to a clean baseline, rebuilds the application and runs the task-specific tests. Figure 2 in the paper.</figcaption>
-  </figure>
   <h3>What counts as a success</h3>
-  <div class="checks">
-    <div><h3>Task check</h3><p>Does the requested behavior work? Tests execute the rebuilt application under controlled interaction sequences and assert on the rendered interface, runtime behavior or internal application state.</p></div>
-    <div><h3>Regression check</h3><p>Does designated existing behavior still work? The same tests cover the functionality the task says must be preserved, so a fix that breaks normal play, editing or navigation fails.</p></div>
-    <div><h3>Permitted-change check</h3><p>Did the patch stay inside the allowed scope? Edits outside the files the task permits fail regardless of test results.</p></div>
-  </div>
+  <table class="checks-table">
+    <thead><tr><th>Check</th><th>Question</th><th>How it is decided</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Task check</th><td>Does the requested behavior work?</td><td>Tests execute the rebuilt application under controlled interaction sequences and assert on the rendered interface, runtime behavior or internal application state.</td></tr>
+      <tr><th scope="row">Regression check</th><td>Does designated existing behavior still work?</td><td>The same tests cover the functionality the task says must be preserved, so a fix that breaks normal play, editing or navigation fails.</td></tr>
+      <tr><th scope="row">Permitted-change check</th><td>Did the patch stay inside the allowed scope?</td><td>Edits outside the files the task permits fail regardless of test results.</td></tr>
+    </tbody>
+  </table>
   <p class="prose-p">These three checks give <b>patch correctness</b>. Reported <b>task success</b> additionally requires a valid trajectory: the run used only the interfaces allowed by its condition and, for Hybrid runs, actually observed the screenshots. Correctness depends on the behavior of the submitted program, not on matching the reference patch; the evaluator may inspect privileged state such as a game board that the agent only sees rendered.</p>
   <h3>How tasks are built and validated</h3>
-  <p class="prose-p">Each task starts from a software behavior that can be reproduced in the running application and modified in the codebase. An LLM author constructs the instruction, initial codebase, runtime setup, gold reference repair, plausible <b>negative repairs</b> and protected tests; human review checks that the requirement is meaningful and that the relevant runtime evidence is observable through the benchmark interface. The verifier must reject the broken project and every negative repair and accept the gold repair. In the masked-date task, for example, clearing the field should remove the selected date while invalid input should keep it; a repair that clears the selection in both cases fails. Reviewed construction-time agent trials then guide neighboring variants that extend each task family's difficulty range.</p>
+  <p class="prose-p">Each task starts from a software behavior that can be reproduced in the running application and modified in the codebase. An LLM author constructs the instruction, initial codebase, runtime setup, gold reference repair, plausible <b>negative repairs</b> and protected tests; human review checks that the requirement is meaningful and that the relevant runtime evidence is observable through the benchmark interface. The verifier must reject the broken project and every negative repair and accept the gold repair; the figure below shows this for one task. Reviewed construction-time agent trials then guide neighboring variants that extend each task family's difficulty range.</p>
   <figure class="fig wide zoomable">
     <img src="assets/media/figures/example-web-preprint.png" alt="Web example: preserving distinct masked-date input behaviors, with the reference replay, the required-behavior table and the replay audit" width="1350" height="690" loading="lazy">
     <figcaption>Validation of one task. The masked-date input must stay empty after clearing and blurring, report no selected date, and keep the previous date on invalid text. The reference replay shows the gold repair meeting all three requirements; the required-behavior table is what the verifier checks, and the replay audit confirms the behavior is observable through the benchmark interface. A negative repair that clears the selection in both cases fails. Figure 5 in the paper.</figcaption>
@@ -253,7 +260,6 @@
 
 <section id="citation" class="section">
   <h2>Citation</h2>
-  <p class="paper-title">CUA-SWE: When Computer-Use Agents Meet Visual Software Engineering. arXiv:2609.32600, 2026. <a href="https://arxiv.org/abs/2609.32600">Abstract ↗</a> · <a href="https://arxiv.org/pdf/2609.32600">PDF ↗</a> · <a href="https://github.com/kingofspace0wzz/cua-swe">Code and task bundles ↗</a> · <a href="https://huggingface.co/datasets/kingofspace0wzz/CUA-SWE">Dataset on Hugging Face ↗</a> · <a href="https://kingofspace0wzz.github.io/cua-swe-viewer/">Recorded trajectories ↗</a></p>
   <pre class="bibtex">@misc{wang2026cuaswe,
   title         = {CUA-SWE: When Computer-Use Agents Meet Visual Software Engineering},
   author        = {Wang, Prince Zizhuang and Liang, Chenhao and Xu, Zelong and Yuan, Aojie and Zhou, Xiaolin and Zhang, Haiyue and Zhao, Yue and Hu, Xiyang and Jiang, Shuli},
@@ -264,7 +270,7 @@
 }</pre>
 </section>
 </main>
-<footer>CUA-SWE · 2026 · Task bundles retain source and asset attribution. <a href="#top">Back to top ↑</a></footer>
+<footer>CUA-SWE, 2026. Task bundles retain source and asset attribution. <a href="#top">Back to top ↑</a></footer>
 <div class="lightbox" id="lightbox" hidden><button type="button" class="lightbox-close" aria-label="Close">✕</button><img alt=""></div>
 <script src="assets/js/site.js"></script>
 </body>

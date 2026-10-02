@@ -10,6 +10,13 @@
   var list = document.getElementById("list"), count = document.getElementById("count"), family = document.getElementById("family"), query = document.getElementById("q");
   function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
   function minutes(seconds) { return Math.round(seconds / 60) + " min"; }
+  var CHECK = { build: "build", unit: "unit tests", ui: "browser UI test", visual: "visual comparison", state: "application-state check" };
+  function checks(names) { return names.map(function (name) { return CHECK[name] || name; }).join(", "); }
+  // "desktop-1280x720" -> "Desktop, 1280×720"
+  function viewport(value) {
+    var m = /^([a-z]+)-(\d+)x(\d+)$/.exec(value || "");
+    return m ? m[1].charAt(0).toUpperCase() + m[1].slice(1) + ", " + m[2] + "×" + m[3] : value;
+  }
   function setOpen(li, open) {
     li.toggleAttribute("open", open);
     li.querySelector("button").setAttribute("aria-expanded", String(open));
@@ -31,15 +38,15 @@
     add("Task ID", task.id, "id");
     add("Application", task.family);
     add("Budget", minutes(task.budgets.wall) + " wall time, " + task.budgets.steps + " agent steps" + (task.budgets.gui ? ", " + task.budgets.gui + " GUI actions" : ""));
-    add("Tests", task.verifiers.join(", "));
-    add("Viewport", task.viewport);
+    add("Checks", checks(task.verifiers));
+    add("Viewport", viewport(task.viewport));
     if (task.seed != null) add("Seed", String(task.seed));
     add("Source", task.source);
     add("Role", task.tier_label);
     detail.appendChild(dl);
     if (task.outcomes) {
       var outcomes = task.outcomes;
-      detail.appendChild(el("p", "out", "Selected outcomes: code-only " + outcomes.code.k + "/" + outcomes.code.n + ", hybrid " + outcomes.cua.k + "/" + outcomes.cua.n + ". " + outcomes.label + "."));
+      detail.appendChild(el("p", "out", "Recorded outcomes: Code-only " + outcomes.code.k + "/" + outcomes.code.n + ", Hybrid " + outcomes.cua.k + "/" + outcomes.cua.n + ". " + outcomes.label + "."));
     }
     var links = el("div", "detail-links");
     var bundle = el("a", null, "View task bundle ↗"); bundle.href = LINKS.code + "/tree/main/" + task.path;

@@ -115,7 +115,7 @@
     DOMAINS.forEach(function (d) {
       var el = document.querySelector('[data-chart="' + d[0] + '"]'); if (!el) return;
       var rows = TABLE1.map(function (r) { return { m: r.m, code: r[d[0]][0], cua: r[d[0]][1], n: d[2], deferred: r.deferredMobile && d[0] === "mobile" }; });
-      drawGrouped(el, rows, { w: 520, h: 250, bw: 16, fs: 9.5, padB: 64, label: d[1] + " task success, Code-only and Hybrid" });
+      drawGrouped(el, rows, { w: 520, h: 274, bw: 16, fs: 9.5, padB: 88, label: d[1] + " task success, Code-only and Hybrid" });
       var cap = document.createElement("div"); cap.className = "chart-title"; cap.textContent = d[1] + " (" + d[2] + " tasks)";
       el.insertBefore(cap, el.firstChild);
     });
@@ -126,11 +126,11 @@
   // Sources: paper/figure2_assets/cases/01_vector_relay; no synthetic screenshots.
   var EPISODE = {
     steps: [
-      { title: "Observe the failure", detail: "The return fractures. The relay stays armed and the score stays at zero.",
+      { title: "See the bug in the running game", detail: "A replacement orb has docked, but the relay is still armed, the PULSE BALANCE panel marks the return as fractured and the score is 000000. The task requires this return to clear the relay and score.",
         screen: { type: "image", src: "assets/media/vector-relay-frame-03.png",
                   alt: "Vector Relay after launch: RELAY ARMED, PULSE BALANCE shows a fractured mark, score 000000, message ORB REPLACED",
                   caption: "Screenshot 3 of 16, 10:04:30 UTC, after pressing Space to launch" } },
-      { title: "Repair the ownership logic", detail: "Manual recall withdraws a pending return. Natural replacement transfers it to the new owner.",
+      { title: "Change which orb a pending return belongs to", detail: "The patch adds two cases where an orb docks. On a manual recall it withdraws the pending return (withdraw). When a replacement docks it hands the return to the new orb (handoff), so it can still score.",
         screen: { type: "diff", files: [
           { name: "src/vector_relay.js", lines: [
             ["ctx", "  VectorRelay.prototype.attachBall = function (reason) {"],
@@ -152,17 +152,17 @@
             ["add", "+   … move pending entries to the replacement owner"],
             ["add", "+ };"] ] } ],
           caption: "Retained agent patch, excerpted; the full diff changes 2 files" } },
-      { title: "Check the code", detail: "Check recall, handoff and duplicate contacts in Node, then build.",
+      { title: "Test the new logic from the shell", detail: "Two Node scripts exercise recall, handoff and duplicate contacts without the game; then the build runs.",
         screen: { type: "shell", items: [
           { cmd: "node -e '… lane.withdraw(recalled) … lane.handoff(natural, replacement) … lane.take(14, shifted)'", out: "{\"pending\":0,\"withdrawn\":1,\"dropped\":0,\"nextDue\":null}" },
           { cmd: "node -e '… contacts.claim(body, tile) twice …'", out: "{\"first\":true,\"sustained\":false,\"series\":0}" },
           { cmd: "npm run build", out: "node --check src/relay_contact.js && node --check src/relay_commit.js && … && node --check server.mjs", ok: true } ],
           caption: "Shell events 17, 19 and 20 of the recorded trajectory, abbreviated" } },
-      { title: "Replay in the running game", detail: "The rebuilt game completes the circuit: one sealed return and 500 points.",
+      { title: "Replay in the rebuilt game", detail: "After a reload the same play clears the relay: CIRCUIT COMPLETE, score 000500.",
         screen: { type: "image", src: "assets/media/vector-relay-frame-15.png",
                   alt: "Vector Relay after the repair: RELAY CLEARED, PULSE BALANCE shows a sealed mark, score 000500, message CIRCUIT COMPLETE +500",
                   caption: "Screenshot 15 of 16, 10:07:20 UTC, after reloading the rebuilt app and replaying" } },
-      { title: "Verify on a clean copy", detail: "The evaluator applies the patch to a fresh project. Protected build and browser checks pass.",
+      { title: "Verifier, on a clean copy", detail: "The evaluator applies the patch to a fresh project, rebuilds it and replays the challenge in a browser: score 500, one recall, pass.",
         screen: { type: "verify", checks: [
           { name: "build", cmd: "npm run build", result: "exit code 0", pass: true },
           { name: "state", cmd: "verifiers/browser_check.py --url http://127.0.0.1:53500/?challenge=relay-circuit",

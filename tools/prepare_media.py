@@ -81,4 +81,19 @@ for src, dst, box in HERO:
     manifest.append({"file": dst, "source": str(src.relative_to(ROOT)), "note": note,
                      "sha256": hashlib.sha256(target.read_bytes()).hexdigest()})
     print(f"{dst:40s} {target.stat().st_size/1024:7.0f} KB  {note}")
+# Site icons: the robot mark from the paper's logo (735 KB at 1254x1254), without the wordmark,
+# padded to a square and downscaled. The touch icon gets a white background.
+LOGO = ROOT / "paper/arxiv-2609.32600v1/figures/logo.png"
+logo = Image.open(LOGO).convert("RGBA")
+mark = logo.crop((0, 0, logo.width, 990))  # the wordmark starts at row 996
+mark = mark.crop(mark.getchannel("A").getbbox())
+side = max(mark.size)
+for dst, size, background in (("favicon.png", 64, (0, 0, 0, 0)), ("apple-touch-icon.png", 180, (255, 255, 255, 255))):
+    square = Image.new("RGBA", (round(side * 1.08),) * 2, background)
+    square.alpha_composite(mark, ((square.width - mark.width) // 2, (square.height - mark.height) // 2))
+    target = OUT / dst
+    square.resize((size, size), Image.LANCZOS).save(target, optimize=True)
+    manifest.append({"file": dst, "source": str(LOGO.relative_to(ROOT)), "note": f"robot mark cropped from the logo, {size}x{size}",
+                     "sha256": hashlib.sha256(target.read_bytes()).hexdigest()})
+    print(f"{dst:40s} {target.stat().st_size/1024:7.0f} KB  {size}x{size}")
 json.dump(manifest, open(OUT / "manifest.json", "w"), indent=1)

@@ -118,5 +118,23 @@
   "source": "paper/demo_video/assets/media/mobile_after.png",
   "note": "cropped to (20, 567, 780, 1042) then encoded as WebP at 760x475",
   "sha256": "cfbba9c7a7d4a96f96f28ee71c9216a9abec4408ab686744740ceb9af3cbf03e"
+ },
+ {
+  "file": "favicon.png",
+  "source": "paper/arxiv-2609.32600v1/figures/logo.png",
+  "note": "robot mark cropped from the logo, 64x64",
+  "sha256": "470cfcc723ddfec9c77d00e41635ce6193517be610c4b93e01a6d57762787bcd"
+ },
+ {
+  "file": "apple-touch-icon.png",
+  "source": "paper/arxiv-2609.32600v1/figures/logo.png",
+  "note": "robot mark cropped from the logo, 180x180",
+  "sha256": "97d801fa7da08af7d77df81c7420ddd3dfd71457bbf34e890873e26be78cc607"
+ },
+ {
+  "file": "og-image.png",
+  "source": "tools/og-image.html",
+  "note": "1200x630 screenshot rendered by tools/render_og_image.py from the hero pairs",
+  "sha256": "e765efad26ebb7214f11d450612c28489314ec3c90f5c3151ee054e116443e78"
  }
 ]
