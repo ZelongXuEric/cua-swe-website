@@ -68,11 +68,13 @@ button { font: inherit; cursor: pointer; }
 .strip .col h4 .dom { font-family: var(--mono); font-weight: 700; margin-right: 4px; }
 .strip .shot { position: relative; aspect-ratio: 16 / 10; overflow: hidden; border: 1px solid var(--line); background: #f4f6f9; }
 .strip .shot img { width: 100%; height: 100%; object-fit: cover; }
-.strip .game .shot, .strip .devops .shot { background: #0b1220; }
+.strip .devops .shot { background: #0b1220; }
+.strip .game .shot { background: #ecf0f1; }
 .strip .game .shot img, .strip .devops .shot img { object-fit: contain; }
 .strip .tag { position: absolute; left: 8px; top: 8px; font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 3px; color: #fff; background: var(--fail); }
 .strip .after .tag { background: var(--pass); }
-.strip .cap { font-size: 13px; line-height: 1.4; color: #333; margin: 6px 0 12px; }
+.strip .cap { min-height: 2.8em; font-size: 13px; line-height: 1.4; color: #333; margin: 6px 0 12px; }
+.strip .about { min-height: 4.35em; margin: -2px 0 10px; font-size: 13px; line-height: 1.45; color: var(--muted); }
 .strip figcaption { grid-column: 1 / -1; font-size: 12.5px; color: var(--muted); margin-top: 2px; }
 
 /* Results panels */
@@ -245,6 +247,7 @@ footer a { margin-left: 10px; }
 }
 @media (max-width: 520px) {
   .strip { grid-template-columns: 1fr; }
+  .strip .about, .strip .cap { min-height: 0; }
   .cases { grid-template-columns: 1fr; }
   .task > button { grid-template-columns: minmax(0, 1fr) 22px; gap: 4px 12px; }
   .task .dom { grid-column: 1; }
@@ -257,51 +260,9 @@ footer a { margin-left: 10px; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
 
-/* ---- Ranking table and timed replays (feat/domains-demo) ---- */
-/* Tokens used by these components; the code teal and GUI blue match the replay record colors. */
+/* ---- Timed replays (assets/js/replay.js) ---- */
+/* Tokens used by the replays; the code teal and GUI blue match the record colors. */
 :root { --gui: #2458ed; --gui-soft: #eff4ff; --code: #00768c; --paper: #fff; }
-/* Domain results combine the exact values and the comparison in one view. */
-.result-domains { display: flex; gap: 28px; border-bottom: 1px solid var(--line); margin-bottom: 14px; }
-.result-domains button { background: transparent; border: 0; border-bottom: 2px solid transparent; color: #35435a; padding: 10px 0; font-size: 15px; margin-bottom: -1px; }
-.result-domains button span { font-size: 12px; margin-left: 5px; color: var(--muted); }
-.result-domains button[aria-pressed="true"] { color: #2458ed; border-bottom-color: #2458ed; }
-.result-domains button:hover { color: var(--gui); }
-.result-domains button:focus-visible { outline: 2px solid var(--gui); outline-offset: 2px; }
-.rank-table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 16px; }
-.rank-table caption { text-align: left; padding: 8px 0 20px; font-size: 15px; }
-.rank-table th, .rank-table td { padding: 12px 0; border-bottom: 1px solid #e3eaf4; vertical-align: middle; }
-.rank-table thead th { font-size: 14px; font-weight: 400; color: #3c4e69; text-align: right; }
-.rank-table thead th:first-child { text-align: left; }
-.rank-table .model-head { width: 28%; }
-.rank-table .chart-head { width: 36%; }
-.rank-table .code-head, .rank-table .cua-head, .rank-table .gain-head { width: 12%; }
-.rank-table.overall .model-head { width: 22%; }
-.rank-table.overall .chart-head { width: 26%; }
-.rank-table.overall .code-head, .rank-table.overall .cua-head, .rank-table.overall .gain-head { width: 9%; }
-.rank-table .dom-head { width: 6.25%; text-align: center; }
-.chart-scale { display: flex; justify-content: space-between; padding-inline: 15px 34px; font-size: 13px; }
-.rank-table .code-head::before, .rank-table .cua-head::before { content: ""; display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 7px; }
-.rank-table .code-head::before { border: 2px solid #00809a; }
-.rank-table .cua-head::before { background: #2458ed; }
-.rank-table tbody tr:hover { background: #f8faff; }
-.rank-table tbody th { position: relative; padding-left: 32px; text-align: left; font-weight: 400; color: #111b30; }
-.rank-table .rank { position: absolute; left: 0; color: var(--muted); font-variant-numeric: tabular-nums; }
-.rank-table td.value { text-align: right; font-variant-numeric: tabular-nums; }
-.rank-table td.cua { color: var(--ink); }
-.rank-table .gain-head, .rank-table td.gain { padding-right: 14px; }
-.rank-table td.gain { color: var(--muted); }
-/* Per-domain CUA profile: one-hue tint, value printed in ink, 2px surface gap around each cell. */
-.rank-table td.dom { text-align: center; font-size: 14px; color: var(--ink); border: 2px solid #fff; background: rgb(36 88 237 / calc(var(--v, 0) * .3)); background-clip: padding-box; }
-.rank-table .best { font-weight: 700; }
-.rank-table .rail-cell { padding-inline: 15px 34px; }
-.rank-table .rail { position: relative; height: 18px; }
-.rank-table .rail::before { content: ""; position: absolute; left: 0; right: 0; top: 8px; height: 1px; background: #d5e0f0; }
-.rank-table .range { position: absolute; top: 8px; height: 2px; left: var(--start); width: var(--length); background: #85a6f8; }
-.rank-table .point { position: absolute; width: 10px; height: 10px; border-radius: 50%; top: 4px; transform: translateX(-50%); }
-.rank-table .point.code { left: var(--code-value); background: #ffffff; border: 2px solid #00809a; }
-.rank-table .point.cua { left: var(--cua-value); background: #2458ed; }
-.results-note { font-size: 14px; line-height: 1.6; margin-top: 18px; color: #35435a; max-width: 100ch; }
-.results-note + .results-note { margin-top: 6px; }
 /* Timed replay of a recorded episode (assets/js/replay.js). Shell/edits use the code teal, browser actions the GUI blue. */
 .replay + .replay { margin-top: 40px; }
 .replay + .episode { margin-top: 40px; }
@@ -407,23 +368,11 @@ footer a { margin-left: 10px; }
   .rp-stream { height: 400px; }
 }
 @media (max-width: 820px) {
-  .result-domains { gap: 28px; }
-  .rank-table { font-size: 15px; }
-  .rank-table .chart-head, .rank-table .rail-cell, .rank-table .dom-head, .rank-table .dom { display: none; }
-  .rank-table .code-head::before, .rank-table .cua-head::before { display: none; }
-  .rank-table .model-head, .rank-table.overall .model-head { width: 43%; }
-  .rank-table .code-head, .rank-table .cua-head, .rank-table .gain-head,
-  .rank-table.overall .code-head, .rank-table.overall .cua-head, .rank-table.overall .gain-head { width: 19%; }
-  .rank-table th, .rank-table td { padding-block: 13px; }
-  .rank-table tbody th { padding-right: 8px; }
   .replay { padding: 22px 20px 16px; }
   .rp-stages { grid-template-columns: repeat(5, minmax(128px, 1fr)); overflow-x: auto; }
   .rp-disclosure { margin-left: 0; flex-basis: 100%; }
 }
 @media (max-width: 520px) {
-  .result-domains { justify-content: space-between; gap: 10px; }
-  .result-domains button { font-size: 14px; }
-  .result-domains button span { display: none; }
   .replay { margin-inline: -8px; padding: 18px 14px 14px; }
   .rp-head h3 { font-size: 24px; }
   .rp-entry { grid-template-columns: 58px minmax(0, 1fr); }

@@ -84,18 +84,6 @@
   "sha256": "7805cc2107530df3d404075aed0f7714a5e689ef448b802233b500b6043961c3"
  },
  {
-  "file": "hero/game-before.webp",
-  "source": "paper/figure2_assets/cases/01_vector_relay/originals/agent_0003.png",
-  "note": "encoded as WebP at 1000x562",
-  "sha256": "cd12652eef1d906f0baa7898ef7ad03d06e08ab676b8cb1c553cfe6c176df0c5"
- },
- {
-  "file": "hero/game-after.webp",
-  "source": "paper/figure2_assets/cases/01_vector_relay/originals/agent_0015.png",
-  "note": "encoded as WebP at 1000x562",
-  "sha256": "83f9afa8b7b18fe77020ff7ba0a5fee092aaf5ac19ee19b8702a6d749efca975"
- },
- {
   "file": "hero/devops-before.webp",
   "source": "paper/figure1_assets/cases/D01_counter_order/keyframes/baseline_rolling-restart_layout.png",
   "note": "cropped to (0, 0, 2120, 920) then encoded as WebP at 1000x434",
@@ -310,5 +298,17 @@
   "source": "EFS export runs/candidate-05/api-gpt6-astra/cua (paths and host redacted)/web-cua/screenshot-0019.png",
   "note": "byte-identical copy",
   "sha256": "27b8a9e0467b98eb4ae4a3426dfa59d94f1b384cd3584eabc48ff56b87e35f42"
+ },
+ {
+  "file": "hero/game-before.png",
+  "source": "kingofspace0wzz/cua-swe-viewer media/source/agent/game-cua/gameqa.hextris-cascade-resettle-stable.001/agent/frames/frame-0003.png",
+  "note": "cropped to (300, 165, 980, 590) then encoded as PNG at 680x425",
+  "sha256": "7b64428c1b4eeeea0d21fa64d73e1f6f5c2aaeb49eaa5726839999a182d73d0d"
+ },
+ {
+  "file": "hero/game-after.png",
+  "source": "kingofspace0wzz/cua-swe-viewer media/source/agent/game-cua/gameqa.hextris-cascade-resettle-stable.001/agent/frames/frame-0016.png",
+  "note": "cropped to (300, 165, 980, 590) then encoded as PNG at 680x425",
+  "sha256": "afba051afdf1007edb5708b25dfd44424aba73fc1c1c2fada4d264398c0a9d4c"
  }
 ]

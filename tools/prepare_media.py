@@ -35,13 +35,16 @@ ITEMS = [
 # Hero collage: matched baseline/repaired pairs, cropped to the same window per domain and
 # encoded as WebP. Web and Mobile are 16:10 crops; Game (16:9) and the full DevOps chart panel
 # are kept whole and letterboxed by the page. Web, DevOps and Mobile pairs are reference-repair replays; the Game
-# pair is two recorded GPT-5.6 Sol screenshots from the selected Vector Relay attempt.
+# pair is frames 3 and 16 of the recorded GPT-5.6 Sol Hextris attempt in the public cua-swe-viewer repository
+# (set CUA_SWE_VIEWER to its checkout).
+VIEWER = pathlib.Path(os.environ.get("CUA_SWE_VIEWER", str(pathlib.Path.home() / "projects/cua-swe-viewer")))
+HEXTRIS = VIEWER / "media/source/agent/game-cua/gameqa.hextris-cascade-resettle-stable.001/agent/frames"
 HERO = [
     # (source, destination, crop box (left, top, right, bottom) or None)
     (F1 / "W01_allocation_ring/keyframes/reference-baseline_stacked.png", "hero/web-before.webp", (0, 0, 1700, 1062)),
     (F1 / "W01_allocation_ring/keyframes/reference-gold_stacked.png", "hero/web-after.webp", (0, 0, 1700, 1062)),
-    (F2 / "01_vector_relay/originals/agent_0003.png", "hero/game-before.webp", None),
-    (F2 / "01_vector_relay/originals/agent_0015.png", "hero/game-after.webp", None),
+    (HEXTRIS / "frame-0003.png", "hero/game-before.png", (300, 165, 980, 590)),
+    (HEXTRIS / "frame-0016.png", "hero/game-after.png", (300, 165, 980, 590)),
     (F1 / "D01_counter_order/keyframes/baseline_rolling-restart_layout.png", "hero/devops-before.webp", (0, 0, 2120, 920)),
     (F1 / "D01_counter_order/keyframes/gold_rolling-restart_layout.png", "hero/devops-after.webp", (0, 0, 2120, 920)),
     (DEMO / "assets/media/mobile_before.png", "hero/mobile-before.webp", (20, 567, 780, 1042)),
@@ -76,9 +79,13 @@ for src, dst, box in HERO:
         im = im.crop(box)
     if im.width > HERO_WIDTH:
         im = im.resize((HERO_WIDTH, round(im.height * HERO_WIDTH / im.width)), Image.LANCZOS)
-    im.save(target, "WEBP", quality=88, method=6)
-    note = (f"cropped to {box} then " if box else "") + f"encoded as WebP at {im.width}x{im.height}"
-    manifest.append({"file": dst, "source": str(src.relative_to(ROOT)), "note": note,
+    if target.suffix == ".png":
+        im.save(target, optimize=True)
+    else:
+        im.save(target, "WEBP", quality=88, method=6)
+    note = (f"cropped to {box} then " if box else "") + f"encoded as {target.suffix[1:].upper()} at {im.width}x{im.height}"
+    source = src.relative_to(ROOT) if src.is_relative_to(ROOT) else "cua-swe-viewer/" + str(src.relative_to(VIEWER))
+    manifest.append({"file": dst, "source": str(source), "note": note,
                      "sha256": hashlib.sha256(target.read_bytes()).hexdigest()})
     print(f"{dst:40s} {target.stat().st_size/1024:7.0f} KB  {note}")
 json.dump(manifest, open(OUT / "manifest.json", "w"), indent=1)
