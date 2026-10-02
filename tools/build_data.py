@@ -56,26 +56,48 @@ MODEL_LABELS = {
 }
 API_MODELS = [k for k in MODEL_LABELS if k.startswith("api-")]
 
+# Title rules (see README, "Task titles"):
+#   1. A title reads "Application: what is affected" in plain words.
+#   2. Construction tags never appear in a title: difficulty anchors (frontier-easy, frontier-anchor,
+#      lower-N, harder-N), revision and owner tags (rN, ownerNN-rN, frontier-hard-rN, cua-upper-rN,
+#      cua-diff-rN), candidate numbers (nested-selection-05) and the trailing .NNN. The task ID in
+#      the detail panel keeps them, and the Role field carries the anchor role.
+#   3. Tasks left with the same title are numbered "(variant k of n)" in task-ID order.
+WORD_FIXES = [
+    (r"\bshiftclick\b", "shift-click"), (r"\bcellselect\b", "cell selection"), (r"\bdatazoom\b", "dataZoom"),
+    (r"\bsoftbreak\b", "soft break"), (r"\broundtrip\b", "round trip"), (r"\blevel(\d)\b", r"level \1"),
+    (r"\bthrough edge\b", "through-edge"), (r"\bcamera ([a-d])$", lambda m: "camera " + m.group(1).upper()),
+]
+
 def words(slug):
-    return slug.replace("-", " ")
+    text = re.sub(r"-\d{2,}$", "", slug).replace("-", " ")
+    for pattern, replacement in WORD_FIXES:
+        text = re.sub(pattern, replacement, text)
+    return text
 
 def web_title(tid):
     core = re.sub(r"^(v3|web)\.", "", tid)
     core = re.sub(r"\.\d{3}$", "", core)
-    variant = ""
-    m = re.match(r"^(.*?)\.(lower-\d)$", core)
-    if m:
-        core, variant = m.group(1), " (" + m.group(2).replace("lower-", "variant ") + ")"
+    core = re.sub(r"\.lower-\d$", "", core)
     for key, name in CONTRACT_APPS.items():
         if core.startswith(key):
-            rest = core[len(key):].strip("-")
-            rest = {"contract": "", "frontier-easy": " (easy anchor)", "frontier-anchor": " (hard anchor)"}.get(rest, " " + words(rest))
-            return name + " contract" + rest + variant, name
+            role = {"frontier-easy": "Easy anchor", "frontier-anchor": "Hard anchor"}.get(core[len(key):].strip("-"))
+            return name + " contract", name, role
     for key, name in sorted(APP_NAMES.items(), key=lambda kv: -len(kv[0])):
         if core.startswith(key):
             rest = core[len(key):].strip("-")
-            return f"{name}: {words(rest)}{variant}", name
-    return words(core) + variant, "Other"
+            return f"{name}: {words(rest)}", name, None
+    return words(core), "Other", None
+
+def number_variants(tasks):
+    """Rule 3: number tasks that share a title within a domain, in the order given."""
+    groups = collections.defaultdict(list)
+    for t in tasks:
+        groups[(t["domain"], t["title"])].append(t)
+    for group in groups.values():
+        if len(group) > 1:
+            for k, t in enumerate(group, 1):
+                t["title"] += f" (variant {k} of {len(group)})"
 
 def game_title(tid):
     core = re.sub(r"^gameqa\.", "", tid)
@@ -91,9 +113,7 @@ def devops_title(tid):
     parts = core.split(".")
     mech = parts[0]
     name = DEVOPS_MECH.get(mech, words(mech))
-    tags = [p for p in parts[1:] if not re.match(r"^\d{3}$", p)]
-    suffix = ", ".join(t for t in tags if t not in ("frontier-hard-r1",))
-    return name, name, suffix
+    return name, name
 
 def load_yaml(p):
     with open(p) as fh:
@@ -125,17 +145,17 @@ def main():
     wsubset = {t["task_id"]: t.get("release_subset") for t in wman["tasks"]}
     for tid in ids["web"]:
         ty = load_yaml(root / f"dataset/web/tasks/{tid}/task.yaml")
-        title, family = web_title(tid)
+        title, family, role = web_title(tid)
         o = wagg[tid]
         tasks.append({
             "id": tid, "domain": "web", "title": title, "family": family,
             "instruction": ty["instruction"].strip(),
-            "tier": None,
+            "tier": None, "tier_label": role,
             "budgets": {"wall": ty["budgets"]["wall_time_sec"], "steps": ty["budgets"]["max_steps"], "gui": ty["budgets"]["max_gui_actions"]},
             "verifiers": [g for g in ("build", "unit", "ui", "visual", "state") if ty["verifiers"].get(g)],
             "viewport": ty["environment"].get("viewport_or_device"),
             "path": ty.get("repo_snapshot", {}).get("path", f"dataset/web/tasks/{tid}"),
-            "outcomes": {"label": "Web-36 release evaluation, nine API models, one selected attempt each",
+            "outcomes": {"label": "Web-36 release evaluation, nine API models, a single attempt each",
                           "code": {"k": o["code"][0], "n": o["code"][1]}, "cua": {"k": o["cua"][0], "n": o["cua"][1]}},
         })
 
@@ -167,11 +187,11 @@ def main():
     dview = {t["task_id"]: t for t in json.load(open(root / "viewer/data/devops-tasks.json"))["tasks"]}
     for tid in ids["devops"]:
         ty = load_yaml(root / f"dataset/devops/tasks/{tid}/task.yaml")
-        title, family, suffix = devops_title(tid)
+        title, family = devops_title(tid)
         tier = dmeta[tid]["tier"]
         v = dview.get(tid, {})
         tasks.append({
-            "id": tid, "domain": "devops", "title": title + (f" ({suffix})" if suffix else ""), "family": family,
+            "id": tid, "domain": "devops", "title": title, "family": family,
             "instruction": ty["instruction"].strip(),
             "tier": tier, "tier_label": {"lower": "Lower anchor", "upper": "Upper anchor", "differential": "GPT-6 / Fable differential"}.get(tier, tier),
             "budgets": {"wall": ty["budgets"]["wall_time_sec"], "steps": ty["budgets"]["max_steps"], "gui": ty["budgets"]["max_gui_actions"]},
@@ -205,7 +225,7 @@ def main():
         o = magg[tid]
         title = m["title"]
         if m["family"] == "Gantt":
-            title = title.replace(" \u2014 ", ": ") + " (" + tid.rsplit(".", 1)[1] + ")"
+            title = title.replace(" \u2014 ", ": ")
         tasks.append({
             "id": tid, "domain": "mobile", "title": title, "family": fam,
             "instruction": body, "instruction_heading": heading,
@@ -221,6 +241,7 @@ def main():
 
     order = {"web": 0, "game": 1, "devops": 2, "mobile": 3}
     tasks.sort(key=lambda t: (order[t["domain"]], t["family"], t["id"]))
+    number_variants(tasks)
     payload = {
         "release_id": reg["release_id"], "task_count": reg["task_count"],
         "domains": [{"domain": d, "count": len(ids[d])} for d in ("web", "game", "devops", "mobile")],

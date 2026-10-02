@@ -41,6 +41,23 @@ Keep the four domain denominators separate. The Game table shows original
 pass@1, not the revised first attempts from the pass@3 cohort. Mobile Opus 5
 conditions are deferred and have no score. Do not convert them to zero.
 
+### Task titles
+
+Titles on the task page are built by `tools/build_data.py` from the task IDs under three rules:
+
+1. A title reads "Application: what is affected" in plain words (`shiftclick cellselect`
+   becomes "shift-click cell selection").
+2. Construction tags never appear in a title: difficulty anchors (`frontier-easy`,
+   `frontier-anchor`, `lower-N`, `harder-N`), revision and owner tags (`rN`, `ownerNN-rN`,
+   `frontier-hard-rN`, `cua-upper-rN`, `cua-diff-rN`), candidate numbers
+   (`nested-selection-05`) and the trailing `.NNN`. The task ID shown in the detail panel keeps
+   them, and the Role field carries the anchor role.
+3. Tasks left with the same title are numbered "(variant k of n)" in task-ID order.
+
+Instructions are never edited. To regenerate, export `dataset/` manifests, `task.yaml`,
+`INSTRUCTION.md`, the release evaluation summaries and `viewer/data/devops-tasks.json` from the
+internal revision and pass that directory as `--root`.
+
 The task explorer preserves original instructions and exposes budgets,
 provenance and recorded task-level outcomes on expansion. Game task-level
 outcomes are construction trials, as identified by their source labels;

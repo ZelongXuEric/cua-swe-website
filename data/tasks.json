@@ -23,10 +23,11 @@
   {
    "id": "web.account-recovery-frontier-easy.001",
    "domain": "web",
-   "title": "Account recovery contract (easy anchor)",
+   "title": "Account recovery contract",
    "family": "Account recovery",
    "instruction": "Make the account recovery page display the channel selected by the live identity risk policy for the account being viewed, including ACC-731, while preserving the recovery decision trace.",
    "tier": null,
+   "tier_label": "Easy anchor",
    "budgets": {
     "wall": 1800,
     "steps": 80,
@@ -39,7 +40,7 @@
    "viewport": "desktop-1280x720",
    "path": "dataset/web/tasks/web.account-recovery-frontier-easy.001/repo",
    "outcomes": {
-    "label": "Web-36 release evaluation, nine API models, one selected attempt each",
+    "label": "Web-36 release evaluation, nine API models, a single attempt each",
     "code": {
      "k": 0,
      "n": 9
@@ -57,6 +58,7 @@
    "family": "Delegated actions",
    "instruction": "Make the frontend display the action selected by the live delegated authorization policy for the request being viewed, including REQ-581, while preserving the decision trace.",
    "tier": null,
+   "tier_label": null,
    "budgets": {
     "wall": 1800,
     "steps": 80,
@@ -69,7 +71,7 @@
    "viewport": "desktop-1280x720",
    "path": "dataset/web/tasks/web.delegated-action-contract.001/repo",
    "outcomes": {
-    "label": "Web-36 release evaluation, nine API models, one selected attempt each",
+    "label": "Web-36 release evaluation, nine API models, a single attempt each",
     "code": {
      "k": 0,
      "n": 9
@@ -83,10 +85,11 @@
   {
    "id": "v3.echarts-linked-datazoom-toolbar.001",
    "domain": "web",
-   "title": "ECharts: linked datazoom toolbar",
+   "title": "ECharts: linked dataZoom toolbar",
    "family": "ECharts",
    "instruction": "In the Fleet Analytics Console, an analyst arms the window-zoom tool and rubber-bands a span on the large primary chart to focus on one stretch of the run. The smaller charts beneath it are supposed to move with it and frame the same stretch of the run, but they don't: after the selection, those smaller charts settle on the wrong stretch of their own readings, so the panels no longer line up on the same moment the analyst framed on the primary chart. Fix the console so that selecting a span on the primary chart brings every linked panel to the stretch of its own readings that corresponds to the framed span. Do not change the fixtures, the number or layout of panels, the toolbox, or how the primary chart itself responds to the selection.",
    "tier": null,
+   "tier_label": null,
    "budgets": {
     "wall": 1800,
     "steps": 80,
@@ -99,7 +102,7 @@
    "viewport": "desktop-1280x720",
    "path": "dataset/web/tasks/v3.echarts-linked-datazoom-toolbar.001/repo",
    "outcomes": {
-    "label": "Web-36 release evaluation, nine API models, one selected attempt each",
+    "label": "Web-36 release evaluation, nine API models, a single attempt each",
     "code": {
      "k": 8,
      "n": 9
@@ -117,6 +120,7 @@
    "family": "Fabric.js",
    "instruction": "The Artboard Editor loads a camera preset for the design surface and selects\nthe shape on it. The red selection frame and its corner handles are supposed\nto hug the shape exactly as it appears under the current camera, and the zoom\nreadout should report the camera's zoom level.\n\nOn the orbit camera presets the selection is wrong: the zoom readout is off,\nthe selection frame is the wrong size, the corner handles do not sit on the\nshape's corners, and on one preset the handles disappear entirely. The frame\nalso stays upright even though the shape looks tilted under the camera. On the\nflat camera preset everything already looks correct.\n\nFix the editor so the zoom readout, the selection frame size, the corner\nhandle positions, and the frame orientation all match the shape as it is drawn\nunder every camera preset. Do not change the camera presets, the shape, the\nscene feed, the protected profiles, or the verifier.",
    "tier": null,
+   "tier_label": null,
    "budgets": {
     "wall": 1800,
     "steps": 80,
@@ -129,7 +133,7 @@
    "viewport": "desktop-1000x780",
    "path": "dataset/web/tasks/v3.fabric-viewport-rotation-controls.001/repo",
    "outcomes": {
-    "label": "Web-36 release evaluation, nine API models, one selected attempt each",
+    "label": "Web-36 release evaluation, nine API models, a single attempt each",
     "code": {
      "k": 8,
      "n": 9
@@ -143,10 +147,11 @@
   {
    "id": "web.fabric-nested-selection-05.001",
    "domain": "web",
-   "title": "Fabric.js: nested selection 05",
+   "title": "Fabric.js: nested selection (variant 1 of 3)",
    "family": "Fabric.js",
    "instruction": "The Blue shape does not behave as described in Help. Repair the editor while preserving its existing interactions.",
    "tier": null,
+   "tier_label": null,
    "budgets": {
     "wall": 1800,
     "steps": 80,
@@ -159,7 +164,7 @@
    "viewport": "desktop-1000x780",
    "path": "dataset/web/tasks/web.fabric-nested-selection-05.001/repo",
    "outcomes": {
-    "label": "Web-36 release evaluation, nine API models, one selected attempt each",
+    "label": "Web-36 release evaluation, nine API models, a single attempt each",
     "code": {
      "k": 0,
      "n": 9
@@ -173,10 +178,11 @@
   {
    "id": "web.fabric-nested-selection-06.001",
    "domain": "web",
-   "title": "Fabric.js: nested selection 06",
+   "title": "Fabric.js: nested selection (variant 2 of 3)",
    "family": "Fabric.js",
    "instruction": "The Blue shape does not behave as described in Help. Repair the editor while preserving its existing interactions.",
    "tier": null,
+   "tier_label": null,
    "budgets": {
     "wall": 1800,
     "steps": 80,
@@ -189,7 +195,7 @@
    "viewport": "desktop-1000x780",
    "path": "dataset/web/tasks/web.fabric-nested-selection-06.001/repo",
    "outcomes": {
-    "label": "Web-36 release evaluation, nine API models, one selected attempt each",
+    "label": "Web-36 release evaluation, nine API models, a single attempt each",
     "code": {
      "k": 1,
      "n": 9
@@ -203,10 +209,11 @@
   {
    "id": "web.fabric-nested-selection-44.001",
    "domain": "web",
-   "title": "Fabric.js: nested selection 44",
+   "title": "Fabric.js: nested selection (variant 3 of 3)",
    "family": "Fabric.js",
    "instruction": "The Blue shape does not behave as described in Help. Repair the editor while preserving its existing interactions.",
    "tier": null,
+   "tier_label": null,
    "budgets": {
     "wall": 1800,
     "steps": 80,
@@ -219,7 +226,7 @@
    "viewport": "desktop-1000x780",
    "path": "dataset/web/tasks/web.fabric-nested-selection-44.001/repo",
    "outcomes": {
-    "label": "Web-36 release evaluation, nine API models, one selected attempt each",
+    "label": "Web-36 release evaluation, nine API models, a single attempt each",
     "code": {
      "k": 1,
      "n": 9
@@ -233,10 +240,11 @@
   {
    "id": "web.fabric-through-edge-nested-camera-a.001",
    "domain": "web",
-   "title": "Fabric.js: through edge nested camera a",
+   "title": "Fabric.js: through-edge nested camera A",
    "family": "Fabric.js",
    "instruction": "The Blue shape does not behave as described in Help. Repair the editor while preserving its existing interactions.",
    "tier": null,
+   "tier_label": null,
    "budgets": {
     "wall": 1800,
     "steps": 80,
@@ -249,7 +257,7 @@
    "viewport": "desktop-1000x780",
    "path": "dataset/web/tasks/web.fabric-through-edge-nested-camera-a.001/repo",
    "outcomes": {
-    "label": "Web-36 release evaluation, nine API models, one selected attempt each",
+    "label": "Web-36 release evaluation, nine API models, a single attempt each",
     "code": {
      "k": 0,
      "n": 9
@@ -263,10 +271,11 @@
   {
    "id": "web.fabric-through-edge-nested-camera-c.001",
    "domain": "web",
-   "title": "Fabric.js: through edge nested camera c",
+   "title": "Fabric.js: through-edge nested camera C",
    "family": "Fabric.js",
    "instruction": "The Blue shape does not behave as described in Help. Repair the editor while preserving its existing interactions.",
    "tier": null,
+   "tier_label": null,
    "budgets": {
     "wall": 1800,
     "steps": 80,
@@ -279,7 +288,7 @@
    "viewport": "desktop-1000x780",
    "path": "dataset/web/tasks/web.fabric-through-edge-nested-camera-c.001/repo",
    "outcomes": {
-    "label": "Web-36 release evaluation, nine API models, one selected attempt each",
+    "label": "Web-36 release evaluation, nine API models, a single attempt each",
     "code": {
      "k": 0,
      "n": 9
@@ -293,10 +302,11 @@
   {
    "id": "web.fabric-through-edge-opposite-resize.001",
    "domain": "web",
-   "title": "Fabric.js: through edge opposite resize",
+   "title": "Fabric.js: through-edge opposite resize",
    "family": "Fabric.js",
    "instruction": "The Blue shape does not behave as described in Help. Repair the editor while preserving its existing interactions.",
    "tier": null,
+   "tier_label": null,
    "budgets": {
     "wall": 1800,
     "steps": 80,
@@ -309,7 +319,7 @@
    "viewport": "desktop-1000x780",
    "path": "dataset/web/tasks/web.fabric-through-edge-opposite-resize.001/repo",
    "outcomes": {
-    "label": "Web-36 release evaluation, nine API models, one selected attempt each",
+    "label": "Web-36 release evaluation, nine API models, a single attempt each",
     "code": {
      "k": 0,
      "n": 9
@@ -323,10 +333,11 @@
   {
    "id": "web.fabric-through-edge-resize.001",
    "domain": "web",
-   "title": "Fabric.js: through edge resize",
+   "title": "Fabric.js: through-edge resize",
    "family": "Fabric.js",
    "instruction": "The Blue shape does not behave as described in Help. Repair the editor while preserving its existing interactions.",
    "tier": null,
+   "tier_label": null,
    "budgets": {
     "wall": 1800,
     "steps": 80,
@@ -339,7 +350,7 @@
    "viewport": "desktop-1000x780",
    "path": "dataset/web/tasks/web.fabric-through-edge-resize.001/repo",
    "outcomes": {
-    "label": "Web-36 release evaluation, nine API models, one selected attempt each",
+    "label": "Web-36 release evaluation, nine API models, a single attempt each",
     "code": {
      "k": 0,
      "n": 9
@@ -353,10 +364,11 @@
   {
    "id": "web.fabric-through-edge-single-nested-return.001",
    "domain": "web",
-   "title": "Fabric.js: through edge single nested return",
+   "title": "Fabric.js: through-edge single nested return",
    "family": "Fabric.js",
    "instruction": "The Blue shape does not behave as described in Help. Repair the editor while preserving its existing interactions.",
    "tier": null,
+   "tier_label": null,
    "budgets": {
     "wall": 1800,
     "steps": 80,
@@ -369,7 +381,7 @@
    "viewport": "desktop-1000x780",
    "path": "dataset/web/tasks/web.fabric-through-edge-single-nested-return.001/repo",
    "outcomes": {
-    "label": "Web-36 release evaluation, nine API models, one selected attempt each",
+    "label": "Web-36 release evaluation, nine API models, a single attempt each",
     "code": {
      "k": 0,
      "n": 9
@@ -387,6 +399,7 @@
    "family": "Handsontable",
    "instruction": "In the scrollable data-grid demo, an open column dropdown or cell context menu can become detached from the header, cell, or submenu that opened it when the outer panel or the grid viewport scrolls. Keep open menus visually attached to their current anchors across outer-container and grid scrolling, and close a menu once its anchor is no longer rendered. Preserve page scrolling, sticky headers, menus rendered in a custom UI container, internal menu scrolling, keyboard-opened menus, and submenu hover behavior.",
    "tier": null,
+   "tier_label": null,
    "budgets": {
     "wall": 3000,
     "steps": 180,
@@ -399,7 +412,7 @@
    "viewport": "desktop-1000x800",
    "path": "dataset/web/tasks/web.handsontable-menu-scroll-anchor.001/repo",
    "outcomes": {
-    "label": "Web-36 release evaluation, nine API models, one selected attempt each",
+    "label": "Web-36 release evaluation, nine API models, a single attempt each",
     "code": {
      "k": 5,
      "n": 9
@@ -413,10 +426,11 @@
   {
    "id": "v3.jupyterlab-shiftclick-cellselect.001",
    "domain": "web",
-   "title": "JupyterLab: shiftclick cellselect",
+   "title": "JupyterLab: shift-click cell selection",
    "family": "JupyterLab",
    "instruction": "The Notebook surface shows a short notebook of cells. Each cell has a prompt\ngutter and an editor; code cells can also show an output below, and markdown\ncells can show rendered text. Clicking a cell makes it active. Holding Shift\nand clicking another cell is supposed to select the whole range of cells\nbetween the active cell and the one you click, so you can act on several cells\nat once.\n\nThere is a bug in the range selection. After you select some text somewhere on\nthe page and then Shift-click another cell, the range selection often does not\nhappen: only the clicked cell becomes active and the cells in between are not\nselected. In some situations that is correct — when you are really extending a\ntext selection the browser should keep growing the highlighted text instead of\nselecting cells — but in other situations the range selection should still\nwork and currently does not.\n\nFix the notebook so that Shift-click reliably extends the cell range selection\nin every situation where it should, while still leaving the gesture to the\nbrowser in the situations where the user is genuinely extending a text\nselection. Explore the running notebook to work out which situations are which.\nDo not change the notebook documents, the cell chrome, the scene feed, the\nprotected payloads, or the verifier.",
    "tier": null,
+   "tier_label": null,
    "budgets": {
     "wall": 1800,
     "steps": 80,
@@ -429,7 +443,7 @@
    "viewport": "desktop-1000x780",
    "path": "dataset/web/tasks/v3.jupyterlab-shiftclick-cellselect.001/repo",
    "outcomes": {
-    "label": "Web-36 release evaluation, nine API models, one selected attempt each",
+    "label": "Web-36 release evaluation, nine API models, a single attempt each",
     "code": {
      "k": 3,
      "n": 9
@@ -447,6 +461,7 @@
    "family": "MapLibre",
    "instruction": "Dragging a marked place should keep it under the pointer, including after zooming or using the touch demonstration. Releasing and starting another drag should continue from the accepted view. Keep the other navigation working. Help describes the workflows.",
    "tier": null,
+   "tier_label": null,
    "budgets": {
     "wall": 2400,
     "steps": 180,
@@ -459,7 +474,7 @@
    "viewport": "desktop-1000x800",
    "path": "dataset/web/tasks/web.maplibre-mouse-ridge-attachment.001/repo",
    "outcomes": {
-    "label": "Web-36 release evaluation, nine API models, one selected attempt each",
+    "label": "Web-36 release evaluation, nine API models, a single attempt each",
     "code": {
      "k": 0,
      "n": 9
@@ -477,6 +492,7 @@
    "family": "MapLibre",
    "instruction": "Dragging a marked place should keep it under the pointer, including after zooming or using the touch demonstration. Releasing and starting another drag should continue from the accepted view. Keep the other navigation working. Help describes the workflows.",
    "tier": null,
+   "tier_label": null,
    "budgets": {
     "wall": 2400,
     "steps": 180,
@@ -489,7 +505,7 @@
    "viewport": "desktop-1000x800",
    "path": "dataset/web/tasks/web.maplibre-post-wheel-reacquisition.001/repo",
    "outcomes": {
-    "label": "Web-36 release evaluation, nine API models, one selected attempt each",
+    "label": "Web-36 release evaluation, nine API models, a single attempt each",
     "code": {
      "k": 0,
      "n": 9
@@ -507,6 +523,7 @@
    "family": "MapLibre",
    "instruction": "Dragging a marked place should keep it under the pointer, including after zooming or using the touch demonstration. Releasing and starting another drag should continue from the accepted view. Keep the other navigation working. Help describes the workflows.",
    "tier": null,
+   "tier_label": null,
    "budgets": {
     "wall": 2400,
     "steps": 180,
@@ -519,7 +536,7 @@
    "viewport": "desktop-1000x800",
    "path": "dataset/web/tasks/web.maplibre-reset-integration-handoff.001/repo",
    "outcomes": {
-    "label": "Web-36 release evaluation, nine API models, one selected attempt each",
+    "label": "Web-36 release evaluation, nine API models, a single attempt each",
     "code": {
      "k": 0,
      "n": 9
@@ -537,6 +554,7 @@
    "family": "MapLibre",
    "instruction": "Dragging a marked place should keep it under the pointer, including after zooming or using the touch demonstration. Releasing and starting another drag should continue from the accepted view. Keep the other navigation working. Help describes the workflows.",
    "tier": null,
+   "tier_label": null,
    "budgets": {
     "wall": 2400,
     "steps": 180,
@@ -549,7 +567,7 @@
    "viewport": "desktop-1000x800",
    "path": "dataset/web/tasks/web.maplibre-reset-terrain-reacquisition.001/repo",
    "outcomes": {
-    "label": "Web-36 release evaluation, nine API models, one selected attempt each",
+    "label": "Web-36 release evaluation, nine API models, a single attempt each",
     "code": {
      "k": 0,
      "n": 9
@@ -567,6 +585,7 @@
    "family": "MapLibre",
    "instruction": "Dragging a marked place should keep it under the pointer, including after zooming or using the touch demonstration. Releasing and starting another drag should continue from the accepted view. Keep the other navigation working. Help describes the workflows.",
    "tier": null,
+   "tier_label": null,
    "budgets": {
     "wall": 2400,
     "steps": 180,
@@ -579,7 +598,7 @@
    "viewport": "desktop-1000x800",
    "path": "dataset/web/tasks/web.maplibre-reset-touch-reacquisition.001/repo",
    "outcomes": {
-    "label": "Web-36 release evaluation, nine API models, one selected attempt each",
+    "label": "Web-36 release evaluation, nine API models, a single attempt each",
     "code": {
      "k": 0,
      "n": 9
@@ -597,6 +616,7 @@
    "family": "MapLibre",
    "instruction": "Dragging a marked place should keep it under the pointer, including after zooming or using the touch demonstration. Releasing and starting another drag should continue from the accepted view. Keep the other navigation working. Help describes the workflows.",
    "tier": null,
+   "tier_label": null,
    "budgets": {
     "wall": 2400,
     "steps": 180,
@@ -609,7 +629,7 @@
    "viewport": "desktop-1000x800",
    "path": "dataset/web/tasks/web.maplibre-reset-wheel-reacquisition.001/repo",
    "outcomes": {
-    "label": "Web-36 release evaluation, nine API models, one selected attempt each",
+    "label": "Web-36 release evaluation, nine API models, a single attempt each",
     "code": {
      "k": 0,
      "n": 9
@@ -627,6 +647,7 @@
    "family": "MapLibre",
    "instruction": "In the terrain gesture fixture, moving and widening a two-finger gesture on the pitched map makes the geographic point that was initially between the fingers drift away from the moving midpoint. Keep that grabbed geographic point attached to the gesture midpoint while zooming and panning together. Preserve ordinary flat-map drag and zoom behavior, rotation controls, and terrain elevation handling.",
    "tier": null,
+   "tier_label": null,
    "budgets": {
     "wall": 2400,
     "steps": 180,
@@ -639,7 +660,7 @@
    "viewport": "desktop-1000x800",
    "path": "dataset/web/tasks/web.maplibre-terrain-pinch-anchor.001/repo",
    "outcomes": {
-    "label": "Web-36 release evaluation, nine API models, one selected attempt each",
+    "label": "Web-36 release evaluation, nine API models, a single attempt each",
     "code": {
      "k": 3,
      "n": 9
@@ -657,6 +678,7 @@
    "family": "Masonry dashboard",
    "instruction": "The Temperature section of the operations dashboard sometimes disappears when the window is narrowed, even though it returns at a smaller width. Repair the responsive dashboard so every configured section remains visible, usable, and non-overlapping at wide, medium, and narrow widths and after resizing back and forth. Preserve the existing section order, responsive density, and card controls; do not replace the layout with a single-column page at every width.",
    "tier": null,
+   "tier_label": null,
    "budgets": {
     "wall": 1800,
     "steps": 120,
@@ -669,7 +691,7 @@
    "viewport": "desktop-1180x760",
    "path": "dataset/web/tasks/web.responsive-masonry-overlap.001/repo",
    "outcomes": {
-    "label": "Web-36 release evaluation, nine API models, one selected attempt each",
+    "label": "Web-36 release evaluation, nine API models, a single attempt each",
     "code": {
      "k": 9,
      "n": 9
@@ -683,10 +705,11 @@
   {
    "id": "v3.quill-paste-scroll-roundtrip.002",
    "domain": "web",
-   "title": "Quill: paste scroll roundtrip",
+   "title": "Quill: paste scroll round trip",
    "family": "Quill",
    "instruction": "In Threadloop's shared document, applying a pending update makes the reading area jump so you lose your place, and sometimes the new paragraph is nowhere in view. Fix how the reading area settles after an update so applying it does the right thing for the update shown in the collaboration bar, including what the presence chips say about where each collaborator is currently reading. Preserve the document text, layout, presence roster, and the way updates are applied.",
    "tier": null,
+   "tier_label": null,
    "budgets": {
     "wall": 1800,
     "steps": 80,
@@ -699,7 +722,7 @@
    "viewport": "desktop-1280x800",
    "path": "dataset/web/tasks/v3.quill-paste-scroll-roundtrip.002/repo",
    "outcomes": {
-    "label": "Web-36 release evaluation, nine API models, one selected attempt each",
+    "label": "Web-36 release evaluation, nine API models, a single attempt each",
     "code": {
      "k": 7,
      "n": 9
@@ -717,6 +740,7 @@
    "family": "React DatePicker",
    "instruction": "On the appointment booking form, the date field misbehaves when the user clears it. After selecting all and deleting the date, the field shows the input mask's empty placeholder, but as soon as focus leaves the field it snaps back to the previously selected date instead of staying cleared. Clearing the appointment date and clicking away must leave the field empty and the selected date shown as None. A field that is left with a merely invalid but non-empty date must still keep the previously selected date. Fix the field so blur behaves correctly. The app runs at the start URL.",
    "tier": null,
+   "tier_label": null,
    "budgets": {
     "wall": 1800,
     "steps": 80,
@@ -729,7 +753,7 @@
    "viewport": "desktop-1280x720",
    "path": "dataset/web/tasks/v3.react-datepicker-mask-clear-blur.001/repo",
    "outcomes": {
-    "label": "Web-36 release evaluation, nine API models, one selected attempt each",
+    "label": "Web-36 release evaluation, nine API models, a single attempt each",
     "code": {
      "k": 9,
      "n": 9
@@ -743,10 +767,11 @@
   {
    "id": "web.react-spectrum-combobox-selection.lower-1.001",
    "domain": "web",
-   "title": "React Spectrum: combobox selection (variant 1)",
+   "title": "React Spectrum: combobox selection (variant 1 of 2)",
    "family": "React Spectrum",
    "instruction": "Existing recipients disappear when a user types a custom recipient and presses Enter. Fix that transition while preserving the workspace-specific Enter behavior shown in the application.",
    "tier": null,
+   "tier_label": null,
    "budgets": {
     "wall": 1800,
     "steps": 80,
@@ -759,7 +784,7 @@
    "viewport": "desktop-1280x720",
    "path": "dataset/web/tasks/web.react-spectrum-combobox-selection.lower-1.001/repo",
    "outcomes": {
-    "label": "Web-36 release evaluation, nine API models, one selected attempt each",
+    "label": "Web-36 release evaluation, nine API models, a single attempt each",
     "code": {
      "k": 2,
      "n": 9
@@ -773,10 +798,11 @@
   {
    "id": "web.react-spectrum-combobox-selection.lower-2.001",
    "domain": "web",
-   "title": "React Spectrum: combobox selection (variant 2)",
+   "title": "React Spectrum: combobox selection (variant 2 of 2)",
    "family": "React Spectrum",
    "instruction": "Existing recipients disappear when a user types a custom recipient and presses Enter. Fix that transition while preserving the workspace-specific Enter behavior shown in the application.",
    "tier": null,
+   "tier_label": null,
    "budgets": {
     "wall": 1800,
     "steps": 80,
@@ -789,7 +815,7 @@
    "viewport": "desktop-1280x720",
    "path": "dataset/web/tasks/web.react-spectrum-combobox-selection.lower-2.001/repo",
    "outcomes": {
-    "label": "Web-36 release evaluation, nine API models, one selected attempt each",
+    "label": "Web-36 release evaluation, nine API models, a single attempt each",
     "code": {
      "k": 2,
      "n": 9
@@ -807,6 +833,7 @@
    "family": "Recharts",
    "instruction": "In the Allocation Ring Studio, each board shows a live allocation ring next to the approved reference of how that same board is meant to look. As you step the board through its layout profiles across the top, the live ring does not settle the way the approved reference does: on the profiles where the card gives its ring less room, the live ring comes out the wrong size for the space it sits in and spills past the room it has, instead of filling that room the way the reference shows. Make the live ring settle to match its approved reference on every profile of every board. Do not change the boards, the profiles, the reference, the legend, or the slice values.",
    "tier": null,
+   "tier_label": null,
    "budgets": {
     "wall": 1800,
     "steps": 80,
@@ -819,7 +846,7 @@
    "viewport": "desktop-1360x900",
    "path": "dataset/web/tasks/v3.recharts-responsive-pie.001/repo",
    "outcomes": {
-    "label": "Web-36 release evaluation, nine API models, one selected attempt each",
+    "label": "Web-36 release evaluation, nine API models, a single attempt each",
     "code": {
      "k": 1,
      "n": 9
@@ -833,10 +860,11 @@
   {
    "id": "web.saleor-export-current-search.lower-1.001",
    "domain": "web",
-   "title": "Saleor: export current search (variant 1)",
+   "title": "Saleor: export current search",
    "family": "Saleor",
    "instruction": "Make the product export's “Current search” scope export exactly the products matching every active filter visible on the product list. Support both workspace configurations described in the application and preserve the other export scopes.",
    "tier": null,
+   "tier_label": null,
    "budgets": {
     "wall": 1800,
     "steps": 80,
@@ -849,7 +877,7 @@
    "viewport": "desktop-1280x720",
    "path": "dataset/web/tasks/web.saleor-export-current-search.lower-1.001/repo",
    "outcomes": {
-    "label": "Web-36 release evaluation, nine API models, one selected attempt each",
+    "label": "Web-36 release evaluation, nine API models, a single attempt each",
     "code": {
      "k": 0,
      "n": 9
@@ -863,10 +891,11 @@
   {
    "id": "v3.slate-softbreak-scroll.002",
    "domain": "web",
-   "title": "Slate: softbreak scroll",
+   "title": "Slate: soft break scroll",
    "family": "Slate",
    "instruction": "In the Field Log Composer, the writer is partway through the active entry with that entry sitting at the bottom of the log. Continuing the same entry on a new line (Shift+Enter, not a new entry) moves the writing spot to somewhere the writer can no longer see it; the composer's status strip reports the writing spot as below the fold while it is off screen. Fix the composer so that continuing the current entry keeps the writing spot in view without throwing away the lines just above it. Do not change the workspace frame payload, the log text, the frame layout, the status indicator behavior, or the plain Enter / typing behavior.",
    "tier": null,
+   "tier_label": null,
    "budgets": {
     "wall": 1800,
     "steps": 80,
@@ -879,7 +908,7 @@
    "viewport": "desktop-1280x720",
    "path": "dataset/web/tasks/v3.slate-softbreak-scroll.002/repo",
    "outcomes": {
-    "label": "Web-36 release evaluation, nine API models, one selected attempt each",
+    "label": "Web-36 release evaluation, nine API models, a single attempt each",
     "code": {
      "k": 1,
      "n": 9
@@ -893,10 +922,11 @@
   {
    "id": "web.subscription-renewal-frontier-easy.001",
    "domain": "web",
-   "title": "Subscription renewal contract (easy anchor)",
+   "title": "Subscription renewal contract",
    "family": "Subscription renewal",
    "instruction": "Make the frontend display the next renewal determined by the live subscription lifecycle contract for the subscription being viewed, including SUB-731, while preserving the renewal calculation.",
    "tier": null,
+   "tier_label": "Easy anchor",
    "budgets": {
     "wall": 1800,
     "steps": 80,
@@ -909,7 +939,7 @@
    "viewport": "desktop-1280x720",
    "path": "dataset/web/tasks/web.subscription-renewal-frontier-easy.001/repo",
    "outcomes": {
-    "label": "Web-36 release evaluation, nine API models, one selected attempt each",
+    "label": "Web-36 release evaluation, nine API models, a single attempt each",
     "code": {
      "k": 0,
      "n": 9
@@ -927,6 +957,7 @@
    "family": "Support scheduling",
    "instruction": "Make the support page display the selected support window for the case being viewed, including SUP-410, while preserving the existing schedule details.",
    "tier": null,
+   "tier_label": null,
    "budgets": {
     "wall": 1800,
     "steps": 80,
@@ -939,7 +970,7 @@
    "viewport": "desktop-1280x720",
    "path": "dataset/web/tasks/web.support-window-contract.001/repo",
    "outcomes": {
-    "label": "Web-36 release evaluation, nine API models, one selected attempt each",
+    "label": "Web-36 release evaluation, nine API models, a single attempt each",
     "code": {
      "k": 0,
      "n": 9
@@ -957,6 +988,7 @@
    "family": "Tax invoicing",
    "instruction": "Make the frontend display estimated tax according to the live calculation contract for the cart being viewed, including CART-730, while preserving the calculation details.",
    "tier": null,
+   "tier_label": null,
    "budgets": {
     "wall": 1800,
     "steps": 80,
@@ -969,7 +1001,7 @@
    "viewport": "desktop-1280x720",
    "path": "dataset/web/tasks/web.tax-rounding-contract.002/repo",
    "outcomes": {
-    "label": "Web-36 release evaluation, nine API models, one selected attempt each",
+    "label": "Web-36 release evaluation, nine API models, a single attempt each",
     "code": {
      "k": 0,
      "n": 9
@@ -987,6 +1019,7 @@
    "family": "Tiptap",
    "instruction": "In Draft Composer, returning to the editor with the keyboard puts the caret at the beginning instead of where the active workspace says the writer left off. Repair keyboard focus resume so the caret returns to the indicated place for the active draft. Preserve the workspace payload, document text, layout, and mouse behavior.",
    "tier": null,
+   "tier_label": null,
    "budgets": {
     "wall": 1800,
     "steps": 80,
@@ -999,7 +1032,7 @@
    "viewport": "desktop-1280x720",
    "path": "dataset/web/tasks/v3.tiptap-keyboard-focus-position.002/repo",
    "outcomes": {
-    "label": "Web-36 release evaluation, nine API models, one selected attempt each",
+    "label": "Web-36 release evaluation, nine API models, a single attempt each",
     "code": {
      "k": 0,
      "n": 9
@@ -1013,10 +1046,11 @@
   {
    "id": "web.vue-sticky-table-columns.lower-1.001",
    "domain": "web",
-   "title": "Vue: sticky table columns (variant 1)",
+   "title": "Vue: sticky table columns",
    "family": "Vue",
    "instruction": "When row selection and the pinned Name column are enabled, horizontally scrolling the member table causes the pinned header and cells to overlap the selection rail. Fix the layout for the active compact workspace density shown in the application without changing the table data or disabling either feature.",
    "tier": null,
+   "tier_label": null,
    "budgets": {
     "wall": 1800,
     "steps": 80,
@@ -1029,7 +1063,7 @@
    "viewport": "desktop-1280x720",
    "path": "dataset/web/tasks/web.vue-sticky-table-columns.lower-1.001/repo",
    "outcomes": {
-    "label": "Web-36 release evaluation, nine API models, one selected attempt each",
+    "label": "Web-36 release evaluation, nine API models, a single attempt each",
     "code": {
      "k": 0,
      "n": 9
@@ -1043,10 +1077,11 @@
   {
    "id": "web.warehouse-cutoff-frontier-anchor.001",
    "domain": "web",
-   "title": "Warehouse cutoff contract (hard anchor)",
+   "title": "Warehouse cutoff contract (variant 1 of 2)",
    "family": "Warehouse cutoff",
    "instruction": "Make the frontend display the day selected by the live warehouse dispatch contract for the order being viewed, including ORD-244, while preserving the dispatch timeline.",
    "tier": null,
+   "tier_label": "Hard anchor",
    "budgets": {
     "wall": 1800,
     "steps": 80,
@@ -1059,7 +1094,7 @@
    "viewport": "desktop-1280x720",
    "path": "dataset/web/tasks/web.warehouse-cutoff-frontier-anchor.001/repo",
    "outcomes": {
-    "label": "Web-36 release evaluation, nine API models, one selected attempt each",
+    "label": "Web-36 release evaluation, nine API models, a single attempt each",
     "code": {
      "k": 0,
      "n": 9
@@ -1073,10 +1108,11 @@
   {
    "id": "web.warehouse-cutoff-frontier-easy.001",
    "domain": "web",
-   "title": "Warehouse cutoff contract (easy anchor)",
+   "title": "Warehouse cutoff contract (variant 2 of 2)",
    "family": "Warehouse cutoff",
    "instruction": "Make the frontend display the day selected by the live warehouse dispatch contract for the order being viewed, including ORD-731, while preserving the dispatch timeline.",
    "tier": null,
+   "tier_label": "Easy anchor",
    "budgets": {
     "wall": 1800,
     "steps": 80,
@@ -1089,7 +1125,7 @@
    "viewport": "desktop-1280x720",
    "path": "dataset/web/tasks/web.warehouse-cutoff-frontier-easy.001/repo",
    "outcomes": {
-    "label": "Web-36 release evaluation, nine API models, one selected attempt each",
+    "label": "Web-36 release evaluation, nine API models, a single attempt each",
     "code": {
      "k": 0,
      "n": 9
@@ -1103,7 +1139,7 @@
   {
    "id": "gameqa.2048-seeded-restart-parity.002",
    "domain": "game",
-   "title": "2048: seeded restart parity",
+   "title": "2048: seeded restart parity (variant 1 of 2)",
    "family": "2048",
    "instruction": "The deterministic 2048 benchmark has an intermittent in-place restart regression. A fresh seeded board can appear correct and then advance before the player's first intentional post-restart move, so replaying the same opening no longer matches. Repair Space, Try again, and Game API restarts without disabling ordinary held-key movement, hardcoding a seed, reloading the page, or changing normal movement, merging, scoring, or Game API behavior.",
    "tier": "upper_anchor",
@@ -1134,7 +1170,7 @@
   {
    "id": "gameqa.2048-seeded-restart-parity.005",
    "domain": "game",
-   "title": "2048: seeded restart parity",
+   "title": "2048: seeded restart parity (variant 2 of 2)",
    "family": "2048",
    "instruction": "The deterministic 2048 benchmark has an intermittent in-place restart regression. A fresh seeded board can appear correct and then advance before the player's first intentional post-restart move, so replaying the same opening no longer matches. Use the live on-page Opening parity lamp as visual feedback while diagnosing and validating the regression. Repair Space, Try again, and Game API restarts without disabling ordinary held-key movement, hardcoding a seed, reloading the page, or changing normal movement, merging, scoring, or Game API behavior.",
    "tier": "lower_anchor",
@@ -1165,7 +1201,7 @@
   {
    "id": "gameqa.astray-level2-parallax-glass.009",
    "domain": "game",
-   "title": "Astray: level2 parallax glass",
+   "title": "Astray: level 2 parallax glass",
    "family": "Astray",
    "instruction": "In deterministic Level 2, the opening view should show a stationary gold ball below three opaque magenta glass seals and a red crossbar. With no input the ball must remain at rest. Press and hold the ordinary Up arrow to travel through the gallery. Each passed seal should visibly resolve into a green glass core with a separate amber crown while the remaining seals stay magenta. After all three transitions, the crossbar must be green, all three green-and-amber signatures must remain visible, and ordinary movement must continue beyond the bar. Fix the complete rendered sequence while preserving smooth play, ordinary R restart, and in-place level selection.",
    "tier": "upper_anchor",
@@ -1197,7 +1233,7 @@
   {
    "id": "gameqa.boxel-rebound-restart-camera-envelope.010",
    "domain": "game",
-   "title": "Boxel Rebound: restart camera envelope",
+   "title": "Boxel Rebound: restart camera envelope (variant 1 of 5)",
    "family": "Boxel Rebound",
    "instruction": "In Boxel Rebound Level 50, a normal restart from the moving lift can make the brief faded checkpoint echo disagree with where the ride resumes, and the course view no longer feels continuous. Fix this restart regression while preserving normal play and completion.",
    "tier": "upper_anchor",
@@ -1229,7 +1265,7 @@
   {
    "id": "gameqa.boxel-rebound-restart-camera-envelope.011",
    "domain": "game",
-   "title": "Boxel Rebound: restart camera envelope",
+   "title": "Boxel Rebound: restart camera envelope (variant 2 of 5)",
    "family": "Boxel Rebound",
    "instruction": "In Boxel Rebound Level 50, a normal restart from the moving lift can make the brief faded checkpoint echo disagree with where the ride resumes, and the course view no longer feels continuous. Fix this restart regression while preserving normal play and completion.",
    "tier": "lower_anchor",
@@ -1261,7 +1297,7 @@
   {
    "id": "gameqa.boxel-rebound-restart-camera-envelope.012",
    "domain": "game",
-   "title": "Boxel Rebound: restart camera envelope",
+   "title": "Boxel Rebound: restart camera envelope (variant 3 of 5)",
    "family": "Boxel Rebound",
    "instruction": "In Boxel Rebound Level 50, a normal restart from the moving lift can make the brief faded checkpoint echo disagree with where the ride resumes, and the course view no longer feels continuous. Fix this restart regression while preserving normal play and completion.",
    "tier": "lower_anchor",
@@ -1293,7 +1329,7 @@
   {
    "id": "gameqa.boxel-rebound-restart-camera-envelope.013",
    "domain": "game",
-   "title": "Boxel Rebound: restart camera envelope",
+   "title": "Boxel Rebound: restart camera envelope (variant 4 of 5)",
    "family": "Boxel Rebound",
    "instruction": "In Boxel Rebound Level 50, a normal restart from the moving lift can make the brief faded checkpoint echo disagree with where the ride resumes, and the course view no longer feels continuous. Fix this restart regression while preserving normal play and completion.",
    "tier": "lower_anchor",
@@ -1325,7 +1361,7 @@
   {
    "id": "gameqa.boxel-rebound-restart-camera-envelope.014",
    "domain": "game",
-   "title": "Boxel Rebound: restart camera envelope",
+   "title": "Boxel Rebound: restart camera envelope (variant 5 of 5)",
    "family": "Boxel Rebound",
    "instruction": "In Boxel Rebound Level 50, a normal restart from the moving lift can make the brief faded checkpoint echo disagree with where the ride resumes, and the course view no longer feels continuous. Fix this restart regression while preserving normal play and completion.",
    "tier": "upper_anchor",
@@ -1421,7 +1457,7 @@
   {
    "id": "gameqa.captain-callisto-goal-transition.005",
    "domain": "game",
-   "title": "Captain Callisto: goal transition",
+   "title": "Captain Callisto: goal transition (variant 1 of 2)",
    "family": "Captain Callisto",
    "instruction": "In the deterministic Level 6 castle stair, collecting every coin and entering the transporter while boosting forward briefly shows the cleared-level screen, but the screen disappears and gameplay resumes. Fix the gameplay regression and replay the route to verify that completion remains active.",
    "tier": "upper_anchor",
@@ -1453,7 +1489,7 @@
   {
    "id": "gameqa.captain-callisto-goal-transition.006",
    "domain": "game",
-   "title": "Captain Callisto: goal transition",
+   "title": "Captain Callisto: goal transition (variant 2 of 2)",
    "family": "Captain Callisto",
    "instruction": "In the deterministic Level 6 castle stair, collecting every coin and entering the transporter while holding forward and boost briefly shows the cleared-level screen. When both approach controls return to neutral, the cleared state is lost. Fix the gameplay regression and replay that same hold-then-release route to verify that completion remains active after the controls are released.",
    "tier": "borderline_upper_anchor",
@@ -1485,7 +1521,7 @@
   {
    "id": "gameqa.captain-callisto-temporal-jetpack.006",
    "domain": "game",
-   "title": "Captain Callisto: temporal jetpack",
+   "title": "Captain Callisto: temporal jetpack (variant 1 of 2)",
    "family": "Captain Callisto",
    "instruction": "The deterministic Level 3 benchmark build contains a gameplay regression. Play the pulse lane and compare the start, release, and restart of several short jetpack bursts. Restore consistent visible and physical timing, then complete the level.",
    "tier": "upper_anchor",
@@ -1517,7 +1553,7 @@
   {
    "id": "gameqa.captain-callisto-temporal-jetpack.007",
    "domain": "game",
-   "title": "Captain Callisto: temporal jetpack",
+   "title": "Captain Callisto: temporal jetpack (variant 2 of 2)",
    "family": "Captain Callisto",
    "instruction": "The deterministic Level 3 benchmark build contains a gameplay regression. Hold D and make three short Shift bursts, releasing Shift briefly between them. Each burst should grow from a small plume and lift smoothly, but later restarts can snap immediately to full exhaust and fuel use even though the release gap looked normal. Restore consistent visible and physical timing, then complete the level.",
    "tier": "lower_anchor",
@@ -1614,7 +1650,7 @@
   {
    "id": "gameqa.flappy-bird-flight-lab.008",
    "domain": "game",
-   "title": "Flappy Bird: flight lab",
+   "title": "Flappy Bird: flight lab (variant 1 of 4)",
    "family": "Flappy Bird",
    "instruction": "The deterministic Flappy Bird build opens on a selectable Flight Lab. Before editing, use the browser to launch TAP ARC, HELD ARC, and LATE CONTACT one by one and inspect a screenshot of every indefinitely frozen result. Compare TAP's INPUT RECEIPT showing PRESS and RELEASE in one step, its ACTUAL IMPULSE versus TARGET IMPULSE, and its actual versus target arc. Compare HELD's longer receipt timeline and its distinct impulse and arc. For LATE CONTACT, compare the moving bird/pipe segment, both endpoint poses, the fractional CONTACT INTERVAL marker, OBSERVED CONTACT versus RETAINED COLLISION, the result, and the ledger. Repair the underlying gameplay contract so TAP and HELD follow their different targets and clear, while LATE CONTACT retains the observed contact as gameplay collision, bumps, and earns no clear. Then verify ordinary three-pipe scoring, collision/death, quick keyboard and pointer flaps, both restart paths, and stable frozen results.",
    "tier": "upper_anchor",
@@ -1646,7 +1682,7 @@
   {
    "id": "gameqa.flappy-bird-flight-lab.010",
    "domain": "game",
-   "title": "Flappy Bird: flight lab",
+   "title": "Flappy Bird: flight lab (variant 2 of 4)",
    "family": "Flappy Bird",
    "instruction": "The deterministic Flappy Bird build opens on a selectable Flight Lab. Before editing, use the browser to launch TAP ARC, HELD ARC, and LATE CONTACT one by one and inspect a screenshot of every indefinitely frozen result. Compare TAP's INPUT RECEIPT showing PRESS and RELEASE in one step, its ACTUAL IMPULSE versus TARGET IMPULSE, and its actual versus target arc. Compare HELD's longer receipt timeline and its distinct impulse and arc. For LATE CONTACT, compare the moving bird/pipe segment, both endpoint poses, the fractional CONTACT INTERVAL marker, and the frozen CONTACT LIFETIME row across capture, the following frame, and commit, alongside the result and ledger. Repair the underlying gameplay contract so TAP and HELD follow their different targets and clear, while LATE CONTACT retains the observed contact as gameplay collision, bumps, and earns no clear. Then verify ordinary three-pipe scoring, collision/death, quick keyboard and pointer flaps, both restart paths, and stable frozen results.",
    "tier": "upper_anchor",
@@ -1678,7 +1714,7 @@
   {
    "id": "gameqa.flappy-bird-flight-lab.011",
    "domain": "game",
-   "title": "Flappy Bird: flight lab",
+   "title": "Flappy Bird: flight lab (variant 3 of 4)",
    "family": "Flappy Bird",
    "instruction": "The deterministic Flappy Bird build opens on a selectable Flight Lab. Before editing, use the browser to launch TAP ARC, HELD ARC, and LATE CONTACT one by one and inspect a screenshot of every indefinitely frozen result. Compare TAP's INPUT RECEIPT showing PRESS and RELEASE in one step, its ACTUAL IMPULSE versus TARGET IMPULSE, and its actual versus target arc. Compare HELD's longer receipt timeline and its distinct impulse and arc. For LATE CONTACT, compare the moving bird/pipe segment, both endpoint poses, the fractional CONTACT INTERVAL marker, and the frozen CONTACT PROOF rows showing the horizontal time window, vertical outside-gap time, and their intersection, alongside the result and ledger. Repair the underlying gameplay contract so TAP and HELD follow their different targets and clear, while LATE CONTACT retains the observed contact as gameplay collision, bumps, and earns no clear. Then verify ordinary three-pipe scoring, collision/death, quick keyboard and pointer flaps, both restart paths, and stable frozen results.",
    "tier": "upper_anchor",
@@ -1710,7 +1746,7 @@
   {
    "id": "gameqa.flappy-bird-flight-lab.012",
    "domain": "game",
-   "title": "Flappy Bird: flight lab",
+   "title": "Flappy Bird: flight lab (variant 4 of 4)",
    "family": "Flappy Bird",
    "instruction": "The deterministic Flappy Bird build opens on a selectable Flight Lab. Before editing, use the browser to launch TAP ARC, HELD ARC, and LATE CONTACT one by one and inspect a screenshot of every indefinitely frozen result. Compare TAP's INPUT RECEIPT showing PRESS and RELEASE in one step, its ACTUAL IMPULSE versus TARGET IMPULSE, and its actual versus target arc. Compare HELD's longer receipt timeline and its distinct impulse and arc. For LATE CONTACT, compare the moving bird/pipe segment, both endpoint poses, the fractional CONTACT INTERVAL marker, and the frozen FIXED-STEP MAP showing same-step press/release edges, before/held/after motion slices, and per-slice collision sweep, alongside the result and ledger. Repair the underlying gameplay contract so TAP and HELD follow their different targets and clear, while LATE CONTACT retains the observed contact as gameplay collision, bumps, and earns no clear. Then verify ordinary three-pipe scoring, collision/death, quick keyboard and pointer flaps, both restart paths, and stable frozen results.",
    "tier": "upper_anchor",
@@ -1870,7 +1906,7 @@
   {
    "id": "gameqa.minesweeper-delayed-loss-episode-identity.002",
    "domain": "game",
-   "title": "Minesweeper: delayed loss episode identity",
+   "title": "Minesweeper: delayed loss episode identity (variant 1 of 2)",
    "family": "Minesweeper",
    "instruction": "The deterministic Minesweeper benchmark has an episode-boundary regression in its intentionally delayed loss presentation. After exposing a mine with either a normal click or a count-valid chord, quickly starting a fresh board through the face or Game API can leave the new board dead or later flip it back to the prior loss. Before editing, let one direct loss remain pending until the live Episode integrity panel classifies its Timing check, then use the panel to validate both Timing and Ownership. Preserve first-click safety, seeded layouts, chord/flag/question behavior, counters, adjacency rendering, and both reset routes. Do not remove the delayed presentation or reload the page.",
    "tier": "lower_anchor",
@@ -1901,7 +1937,7 @@
   {
    "id": "gameqa.minesweeper-delayed-loss-episode-identity.003",
    "domain": "game",
-   "title": "Minesweeper: delayed loss episode identity",
+   "title": "Minesweeper: delayed loss episode identity (variant 2 of 2)",
    "family": "Minesweeper",
    "instruction": "The deterministic Minesweeper benchmark has an episode-boundary regression in its intentionally delayed loss presentation. After exposing a mine with either a normal click or a count-valid chord, quickly starting a fresh board through the face or Game API can leave the new board dead or later flip it back to the prior loss. Before editing, let one direct loss remain pending until the live Episode integrity panel classifies its Timing check, then use the panel to validate both Timing and Ownership. Preserve first-click safety, seeded layouts, chord/flag/question behavior, counters, adjacency rendering, and both reset routes. Do not remove the delayed presentation or reload the page. This successor uses a newly protected handoff calibration; do not assume the predecessor's timing value.",
    "tier": "lower_anchor",
@@ -2028,7 +2064,7 @@
   {
    "id": "devops.alert-inhibition-equal-labels.harder-1.frontier-hard-r1.001",
    "domain": "devops",
-   "title": "Alert inhibition with equal labels (harder-1)",
+   "title": "Alert inhibition with equal labels (variant 1 of 2)",
    "family": "Alert inhibition with equal labels",
    "instruction": "Sentinel shows active incidents where infrastructure alerts are suppressing unrelated service alerts, while other suppressions in the same incident are expected and must remain. Diagnose the boundary using the firing and suppressed queues, inhibitor edges, label-comparison diagnostics, the scope-dimension registry with its operator notes, the incident advisories, and the deployed rule, then load the arriving-alert batch and confirm the behavior generalizes. Repair the inhibition configuration so unrelated alerts keep firing without disabling legitimate suppression. Preserve every alert, incident, diagnostic surface, and rule workflow.",
    "tier": "lower",
@@ -2051,7 +2087,7 @@
   {
    "id": "devops.alert-inhibition-equal-labels.harder-1.frontier-hard-r1.cua-upper-r3.001",
    "domain": "devops",
-   "title": "Alert inhibition with equal labels (harder-1, cua-upper-r3)",
+   "title": "Alert inhibition with equal labels (variant 2 of 2)",
    "family": "Alert inhibition with equal labels",
    "instruction": "Sentinel shows incidents where infrastructure alerts are suppressing unrelated service alerts, while other suppressions in the same incidents are expected and must remain. The incident timeline steps deterministically through its initial, arriving-alert, partial-resolution, and replay states. Diagnose the boundary by comparing the firing and suppressed queues, inhibitor edges, label-comparison diagnostics, the scope-dimension registry, the stamping runbook, the incident advisories, the notification routes, and the deployed rule across those timeline states, then repair the inhibition configuration so unrelated alerts keep firing without disabling legitimate suppression. Preserve every alert, timeline state, route, diagnostic surface, and rule workflow.",
    "tier": "lower",
@@ -2074,7 +2110,7 @@
   {
    "id": "devops.log-severity-normalization.r1.frontier-hard-r1.001",
    "domain": "devops",
-   "title": "Log severity normalization (r1)",
+   "title": "Log severity normalization (variant 1 of 2)",
    "family": "Log severity normalization",
    "instruction": "After the collector rollout, failed operations are missing from the log workbench’s severe view while a routine event appears as an error. Investigate the live records and receiver fleet, then repair severity classification. You may change the incorrect behavior. Preserve all records, healthy and legacy receiver behavior, raw telemetry, correlation details, severity filtering, delivery retries, and reset controls.",
    "tier": "lower",
@@ -2097,7 +2133,7 @@
   {
    "id": "devops.log-severity-normalization.r1.frontier-hard-r1.cua-upper-r2.001",
    "domain": "devops",
-   "title": "Log severity normalization (r1, cua-upper-r2)",
+   "title": "Log severity normalization (variant 2 of 2)",
    "family": "Log severity normalization",
    "instruction": "After the collector rollout, failed operations are missing from the log workbench’s severe view while a routine event appears as an error. Investigate the live records and receiver fleet, then repair severity classification. You may change the incorrect behavior. Preserve all records, healthy and legacy receiver behavior, raw telemetry, correlation details, severity filtering, delivery retries, and reset controls.",
    "tier": "upper",
@@ -2120,7 +2156,7 @@
   {
    "id": "devops.alert-pending-identity.receiver-selector-r2.frontier-hard-r1.001",
    "domain": "devops",
-   "title": "Pending-alert identity and receiver selector (receiver-selector-r2)",
+   "title": "Pending-alert identity and receiver selector (variant 1 of 2)",
    "family": "Pending-alert identity and receiver selector",
    "instruction": "The operations console shows sustained pressure, but the expected alert never reaches the on-call receiver and the delivery journal keeps reporting divergence. Investigate the live evaluation states and repair the durable rule adapter. Preserve the alert threshold and hold intent, healthy recoveries, independent service and instance identity, receiver routing and the delivery journal, descriptive detail, and the selection, reset, and replay controls.",
    "tier": "differential",
@@ -2143,7 +2179,7 @@
   {
    "id": "devops.alert-pending-identity.receiver-selector-r2.frontier-hard-r2.cua-upper-r2.001",
    "domain": "devops",
-   "title": "Pending-alert identity and receiver selector (receiver-selector-r2, frontier-hard-r2, cua-upper-r2)",
+   "title": "Pending-alert identity and receiver selector (variant 2 of 2)",
    "family": "Pending-alert identity and receiver selector",
    "instruction": "The operations console shows sustained pressure, but the expected alert does not reach the on-call receiver in any routing epoch. Investigate the live evaluation states and repair the durable rule adapter. Preserve the alert threshold and hold intent, healthy recoveries, independent service and instance identity, receiver routing, the routing-epoch context and its declared policy classes, the posted routing policy runbook view, descriptive detail, and the selection, reset, and replay controls.",
    "tier": "lower",
@@ -2166,7 +2202,7 @@
   {
    "id": "devops.rate-before-aggregation.harder-1.frontier-hard-r1.001",
    "domain": "devops",
-   "title": "Rate before aggregation (harder-1)",
+   "title": "Rate before aggregation (variant 1 of 3)",
    "family": "Rate before aggregation",
    "instruction": "Counter Order Console shows narrow rectangular traffic blocks around target restarts, inflated window totals, and the same artifact across counter panels, while ramped load bursts are legitimate. Compare Burst control, Rolling restart, and Restart in burst across every panel; inspect event markers, target reset evidence, and the deployed Query definitions inspector. Repair the durable query binding while preserving every panel, target, point, real burst, marker, total, peak, range, scenario, control, and diagnostic.",
    "tier": "lower",
@@ -2189,7 +2225,7 @@
   {
    "id": "devops.rate-before-aggregation.harder-1.frontier-hard-r1.cua-upper-r1.001",
    "domain": "devops",
-   "title": "Rate before aggregation (harder-1, cua-upper-r1)",
+   "title": "Rate before aggregation (variant 2 of 3)",
    "family": "Rate before aggregation",
    "instruction": "Counter Order Console shows narrow rectangular traffic blocks around target restarts and inflated window totals in both paired observation windows, across every counter panel, while ramped load bursts are legitimate. Compare Burst control, Rolling restart, and Restart in burst across every panel in both observation windows; correlate event markers, target reset evidence, the collection lineage record for each window, and the deployed Query definitions inspector before and after the recorded publication transition. Repair the durable query binding while preserving every window, panel, target, point, real burst, marker, total, peak, range, scenario, control, and diagnostic.",
    "tier": "upper",
@@ -2212,7 +2248,7 @@
   {
    "id": "devops.rate-before-aggregation.harder-1.frontier-hard-r1.cua-upper-r2.001",
    "domain": "devops",
-   "title": "Rate before aggregation (harder-1, cua-upper-r2)",
+   "title": "Rate before aggregation (variant 3 of 3)",
    "family": "Rate before aggregation",
    "instruction": "Counter Order Console shows narrow rectangular traffic blocks around target restarts and inflated window totals in both paired observation windows, while ramped load bursts are legitimate. Compare Burst control, Rolling restart, and Restart in burst across every panel in both observation windows; inspect event markers, target reset and publication evidence, the collection record, and the deployed Query definitions inspector. Repair the durable query binding while preserving every window, panel, target, point, real burst, marker, total, peak, range, scenario, control, and diagnostic.",
    "tier": "lower",
@@ -2235,7 +2271,7 @@
   {
    "id": "devops.slo-availability-rollup.harder-1.frontier-hard-r1.001",
    "domain": "devops",
-   "title": "SLO availability rollup (harder-1)",
+   "title": "SLO availability rollup (variant 1 of 2)",
    "family": "SLO availability rollup",
    "instruction": "SLO Ledger Review has been enabled for a service with a new reporting agreement. Availability, the objective verdict, and budget utilization do not reconcile with the agreement and the event ledger across traffic shapes and rolling windows. Diagnose the discrepancy in the running console and repair durable rollup behavior. Preserve all events, slices, objectives, windows, breakdowns, filters, probes, and replay.",
    "tier": "lower",
@@ -2258,7 +2294,7 @@
   {
    "id": "devops.slo-availability-rollup.harder-1.frontier-hard-r1.cua-upper-r1.001",
    "domain": "devops",
-   "title": "SLO availability rollup (harder-1, cua-upper-r1)",
+   "title": "SLO availability rollup (variant 2 of 2)",
    "family": "SLO availability rollup",
    "instruction": "SLO Ledger Review has been enabled for a service with a new reporting agreement. Availability, the objective verdict, and budget utilization do not reconcile with the agreement and the event ledger across traffic shapes and both rolling windows, even though the console now tracks the rollup deployment schedule. Diagnose the discrepancy in the running console and repair durable rollup behavior for every aggregation window. Preserve all events, slices, objectives, windows, breakdowns, filters, probes, replay, deployment records, and comparison views.",
    "tier": "lower",
@@ -2281,7 +2317,7 @@
   {
    "id": "devops.scrape-response-phase-deadline.owner29-r1.frontier-hard-r2.cua-diff-r3.001",
    "domain": "devops",
-   "title": "Scrape response phase deadline (owner29-r1, frontier-hard-r2, cua-diff-r3)",
+   "title": "Scrape response phase deadline",
    "family": "Scrape response phase deadline",
    "instruction": "The healthy staging exporter stays current, but a slower target reports scrape timeouts and its samples stop updating. Reproduce the issue in the scrape console and repair collection so complete samples arrive within the published freshness budget, while stalled requests are canceled and healthy collection continues. Preserve complete payloads, receiver ingestion, truthful diagnostics, reset and replay. Any general repair within the public latency and freshness budgets is acceptable.",
    "tier": "lower",
@@ -2304,7 +2340,7 @@
   {
    "id": "devops.statsd-gauge-update-mode.owner32-r1.frontier-hard-r4.001",
    "domain": "devops",
-   "title": "StatsD gauge update mode (owner32-r1, frontier-hard-r4)",
+   "title": "StatsD gauge update mode (variant 1 of 2)",
    "family": "StatsD gauge update mode",
    "instruction": "After a collector rollout, some gauge readings jump to the size of a change while other gauge streams remain stable. Investigate the live datagrams, the fleet inventory and the update history, then repair ingestion. Preserve native units, every received update, metric identity and producer attribution, healthy traffic, idle state, reset, replay and page reload. Follow each fleet endpoint's currently demonstrated conventions and the published processing bound; any general correct repair is acceptable.",
    "tier": "differential",
@@ -2327,7 +2363,7 @@
   {
    "id": "devops.statsd-gauge-update-mode.owner32-r1.frontier-hard-r5.001",
    "domain": "devops",
-   "title": "StatsD gauge update mode (owner32-r1, frontier-hard-r5)",
+   "title": "StatsD gauge update mode (variant 2 of 2)",
    "family": "StatsD gauge update mode",
    "instruction": "After a site relay rollout, some gauge readings jump to the size of a change and later snap to a different level when their relay re-announces, while other gauge streams remain stable. Investigate the live datagrams and update history, then repair ingestion. Preserve native units, every received update, metric identity and relay attribution, healthy traffic, idle state, reset, replay and page reload. Follow the published relay announce contract and processing bound; any general correct repair is acceptable.",
    "tier": "differential",
@@ -2350,7 +2386,7 @@
   {
    "id": "devops.tail-sampling-decision-window.owner20-r1.frontier-hard-r2.001",
    "domain": "devops",
-   "title": "Tail-sampling decision window (owner20-r1, frontier-hard-r2)",
+   "title": "Tail-sampling decision window (variant 1 of 2)",
    "family": "Tail-sampling decision window",
    "instruction": "The Tail Sampling Console shows incident traces with failed dependencies missing from the trace store. Investigate the live windows and replay, then repair the durable collector configuration. Keep all error and slow traces eligible for retention while preserving the ordinary sampling baseline and the receiver service levels shown in the console. Collector settings and decision timing may change; received spans, their timestamps, trace details, filters, and replay inputs must remain intact.",
    "tier": "lower",
@@ -2373,7 +2409,7 @@
   {
    "id": "devops.tail-sampling-decision-window.owner20-r1.frontier-hard-r3.cua-diff-r2.001",
    "domain": "devops",
-   "title": "Tail-sampling decision window (owner20-r1, frontier-hard-r3, cua-diff-r2)",
+   "title": "Tail-sampling decision window (variant 2 of 2)",
    "family": "Tail-sampling decision window",
    "instruction": "The Tail Sampling Console shows incident traces with failed dependencies missing from the trace store. Investigate the live windows, the receiver delivery ledger, the receiver operations runbook, and replay, then repair the durable collector configuration. Keep all error and slow traces eligible for retention while preserving the ordinary sampling baseline and the service levels the receiver operations team publishes for its delivery profiles. The collector is redeployed against recorded receiver delivery profiles; the repaired durable configuration must stay correct for whichever supported delivery profile the receiver reports, not only the currently loaded traffic. Collector settings and decision timing may change; received spans, their timestamps, trace details, filters, and replay inputs must remain intact.",
    "tier": "lower",
@@ -2396,7 +2432,7 @@
   {
    "id": "devops.trace-clock-skew.lower-3.frontier-hard-r1.001",
    "domain": "devops",
-   "title": "Trace clock skew (lower-3)",
+   "title": "Trace clock skew (variant 1 of 2)",
    "family": "Trace clock skew",
    "instruction": "Spanline draws several remote-service spans outside the request that caused them. Some start before their parent and others end after it, while other cross-host traces render normally and boundaries that the operator surfaces flag as instrumentation problems are a separate issue. Use the trace selector, waterfall, raw span detail, host comparison and its operator notes, and warnings to repair the query adjustment chain. The console opens with one leading-clock and one trailing-clock trace side by side, including reported range, displayed range, host shift, parent range, and duration. Preserve every host-measured duration, root geometry, span and trace, already-aligned cross-host data, and every reported timestamp that the operator surfaces identify as an instrumentation problem rather than skew.",
    "tier": "lower",
@@ -2419,7 +2455,7 @@
   {
    "id": "devops.trace-clock-skew.lower-3.frontier-hard-r1.cua-upper-r6.001",
    "domain": "devops",
-   "title": "Trace clock skew (lower-3, cua-upper-r6)",
+   "title": "Trace clock skew (variant 2 of 2)",
    "family": "Trace clock skew",
    "instruction": "Spanline draws several remote-service spans outside the request that caused them. Captures archived before the site's overnight clock maintenance are affected in opposite directions, records filed after it render normally, and boundaries that the operator surfaces flag as sensor artefacts stay wrong in every record and are a separate issue. More than one post-maintenance replay of each affected workload was filed, the replays disagree with one another, and every record carries the site's short filing codes for its register, disposition, and recording crew; the operator calibration board posted in the console is where those codes are defined. Use the trace selector, waterfall, raw span detail, host comparison and its operator notes, warnings, the operator decision guide, and the operator calibration board to repair the query adjustment chain. The console opens with one leading-clock and one trailing-clock archived capture side by side, including reported range, displayed range, host shift, parent range, and duration. Preserve every host-measured duration, root geometry, span and trace, every record that replays consistently across the maintenance, and every boundary the operator surfaces flag as a sensor artefact rather than skew.",
    "tier": "lower",
@@ -2442,7 +2478,7 @@
   {
    "id": "devops.trace-await-context.lower-1.frontier-hard-r1.001",
    "domain": "devops",
-   "title": "Trace context across await (lower-1)",
+   "title": "Trace context across await (variant 1 of 2)",
    "family": "Trace context across await",
    "instruction": "Continuum shows complete trace data for service refreshes, but work created after asynchronous suspension points starts unrelated traces. Start with the compatibility diagnosis card, then confirm its finding against the sequential waterfall, raw span inventory, transition diagnostics, and automatic instrumentation coverage before running the overlapping-operation scenario. Repair the runtime compatibility configuration so every hand-written and automatically instrumented post-await span remains under its own operation root, including overlapping operations. Preserve every operation, span, instrumentation boundary, scenario, and diagnostic surface.",
    "tier": "lower",
@@ -2465,7 +2501,7 @@
   {
    "id": "devops.trace-await-context.lower-1.frontier-hard-r1.cua-diff-r1.001",
    "domain": "devops",
-   "title": "Trace context across await (lower-1, cua-diff-r1)",
+   "title": "Trace context across await (variant 2 of 2)",
    "family": "Trace context across await",
    "instruction": "Continuum shows complete trace data for service refreshes, but work created after asynchronous suspension points starts unrelated traces. Start with the compatibility diagnosis card, then confirm its finding against the sequential waterfall, raw span inventory, transition diagnostics, and automatic instrumentation coverage before running the overlapping-operation scenario. Repair the runtime compatibility configuration so every hand-written and automatically instrumented post-await span remains under its own operation root, including operations whose asynchronous work completes only after an overlapping operation has already started. Preserve every operation, span, instrumentation boundary, scenario, and diagnostic surface.",
    "tier": "lower",
@@ -2530,7 +2566,7 @@
   {
    "id": "mobile.synthetic.external-wallchart-schedule.001",
    "domain": "mobile",
-   "title": "Brine & Beam: received wall-chart schedules (001)",
+   "title": "Brine & Beam: received wall-chart schedules (variant 1 of 9)",
    "family": "Gantt",
    "instruction": "The fictional yard delivered two approved refit charts. The mobile review app still\nintegrates a complete earlier refit. Repair the received-chart workflow so its live\nschedule, full per-job ledger and critical-path/slip report agree with the foreman's\nnew drawings for **both** editions. This is an original standalone synthetic task,\nnot an upstream bug or a native Android/iOS app.\n\nOpen **Received chart**, choose each sheet, and use **Read at 85%**, pan and zoom.\n**Reading guide** explains the day axis, arrows, bridges, lag ticks, all constraint\nand report rules, and draft behavior. The sheets overlap; the charts are planned\ndates, not a printed answer table. Use that evidence, not the older integration as\nan authority. The same imported inbox exists in both evaluation conditions.\n\nThe app receives a deterministic external inbox in the prepared isolated runtime.\nOutside it, an empty inbox is normal. All ordinary client source/build inputs are\navailable in this coding workspace; external attachments are product inputs, not\nmissing repository files. Rebuild/reset_to_scene makes a fresh review session;\nordinary reload preserves the saved edition and notes and does not re-import.\n\nPreserve live edits to planned start/duration and incoming links (including changing\nlink type), slip preview, cycle/integration errors that do not disable the viewer,\nUndo, Cancel, Save, notes, ordinary reload, independent editions, Reset, and inline\nExport draft. Keep each job's planned start/duration/incoming set/earliest dates/float,\nand the guide-defined report, human-readable in dedicated ledger/report sections;\nkeep a compact live schedule. Incoming links have no intrinsic order. Different\ninternal data structures, markup and framing are acceptable. Do not hardcode computed\ntotals or edit outcomes in place of implementing the disclosed scheduling contract.\n\nEdit any ordinary app file listed by this task. `build.sh` alone is protected;\nit checks ES modules and copies the whitelisted client files into mounted `dist`\nwithout removing the mount. No dependencies or network services are required.",
    "instruction_heading": "Brine & Beam — received wall-chart schedules",
@@ -2551,7 +2587,7 @@
   {
    "id": "mobile.synthetic.external-wallchart-schedule.004",
    "domain": "mobile",
-   "title": "Brine & Beam: received wall-chart schedules (004)",
+   "title": "Brine & Beam: received wall-chart schedules (variant 2 of 9)",
    "family": "Gantt",
    "instruction": "The fictional yard delivered two approved refit charts. The mobile review app still\nintegrates a complete earlier refit. Repair the received-chart workflow so its live\nschedule, full per-job ledger and critical-path/slip report agree with the foreman's\nnew drawings for **both** editions. This is an original standalone synthetic task,\nnot an upstream bug or a native Android/iOS app.\n\nOpen **Received chart**, choose each sheet, and use **Read at 85%**, pan and zoom.\n**Reading guide** explains the day axis, arrows, bridges, lag ticks, all constraint\nand report rules, and draft behavior. The sheets overlap; the charts are planned\ndates, not a printed answer table. Use that evidence, not the older integration as\nan authority. The same imported inbox exists in both evaluation conditions.\n\nThe app receives a deterministic external inbox in the prepared isolated runtime.\nOutside it, an empty inbox is normal. All ordinary client source/build inputs are\navailable in this coding workspace; external attachments are product inputs, not\nmissing repository files. Rebuild/reset_to_scene makes a fresh review session;\nordinary reload preserves the saved edition and notes and does not re-import.\n\nPreserve live edits to planned start/duration and incoming links (including changing\nlink type), slip preview, cycle/integration errors that do not disable the viewer,\nUndo, Cancel, Save, notes, ordinary reload, independent editions, Reset, and inline\nExport draft. Keep each job's planned start/duration/incoming set/earliest dates/float,\nand the guide-defined report, human-readable in dedicated ledger/report sections;\nkeep a compact live schedule. Incoming links have no intrinsic order. Different\ninternal data structures, markup and framing are acceptable. Do not hardcode computed\ntotals or edit outcomes in place of implementing the disclosed scheduling contract.\n\nEdit any ordinary app file listed by this task. `build.sh` alone is protected;\nit checks ES modules and copies the whitelisted client files into mounted `dist`\nwithout removing the mount. No dependencies or network services are required.",
    "instruction_heading": "Brine & Beam — received wall-chart schedules",
@@ -2572,7 +2608,7 @@
   {
    "id": "mobile.synthetic.external-wallchart-schedule.005",
    "domain": "mobile",
-   "title": "Brine & Beam: received wall-chart schedules (005)",
+   "title": "Brine & Beam: received wall-chart schedules (variant 3 of 9)",
    "family": "Gantt",
    "instruction": "The fictional yard delivered two approved refit charts. The mobile review app still\nintegrates a complete earlier refit. Repair the received-chart workflow so its live\nschedule, full per-job ledger and critical-path/slip report agree with the foreman's\nnew drawings for **both** editions. This is an original standalone synthetic task,\nnot an upstream bug or a native Android/iOS app.\n\nOpen **Received chart**, choose each sheet, and use **Read at 85%**, pan and zoom.\n**Reading guide** explains the day axis, arrows, bridges, lag ticks, all constraint\nand report rules, and draft behavior. The sheets overlap; the charts are planned\ndates, not a printed answer table. Use that evidence, not the older integration as\nan authority. The same imported inbox exists in both evaluation conditions.\n\nThe app receives a deterministic external inbox in the prepared isolated runtime.\nOutside it, an empty inbox is normal. All ordinary client source/build inputs are\navailable in this coding workspace; external attachments are product inputs, not\nmissing repository files. Rebuild/reset_to_scene makes a fresh review session;\nordinary reload preserves the saved edition and notes and does not re-import.\n\nPreserve live edits to planned start/duration and incoming links (including changing\nlink type), slip preview, cycle/integration errors that do not disable the viewer,\nUndo, Cancel, Save, notes, ordinary reload, independent editions, Reset, and inline\nExport draft. Keep each job's planned start/duration/incoming set/earliest dates/float,\nand the guide-defined report, human-readable in dedicated ledger/report sections;\nkeep a compact live schedule. Incoming links have no intrinsic order. Different\ninternal data structures, markup and framing are acceptable. Do not hardcode computed\ntotals or edit outcomes in place of implementing the disclosed scheduling contract.\n\nEdit any ordinary app file listed by this task. `build.sh` alone is protected;\nit checks ES modules and copies the whitelisted client files into mounted `dist`\nwithout removing the mount. No dependencies or network services are required.",
    "instruction_heading": "Brine & Beam — received wall-chart schedules",
@@ -2593,7 +2629,7 @@
   {
    "id": "mobile.synthetic.external-wallchart-schedule.008",
    "domain": "mobile",
-   "title": "Brine & Beam: received wall-chart schedules (008)",
+   "title": "Brine & Beam: received wall-chart schedules (variant 4 of 9)",
    "family": "Gantt",
    "instruction": "The fictional yard delivered two approved refit charts. The mobile review app still\nintegrates a complete earlier refit. Repair the received-chart workflow so its live\nschedule, full per-job ledger and critical-path/slip report agree with the foreman's\nnew drawings for **both** editions. This is an original standalone synthetic task,\nnot an upstream bug or a native Android/iOS app.\n\nOpen **Received chart**, choose each sheet, and use **Read at 85%**, pan and zoom.\n**Reading guide** explains the day axis, arrows, bridges, lag ticks, all constraint\nand report rules, and draft behavior. The sheets overlap; the charts are planned\ndates, not a printed answer table. Use that evidence, not the older integration as\nan authority. The same imported inbox exists in both evaluation conditions.\n\nThe app receives a deterministic external inbox in the prepared isolated runtime.\nOutside it, an empty inbox is normal. All ordinary client source/build inputs are\navailable in this coding workspace; external attachments are product inputs, not\nmissing repository files. Rebuild/reset_to_scene makes a fresh review session;\nordinary reload preserves the saved edition and notes and does not re-import.\n\nPreserve live edits to planned start/duration and incoming links (including changing\nlink type), slip preview, cycle/integration errors that do not disable the viewer,\nUndo, Cancel, Save, notes, ordinary reload, independent editions, Reset, and inline\nExport draft. Keep each job's planned start/duration/incoming set/earliest dates/float,\nand the guide-defined report, human-readable in dedicated ledger/report sections;\nkeep a compact live schedule. Incoming links have no intrinsic order. Different\ninternal data structures, markup and framing are acceptable. Do not hardcode computed\ntotals or edit outcomes in place of implementing the disclosed scheduling contract.\n\nEdit any ordinary app file listed by this task. `build.sh` alone is protected;\nit checks ES modules and copies the whitelisted client files into mounted `dist`\nwithout removing the mount. No dependencies or network services are required.",
    "instruction_heading": "Brine & Beam — received wall-chart schedules",
@@ -2614,7 +2650,7 @@
   {
    "id": "mobile.synthetic.external-wallchart-schedule.009",
    "domain": "mobile",
-   "title": "Brine & Beam: received wall-chart schedules (009)",
+   "title": "Brine & Beam: received wall-chart schedules (variant 5 of 9)",
    "family": "Gantt",
    "instruction": "The fictional yard delivered two approved refit charts. The mobile review app still\nintegrates a complete earlier refit. Repair the received-chart workflow so its live\nschedule, full per-job ledger and critical-path/slip report agree with the foreman's\nnew drawings for **both** editions. This is an original standalone synthetic task,\nnot an upstream bug or a native Android/iOS app.\n\nOpen **Received chart**, choose each sheet, and use **Read at 85%**, pan and zoom.\n**Reading guide** explains the day axis, arrows, bridges, lag ticks, all constraint\nand report rules, and draft behavior. The sheets overlap; the charts are planned\ndates, not a printed answer table. Use that evidence, not the older integration as\nan authority. The same imported inbox exists in both evaluation conditions.\n\nThe app receives a deterministic external inbox in the prepared isolated runtime.\nOutside it, an empty inbox is normal. All ordinary client source/build inputs are\navailable in this coding workspace; external attachments are product inputs, not\nmissing repository files. Rebuild/reset_to_scene makes a fresh review session;\nordinary reload preserves the saved edition and notes and does not re-import.\n\nPreserve live edits to planned start/duration and incoming links (including changing\nlink type), slip preview, cycle/integration errors that do not disable the viewer,\nUndo, Cancel, Save, notes, ordinary reload, independent editions, Reset, and inline\nExport draft. Keep each job's planned start/duration/incoming set/earliest dates/float,\nand the guide-defined report, human-readable in dedicated ledger/report sections;\nkeep a compact live schedule. Incoming links have no intrinsic order. Different\ninternal data structures, markup and framing are acceptable. Do not hardcode computed\ntotals or edit outcomes in place of implementing the disclosed scheduling contract.\n\nEdit any ordinary app file listed by this task. `build.sh` alone is protected;\nit checks ES modules and copies the whitelisted client files into mounted `dist`\nwithout removing the mount. No dependencies or network services are required.",
    "instruction_heading": "Brine & Beam — received wall-chart schedules",
@@ -2635,7 +2671,7 @@
   {
    "id": "mobile.synthetic.external-wallchart-schedule.010",
    "domain": "mobile",
-   "title": "Brine & Beam: received wall-chart schedules (010)",
+   "title": "Brine & Beam: received wall-chart schedules (variant 6 of 9)",
    "family": "Gantt",
    "instruction": "The fictional yard delivered two approved refit charts. The mobile review app still\nintegrates a complete earlier refit. Repair the received-chart workflow so its live\nschedule, full per-job ledger and critical-path/slip report agree with the foreman's\nnew drawings for **both** editions. This is an original standalone synthetic task,\nnot an upstream bug or a native Android/iOS app.\n\nOpen **Received chart**, choose each sheet, and use **Read at 85%**, pan and zoom.\n**Reading guide** explains the day axis, arrows, bridges, lag ticks, all constraint\nand report rules, and draft behavior. The sheets overlap; the charts are planned\ndates, not a printed answer table. Use that evidence, not the older integration as\nan authority. The same imported inbox exists in both evaluation conditions.\n\nThe app receives a deterministic external inbox in the prepared isolated runtime.\nOutside it, an empty inbox is normal. All ordinary client source/build inputs are\navailable in this coding workspace; external attachments are product inputs, not\nmissing repository files. Rebuild/reset_to_scene makes a fresh review session;\nordinary reload preserves the saved edition and notes and does not re-import.\n\nPreserve live edits to planned start/duration and incoming links (including changing\nlink type), slip preview, cycle/integration errors that do not disable the viewer,\nUndo, Cancel, Save, notes, ordinary reload, independent editions, Reset, and inline\nExport draft. Keep each job's planned start/duration/incoming set/earliest dates/float,\nand the guide-defined report, human-readable in dedicated ledger/report sections;\nkeep a compact live schedule. Incoming links have no intrinsic order. Different\ninternal data structures, markup and framing are acceptable. Do not hardcode computed\ntotals or edit outcomes in place of implementing the disclosed scheduling contract.\n\nEdit any ordinary app file listed by this task. `build.sh` alone is protected;\nit checks ES modules and copies the whitelisted client files into mounted `dist`\nwithout removing the mount. No dependencies or network services are required.",
    "instruction_heading": "Brine & Beam — received wall-chart schedules",
@@ -2656,7 +2692,7 @@
   {
    "id": "mobile.synthetic.external-wallchart-schedule.013",
    "domain": "mobile",
-   "title": "Brine & Beam: received wall-chart schedules (013)",
+   "title": "Brine & Beam: received wall-chart schedules (variant 7 of 9)",
    "family": "Gantt",
    "instruction": "The fictional yard delivered two approved refit charts. The mobile review app still\nintegrates a complete earlier refit. Repair the received-chart workflow so its live\nschedule, full per-job ledger and critical-path/slip report agree with the foreman's\nnew drawings for **both** editions. This is an original standalone synthetic task,\nnot an upstream bug or a native Android/iOS app.\n\nOpen **Received chart**, choose each sheet, and use **Read at 85%**, pan and zoom.\n**Reading guide** explains the day axis, arrows, bridges, lag ticks, all constraint\nand report rules, and draft behavior. The sheets overlap; the charts are planned\ndates, not a printed answer table. Use that evidence, not the older integration as\nan authority. The same imported inbox exists in both evaluation conditions.\n\nThe app receives a deterministic external inbox in the prepared isolated runtime.\nOutside it, an empty inbox is normal. All ordinary client source/build inputs are\navailable in this coding workspace; external attachments are product inputs, not\nmissing repository files. Rebuild/reset_to_scene makes a fresh review session;\nordinary reload preserves the saved edition and notes and does not re-import.\n\nPreserve live edits to planned start/duration and incoming links (including changing\nlink type), slip preview, cycle/integration errors that do not disable the viewer,\nUndo, Cancel, Save, notes, ordinary reload, independent editions, Reset, and inline\nExport draft. Keep each job's planned start/duration/incoming set/earliest dates/float,\nand the guide-defined report, human-readable in dedicated ledger/report sections;\nkeep a compact live schedule. Incoming links have no intrinsic order. Different\ninternal data structures, markup and framing are acceptable. Do not hardcode computed\ntotals or edit outcomes in place of implementing the disclosed scheduling contract.\n\nEdit any ordinary app file listed by this task. `build.sh` alone is protected;\nit checks ES modules and copies the whitelisted client files into mounted `dist`\nwithout removing the mount. No dependencies or network services are required.",
    "instruction_heading": "Brine & Beam — received wall-chart schedules",
@@ -2677,7 +2713,7 @@
   {
    "id": "mobile.synthetic.external-wallchart-schedule.015",
    "domain": "mobile",
-   "title": "Brine & Beam: received wall-chart schedules (015)",
+   "title": "Brine & Beam: received wall-chart schedules (variant 8 of 9)",
    "family": "Gantt",
    "instruction": "The fictional yard delivered two approved refit charts. The mobile review app still\nintegrates a complete earlier refit. Repair the received-chart workflow so its live\nschedule, full per-job ledger and critical-path/slip report agree with the foreman's\nnew drawings for **both** editions. This is an original standalone synthetic task,\nnot an upstream bug or a native Android/iOS app.\n\nOpen **Received chart**, choose each sheet, and use **Read at 85%**, pan and zoom.\n**Reading guide** explains the day axis, arrows, bridges, lag ticks, all constraint\nand report rules, and draft behavior. The sheets overlap; the charts are planned\ndates, not a printed answer table. Use that evidence, not the older integration as\nan authority. The same imported inbox exists in both evaluation conditions.\n\nThe app receives a deterministic external inbox in the prepared isolated runtime.\nOutside it, an empty inbox is normal. All ordinary client source/build inputs are\navailable in this coding workspace; external attachments are product inputs, not\nmissing repository files. Rebuild/reset_to_scene makes a fresh review session;\nordinary reload preserves the saved edition and notes and does not re-import.\n\nPreserve live edits to planned start/duration and incoming links (including changing\nlink type), slip preview, cycle/integration errors that do not disable the viewer,\nUndo, Cancel, Save, notes, ordinary reload, independent editions, Reset, and inline\nExport draft. Keep each job's planned start/duration/incoming set/earliest dates/float,\nand the guide-defined report, human-readable in dedicated ledger/report sections;\nkeep a compact live schedule. Incoming links have no intrinsic order. Different\ninternal data structures, markup and framing are acceptable. Do not hardcode computed\ntotals or edit outcomes in place of implementing the disclosed scheduling contract.\n\nEdit any ordinary app file listed by this task. `build.sh` alone is protected;\nit checks ES modules and copies the whitelisted client files into mounted `dist`\nwithout removing the mount. No dependencies or network services are required.",
    "instruction_heading": "Brine & Beam — received wall-chart schedules",
@@ -2698,7 +2734,7 @@
   {
    "id": "mobile.synthetic.external-wallchart-schedule.016",
    "domain": "mobile",
-   "title": "Brine & Beam: received wall-chart schedules (016)",
+   "title": "Brine & Beam: received wall-chart schedules (variant 9 of 9)",
    "family": "Gantt",
    "instruction": "The fictional yard delivered two approved refit charts. The mobile review app still\nintegrates a complete earlier refit. Repair the received-chart workflow so its live\nschedule, full per-job ledger and critical-path/slip report agree with the foreman's\nnew drawings for **both** editions. This is an original standalone synthetic task,\nnot an upstream bug or a native Android/iOS app.\n\nOpen **Received chart**, choose each sheet, and use **Read at 85%**, pan and zoom.\n**Reading guide** explains the day axis, arrows, bridges, lag ticks, all constraint\nand report rules, and draft behavior. The sheets overlap; the charts are planned\ndates, not a printed answer table. Use that evidence, not the older integration as\nan authority. The same imported inbox exists in both evaluation conditions.\n\nThe app receives a deterministic external inbox in the prepared isolated runtime.\nOutside it, an empty inbox is normal. All ordinary client source/build inputs are\navailable in this coding workspace; external attachments are product inputs, not\nmissing repository files. Rebuild/reset_to_scene makes a fresh review session;\nordinary reload preserves the saved edition and notes and does not re-import.\n\nPreserve live edits to planned start/duration and incoming links (including changing\nlink type), slip preview, cycle/integration errors that do not disable the viewer,\nUndo, Cancel, Save, notes, ordinary reload, independent editions, Reset, and inline\nExport draft. Keep each job's planned start/duration/incoming set/earliest dates/float,\nand the guide-defined report, human-readable in dedicated ledger/report sections;\nkeep a compact live schedule. Incoming links have no intrinsic order. Different\ninternal data structures, markup and framing are acceptable. Do not hardcode computed\ntotals or edit outcomes in place of implementing the disclosed scheduling contract.\n\nEdit any ordinary app file listed by this task. `build.sh` alone is protected;\nit checks ES modules and copies the whitelisted client files into mounted `dist`\nwithout removing the mount. No dependencies or network services are required.",
    "instruction_heading": "Brine & Beam — received wall-chart schedules",
