@@ -162,61 +162,6 @@
   // Recorded runs. Every screenshot, patch excerpt, shell output and verifier result is retained evidence
   // from the named attempt; nothing is reconstructed. Sources are listed in assets/media/manifest.json.
   var EPISODES = [
-    { tab: "Web: Fabric.js editor",
-      title: "Web: Fabric.js artboard editor, GPT-6 Astra with Hybrid access",
-      task: "The instruction reads: \u201cThe Blue shape does not behave as described in Help. Repair the editor while preserving its existing interactions.\u201d It does not say what is wrong. The expected behavior is written in the Help panel of the running application.",
-      taskId: "web.fabric-nested-selection-05.001",
-      foot: "Screenshots, both edits and the verifier report come from this attempt, recorded on 20 September 2026. In the Web evaluation, 1 of 9 API models solved this task with Hybrid access and 0 of 9 with Code-only.",
-      steps: [
-        { title: "Read Help in the application, then the source", detail: "Help says a side or corner handle may pass through the opposite edge and keep going. In src/app.mjs the agent finds the resize clamped at one pixel, so Blue can never cross.",
-          screen: { type: "image", src: "assets/media/episodes/fabric-nested-05/frame-02.png", w: 1000, h: 780,
-                    alt: "Artboard Editor with the Help panel opened below the canvas; the Blue rectangle sits inside two nested gray frames",
-                    caption: "Screenshot 2 of 19, 23:03:31 UTC, after opening Help" } },
-        { title: "First edit: let a dragged edge cross the opposite one", detail: "The Math.max(1, \u2026) clamp is removed. Width and height stay signed for positioning and are stored as absolute values.",
-          screen: { type: "diff", files: [
-            { name: "src/app.mjs", lines: [
-              ["ctx", "  const delta = p.subtract(start);"],
-              ["del", "- const width = sx ? Math.max(1, edit.width+sx*(delta.x*u.x+delta.y*u.y)) : edit.width;"],
-              ["del", "- const height = sy ? Math.max(1, edit.height+sy*(delta.x*v.x+delta.y*v.y)) : edit.height;"],
-              ["del", "- rect.set({scaleX:width/edit.original.width, scaleY:height/edit.original.height});"],
-              ["add", "+ const width = sx ? edit.width+sx*(delta.x*u.x+delta.y*u.y) : edit.width;"],
-              ["add", "+ const height = sy ? edit.height+sy*(delta.x*v.x+delta.y*v.y) : edit.height;"],
-              ["add", "+ rect.set({width:Math.abs(width), height:Math.abs(height), scaleX:1, scaleY:1});"] ] } ],
-            caption: "Edit at 23:03:50 UTC, as it appears in the submitted patch; code comments omitted" } },
-        { title: "Try it in the application: crossing works", detail: "After a reload the agent selects Blue and drags a side handle, then a corner, through the opposite edge. Blue now extends outside its frame, with its outline and handles in place.",
-          screen: { type: "image", src: "assets/media/episodes/fabric-nested-05/frame-06.png", w: 1000, h: 780,
-                    alt: "Blue resized through its opposite corner; it now sits at the top-left edge of the inner frame with red handles around it",
-                    caption: "Screenshot 6 of 19, 23:04:20 UTC, after the corner drag" } },
-        { title: "Keep going: Blue no longer responds", detail: "The agent then drags Blue itself. It does not move and its handles are gone. The agent notes: \u201cTesting also exposed a related issue: after Blue crosses outside a fixed frame, Fabric no longer finds its visible fill.\u201d Help requires that a later fill drag moves the whole shape.",
-          screen: { type: "image", src: "assets/media/episodes/fabric-nested-05/frame-07.png", w: 1000, h: 780,
-                    alt: "Blue in the same place outside the inner frame, now without any selection handles",
-                    caption: "Screenshot 7 of 19, 23:04:26 UTC, after dragging on Blue\u2019s fill" } },
-        { title: "Second edit: find artwork that overflows its frame", detail: "A canvas subclass extends the pointer hit test to the children of a frame, so a shape outside its frame can still be selected and dragged.",
-          screen: { type: "diff", files: [
-            { name: "src/app.mjs", lines: [
-              ["add", "+ class ArtboardCanvas extends fabric.Canvas {"],
-              ["add", "+   _checkTarget(object, pointer) {"],
-              ["add", "+     return super._checkTarget(object, pointer) ||"],
-              ["add", "+       !!(object.visible && object.evented && object instanceof fabric.Group &&"],
-              ["add", "+         object.interactive && object.subTargetCheck &&"],
-              ["add", "+         object.getObjects().some(child => this._checkTarget(child, pointer)));"],
-              ["add", "+   }"],
-              ["add", "+ }"],
-              ["ctx", "  \u2026"],
-              ["del", "- const canvas = new fabric.Canvas(canvasEl, {"],
-              ["add", "+ const canvas = new ArtboardCanvas(canvasEl, {"] ] } ],
-            caption: "Edit at 23:04:40 UTC, as it appears in the submitted patch; code comments omitted" } },
-        { title: "Repeat the same drags", detail: "After another reload the agent crosses the frame again and drags Blue\u2019s fill. This time Blue moves and stays selected.",
-          screen: { type: "image", src: "assets/media/episodes/fabric-nested-05/frame-11.png", w: 1000, h: 780,
-                    alt: "Blue moved back inside the inner frame by a fill drag, with its selection handles still shown",
-                    caption: "Screenshot 11 of 19, 23:07:13 UTC, after dragging on Blue\u2019s fill" } },
-        { title: "Verifier, on a clean copy", detail: "The evaluator rebuilds the project with the patch and replays scripted drags in a browser. All 21 checkpoints pass, including the three that drag Blue after it has crossed its frame.",
-          screen: { type: "verify", checks: [
-            { name: "build", cmd: "node build.mjs", result: "exit code 0", pass: true },
-            { name: "ui", cmd: "python3 verifiers/browser_check.py",
-              result: "nested-A-side-cross-released: PASS\nnested-A-corner-cross-released: PASS\nnested-A-fill-continuation-acquired: PASS\nnested-A-fill-continuation-preview: PASS\nnested-A-fill-continuation-released: PASS\n\u2026 21 of 21 checkpoints PASS", pass: true } ],
-            summary: "success: true", caption: "Retained verifier report for the same attempt; five of the 21 checkpoint lines shown" } }
-      ] },
     { tab: "Game: Vector Relay",
       title: "Game: Vector Relay, GPT-5.6 Sol with Hybrid access",
       task: "The player launches an orb at a relay; when the orb returns, the relay should clear and score. The task asks the agent to make a return count exactly once after the orb falls out and a replacement docks, and not at all after the player recalls the orb.",
@@ -332,6 +277,7 @@
       button.addEventListener("click", function () { load(i); });
       tabs.appendChild(button); tabButtons.push(button);
     });
+    tabs.hidden = EPISODES.length < 2;
     load(0);
   }
 

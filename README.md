@@ -4,7 +4,7 @@ A static research site in the style of an academic project page: `index.html` ha
 front matter (title, authors with numbered affiliations as in the paper, buttons), an overview
 (abstract, one before/after task per domain, then the paper's pipeline figure), results
 (inline-SVG grouped bar charts, an efficiency scatter and the paper's Table 1, collapsed by
-default), two recorded repair examples (Web and Game, switched by tabs), the four domains, analysis (paired gains, four case
+default), two timed replays and a step player for recorded repair runs, the four domains, analysis (paired gains, four case
 figures shown one at a time by domain tab, two failures), evaluation (the three verifier checks as a table, task construction and
 the task-validation figure) and the citation. `tasks.html` explores all 105 tasks; `results.html` redirects to
 the results section. GitHub Pages serves the repository root. No build step or JavaScript
@@ -26,7 +26,6 @@ of its task data and retained media.
 | Task inventory, original instructions, budgets and families | `tools/build_data.py` reads the canonical registry, domain manifests, task descriptors and release summaries. Run `python3 tools/build_data.py --root <research-checkout>`. |
 | Per-domain pass@1 results | `TABLE1` in `assets/js/site.js`, transcribed from `paper/evaluation/final-evaluation-report.md` (September 24, 2026) and identical to Table 1 of arXiv 2609.32600v1. The per-domain charts, the four-domain mean (panel a, equal domain weights, matching the right panel of Figure 1 in the paper) and the table are all rendered from it. `COLOR` gives each model the hue used in the paper's figures. Panel c is the paper's Figure 6a as an image. |
 | Paper figures | `assets/media/figures/*.png`, rendered by `tools/render_figures.py` (needs `pypdfium2`) from the **arXiv e-print** figures stored at `paper/arxiv-2609.32600v1/figures` in the research checkout (source dated 2026-09-29). The older Overleaf snapshot under `paper/overleaf` (2026-09-23) has outdated figures and must not be used. Rendered: Figure 2 pipeline (Overview, after the real screenshots; the left half of Figure 1 is no longer shown because Figure 2 covers it and also draws the Code-only and Hybrid conditions), Figures 3–4 task examples (Tasks), Figure 5 (reference validation, under Evaluation), Figure 6a, Figure 20 paired gains, Figures 28–31 repair cases. The appendix's task-construction figure (Figure 8) is deliberately not used. Sources and hashes are in `assets/media/figures/manifest.json`. |
-| Fabric.js repair example | The released GPT-6 Astra Hybrid attempt at `web.fabric-nested-selection-05.001` (the Web case of Figure 28) in `artifacts/trajectories/cua_results/gpt6-cua`: four of its 19 screenshots (the byte-identical copies under `assets/media/episodes/fabric-nested-05`, shared with the timed replay), the two edits exactly as they appear in `patch.diff` (comments omitted), the agent's own message from `rollout/responses-agent-trajectory.jsonl`, and `verifier_report.json`. Step text in `EPISODES` in `assets/js/site.js` was checked against the action log. |
 | Web replay (`#examples`) | `tools/build_episode.py --bundle <run>/gpt6-cua --curation tools/episodes/fabric-nested-05.json`. `<run>` is the redacted EFS export of `runs/candidate-05/` (GPT-6 Astra, plus GPT-5.6 Sol and Claude Opus 5 for the comparison line), kept outside this repository. This is the paper's Table 8 attempt; the patch view keeps `src/app.mjs` only. |
 | Minesweeper replay (`#examples`) | `tools/build_episode.py --bundle <dir> --curation tools/episodes/minesweeper-002.json`, where `<dir>` is `media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.002` from the public `cua-swe-viewer` repository. Event text and frames are verbatim; only stage titles and one-line summaries in the curation file are editorial. It is a GPT-5.6 Sol construction trial (`cua-03`), not a Table 8 attempt. `node tools/check_replay.mjs` checks the timeline. |
 | Vector Relay repair example | Retained screenshots, patch, shell outputs and verifier report in `paper/figure2_assets/cases/01_vector_relay`. The five steps are a selected excerpt of one recorded attempt. |
@@ -79,8 +78,8 @@ Code-only and a solid bar for Hybrid, value labels on every bar, a 0–100 axis,
 labels on the overall panel. The legend sits above the panels and uses neutral gray swatches, since hue
 identifies the model. The conditions are named Code-only (Coding / CLI) and Hybrid
 (Computer use + Coding / CLI), following the paper. Figures open in a lightbox. The recorded
-repair examples are manual and keyboard-accessible, with step titles in plain words and the
-task described above each player; task URL hashes open the corresponding
+step player is manual and keyboard-accessible, with step titles in plain words and the task
+described above it (`EPISODES` in `site.js` can hold several runs; tabs appear when it does); task URL hashes open the corresponding
 original instruction.
 
 Keep the copy short and factual. Use real evidence as the visual focus. Avoid decorative
