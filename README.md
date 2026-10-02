@@ -60,7 +60,9 @@ Instructions are never edited. To regenerate, export `dataset/` manifests, `task
 internal revision and pass that directory as `--root`.
 
 The task explorer preserves original instructions and exposes budgets,
-provenance and recorded task-level outcomes on expansion. Game task-level
+provenance and recorded task-level outcomes on expansion. Each collapsed row shows the first
+sentence of the instruction and, for Web tasks only, the release-evaluation outcome
+(`outcomes.kind == "release"`). Game task-level
 outcomes are construction trials, as identified by their source labels;
 they are not the final pass@1 model comparison.
 

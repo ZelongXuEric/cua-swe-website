@@ -155,7 +155,7 @@ def main():
             "verifiers": [g for g in ("build", "unit", "ui", "visual", "state") if ty["verifiers"].get(g)],
             "viewport": ty["environment"].get("viewport_or_device"),
             "path": ty.get("repo_snapshot", {}).get("path", f"dataset/web/tasks/{tid}"),
-            "outcomes": {"label": "Web-36 release evaluation, nine API models, a single attempt each",
+            "outcomes": {"kind": "release", "label": "Web-36 release evaluation, nine API models, a single attempt each",
                           "code": {"k": o["code"][0], "n": o["code"][1]}, "cua": {"k": o["cua"][0], "n": o["cua"][1]}},
         })
 
@@ -176,7 +176,7 @@ def main():
             "viewport": ty["environment"].get("viewport_or_device"),
             "path": f"dataset/game/tasks/{tid}",
             "seed": ty.get("game_runtime", {}).get("seed"),
-            "outcomes": {"label": f"Construction trials, GPT-5.6 Sol, {m.get('attempts_per_condition', 3)} attempts per condition",
+            "outcomes": {"kind": "construction", "label": f"Construction trials, GPT-5.6 Sol, {m.get('attempts_per_condition', 3)} attempts per condition",
                           "code": {"k": int(m["code_only_successes"]), "n": int(m["code_only_attempts"])},
                           "cua": {"k": int(m["cua_successes"]), "n": int(m["cua_attempts"])}},
         })

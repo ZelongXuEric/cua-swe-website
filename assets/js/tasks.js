@@ -22,12 +22,22 @@
     li.querySelector("button").setAttribute("aria-expanded", String(open));
     li.querySelector(".expand").textContent = open ? "−" : "+";
   }
+  // First sentence of the instruction, cut at a word boundary, for the collapsed row.
+  function excerpt(text) {
+    var first = text.replace(/\s+/g, " ").trim(), m = /^(.{20,}?[.!?])(\s|$)/.exec(first);
+    if (m) first = m[1];
+    return first.length > 150 ? first.slice(0, 150).replace(/\s+\S*$/, "") + "\u2026" : first;
+  }
   function row(task) {
     var li = el("li", "task"); li.id = task.id;
     var button = el("button"); button.type = "button";
     button.setAttribute("aria-expanded", "false"); button.setAttribute("aria-controls", "detail-" + task.id);
     button.appendChild(el("span", "dom", DOMAIN[task.domain]));
-    button.appendChild(el("span", "title", task.title));
+    var text = el("span", "text"); text.appendChild(el("span", "title", task.title)); text.appendChild(el("span", "excerpt", excerpt(task.instruction)));
+    button.appendChild(text);
+    // Only release-evaluation outcomes belong in the list; construction trials stay in the detail with their label.
+    var score = el("span", "score", task.outcomes && task.outcomes.kind === "release" ? "Hybrid " + task.outcomes.cua.k + "/" + task.outcomes.cua.n + ", Code-only " + task.outcomes.code.k + "/" + task.outcomes.code.n : "");
+    button.appendChild(score);
     var symbol = el("span", "expand", "+"); symbol.setAttribute("aria-hidden", "true"); button.appendChild(symbol);
     li.appendChild(button);
     var detail = el("div", "detail"); detail.id = "detail-" + task.id;
