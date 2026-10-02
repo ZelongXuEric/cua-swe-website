@@ -207,23 +207,24 @@
     </div>
   </div>
   <h3>How agents turn runtime observations into correct changes</h3>
-  <p class="intro">Four released GPT-6 Astra attempts, one per domain, as reviewed in the paper (Figures 28 to 31). Each card shows what the agent observed, the consequential source change, and the evaluator's verdict. Click a card to enlarge.</p>
-  <div class="cases">
-    <figure class="case zoomable">
+  <p class="intro">Four released GPT-6 Astra attempts, one per domain, as reviewed in the paper (Figures 28 to 31). Each figure shows what the agent observed, the source change that followed and the evaluator's verdict. Click a figure to enlarge it.</p>
+  <div class="case-viewer" id="case-viewer">
+    <div class="seg" role="group" aria-label="Repair case"></div>
+    <figure class="case zoomable" data-tab="Web">
       <img src="assets/media/figures/repair-case-web.png" alt="Web case: preserve nested selection after resizing" width="951" height="1193" loading="lazy">
-      <figcaption><b>Web · following the consequences of a code change.</b> After repairing resizing, the agent drags the object beyond its containing frame; when selection is lost it extends hit testing to selectable descendants and repeats the interaction. GPT-5.6 Sol and Claude Opus 5 repair the resize but leave the selection defect.</figcaption>
+      <figcaption>Fabric.js editor, the run shown step by step under Examples. After repairing resizing, the agent drags the object beyond its containing frame; when selection is lost it extends hit testing to selectable descendants and repeats the interaction. GPT-5.6 Sol and Claude Opus 5 repair the resize but leave the selection defect.</figcaption>
     </figure>
-    <figure class="case zoomable">
+    <figure class="case zoomable" data-tab="Game">
       <img src="assets/media/figures/repair-case-game.png" alt="Game case: restore checkpoint state from geometry" width="951" height="1193" loading="lazy">
-      <figcaption><b>Game · state updates jointly restore the scene.</b> The checkpoint stores geometry; the agent reconstructs lift phase from a faded reference frame, restores camera progress in course coordinates, and reattaches the player at its saved height.</figcaption>
+      <figcaption>State updates jointly restore the scene. The checkpoint stores geometry; the agent reconstructs lift phase from a faded reference frame, restores camera progress in course coordinates, and reattaches the player at its saved height.</figcaption>
     </figure>
-    <figure class="case zoomable">
+    <figure class="case zoomable" data-tab="DevOps">
       <img src="assets/media/figures/repair-case-devops.png" alt="DevOps case: infer each producer's gauge-update semantics" width="951" height="1287" loading="lazy">
-      <figcaption><b>DevOps · live behavior identifies the operative contract.</b> A pulse–pulse–settle sequence in the gauge console reveals each endpoint's update mode; the repair relearns the mode at each epoch and preserves receipt order.</figcaption>
+      <figcaption>Live behavior identifies the operative contract. A pulse, pulse, settle sequence in the gauge console reveals each endpoint's update mode; the repair relearns the mode at each epoch and preserves receipt order.</figcaption>
     </figure>
-    <figure class="case zoomable">
+    <figure class="case zoomable" data-tab="Mobile">
       <img src="assets/media/figures/repair-case-mobile.png" alt="Mobile case: recover gear connections from the received drawings" width="951" height="1313" loading="lazy">
-      <figcaption><b>Mobile · recovering relations from drawings.</b> Enlarged maker drawings expose shared axes and belt routing; the agent reconstructs all 23 driving relations and implements their angle, phase and editing behavior. GPT-5.6 Sol chooses the wrong driving rim at two compound assemblies.</figcaption>
+      <figcaption>Relations recovered from drawings. Enlarged maker drawings expose shared axes and belt routing; the agent reconstructs all 23 driving relations and implements their angle, phase and editing behavior. GPT-5.6 Sol chooses the wrong driving rim at two compound assemblies.</figcaption>
     </figure>
   </div>
   <h3>Where repairs still fail</h3>

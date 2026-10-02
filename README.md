@@ -5,7 +5,7 @@ front matter (title, authors with numbered affiliations as in the paper, buttons
 (abstract, one before/after task per domain, then the paper's pipeline figure), results
 (inline-SVG grouped bar charts, an efficiency scatter and the paper's Table 1, collapsed by
 default), two recorded repair examples (Web and Game, switched by tabs), the four domains, analysis (paired gains, four case
-figures, two failures), evaluation (the three verifier checks as a table, task construction and
+figures shown one at a time by domain tab, two failures), evaluation (the three verifier checks as a table, task construction and
 the task-validation figure) and the citation. `tasks.html` explores all 105 tasks; `results.html` redirects to
 the results section. GitHub Pages serves the repository root. No build step or JavaScript
 dependencies are required.
