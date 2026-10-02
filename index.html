@@ -60,20 +60,23 @@
   <figure class="strip">
     <div class="col web">
       <h4><span class="dom">Web</span> Allocation Ring Studio</h4>
+      <p class="about">Browser apps on real libraries: charts, canvas, maps, editors, tables. Layout and interaction bugs.</p>
       <div class="shot before"><img src="assets/media/hero/web-before.webp" alt="Allocation Ring Studio baseline: the live ring chart overflows its card" width="1000" height="625"><span class="tag">Bug</span></div>
       <p class="cap">Ring chart overflows its card in the Stacked layout</p>
       <div class="shot after"><img src="assets/media/hero/web-after.webp" alt="After the reference repair the ring fits its card" width="1000" height="625" loading="lazy"><span class="tag">Repaired</span></div>
       <p class="cap">Ring fits every layout profile</p>
     </div>
     <div class="col game">
-      <h4><span class="dom">Game</span> Vector Relay</h4>
-      <div class="shot before"><img src="assets/media/hero/game-before.webp" alt="Vector Relay before the repair: relay armed, orb replaced, score 0" width="1000" height="562"><span class="tag">Bug</span></div>
-      <p class="cap">A replacement orb docks, but the yellow relay never clears; score stays 0</p>
-      <div class="shot after"><img src="assets/media/hero/game-after.webp" alt="Vector Relay after the repair: circuit complete, score 500" width="1000" height="562" loading="lazy"><span class="tag">Repaired</span></div>
-      <p class="cap">Relay cleared, circuit complete, score 500</p>
+      <h4><span class="dom">Game</span> Hextris</h4>
+      <p class="about">12 browser games, from 2048 to platformers. Timing, physics and state bugs that show only in play.</p>
+      <div class="shot before"><img src="assets/media/hero/game-before.png" alt="Hextris before the repair: the cascade stalls and the score stays at 9" width="680" height="425"><span class="tag">Bug</span></div>
+      <p class="cap">Cascade stalls, score stuck at 9</p>
+      <div class="shot after"><img src="assets/media/hero/game-after.png" alt="Hextris after the repair: the cascade completes and the score reaches 27" width="680" height="425" loading="lazy"><span class="tag">Repaired</span></div>
+      <p class="cap">Cascade completes, score reaches 27</p>
     </div>
     <div class="col devops">
       <h4><span class="dom">DevOps</span> Counter Order Console</h4>
+      <p class="about">Consoles for traces, alerts, logs and metrics. Fix the config or pipeline behind them.</p>
       <div class="shot before"><img src="assets/media/hero/devops-before.webp" alt="Counter Order Console baseline: a rolling restart renders as a 12,516 requests-per-second spike" width="1000" height="434"><span class="tag">Bug</span></div>
       <p class="cap">Rolling restart rendered as a 12,516 req/s spike</p>
       <div class="shot after"><img src="assets/media/hero/devops-after.webp" alt="After the reference repair the false spike is gone and the real burst remains" width="1000" height="434" loading="lazy"><span class="tag">Repaired</span></div>
@@ -81,6 +84,7 @@
     </div>
     <div class="col mobile">
       <h4><span class="dom">Mobile</span> Mural Desk</h4>
+      <p class="about">Phone apps that import drawings and plans. Make the app agree with them.</p>
       <div class="shot before"><img src="assets/media/hero/mobile-before.webp" alt="Mural Desk baseline: the artwork is projected onto the wall plan in the wrong orientation" width="760" height="475"><span class="tag">Bug</span></div>
       <p class="cap">Artwork projected onto the wall plan the wrong way</p>
       <div class="shot after"><img src="assets/media/hero/mobile-after.webp" alt="After the reference repair the artwork is aligned to the wall plan" width="760" height="475" loading="lazy"><span class="tag">Repaired</span></div>
@@ -127,7 +131,9 @@
 
 <section id="examples" class="section">
   <h2>Examples</h2>
-  <p class="intro">Two recorded runs, step by step: what the agent saw, what it changed and what the verifier decided.</p>
+  <p class="intro">Recorded runs. The two timed replays play GPT-6 Astra’s scored Web attempt and a GPT-5.6 Sol Minesweeper run as they happened. The step player after them walks through two runs with the agent’s edits and the verifier’s result.</p>
+  <article class="replay" data-episode="fabric-nested-05"></article>
+  <article class="replay" data-episode="minesweeper-002"></article>
   <div class="seg episode-tabs" id="episode-tabs" role="group" aria-label="Recorded run"></div>
   <h3 id="episode-title"></h3>
   <p class="intro" id="episode-task"></p>
@@ -275,5 +281,8 @@
 <footer>CUA-SWE, 2026. Task bundles retain source and asset attribution. <a href="#top">Back to top ↑</a></footer>
 <div class="lightbox" id="lightbox" hidden><button type="button" class="lightbox-close" aria-label="Close">✕</button><img alt=""></div>
 <script src="assets/js/site.js"></script>
+<script src="data/episodes/fabric-nested-05.js"></script>
+<script src="data/episodes/minesweeper-002.js"></script>
+<script src="assets/js/replay.js"></script>
 </body>
 </html>

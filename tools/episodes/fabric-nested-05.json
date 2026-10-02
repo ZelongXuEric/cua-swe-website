@@ -1,0 +1,47 @@
+{
+  "id": "fabric-nested-05",
+  "task_id": "web.fabric-nested-selection-05.001",
+  "source": "EFS export runs/candidate-05/api-gpt6-astra/cua (paths and host redacted)",
+  "model": "GPT-6 Astra",
+  "run_kind": "single scored attempt (paper Table 8)",
+  "cohort": "nine API models on this task",
+  "kicker": "Web · Fabric.js artboard",
+  "title": "Seeing the second bug.",
+  "summary": "GPT-6 Astra makes Blue's edges cross as Help describes. A live drag then shows Blue can no longer be selected outside its frame, so it repairs hit testing and checks every gesture again.",
+  "highlight": "as described in Help",
+  "end_note": "The protected verifier rebuilt the submitted patch and checked 21 gesture checkpoints in Nested A and Single C.",
+  "patch_files": ["src/app.mjs"],
+  "patch_note": "Shows src/app.mjs. The submitted diff also contains build output and installed dependencies, omitted here.",
+  "comparisons": [
+    { "dir": "gpt56-sol-cua", "label": "GPT-5.6 Sol" },
+    { "dir": "opus5-cua", "label": "Claude Opus 5" }
+  ],
+  "edit_turns": [11, 23, 49],
+  "stages": [
+    {
+      "turns": [1, 6],
+      "title": "Observe the editor",
+      "insight": "The agent opens the editor and its Help panel. Blue starts unselected inside two rotated frames."
+    },
+    {
+      "turns": [7, 10],
+      "title": "Find the clamp",
+      "insight": "Resizing is clamped before Blue can cross its opposite edge, contrary to Help."
+    },
+    {
+      "turns": [11, 21],
+      "title": "Repair resizing, check it live",
+      "insight": "Side and corner crossings now work, but after a drag outside its frame Blue can no longer be selected."
+    },
+    {
+      "turns": [22, 23],
+      "title": "Repair hit testing",
+      "insight": "Target search now includes artwork that overflows a fixed frame, so Blue stays selectable there."
+    },
+    {
+      "turns": [24, 50],
+      "title": "Check every gesture and submit",
+      "insight": "Crossings, handle reuse, rotation, fill drags and Single mode work live. The protected verifier passes all 21 checkpoints."
+    }
+  ]
+}
