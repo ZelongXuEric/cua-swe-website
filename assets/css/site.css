@@ -144,6 +144,7 @@ button { font: inherit; cursor: pointer; }
 
 /* Analysis */
 .two { display: grid; grid-template-columns: 1.15fr 1fr; gap: 36px; align-items: start; }
+.two > * { min-width: 0; }
 .prose p { font-size: 15.5px; line-height: 1.65; }
 .prose p + p { margin-top: 14px; }
 .fig { margin: 0; }
@@ -249,9 +250,10 @@ footer a { margin-left: 10px; }
   .screen .media { min-height: 0; }
   .screen .pane { padding: 18px; font-size: 12.5px; }
   .fail-media { height: 220px; }
-  .panel { overflow-x: auto; }
-  .chart svg { min-width: 520px; }
-  .domain-charts { gap: 12px 0; }
+  .info-table { font-size: 12px; }
+  .info-table th, .info-table td { padding: 4px 5px; }
+  .chart-title { margin-left: 0; }
+  .domain-charts { gap: 16px 0; }
   .task > button { grid-template-columns: 64px minmax(0, 1fr) 20px; gap: 12px; }
   .task .score { display: none; }
   .task .detail { padding: 0 0 20px; }

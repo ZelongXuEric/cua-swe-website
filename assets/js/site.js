@@ -82,6 +82,36 @@
     s.push('</svg>'); el.innerHTML = s.join("");
   }
 
+  // Narrow screens: the same data as horizontal bars, model names as row labels, no rotation and no scrolling.
+  function drawHorizontal(el, rows, o) {
+    o = o || {};
+    var W = 360, padL = 112, padR = 40, padT = 18, padB = 6, bh = 11, gap = 2, rowH = bh * 2 + gap + 11, fs = 10.5;
+    var innerW = W - padL - padR, H = padT + rows.length * rowH + padB;
+    var s = ['<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(o.label || "Grouped bar chart") + '">'];
+    [0, 25, 50, 75, 100].forEach(function (v) {
+      var x = padL + innerW * v / 100;
+      s.push('<line x1="' + x + '" x2="' + x + '" y1="' + padT + '" y2="' + (H - padB) + '" stroke="#e6e6e6"/>');
+      s.push('<text x="' + x + '" y="' + (padT - 6) + '" text-anchor="middle" font-size="9.5" fill="#666">' + v + '</text>');
+    });
+    rows.forEach(function (r, i) {
+      var y0 = padT + i * rowH + 4, color = COLOR[r.m] || "#888";
+      s.push('<text x="' + (padL - 6) + '" y="' + (y0 + bh + 4) + '" text-anchor="end" font-size="' + fs + '" fill="#333">' + esc(r.m) + '</text>');
+      [["code", r.code], ["cua", r.cua]].forEach(function (b, j) {
+        var v = b[1], y = y0 + j * (bh + gap);
+        if (v == null) {
+          if (j === 0) s.push('<text x="' + (padL + 3) + '" y="' + (y0 + bh + 4) + '" font-size="9.5" fill="#888">' + (r.deferred ? "deferred" : "\u2014") + '</text>');
+          return;
+        }
+        var w = innerW * v / 100, title = r.m + ", " + (j ? "Hybrid" : "Code-only") + ": " + v.toFixed(1) + "%";
+        s.push('<rect x="' + padL + '" y="' + y + '" width="' + Math.max(w, 1.5) + '" height="' + bh + '" fill="' + color + '"' + (j ? '' : ' fill-opacity="0.35"') + '><title>' + esc(title) + '</title></rect>');
+        var label = v.toFixed(1);
+        if (o.gain && j === 1 && r.code != null) { var d = r.cua - r.code; label += ' <tspan fill="#d93025" font-weight="700">' + (d >= 0 ? "+" : "") + d.toFixed(1) + '</tspan>'; }
+        s.push('<text x="' + (padL + w + 4) + '" y="' + (y + bh - 2) + '" font-size="' + (j ? fs : 9.5) + '" font-weight="' + (j ? 700 : 400) + '" fill="' + (j ? "#222" : "#666") + '">' + label + '</text>');
+      });
+    });
+    s.push('</svg>'); el.innerHTML = s.join("");
+  }
+
   function renderTable(host) {
     var maxima = {};
     DOMAINS.forEach(function (d) { [0, 1].forEach(function (i) {
@@ -109,16 +139,22 @@
     h.push('</tbody></table>'); host.innerHTML = h.join("");
   }
 
-  function mountResults() {
+  var narrow = window.matchMedia("(max-width: 720px)");
+  function drawCharts() {
+    var draw = narrow.matches ? drawHorizontal : drawGrouped;
     var mean = document.getElementById("chart-mean");
-    if (mean) drawGrouped(mean, MEAN, { w: 640, h: 300, bw: 26, gain: true, fs: 11, label: "Four-domain mean task success, Code-only and Hybrid, eight API models" });
+    if (mean) draw(mean, MEAN, { w: 640, h: 300, bw: 26, gain: true, fs: 11, label: "Four-domain mean task success, Code-only and Hybrid, eight API models" });
     DOMAINS.forEach(function (d) {
       var el = document.querySelector('[data-chart="' + d[0] + '"]'); if (!el) return;
       var rows = TABLE1.map(function (r) { return { m: r.m, code: r[d[0]][0], cua: r[d[0]][1], n: d[2], deferred: r.deferredMobile && d[0] === "mobile" }; });
-      drawGrouped(el, rows, { w: 520, h: 274, bw: 16, fs: 9.5, padB: 88, label: d[1] + " task success, Code-only and Hybrid" });
+      draw(el, rows, { w: 520, h: 274, bw: 16, fs: 9.5, padB: 88, label: d[1] + " task success, Code-only and Hybrid" });
       var cap = document.createElement("div"); cap.className = "chart-title"; cap.textContent = d[1] + " (" + d[2] + " tasks)";
       el.insertBefore(cap, el.firstChild);
     });
+  }
+  function mountResults() {
+    drawCharts();
+    if (narrow.addEventListener) narrow.addEventListener("change", drawCharts);
     var table = document.getElementById("results-table");
     if (table) renderTable(table);
   }
