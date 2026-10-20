@@ -4,7 +4,7 @@ A static research site in the style of an academic project page: `index.html` ha
 front matter (title, authors with numbered affiliations as in the paper, buttons), an overview
 (abstract, one task per domain with a Bug/Repaired switch, then the paper's pipeline figure), results
 (inline-SVG grouped bar charts, an efficiency scatter and the paper's Table 1, collapsed by
-default), two timed replays and a step player for recorded repair runs, the four domains, analysis (paired gains, four case
+default), two timed replays and a step player for recorded repair runs (one per tab), the four domains, analysis (paired gains, four case
 figures shown one at a time by domain tab, two failures), evaluation (the three verifier checks as a table, task construction and
 the task-validation figure) and the citation. `tasks.html` explores all 105 tasks; `results.html` redirects to
 the results section. GitHub Pages serves the repository root. No build step or JavaScript

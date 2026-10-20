@@ -409,16 +409,18 @@
     select(0);
   }
 
-  // Repair cases: one paper figure at a time, chosen by domain tab. Without JS all four stack.
-  function mountCases(root) {
-    var seg = root.querySelector(".seg"), figures = Array.prototype.slice.call(root.querySelectorAll("figure")), buttons = [];
+  // Examples and repair cases: one panel at a time, chosen by tab. Without JS every panel stacks.
+  function mountTabs(root) {
+    var seg = root.querySelector(".seg"), panels = Array.prototype.slice.call(root.querySelectorAll(":scope > [data-tab]")), buttons = [];
     root.classList.add("js");
     function select(index) {
-      figures.forEach(function (figure, i) { figure.classList.toggle("current", i === index); });
+      panels.forEach(function (panel, i) { panel.classList.toggle("current", i === index); });
       buttons.forEach(function (button, i) { button.setAttribute("aria-pressed", String(i === index)); });
     }
-    figures.forEach(function (figure, i) {
-      var button = el("button", null, figure.getAttribute("data-tab")); button.type = "button";
+    panels.forEach(function (panel, i) {
+      var label = panel.getAttribute("data-tab").split(" · "), button = el("button"); button.type = "button";
+      if (label.length > 1) button.appendChild(el("small", null, label[0]));
+      button.appendChild(document.createTextNode(label[label.length - 1]));
       button.addEventListener("click", function () { select(i); });
       seg.appendChild(button); buttons.push(button);
     });
@@ -441,8 +443,7 @@
   if (strip) mountStrip(strip);
   var episode = document.getElementById("repair-player");
   if (episode) mountEpisode(episode, EPISODE);
-  var cases = document.getElementById("case-viewer");
-  if (cases) mountCases(cases);
+  document.querySelectorAll(".tabbed").forEach(mountTabs);
   mountLightbox();
   if (!document.getElementById("results-table") && location.hash === "#results") location.replace("index.html#results");
 })();
