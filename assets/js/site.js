@@ -438,7 +438,37 @@
     document.addEventListener("keydown", function (event) { if (event.key === "Escape" && !box.hidden) close(); });
   }
 
+  // Navigation marks the section being read.
+  function mountScrollspy() {
+    var links = Array.prototype.slice.call(document.querySelectorAll('.nav ul a[href^="#"]'));
+    var sections = links.map(function (a) { return document.getElementById(a.getAttribute("href").slice(1)); });
+    if (!links.length || !("IntersectionObserver" in window)) return;
+    var shown = {};
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { shown[e.target.id] = e.isIntersecting; });
+      var current = -1;
+      sections.forEach(function (sec, i) { if (sec && shown[sec.id] && current < 0) current = i; });
+      links.forEach(function (a, i) { a.classList.toggle("active", i === current); });
+    }, { rootMargin: "-45% 0px -50% 0px" });
+    sections.forEach(function (sec) { if (sec) io.observe(sec); });
+  }
+
+  // Citation: copy the BibTeX entry.
+  function mountCopy(card) {
+    var button = el("button", null, "Copy"); button.type = "button";
+    button.addEventListener("click", function () {
+      var text = card.querySelector("pre").textContent;
+      (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject()).then(function () {
+        button.textContent = "Copied"; setTimeout(function () { button.textContent = "Copy"; }, 1600);
+      }, function () { button.textContent = "Select and copy"; });
+    });
+    card.querySelector(".code-head").appendChild(button);
+  }
+
   mountResults();
+  mountScrollspy();
+  var bib = document.getElementById("bibtex");
+  if (bib) mountCopy(bib);
   var strip = document.getElementById("strip");
   if (strip) mountStrip(strip);
   var episode = document.getElementById("repair-player");
