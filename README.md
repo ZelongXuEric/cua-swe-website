@@ -78,9 +78,10 @@ Code-only and a solid bar for Hybrid, value labels on every bar, a 0–100 axis,
 labels on the overall panel. The legend sits above the panels and uses neutral gray swatches, since hue
 identifies the model. The conditions are named Code-only (Coding / CLI) and Hybrid
 (Computer use + Coding / CLI), following the paper. Figures open in a lightbox. The recorded
-step player is manual and keyboard-accessible, with step titles in plain words and the task
-described above it (`EPISODES` in `site.js` can hold several runs; tabs appear when it does); task URL hashes open the corresponding
-original instruction.
+step player (`EPISODE` in `site.js`) uses the same layout and controls as the timed replays (header, task
+instruction, numbered stages, record column beside the screenshot, Play/←/→/Loop/Speed), advancing one
+curated step at a time; it is keyboard-accessible and shows every step under reduced motion. Task URL
+hashes open the corresponding original instruction.
 
 Keep the copy short and factual. Use real evidence as the visual focus. Avoid decorative
 badges, repeated metadata rows and reconstructed agent actions.

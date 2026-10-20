@@ -161,20 +161,30 @@
 
   // Recorded runs. Every screenshot, patch excerpt, shell output and verifier result is retained evidence
   // from the named attempt; nothing is reconstructed. Sources are listed in assets/media/manifest.json.
-  var EPISODES = [
-    { tab: "Game: Vector Relay",
-      title: "Game: Vector Relay, GPT-5.6 Sol with Hybrid access",
-      task: "The player launches an orb at a relay; when the orb returns, the relay should clear and score. The task asks the agent to make a return count exactly once after the orb falls out and a replacement docks, and not at all after the player recalls the orb.",
-      taskId: "gameqa.vector-relay-primed-pulse-balance-handoff.011",
-      foot: "Screenshots, patch and verifier result come from this attempt. In the task\u2019s three matched trials, Code-only solved 0/3 and Hybrid solved 1/3.",
+  // The step player uses the same layout and controls as the timed replays (assets/js/replay.js),
+  // but advances one curated step at a time.
+  var EPISODE = {
+    kicker: "Game · Vector Relay",
+    title: "One return, counted once.",
+    summary: "The player launches an orb at a relay; when the orb returns, the relay should clear and score. The agent sees the stuck relay in the game, hands the pending return to the replacement orb, tests the logic from the shell and confirms the fix in the rebuilt game.",
+    instruction: "Make a return count exactly once after the orb falls out and a replacement docks, and not at all after the player recalls the orb.",
+    highlight: "exactly once",
+    taskId: "gameqa.vector-relay-primed-pulse-balance-handoff.011",
+    run_text: "GPT-5.6 Sol · Hybrid access · the task’s three matched trials: code-only 0/3 · hybrid 1/3",
+    frames: [
+      { src: "assets/media/vector-relay-frame-03.png", n: 3, time: "10:04:30",
+        alt: "Vector Relay after launch: RELAY ARMED, PULSE BALANCE shows a fractured mark, score 000000, message ORB REPLACED" },
+      { src: "assets/media/vector-relay-frame-15.png", n: 15, time: "10:07:20",
+        alt: "Vector Relay after the repair: RELAY CLEARED, PULSE BALANCE shows a sealed mark, score 000500, message CIRCUIT COMPLETE +500" }
+    ],
+    total: 16,
     steps: [
-      { title: "See the bug in the running game", detail: "A replacement orb has docked, but the relay is still armed, the PULSE BALANCE panel marks the return as fractured and the score is 000000. The task requires this return to clear the relay and score.",
-        screen: { type: "image", src: "assets/media/vector-relay-frame-03.png",
-                  alt: "Vector Relay after launch: RELAY ARMED, PULSE BALANCE shows a fractured mark, score 000000, message ORB REPLACED",
-                  caption: "Screenshot 3 of 16, 10:04:30 UTC, after pressing Space to launch" } },
-      { title: "Change which orb a pending return belongs to", detail: "The patch adds two cases where an orb docks. On a manual recall it withdraws the pending return (withdraw). When a replacement docks it hands the return to the new orb (handoff), so it can still score.",
-        screen: { type: "diff", files: [
-          { name: "src/vector_relay.js", lines: [
+      { title: "See the bug in the running game", frame: 0,
+        entries: [{ kind: "gui", text: "Press Space to launch", frame: 0 }],
+        insight: "A replacement orb has docked, but the relay is still armed, PULSE BALANCE marks the return as fractured and the score is 000000." },
+      { title: "Change which orb owns a pending return", frame: 0,
+        entries: [
+          { kind: "edit", cmd: "src/vector_relay.js", lines: [
             ["ctx", "  VectorRelay.prototype.attachBall = function (reason) {"],
             ["add", "+   var previousOwner = this.ball && this.ball.owner;"],
             ["add", "+   if (reason === \"manual-redock\") {"],
@@ -186,99 +196,202 @@
             ["add", "+     this.lane.handoff(previousOwner, this.ball.owner);"],
             ["add", "+   }"],
             ["ctx", "  };"] ] },
-          { name: "src/relay_commit.js", lines: [
+          { kind: "edit", cmd: "src/relay_commit.js", lines: [
             ["add", "+ RelayLane.prototype.withdraw = function (owner) {"],
             ["add", "+   … drop pending entries owned by the recalled orb"],
             ["add", "+ };"],
             ["add", "+ RelayLane.prototype.handoff = function (fromOwner, toOwner) {"],
             ["add", "+   … move pending entries to the replacement owner"],
             ["add", "+ };"] ] } ],
-          caption: "Retained agent patch, excerpted; the full diff changes 2 files" } },
-      { title: "Test the new logic from the shell", detail: "Two Node scripts exercise recall, handoff and duplicate contacts without the game; then the build runs.",
-        screen: { type: "shell", items: [
-          { cmd: "node -e '… lane.withdraw(recalled) … lane.handoff(natural, replacement) … lane.take(14, shifted)'", out: "{\"pending\":0,\"withdrawn\":1,\"dropped\":0,\"nextDue\":null}" },
-          { cmd: "node -e '… contacts.claim(body, tile) twice …'", out: "{\"first\":true,\"sustained\":false,\"series\":0}" },
-          { cmd: "npm run build", out: "node --check src/relay_contact.js && node --check src/relay_commit.js && … && node --check server.mjs", ok: true } ],
-          caption: "Shell events 17, 19 and 20 of the recorded trajectory, abbreviated" } },
-      { title: "Replay in the rebuilt game", detail: "After a reload the same play clears the relay: CIRCUIT COMPLETE, score 000500.",
-        screen: { type: "image", src: "assets/media/vector-relay-frame-15.png",
-                  alt: "Vector Relay after the repair: RELAY CLEARED, PULSE BALANCE shows a sealed mark, score 000500, message CIRCUIT COMPLETE +500",
-                  caption: "Screenshot 15 of 16, 10:07:20 UTC, after reloading the rebuilt app and replaying" } },
-      { title: "Verifier, on a clean copy", detail: "The evaluator applies the patch to a fresh project, rebuilds it and replays the challenge in a browser: score 500, one recall, pass.",
-        screen: { type: "verify", checks: [
-          { name: "build", cmd: "npm run build", result: "exit code 0", pass: true },
-          { name: "state", cmd: "verifiers/browser_check.py --url http://127.0.0.1:53500/?challenge=relay-circuit",
-            result: "{\"status\": \"pass\", \"score\": 500, \"routes\": 1, \"browser_actions\": 4, \"recalls\": 1}", pass: true } ],
-          summary: "success: true", caption: "Retained verifier report for the same attempt" } }
-    ] }
-  ];
+        insight: "On a manual recall the pending return is withdrawn; when a replacement docks it is handed to the new orb, so it can still score." },
+      { title: "Test the new logic from the shell", frame: 0,
+        entries: [
+          { kind: "shell", cmd: "node -e '… lane.withdraw(recalled) … lane.handoff(natural, replacement) … lane.take(14, shifted)'", out: "{\"pending\":0,\"withdrawn\":1,\"dropped\":0,\"nextDue\":null}" },
+          { kind: "shell", cmd: "node -e '… contacts.claim(body, tile) twice …'", out: "{\"first\":true,\"sustained\":false,\"series\":0}" },
+          { kind: "shell", cmd: "npm run build", out: "node --check src/relay_contact.js && node --check src/relay_commit.js && … && node --check server.mjs" } ],
+        insight: "Two Node scripts exercise recall, handoff and duplicate contacts without the game; the build passes." },
+      { title: "Replay in the rebuilt game", frame: 1,
+        entries: [{ kind: "gui", text: "Reload the rebuilt app and replay", frame: 1 }],
+        insight: "The same play now clears the relay: CIRCUIT COMPLETE, score 000500." },
+      { title: "Verify on a clean copy", frame: 1, verify: true,
+        insight: "The evaluator applies the patch to a fresh project, rebuilds it and replays the challenge in a browser: score 500, one recall, pass." }
+    ],
+    verifier: [
+      { command: "npm run build", stdout: "exit code 0" },
+      { command: "verifiers/browser_check.py --url http://127.0.0.1:53500/?challenge=relay-circuit",
+        stdout: "{\"status\": \"pass\", \"score\": 500, \"routes\": 1, \"browser_actions\": 4, \"recalls\": 1}" } ],
+    end_note: "Screenshots, patch excerpts, shell output and the verifier report come from this attempt; the full diff changes 2 files."
+  };
   function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
-  function renderScreen(step) {
-    var s = step.screen, frag = document.createDocumentFragment(), media = el("div", "media");
-    if (s.type === "image") {
-      var img = el("img"); img.src = s.src; img.alt = s.alt; img.width = s.w || 1280; img.height = s.h || 720; media.appendChild(img);
-    } else {
-      var pane = el("div", "pane");
-      if (s.type === "diff") {
-        s.files.forEach(function (file) {
-          pane.appendChild(el("div", "hdr", file.name));
-          var pre = el("pre"); file.lines.forEach(function (line) { pre.appendChild(el("span", line[0], line[1] + "\n")); }); pane.appendChild(pre);
-        });
-      } else if (s.type === "shell") {
-        s.items.forEach(function (item) {
-          var pre = el("pre"); pre.appendChild(el("span", "cmd", "$ " + item.cmd + "\n")); pre.appendChild(el("span", item.ok ? "ok" : "out", item.out + "\n")); pane.appendChild(pre);
-        });
-      } else if (s.type === "verify") {
-        s.checks.forEach(function (check) {
-          var pre = el("pre"); pre.appendChild(el("span", "hdr", check.name + ": " + check.cmd + "\n")); pre.appendChild(el("span", "out", check.result + "\n"));
-          pre.appendChild(el("span", check.pass ? "ok" : "fail", check.pass ? "passed\n" : "failed\n")); pane.appendChild(pre);
-        });
-        pane.appendChild(el("pre", "ok", s.summary));
-      }
-      media.appendChild(pane);
-    }
-    frag.appendChild(media); frag.appendChild(el("div", "note", s.caption)); return frag;
-  }
-  function mountEpisode(root) {
-    var screen = root.querySelector(".screen"), list = root.querySelector(".steps"), tabs = document.getElementById("episode-tabs");
-    var title = document.getElementById("episode-title"), task = document.getElementById("episode-task"), foot = root.querySelector(".episode-foot");
-    var episode, buttons = [], tabButtons = [];
-    function show(index) {
-      screen.replaceChildren(renderScreen(episode.steps[index]));
-      screen.setAttribute("aria-label", "Step " + (index + 1) + ": " + episode.steps[index].title);
-      buttons.forEach(function (button, i) { button.setAttribute("aria-pressed", String(i === index)); });
-    }
-    function load(which) {
-      episode = EPISODES[which]; buttons = [];
-      tabButtons.forEach(function (button, i) { button.setAttribute("aria-pressed", String(i === which)); });
-      title.textContent = episode.title;
-      task.textContent = episode.task + " ";
-      var link = el("a", null, "Full instruction"); link.href = "tasks.html#" + episode.taskId; task.appendChild(link);
-      foot.textContent = episode.foot;
-      list.replaceChildren();
-      episode.steps.forEach(function (step, i) {
-        var li = el("li"), button = el("button"); button.type = "button"; button.setAttribute("aria-controls", "episode-screen");
-        button.appendChild(el("span", "step-number", String(i + 1).padStart(2, "0")));
-        var body = el("span"); body.appendChild(el("span", "t", step.title)); body.appendChild(el("span", "d", step.detail));
-        button.appendChild(body); li.appendChild(button); list.appendChild(li); buttons.push(button);
-        button.addEventListener("click", function () { show(i); });
-        button.addEventListener("keydown", function (event) {
-          var target = i;
-          if (event.key === "ArrowRight" || event.key === "ArrowDown") target = (i + 1) % buttons.length;
-          else if (event.key === "ArrowLeft" || event.key === "ArrowUp") target = (i + buttons.length - 1) % buttons.length;
-          else if (event.key === "Home") target = 0; else if (event.key === "End") target = buttons.length - 1; else return;
-          event.preventDefault(); buttons[target].focus(); show(target);
-        });
+  function mountEpisode(root, ep) {
+    var reduced = window.matchMedia("(prefers-reduced-motion: reduce)"), last = ep.steps.length - 1;
+    var st = { step: reduced.matches ? last : -1, playing: false, manual: false, visible: false, loop: true, speed: 1, timer: 0 };
+    function pad(n) { return String(n).padStart(2, "0"); }
+
+    var head = el("header", "rp-head");
+    head.appendChild(el("p", "rp-kicker", ep.kicker));
+    head.appendChild(el("h3", null, ep.title));
+    head.appendChild(el("p", "rp-summary", ep.summary));
+    root.appendChild(head);
+    var task = el("div", "rp-task"), instruction = el("p", "rp-instruction"), at = ep.instruction.indexOf(ep.highlight);
+    task.appendChild(el("span", "rp-label", "Task instruction"));
+    instruction.appendChild(document.createTextNode(ep.instruction.slice(0, at)));
+    instruction.appendChild(el("mark", null, ep.highlight));
+    instruction.appendChild(document.createTextNode(ep.instruction.slice(at + ep.highlight.length) + " "));
+    var link = el("a", null, "Full instruction"); link.href = "tasks.html#" + ep.taskId; instruction.appendChild(link);
+    task.appendChild(instruction);
+    task.appendChild(el("p", "rp-run", ep.run_text));
+    root.appendChild(task);
+
+    var nav = el("ol", "rp-stages"), stageButtons = [];
+    nav.setAttribute("aria-label", "Repair steps");
+    ep.steps.forEach(function (step, i) {
+      var li = el("li"), b = el("button"); b.type = "button";
+      b.appendChild(el("span", "n", pad(i + 1)));
+      b.appendChild(el("span", "t", step.title));
+      b.addEventListener("click", function () { go(i, true); });
+      b.addEventListener("keydown", function (event) {
+        var to = { ArrowRight: i + 1, ArrowDown: i + 1, ArrowLeft: i - 1, ArrowUp: i - 1, Home: 0, End: last }[event.key];
+        if (to == null) return;
+        event.preventDefault(); to = (to + ep.steps.length) % ep.steps.length;
+        stageButtons[to].focus(); go(to, true);
       });
-      show(0);
-    }
-    EPISODES.forEach(function (entry, i) {
-      var button = el("button", null, entry.tab); button.type = "button";
-      button.addEventListener("click", function () { load(i); });
-      tabs.appendChild(button); tabButtons.push(button);
+      li.appendChild(b); nav.appendChild(li); stageButtons.push(b);
     });
-    tabs.hidden = EPISODES.length < 2;
-    load(0);
+    root.appendChild(nav);
+
+    var grid = el("div", "rp-grid"), col = el("section", "rp-col"), stream = el("div", "rp-stream");
+    col.setAttribute("aria-label", "Agent and environment record");
+    var colHead = el("div", "rp-col-head"), badge = el("span", "rp-status", "Ready");
+    colHead.appendChild(el("span", null, "Agent ↔ Environment")); colHead.appendChild(badge);
+    stream.tabIndex = 0; stream.setAttribute("role", "region");
+    stream.setAttribute("aria-label", "Recorded agent actions and outputs, step by step.");
+    col.appendChild(colHead); col.appendChild(stream);
+    var browser = el("aside", "rp-browser"), bar = el("div", "rp-bar"), view = el("div", "rp-view");
+    browser.setAttribute("aria-label", "Recorded game screenshots");
+    var open = el("a"), img = el("img"), empty = el("p", "rp-empty", "The game appears when the agent first looks at it.");
+    open.target = "_blank"; open.rel = "noopener"; open.title = "Open the full-size screenshot";
+    img.width = 1280; img.height = 720; img.hidden = true;
+    open.appendChild(img); view.appendChild(open); view.appendChild(empty);
+    browser.appendChild(bar); browser.appendChild(view);
+    browser.appendChild(el("p", "rp-frame-note", "Retained screenshots from this attempt. Select a screenshot to open it full size."));
+    grid.appendChild(col); grid.appendChild(browser); root.appendChild(grid);
+
+    var controls = el("div", "rp-controls");
+    function button(label, text, cls) { var b = el("button", cls || "rp-btn", text); b.type = "button"; b.setAttribute("aria-label", label); controls.appendChild(b); return b; }
+    var playBtn = button("Play steps", "▶ Play", "rp-play"), prevBtn = button("Previous step", "←"), nextBtn = button("Next step", "→"), againBtn = button("Play from start", "↺ Replay");
+    var loopLabel = el("label", "rp-opt"), loopBox = el("input"); loopBox.type = "checkbox"; loopBox.checked = true;
+    loopLabel.appendChild(loopBox); loopLabel.appendChild(document.createTextNode(" Loop")); controls.appendChild(loopLabel);
+    var position = el("span", "rp-pos"); controls.appendChild(position);
+    var speedLabel = el("label", "rp-opt rp-speed", "Speed "), speed = el("select");
+    [0.5, 1, 1.5, 2].forEach(function (v) { var o = el("option", null, v + "×"); o.value = v; o.selected = v === 1; speed.appendChild(o); });
+    speedLabel.appendChild(speed); controls.appendChild(speedLabel);
+    controls.appendChild(el("span", "rp-disclosure", "Step player · real screenshots · outputs excerpted"));
+    root.appendChild(controls);
+    var seekBar = el("input", "rp-seek"); seekBar.type = "range"; seekBar.min = 0; seekBar.max = last; seekBar.step = 1;
+    seekBar.setAttribute("aria-label", "Step"); root.appendChild(seekBar);
+    var announcer = el("p", "sr-only"); announcer.setAttribute("aria-live", "polite"); root.appendChild(announcer);
+
+    function entry(e) {
+      if (e.kind === "gui") {
+        var row = el("div", "rp-entry rp-row gui");
+        row.appendChild(el("span", "rp-who", "Browser")); row.appendChild(el("span", "rp-what", e.text));
+        row.appendChild(el("span", "rp-chip", "Screenshot " + ep.frames[e.frame].n));
+        return row;
+      }
+      var box = el("div", "rp-entry rp-cmd" + (e.kind === "edit" ? " edit" : "")), pre = el("pre");
+      box.appendChild(el("span", "rp-who", e.kind === "edit" ? "Edit" : "Shell"));
+      pre.appendChild(el("span", "c", (e.kind === "edit" ? "" : "$ ") + e.cmd + "\n"));
+      if (e.lines) e.lines.forEach(function (l) { pre.appendChild(el("span", l[0], l[1] + "\n")); });
+      else pre.appendChild(el("span", "o", e.out));
+      box.appendChild(pre);
+      return box;
+    }
+    function verifyCard() {
+      var card = el("div", "rp-verify"), top = el("div", "rp-verify-head");
+      top.appendChild(el("span", "rp-who", "Independent verifier")); top.appendChild(el("strong", "rp-good", "Passed"));
+      card.appendChild(top);
+      ep.verifier.forEach(function (v) {
+        var pre = el("pre"); pre.appendChild(el("span", "c", "$ " + v.command + "\n")); pre.appendChild(el("span", "o", v.stdout)); card.appendChild(pre);
+      });
+      card.appendChild(el("p", null, ep.end_note));
+      return card;
+    }
+    function render() {
+      var s = st.step;
+      stream.replaceChildren();
+      for (var i = 0; i <= s; i++) {
+        var step = ep.steps[i], mark = el("div", "rp-stage-mark");
+        mark.appendChild(el("span", "n", pad(i + 1))); mark.appendChild(el("span", null, step.title));
+        stream.appendChild(mark);
+        (step.entries || []).forEach(function (e) { stream.appendChild(entry(e)); });
+        if (step.verify) stream.appendChild(verifyCard());
+        var p = el("p", "rp-insight"); p.appendChild(el("span", "rp-tag", "Summary")); p.appendChild(el("span", null, step.insight));
+        stream.appendChild(p);
+      }
+      stream.scrollTop = stream.scrollHeight;
+      var f = s < 0 ? null : ep.frames[ep.steps[s].frame];
+      empty.hidden = !!f; img.hidden = !f;
+      bar.textContent = f ? "Screenshot " + f.n + " of " + ep.total + " · " + f.time + " UTC" : "Game · no screenshot yet";
+      if (f && img.getAttribute("src") !== f.src) {
+        img.src = open.href = f.src; img.alt = f.alt;
+        if (!reduced.matches && img.animate) img.animate([{ opacity: 0.35 }, { opacity: 1 }], { duration: 250 });
+      }
+      stageButtons.forEach(function (b, i) {
+        b.setAttribute("aria-current", i === s ? "step" : "false");
+        b.classList.toggle("done", i < s || (i === s && s === last));
+      });
+      position.textContent = (s + 1) + " / " + ep.steps.length;
+      seekBar.value = Math.max(0, s);
+      badge.textContent = s === last ? "Complete" : st.playing ? "Playing" : s >= 0 ? "Paused" : "Ready";
+      playBtn.textContent = st.playing ? "❚❚ Pause" : "▶ Play";
+      playBtn.setAttribute("aria-label", st.playing ? "Pause steps" : "Play steps");
+      if (s >= 0) announcer.textContent = "Step " + (s + 1) + " of " + ep.steps.length + ": " + ep.steps[s].title;
+    }
+    // Each step stays up long enough to read; at the end it holds, then loops like the replays.
+    function schedule() {
+      clearTimeout(st.timer);
+      st.timer = setTimeout(function () {
+        if (st.step < last) { st.step++; render(); schedule(); }
+        else if (st.loop && st.visible && !document.hidden) { st.step = 0; render(); schedule(); }
+        else { st.playing = false; render(); }
+      }, (st.step === last ? 6000 : st.step < 0 ? 300 : 5200) / st.speed);
+    }
+    function play() {
+      if (st.step === last) st.step = -1;
+      st.playing = true; st.manual = false; render(); schedule();
+    }
+    function pause(manual) {
+      clearTimeout(st.timer); st.timer = 0; st.playing = false;
+      if (manual) st.manual = true;
+      render();
+    }
+    function go(i, manual) { pause(manual); st.step = Math.max(0, Math.min(last, i)); render(); }
+
+    playBtn.addEventListener("click", function () { if (st.playing) pause(true); else play(); });
+    againBtn.addEventListener("click", function () { st.step = -1; play(); });
+    prevBtn.addEventListener("click", function () { go(st.step - 1, true); });
+    nextBtn.addEventListener("click", function () { go(st.step + 1, true); });
+    loopBox.addEventListener("change", function () { st.loop = loopBox.checked; });
+    speed.addEventListener("change", function () { st.speed = Number(speed.value); if (st.playing) schedule(); });
+    seekBar.addEventListener("input", function () { go(Number(seekBar.value), true); });
+    ["wheel", "touchstart", "pointerdown"].forEach(function (type) {
+      stream.addEventListener(type, function () { if (st.playing) pause(true); }, { passive: true });
+    });
+
+    // Autoplay while visible; reduced motion shows every step instead.
+    render();
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        st.visible = entries[0].isIntersecting && entries[0].intersectionRatio >= 0.18;
+        if (!st.visible) { if (st.playing) pause(); }
+        else if (!st.manual && !reduced.matches && !document.hidden && !st.playing) play();
+      }, { threshold: [0, 0.18, 0.4] }).observe(grid);
+    }
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) { if (st.playing) pause(); }
+      else if (st.visible && !st.manual && !reduced.matches && !st.playing) play();
+    });
   }
 
   // Overview strip: every column shows the bug or the repaired application, chosen by tab. Without JS the bug shows.
@@ -327,7 +440,7 @@
   var strip = document.getElementById("strip");
   if (strip) mountStrip(strip);
   var episode = document.getElementById("repair-player");
-  if (episode) mountEpisode(episode);
+  if (episode) mountEpisode(episode, EPISODE);
   var cases = document.getElementById("case-viewer");
   if (cases) mountCases(cases);
   mountLightbox();

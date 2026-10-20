@@ -134,33 +134,6 @@ button { font: inherit; cursor: pointer; }
 .score-table tbody tr:hover { background: #f7f9fc; }
 
 /* Episode player (kept for the interactive examples) */
-.episode { border: 1px solid var(--line); overflow: hidden; background: #fff; }
-.episode-body { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(290px, 1fr); }
-.screen { background: #0e191e; color: #e9eeee; min-width: 0; display: flex; flex-direction: column; }
-.screen .media { min-height: 392px; display: flex; align-items: center; }
-.screen img { width: 100%; height: auto; }
-.screen .pane { width: 100%; padding: 28px; font-family: var(--mono); font-size: 13.5px; line-height: 1.6; overflow-wrap: anywhere; }
-.screen .pane pre { margin: 0 0 14px; white-space: pre-wrap; overflow-wrap: anywhere; font-family: inherit; }
-.screen .pane pre:last-child { margin-bottom: 0; }
-.screen .hdr { color: #bcc9ce; margin-bottom: 7px; }
-.screen .ctx { color: #b0c2c7; }
-.screen .add, .screen .ok { color: #9fdec0; }
-.screen .del { color: #f3a9a0; }
-.screen .cmd { color: #f4bf8a; }
-.screen .note { margin-top: auto; border-top: 1px solid #314047; padding: 14px 24px; font-size: 13px; color: #c2cdd0; }
-.steps { list-style: none; margin: 0; padding: 8px 0; display: flex; flex-direction: column; justify-content: center; }
-.steps button { display: grid; grid-template-columns: 30px 1fr; gap: 12px; text-align: left; width: 100%; border: 0; background: transparent; color: var(--text); padding: 12px 24px; border-left: 3px solid transparent; }
-.steps button:hover { background: #f5f8fc; }
-.steps button[aria-pressed="true"] { background: #eef4fd; border-left-color: var(--link); }
-.steps button[aria-pressed="true"] .step-number { color: var(--link); }
-.steps .step-number { font-family: var(--mono); font-size: 13px; color: var(--muted); padding-top: 3px; }
-.steps .t { font-size: 16px; font-weight: 700; color: var(--ink); line-height: 1.4; display: block; }
-.steps .d { display: block; font-size: 14px; line-height: 1.5; margin-top: 5px; }
-.steps button[aria-pressed="false"] .d { display: none; }
-.episode-foot { border-top: 1px solid var(--line); padding: 14px 22px; font-size: 13.5px; line-height: 1.55; color: var(--muted); }
-.episode-tabs { margin-bottom: 4px; }
-#episode-title { margin-top: 22px; }
-#episode-task { margin-bottom: 16px; }
 
 /* Tasks */
 .domains { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 40px; }
@@ -262,8 +235,6 @@ footer a { margin-left: 10px; }
   .domain-charts { grid-template-columns: 1fr; }
   .two { grid-template-columns: 1fr; }
   .examples-grid { grid-template-columns: 1fr; }
-  .episode-body { grid-template-columns: 1.3fr 1fr; }
-  .screen .media { min-height: 320px; }
 }
 @media (max-width: 720px) {
   .wrap { padding: 0 18px; }
@@ -274,9 +245,6 @@ footer a { margin-left: 10px; }
   .section h2 { font-size: 26px; }
   .domains, .fails { grid-template-columns: 1fr; }
   .checks-table tbody th { white-space: normal; }
-  .episode-body { grid-template-columns: 1fr; }
-  .screen .media { min-height: 0; }
-  .screen .pane { padding: 18px; font-size: 12.5px; }
   .fail-media { height: 220px; }
   .info-table { font-size: 12px; }
   .info-table th, .info-table td { padding: 4px 5px; }
@@ -306,7 +274,6 @@ footer a { margin-left: 10px; }
 :root { --gui: #2458ed; --gui-soft: #eff4ff; --code: #00768c; --paper: #fff; }
 /* Timed replay of a recorded episode (assets/js/replay.js). Shell/edits use the code teal, browser actions the GUI blue. */
 .replay + .replay { margin-top: 40px; }
-.replay + .episode { margin-top: 40px; }
 .replay { border: 1px solid #cad8ec; border-radius: 4px; background: var(--paper); padding: 28px 28px 20px; }
 .rp-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 8px 48px; align-items: end; }
 .rp-kicker { grid-column: 1 / -1; font-family: var(--mono); font-size: 13px; color: var(--gui); }
@@ -344,7 +311,8 @@ footer a { margin-left: 10px; }
 .rp-cmd.edit .c { color: #8a4206; }
 .rp-cmd pre { margin: 0; max-height: 220px; overflow: auto; padding: 8px 10px; border-radius: 3px; background: #fff; font-family: var(--mono); font-size: 12px; line-height: 1.55; white-space: pre-wrap; overflow-wrap: anywhere; }
 .rp-cmd .c { color: var(--code); }
-.rp-cmd .o { color: #3c4a60; }
+.rp-cmd .o, .rp-cmd .ctx { color: #3c4a60; }
+.rp-cmd .add { color: #17784a; }
 .rp-foot { grid-column: 2; display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12px; color: var(--muted); }
 .rp-link { border: 0; background: none; padding: 0; color: var(--gui); font-size: 12px; }
 .rp-row { grid-template-columns: 58px minmax(0, 1fr) auto auto; align-items: center; }
