@@ -32,25 +32,36 @@ ITEMS = [
     (DEMO / "exports/poster.jpg", "cua-swe-demo-poster.jpg", None),
 ]
 
-# Hero collage: matched baseline/repaired pairs, cropped to the same window per domain and
-# encoded as WebP. Web and Mobile are 16:10 crops; Game (16:9) and the full DevOps chart panel
-# are kept whole and letterboxed by the page. Web, DevOps and Mobile pairs are reference-repair replays; the Game
-# pair is frames 3 and 16 of the recorded GPT-5.6 Sol Hextris attempt in the public cua-swe-viewer repository
-# (set CUA_SWE_VIEWER to its checkout).
-VIEWER = pathlib.Path(os.environ.get("CUA_SWE_VIEWER", str(pathlib.Path.home() / "projects/cua-swe-viewer")))
-HEXTRIS = VIEWER / "media/source/agent/game-cua/gameqa.hextris-cascade-resettle-stable.001/agent/frames"
+# Overview strip: one baseline/repaired pair per domain, shown one state at a time, encoded as WebP.
+# Web, DevOps and Mobile pairs are reference-repair replays. Game is Captain Callisto (the task of
+# Figure 3): frame 3 of the recorded GPT-5.6 Sol attempt (one pickup counts 2/2) and frame 2 of the
+# certified gold replay (1/2). Mobile keeps the top two thirds of the 400x800 phone screen.
 HERO = [
-    # (source, destination, crop box (left, top, right, bottom) or None)
-    (F1 / "W01_allocation_ring/keyframes/reference-baseline_stacked.png", "hero/web-before.webp", (0, 0, 1700, 1062)),
-    (F1 / "W01_allocation_ring/keyframes/reference-gold_stacked.png", "hero/web-after.webp", (0, 0, 1700, 1062)),
-    (HEXTRIS / "frame-0003.png", "hero/game-before.png", (300, 165, 980, 590)),
-    (HEXTRIS / "frame-0016.png", "hero/game-after.png", (300, 165, 980, 590)),
-    (F1 / "D01_counter_order/keyframes/baseline_rolling-restart_layout.png", "hero/devops-before.webp", (0, 0, 2120, 920)),
-    (F1 / "D01_counter_order/keyframes/gold_rolling-restart_layout.png", "hero/devops-after.webp", (0, 0, 2120, 920)),
-    (DEMO / "assets/media/mobile_before.png", "hero/mobile-before.webp", (20, 567, 780, 1042)),
-    (DEMO / "assets/media/mobile_after.png", "hero/mobile-after.webp", (20, 567, 780, 1042)),
+    # (source, destination, crop box (left, top, right, bottom) or None, width)
+    (F1 / "W01_allocation_ring/keyframes/reference-baseline_stacked.png", "hero/web-before.webp", (0, 0, 1700, 1062), 1000),
+    (F1 / "W01_allocation_ring/keyframes/reference-gold_stacked.png", "hero/web-after.webp", (0, 0, 1700, 1062), 1000),
+    (F2 / "05_captain_callisto/originals/agent_0003.png", "hero/game-before.webp", None, 1000),
+    (F2 / "05_captain_callisto/originals/gold_0002.png", "hero/game-after.webp", None, 1000),
+    (F1 / "D01_counter_order/keyframes/baseline_rolling-restart_layout.png", "hero/devops-before.webp", (0, 0, 2120, 920), 1000),
+    (F1 / "D01_counter_order/keyframes/gold_rolling-restart_layout.png", "hero/devops-after.webp", (0, 0, 2120, 920), 1000),
+    (DEMO / "assets/media/mobile_before.png", "hero/mobile-before.webp", (0, 0, 800, 1200), 400),
+    (DEMO / "assets/media/mobile_after.png", "hero/mobile-after.webp", (0, 0, 800, 1200), 400),
 ]
-HERO_WIDTH = 1000
+# Representative logos in the overview strip. Game icons come from the upstream games in the task
+# repositories (Captain Callisto: MIT, Hextris: GPL-3.0); the other logos are committed SVGs with the
+# sources below. Mobile apps have no upstream projects and get no logo.
+GAME = ROOT / "dataset/game/tasks"
+ICONS = [
+    (GAME / "gameqa.captain-callisto-visual-semantic-item.009/repo/callisto-small-screenshot.png", "logos/callisto.png"),
+    (GAME / "gameqa.hextris-cascade-resettle-stable.001/repo/images/hextris-logo.png", "logos/hextris.png"),
+]
+SVG_LOGOS = {
+    "logos/fabricjs.svg": "github.com/fabricjs/fabric.js packages/website/public/logo.svg",
+    "logos/maplibre.svg": "simple-icons@13.21.0 icons/maplibre.svg, fill #396CB2 from its brand data",
+    "logos/apacheecharts.svg": "simple-icons@13.21.0 icons/apacheecharts.svg, fill #AA344D from its brand data",
+    "logos/prometheus.svg": "simple-icons@13.21.0 icons/prometheus.svg, fill #E6522C from its brand data",
+    "logos/opentelemetry.svg": "simple-icons@13.21.0 icons/opentelemetry.svg, fill #000000 from its brand data",
+}
 
 manifest = []
 for src, dst, maxw in ITEMS:
@@ -73,22 +84,28 @@ for src, dst, maxw in ITEMS:
                      "sha256": hashlib.sha256(target.read_bytes()).hexdigest()})
     print(f"{dst:40s} {target.stat().st_size/1024:7.0f} KB  {note}")
 (OUT / "hero").mkdir(exist_ok=True)
-for src, dst, box in HERO:
+for src, dst, box, width in HERO:
     target = OUT / dst
     im = Image.open(src).convert("RGB")
     if box:
         im = im.crop(box)
-    if im.width > HERO_WIDTH:
-        im = im.resize((HERO_WIDTH, round(im.height * HERO_WIDTH / im.width)), Image.LANCZOS)
-    if target.suffix == ".png":
-        im.save(target, optimize=True)
-    else:
-        im.save(target, "WEBP", quality=88, method=6)
-    note = (f"cropped to {box} then " if box else "") + f"encoded as {target.suffix[1:].upper()} at {im.width}x{im.height}"
-    source = src.relative_to(ROOT) if src.is_relative_to(ROOT) else "cua-swe-viewer/" + str(src.relative_to(VIEWER))
-    manifest.append({"file": dst, "source": str(source), "note": note,
+    if im.width > width:
+        im = im.resize((width, round(im.height * width / im.width)), Image.LANCZOS)
+    im.save(target, "WEBP", quality=88, method=6)
+    note = (f"cropped to {box} then " if box else "") + f"encoded as WebP at {im.width}x{im.height}"
+    manifest.append({"file": dst, "source": str(src.relative_to(ROOT)), "note": note,
                      "sha256": hashlib.sha256(target.read_bytes()).hexdigest()})
     print(f"{dst:40s} {target.stat().st_size/1024:7.0f} KB  {note}")
+(OUT / "logos").mkdir(exist_ok=True)
+for src, dst in ICONS:
+    target = OUT / dst
+    Image.open(src).convert("RGBA").resize((64, 64), Image.LANCZOS).save(target, optimize=True)
+    manifest.append({"file": dst, "source": str(src.relative_to(ROOT)), "note": "resized to 64x64",
+                     "sha256": hashlib.sha256(target.read_bytes()).hexdigest()})
+    print(f"{dst:40s} {target.stat().st_size/1024:7.0f} KB  64x64")
+for dst, source in SVG_LOGOS.items():
+    manifest.append({"file": dst, "source": source, "note": "committed copy",
+                     "sha256": hashlib.sha256((OUT / dst).read_bytes()).hexdigest()})
 # Site icons: the robot mark from the paper's logo (735 KB at 1254x1254), without the wordmark,
 # padded to a square and downscaled. The touch icon gets a white background.
 LOGO = ROOT / "paper/arxiv-2609.32600v1/figures/logo.png"
@@ -109,4 +126,6 @@ if (OUT / "og-image.png").exists():
     manifest.append({"file": "og-image.png", "source": "tools/og-image.html",
                      "note": "1200x630 screenshot rendered by tools/render_og_image.py from the hero pairs",
                      "sha256": hashlib.sha256((OUT / "og-image.png").read_bytes()).hexdigest()})
-json.dump(manifest, open(OUT / "manifest.json", "w"), indent=1)
+# Episode frames are recorded by tools/build_episode.py; keep them.
+episodes = [m for m in json.load(open(OUT / "manifest.json")) if m["file"].startswith("episodes/")]
+json.dump(manifest + episodes, open(OUT / "manifest.json", "w"), indent=1)

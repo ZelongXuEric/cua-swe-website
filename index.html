@@ -57,40 +57,53 @@
 
 <section id="overview" class="section overview">
   <p class="abstract">CUA-SWE provides a benchmark and environment where coding agents need to repair the software by using it and visually inspecting it. Each of the 105 tasks (36 Web, 29 Game, 20 DevOps, 20 Mobile) gives the agent an editable project and the running application; deterministic, task-specific tests then judge the repaired software on a clean copy of the project. Adding computer use to coding raises task success for all eight models evaluated with and without it in every domain.</p>
-  <figure class="strip">
+  <figure class="strip" id="strip">
+    <div class="seg" role="group" aria-label="Screens show"></div>
     <div class="col web">
-      <h4><span class="dom">Web</span> Allocation Ring Studio</h4>
-      <p class="about">Browser apps on real libraries: charts, canvas, maps, editors, tables. Layout and interaction bugs.</p>
-      <div class="shot before"><img src="assets/media/hero/web-before.webp" alt="Allocation Ring Studio baseline: the live ring chart overflows its card" width="1000" height="625"><span class="tag">Bug</span></div>
-      <p class="cap">Ring chart overflows its card in the Stacked layout</p>
-      <div class="shot after"><img src="assets/media/hero/web-after.webp" alt="After the reference repair the ring fits its card" width="1000" height="625" loading="lazy"><span class="tag">Repaired</span></div>
-      <p class="cap">Ring fits every layout profile</p>
+      <h4><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M6.5 6.5h.01M9.5 6.5h.01"/></svg>Web</h4>
+      <p class="about">Browser apps on real libraries. Layout and interaction bugs.</p>
+      <p class="logos"><img class="wordmark" src="assets/media/logos/fabricjs.svg" alt="Fabric.js" width="64" height="20"><span><img src="assets/media/logos/maplibre.svg" alt="" width="16" height="16">MapLibre</span><span><img src="assets/media/logos/apacheecharts.svg" alt="" width="16" height="16">ECharts</span></p>
+      <div class="stage"><div class="frame"><div class="shot">
+        <img class="bug" src="assets/media/hero/web-before.webp" alt="Allocation Ring Studio before the repair: the live ring chart overflows its card" width="1000" height="625">
+        <img class="fixed" src="assets/media/hero/web-after.webp" alt="Allocation Ring Studio after the reference repair: the ring fits its card" width="1000" height="625">
+        <span class="box"></span>
+      </div></div></div>
+      <p class="cap"><b>Allocation Ring Studio.</b> <span class="bug">The ring chart overflows its card in the Stacked layout.</span><span class="fixed">The ring fits its card in every layout.</span></p>
     </div>
     <div class="col game">
-      <h4><span class="dom">Game</span> Hextris</h4>
-      <p class="about">12 browser games, from 2048 to platformers. Timing, physics and state bugs that show only in play.</p>
-      <div class="shot before"><img src="assets/media/hero/game-before.png" alt="Hextris before the repair: the cascade stalls and the score stays at 9" width="680" height="425"><span class="tag">Bug</span></div>
-      <p class="cap">Cascade stalls, score stuck at 9</p>
-      <div class="shot after"><img src="assets/media/hero/game-after.png" alt="Hextris after the repair: the cascade completes and the score reaches 27" width="680" height="425" loading="lazy"><span class="tag">Repaired</span></div>
-      <p class="cap">Cascade completes, score reaches 27</p>
+      <h4><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10a5 5 0 0 1 4.9 6l-.8 3.9a2.4 2.4 0 0 1-4.2 1L15 16H9l-1.9 1.9a2.4 2.4 0 0 1-4.2-1L2.1 13A5 5 0 0 1 7 7z"/><path d="M7.5 10v4M5.5 12h4M15.5 11h.01M18 13h.01"/></svg>Game</h4>
+      <p class="about">Open-source browser games. Timing, physics and state bugs that show only in play.</p>
+      <p class="logos"><span><img src="assets/media/logos/callisto.png" alt="" width="16" height="16">Captain Callisto</span><span><img src="assets/media/logos/hextris.png" alt="" width="16" height="16">Hextris</span><span class="tile">2048</span></p>
+      <div class="stage"><div class="frame"><div class="shot">
+        <img class="bug" src="assets/media/hero/game-before.webp" alt="Captain Callisto before the repair: one pickup moves the cargo counter from 0 of 2 to 2 of 2" width="1000" height="562">
+        <img class="fixed" src="assets/media/hero/game-after.webp" alt="Captain Callisto after the reference repair: one pickup moves the cargo counter to 1 of 2" width="1000" height="562">
+        <span class="box"></span>
+      </div></div></div>
+      <p class="cap"><b>Captain Callisto.</b> <span class="bug">Picking up one item counts as two: the cargo counter jumps to 2/2.</span><span class="fixed">One item counts once: the cargo counter reads 1/2.</span></p>
     </div>
     <div class="col devops">
-      <h4><span class="dom">DevOps</span> Counter Order Console</h4>
+      <h4><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="7" rx="1.5"/><rect x="3" y="13" width="18" height="7" rx="1.5"/><path d="M7 7.5h.01M7 16.5h.01M11 7.5h6M11 16.5h6"/></svg>DevOps</h4>
       <p class="about">Consoles for traces, alerts, logs and metrics. Fix the config or pipeline behind them.</p>
-      <div class="shot before"><img src="assets/media/hero/devops-before.webp" alt="Counter Order Console baseline: a rolling restart renders as a 12,516 requests-per-second spike" width="1000" height="434"><span class="tag">Bug</span></div>
-      <p class="cap">Rolling restart rendered as a 12,516 req/s spike</p>
-      <div class="shot after"><img src="assets/media/hero/devops-after.webp" alt="After the reference repair the false spike is gone and the real burst remains" width="1000" height="434" loading="lazy"><span class="tag">Repaired</span></div>
-      <p class="cap">False spike removed, real burst retained</p>
+      <p class="logos"><span><img src="assets/media/logos/prometheus.svg" alt="" width="16" height="16">Prometheus</span><span><img src="assets/media/logos/opentelemetry.svg" alt="" width="16" height="16">OpenTelemetry</span></p>
+      <div class="stage"><div class="frame"><div class="shot">
+        <img class="bug" src="assets/media/hero/devops-before.webp" alt="Counter Order Console before the repair: a rolling restart renders as a 12,516 requests-per-second spike" width="1000" height="434">
+        <img class="fixed" src="assets/media/hero/devops-after.webp" alt="Counter Order Console after the reference repair: the false spike is gone and the real burst remains" width="1000" height="434">
+        <span class="box"></span>
+      </div></div></div>
+      <p class="cap"><b>Counter Order Console.</b> <span class="bug">A rolling restart shows up as a 12,516 req/s traffic spike.</span><span class="fixed">The false spike is gone; the real burst later on remains.</span></p>
     </div>
     <div class="col mobile">
-      <h4><span class="dom">Mobile</span> Mural Desk</h4>
+      <h4><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="2.5" width="11" height="19" rx="2.2"/><path d="M10.5 18.5h3"/></svg>Mobile</h4>
       <p class="about">Phone apps that import drawings and plans. Make the app agree with them.</p>
-      <div class="shot before"><img src="assets/media/hero/mobile-before.webp" alt="Mural Desk baseline: the artwork is projected onto the wall plan in the wrong orientation" width="760" height="475"><span class="tag">Bug</span></div>
-      <p class="cap">Artwork projected onto the wall plan the wrong way</p>
-      <div class="shot after"><img src="assets/media/hero/mobile-after.webp" alt="After the reference repair the artwork is aligned to the wall plan" width="760" height="475" loading="lazy"><span class="tag">Repaired</span></div>
-      <p class="cap">Artwork aligned to the wall plan</p>
+      <p class="logos"></p>
+      <div class="stage"><div class="frame"><div class="shot">
+        <img class="bug" src="assets/media/hero/mobile-before.webp" alt="Mural Desk before the repair: the artwork is projected onto the wall plan in the wrong orientation" width="400" height="600">
+        <img class="fixed" src="assets/media/hero/mobile-after.webp" alt="Mural Desk after the reference repair: the artwork is aligned to the wall plan" width="400" height="600">
+        <span class="box"></span>
+      </div></div></div>
+      <p class="cap"><b>Mural Desk.</b> <span class="bug">The artwork is projected onto the wall plan the wrong way.</span><span class="fixed">The artwork lines up with the wall plan.</span></p>
     </div>
-    <figcaption>One task per domain, before and after the repair. Web, DevOps and Mobile show reference-repair replays; Game shows two screenshots from a recorded GPT-5.6 Sol attempt.</figcaption>
+    <figcaption>One task per domain. Screens come from replays of the original and the reference-repaired application; the Game bug screen is from a recorded GPT-5.6 Sol attempt. Logos belong to their projects.</figcaption>
   </figure>
   <figure class="fig wide overview-fig zoomable">
     <img src="assets/media/figures/figure2.png" alt="The CUA-SWE development and evaluation pipeline: task package, matched comparison of a code-only agent and a hybrid computer-use agent, and the shared evaluator-private deterministic verifier" width="1378" height="793" loading="lazy">

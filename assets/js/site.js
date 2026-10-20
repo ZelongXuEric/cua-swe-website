@@ -281,6 +281,21 @@
     load(0);
   }
 
+  // Overview strip: every column shows the bug or the repaired application, chosen by tab. Without JS the bug shows.
+  function mountStrip(root) {
+    var seg = root.querySelector(".seg"), buttons = [];
+    function select(index) {
+      root.classList.toggle("show-fixed", index === 1);
+      buttons.forEach(function (button, i) { button.setAttribute("aria-pressed", String(i === index)); });
+    }
+    ["Bug", "Repaired"].forEach(function (label, i) {
+      var button = el("button", null, label); button.type = "button";
+      button.addEventListener("click", function () { select(i); });
+      seg.appendChild(button); buttons.push(button);
+    });
+    select(0);
+  }
+
   // Repair cases: one paper figure at a time, chosen by domain tab. Without JS all four stack.
   function mountCases(root) {
     var seg = root.querySelector(".seg"), figures = Array.prototype.slice.call(root.querySelectorAll("figure")), buttons = [];
@@ -309,6 +324,8 @@
   }
 
   mountResults();
+  var strip = document.getElementById("strip");
+  if (strip) mountStrip(strip);
   var episode = document.getElementById("repair-player");
   if (episode) mountEpisode(episode);
   var cases = document.getElementById("case-viewer");

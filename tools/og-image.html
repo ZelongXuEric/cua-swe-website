@@ -9,32 +9,40 @@
   body { width: 1200px; height: 630px; background: #fff; color: #1f1f1f; font-family: "Noto Sans", sans-serif; padding: 58px 40px 0; }
   h1 { font-family: "Inconsolata", monospace; font-size: 52px; line-height: 1; }
   p.def { font-size: 24px; line-height: 1.35; margin-top: 12px; color: #333; }
-  .strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 32px; }
-  h2 { font-family: "Inconsolata", monospace; font-size: 22px; margin-bottom: 8px; }
-  .shot { position: relative; aspect-ratio: 16 / 10; border: 1px solid #e4e4e4; overflow: hidden; background: #f4f6f9; margin-bottom: 10px; }
-  .shot.dark { background: #0b1220; }
-  .shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .shot.dark img { object-fit: contain; }
-  .tag { position: absolute; left: 7px; top: 7px; font-size: 13px; font-weight: 700; padding: 2px 8px; border-radius: 3px; color: #fff; background: #d93025; }
-  .after .tag { background: #188038; }
+  .strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 36px; }
+  h2 { display: flex; align-items: center; gap: 9px; font-size: 24px; margin-bottom: 12px; }
+  h2 svg { width: 28px; height: 28px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .stage { height: 330px; padding: 14px; display: flex; align-items: center; justify-content: center; background: #f1f3f6; border-radius: 4px; overflow: hidden; }
+  .frame { position: relative; width: 100%; border-radius: 6px; overflow: hidden; }
+  .shot { position: relative; }
+  img { display: block; width: 100%; }
+  .box { position: absolute; border: 3px solid #d93025; border-radius: 3px; }
+  .bar { height: 18px; background: #e4e8ee; border: 1px solid #cdd3dc; border-bottom: 0; border-radius: 6px 6px 0 0; }
+  .web .shot, .devops .shot { border: 1px solid #cdd3dc; border-top: 0; }
+  .devops .bar { background: #1c2633; border-color: #1c2633; }
+  .devops .shot { border-color: #1c2633; }
+  .game .box, .devops .box { border-color: #ff5a4f; }
+  .mobile .stage { align-items: flex-start; padding-bottom: 0; }
+  .mobile .frame { width: 214px; padding: 24px 8px 0; background: #2a2e35; border-radius: 26px 26px 0 0; }
+  .mobile .shot { border-radius: 4px 4px 0 0; overflow: hidden; }
+  .web .box { left: 8%; top: 38%; width: 35%; height: 43%; }
+  .game .box { left: .5%; top: 1%; width: 13%; height: 8.5%; }
+  .devops .box { left: 19%; top: 30%; width: 21%; height: 64%; }
+  .mobile .box { left: 3%; top: 42%; width: 94%; height: 51%; }
 </style>
 </head>
 <body>
 <h1>CUA-SWE</h1>
 <p class="def">A benchmark where coding agents repair software by using it and visually inspecting it</p>
 <div class="strip">
-  <div><h2>Web</h2>
-    <div class="shot"><img src="../assets/media/hero/web-before.webp" alt=""><span class="tag">Bug</span></div>
-    <div class="shot after"><img src="../assets/media/hero/web-after.webp" alt=""><span class="tag">Repaired</span></div></div>
-  <div><h2>Game</h2>
-    <div class="shot dark"><img src="../assets/media/hero/game-before.png" alt=""><span class="tag">Bug</span></div>
-    <div class="shot dark after"><img src="../assets/media/hero/game-after.png" alt=""><span class="tag">Repaired</span></div></div>
-  <div><h2>DevOps</h2>
-    <div class="shot dark"><img src="../assets/media/hero/devops-before.webp" alt=""><span class="tag">Bug</span></div>
-    <div class="shot dark after"><img src="../assets/media/hero/devops-after.webp" alt=""><span class="tag">Repaired</span></div></div>
-  <div><h2>Mobile</h2>
-    <div class="shot"><img src="../assets/media/hero/mobile-before.webp" alt=""><span class="tag">Bug</span></div>
-    <div class="shot after"><img src="../assets/media/hero/mobile-after.webp" alt=""><span class="tag">Repaired</span></div></div>
+  <div class="web"><h2><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M6.5 6.5h.01M9.5 6.5h.01"/></svg>Web</h2>
+    <div class="stage"><div class="frame"><div class="bar"></div><div class="shot"><img src="../assets/media/hero/web-before.webp" alt=""><span class="box"></span></div></div></div></div>
+  <div class="game"><h2><svg viewBox="0 0 24 24"><path d="M7 7h10a5 5 0 0 1 4.9 6l-.8 3.9a2.4 2.4 0 0 1-4.2 1L15 16H9l-1.9 1.9a2.4 2.4 0 0 1-4.2-1L2.1 13A5 5 0 0 1 7 7z"/><path d="M7.5 10v4M5.5 12h4M15.5 11h.01M18 13h.01"/></svg>Game</h2>
+    <div class="stage"><div class="frame"><div class="shot"><img src="../assets/media/hero/game-before.webp" alt=""><span class="box"></span></div></div></div></div>
+  <div class="devops"><h2><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="7" rx="1.5"/><rect x="3" y="13" width="18" height="7" rx="1.5"/><path d="M7 7.5h.01M7 16.5h.01M11 7.5h6M11 16.5h6"/></svg>DevOps</h2>
+    <div class="stage"><div class="frame"><div class="bar"></div><div class="shot"><img src="../assets/media/hero/devops-before.webp" alt=""><span class="box"></span></div></div></div></div>
+  <div class="mobile"><h2><svg viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="11" height="19" rx="2.2"/><path d="M10.5 18.5h3"/></svg>Mobile</h2>
+    <div class="stage"><div class="frame"><div class="shot"><img src="../assets/media/hero/mobile-before.webp" alt=""><span class="box"></span></div></div></div></div>
 </div>
 </body>
 </html>

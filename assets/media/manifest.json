@@ -84,6 +84,18 @@
   "sha256": "7805cc2107530df3d404075aed0f7714a5e689ef448b802233b500b6043961c3"
  },
  {
+  "file": "hero/game-before.webp",
+  "source": "paper/figure2_assets/cases/05_captain_callisto/originals/agent_0003.png",
+  "note": "encoded as WebP at 1000x562",
+  "sha256": "36947ec06c4bc3b1e093e7b0c45035127222a5f5b09bca564fe074934427c5bb"
+ },
+ {
+  "file": "hero/game-after.webp",
+  "source": "paper/figure2_assets/cases/05_captain_callisto/originals/gold_0002.png",
+  "note": "encoded as WebP at 1000x562",
+  "sha256": "2d9b3beb4b7c15c8f803e35777941ce215488e0ff3398c84e273c5575b8d9c99"
+ },
+ {
   "file": "hero/devops-before.webp",
   "source": "paper/figure1_assets/cases/D01_counter_order/keyframes/baseline_rolling-restart_layout.png",
   "note": "cropped to (0, 0, 2120, 920) then encoded as WebP at 1000x434",
@@ -98,14 +110,74 @@
  {
   "file": "hero/mobile-before.webp",
   "source": "paper/demo_video/assets/media/mobile_before.png",
-  "note": "cropped to (20, 567, 780, 1042) then encoded as WebP at 760x475",
-  "sha256": "14c17b2c044fe5d9296bc5522e3eed5b958c6a32f3ee438ba8634f7b427a9762"
+  "note": "cropped to (0, 0, 800, 1200) then encoded as WebP at 400x600",
+  "sha256": "6b3a10f970b8ca18f573f1ec2b02c30b8210fd97d0d72c2aa7d64f9e451172f8"
  },
  {
   "file": "hero/mobile-after.webp",
   "source": "paper/demo_video/assets/media/mobile_after.png",
-  "note": "cropped to (20, 567, 780, 1042) then encoded as WebP at 760x475",
-  "sha256": "cfbba9c7a7d4a96f96f28ee71c9216a9abec4408ab686744740ceb9af3cbf03e"
+  "note": "cropped to (0, 0, 800, 1200) then encoded as WebP at 400x600",
+  "sha256": "410a4890ba74b5a7cd7d1c27b17658de1f2059b15afd63819485a7085fac4b88"
+ },
+ {
+  "file": "logos/callisto.png",
+  "source": "dataset/game/tasks/gameqa.captain-callisto-visual-semantic-item.009/repo/callisto-small-screenshot.png",
+  "note": "resized to 64x64",
+  "sha256": "dbc13b1b09ab17d055b3d7cf77ebbab535c18d852a0dc88ffba873696c2b3ecc"
+ },
+ {
+  "file": "logos/hextris.png",
+  "source": "dataset/game/tasks/gameqa.hextris-cascade-resettle-stable.001/repo/images/hextris-logo.png",
+  "note": "resized to 64x64",
+  "sha256": "0c019a79611f19d204468952b78d391c59917aeb9b58ef0970a145686af72de2"
+ },
+ {
+  "file": "logos/fabricjs.svg",
+  "source": "github.com/fabricjs/fabric.js packages/website/public/logo.svg",
+  "note": "committed copy",
+  "sha256": "559d52f996d7b6db9d65d34791402746af6262dce68e1e9aa3d2dd07e1e0f70b"
+ },
+ {
+  "file": "logos/maplibre.svg",
+  "source": "simple-icons@13.21.0 icons/maplibre.svg, fill #396CB2 from its brand data",
+  "note": "committed copy",
+  "sha256": "6495297416e98bc5d164a43a75e8401e5d642f0c9664651c7cb9807bf0faa77d"
+ },
+ {
+  "file": "logos/apacheecharts.svg",
+  "source": "simple-icons@13.21.0 icons/apacheecharts.svg, fill #AA344D from its brand data",
+  "note": "committed copy",
+  "sha256": "2bfada6a09da5b105a5d11bb50dfde5923fb096bedf144fd8aa2d0a40817e5a4"
+ },
+ {
+  "file": "logos/prometheus.svg",
+  "source": "simple-icons@13.21.0 icons/prometheus.svg, fill #E6522C from its brand data",
+  "note": "committed copy",
+  "sha256": "aae7efa90a77c233d051d1d5a8b1ed9e78f39d357364be8c2f1d9383a476d027"
+ },
+ {
+  "file": "logos/opentelemetry.svg",
+  "source": "simple-icons@13.21.0 icons/opentelemetry.svg, fill #000000 from its brand data",
+  "note": "committed copy",
+  "sha256": "e58e9c5b51e396e95a8370ddecb307f5423dea88d5f4b781a269425f25669b1c"
+ },
+ {
+  "file": "favicon.png",
+  "source": "paper/arxiv-2609.32600v1/figures/logo.png",
+  "note": "robot mark cropped from the logo, 64x64",
+  "sha256": "470cfcc723ddfec9c77d00e41635ce6193517be610c4b93e01a6d57762787bcd"
+ },
+ {
+  "file": "apple-touch-icon.png",
+  "source": "paper/arxiv-2609.32600v1/figures/logo.png",
+  "note": "robot mark cropped from the logo, 180x180",
+  "sha256": "97d801fa7da08af7d77df81c7420ddd3dfd71457bbf34e890873e26be78cc607"
+ },
+ {
+  "file": "og-image.png",
+  "source": "tools/og-image.html",
+  "note": "1200x630 screenshot rendered by tools/render_og_image.py from the hero pairs",
+  "sha256": "304aaae47ea69e4661547356da5e2da5f409d3ff629752ca6c2da2d86042db03"
  },
  {
   "file": "episodes/minesweeper-002/frame-01.png",
@@ -298,35 +370,5 @@
   "source": "EFS export runs/candidate-05/api-gpt6-astra/cua (paths and host redacted)/web-cua/screenshot-0019.png",
   "note": "byte-identical copy",
   "sha256": "27b8a9e0467b98eb4ae4a3426dfa59d94f1b384cd3584eabc48ff56b87e35f42"
- },
- {
-  "file": "hero/game-before.png",
-  "source": "kingofspace0wzz/cua-swe-viewer media/source/agent/game-cua/gameqa.hextris-cascade-resettle-stable.001/agent/frames/frame-0003.png",
-  "note": "cropped to (300, 165, 980, 590) then encoded as PNG at 680x425",
-  "sha256": "7b64428c1b4eeeea0d21fa64d73e1f6f5c2aaeb49eaa5726839999a182d73d0d"
- },
- {
-  "file": "hero/game-after.png",
-  "source": "kingofspace0wzz/cua-swe-viewer media/source/agent/game-cua/gameqa.hextris-cascade-resettle-stable.001/agent/frames/frame-0016.png",
-  "note": "cropped to (300, 165, 980, 590) then encoded as PNG at 680x425",
-  "sha256": "afba051afdf1007edb5708b25dfd44424aba73fc1c1c2fada4d264398c0a9d4c"
- },
- {
-  "file": "favicon.png",
-  "source": "paper/arxiv-2609.32600v1/figures/logo.png",
-  "note": "robot mark cropped from the logo, 64x64",
-  "sha256": "470cfcc723ddfec9c77d00e41635ce6193517be610c4b93e01a6d57762787bcd"
- },
- {
-  "file": "apple-touch-icon.png",
-  "source": "paper/arxiv-2609.32600v1/figures/logo.png",
-  "note": "robot mark cropped from the logo, 180x180",
-  "sha256": "97d801fa7da08af7d77df81c7420ddd3dfd71457bbf34e890873e26be78cc607"
- },
- {
-  "file": "og-image.png",
-  "source": "tools/og-image.html",
-  "note": "1200x630 screenshot rendered by tools/render_og_image.py from the hero pairs",
-  "sha256": "4dda35392a9d6d193d156856265001d15023c02c67ad2557b775e96e48347299"
  }
 ]
